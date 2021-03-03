@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="estiloFormulario">
+        <attr name="colorTextoLabel" format="color"/>
+        <attr name="estiloCampoFormulario" format="reference"/>
+        <attr name="colorTextoFormulario" format="color"/>
+        <attr name="colorCursor" format="reference"/>
+    </declare-styleable>
+</resources>

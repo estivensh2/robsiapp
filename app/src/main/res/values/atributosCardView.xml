@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="atributosCardview">
+        <attr name="estiloCardView" format="reference"/>
+        <attr name="iconoCardView" format="reference"/>
+    </declare-styleable>
+</resources>

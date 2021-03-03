@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="estiloNavegacionCursos">
+        <attr name="estiloNavegcionExpandible" format="reference"/>
+        <attr name="colorTextoNavegcionExpandible" format="color"/>
+    </declare-styleable>
+</resources>

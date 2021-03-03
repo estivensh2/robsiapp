@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/perfil"
+    app:startDestination="@id/perfilFragment">
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.alp.app.ui.perfil.PerfilFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/accion_perfil_a_perfil_configuracion"
+            app:destination="@id/perfilDetalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilDetalleFragment"
+        android:name="com.alp.app.ui.perfil.PerfilDetalleFragment"
+        android:label="Configuración"
+        tools:layout="@layout/perfil_detalle_fragment" >
+        <argument
+            android:name="imagen"
+            app:argType="string" />
+        <argument
+            android:name="nombres"
+            app:argType="string" />
+        <argument
+            android:name="apellidos"
+            app:argType="string" />
+        <argument
+            android:name="idnotificaicones"
+            app:argType="string" />
+        <argument
+            android:name="correoElectronico"
+            app:argType="string" />
+        <argument
+            android:name="claveAcceso"
+            app:argType="string" />
+        <action
+            android:id="@+id/accion_configuracion_a_iniciar_o_crear"
+            app:destination="@id/entradaActivity" />
+        <action
+            android:id="@+id/accion_configuracion_a_cambiar_clave"
+            app:destination="@id/cambiarClaveFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/entradaActivity"
+        android:name="com.alp.app.EntradaActivity"
+        android:label="EntradaActivity" />
+    <fragment
+        android:id="@+id/cambiarClaveFragment"
+        android:name="com.alp.app.ui.perfil.CambiarClaveFragment"
+        android:label="Cambiar clave"
+        tools:layout="@layout/fragment_cambiar_clave" />
+</navigation>

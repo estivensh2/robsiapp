@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="estiloBotonesGenerales">
+        <attr name="estiloGeneralBotonPrimario" format="reference"/>
+        <attr name="estiloGeneralBotonSegundario" format="reference"/>
+        <attr name="estiloGeneralBotonFacebook" format="reference"/>
+        <attr name="colorTextoBotonPrimario" format="color"/>
+        <attr name="colorTextoBotonSegundario" format="color"/>
+        <attr name="colorTextoBotonGoogle" format="color"/>
+        <attr name="colorTextoBotonFacebook" format="color"/>
+    </declare-styleable>
+</resources>

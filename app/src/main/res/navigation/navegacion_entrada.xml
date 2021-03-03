@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navegacion_bienvenida">
+
+    <fragment
+        android:id="@+id/navegacion_bienvenida"
+        android:name="com.alp.app.ui.bienvenida.BienvenidaFragment"
+        android:label="bienvenida_fragment"
+        tools:layout="@layout/fragment_bienvenida" >
+        <action
+            android:id="@+id/accion_bienvenida_a_induccion"
+            app:destination="@id/induccionFragment"
+            app:enterAnim="@anim/animacion_fragment_entrada_derecha"
+            app:popUpTo="@id/navegacion_bienvenida"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/accion_bienvenida_a_iniciar_o_crear_cuenta"
+            app:destination="@id/iniciarOCrearCuentaFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popUpTo="@id/navegacion_bienvenida"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/accion_bienvenida_a_inicio"
+            app:destination="@id/principalActivity2"
+            app:popUpTo="@id/navegacion_bienvenida"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/induccionFragment"
+        android:name="com.alp.app.ui.induccion.InduccionFragment"
+        android:label="induccion_fragment"
+        tools:layout="@layout/fragment_induccion" >
+        <action
+            android:id="@+id/accion_induccion_a_iniciar_o_crear"
+            app:destination="@id/iniciarOCrearCuentaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarOCrearCuentaFragment"
+        android:name="com.alp.app.ui.iniciarocrearcuenta.IniciarOCrearCuentaFragment"
+        android:label="Iniciar o crear cuenta"
+        tools:layout="@layout/fragment_iniciar_o_crear_cuenta" >
+        <action
+            android:id="@+id/accion_iniciar_o_crear_a_registrarme"
+            app:destination="@id/registrarUsuarioFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/accion_iniciar_o_crear_a_iniciar_sesion"
+            app:destination="@id/iniciarSesionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarUsuarioFragment"
+        android:name="com.alp.app.ui.registrar.RegistrarUsuarioFragment"
+        android:label="registrarme"
+        tools:layout="@layout/fragment_registrar_usuario" >
+        <action
+            android:id="@+id/accion_registrar_a_iniciar_sesion"
+            app:destination="@id/iniciarSesionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarSesionFragment"
+        android:name="com.alp.app.ui.iniciarsesion.IniciarSesionFragment"
+        android:label="Iniciar sesión"
+        tools:layout="@layout/fragment_iniciar_sesion" >
+        <action
+            android:id="@+id/accion_iniciar_a_navegacion_principal"
+            app:destination="@id/principalActivity2"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/principalActivity2"
+        android:name="com.alp.app.PrincipalActivity"
+        android:label="PrincipalActivity" >
+        <argument
+            android:name="nombres"
+            app:argType="string" />
+        <argument android:name="apellidos"
+            app:argType="string" />
+        <argument
+            android:name="notificaciones"
+            app:argType="string" />
+        <argument
+            android:name="correo"
+            app:argType="string" />
+        <argument
+            android:name="clave"
+            app:argType="string" />
+        <argument
+            android:name="imagen"
+            app:argType="string" />
+    </activity>
+</navigation>

@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Toolbar_Claro">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:background">@drawable/estilo_fondo_toolbar_claro</item>
+        <item name="android:theme">@style/Base_Toolbar</item>
+    </style>
+    <style name="Toolbar_Oscuro">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:background">@drawable/icono_perfil</item>
+    </style>
+    <style name="Base_Toolbar">
+        <item name="android:textColorPrimary">@color/colorGrisOscuro</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="AppCompatAlertaDialogoEstilo" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorBlanco</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="TituloCollapsadaClaro" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorGrisOscuro</item>
+    </style>
+    <style name="TituloExpandidaClaro" parent="@style/TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/colorGrisOscuro</item>
+    </style>
+
+    <style name="TituloCollapsadaOscuro" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+    </style>
+    <style name="TituloExpandidaOscuro" parent="@style/TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+    </style>
+</resources>
