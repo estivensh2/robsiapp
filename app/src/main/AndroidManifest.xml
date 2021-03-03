@@ -4,11 +4,16 @@
     package="com.alp.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:fullBackupContent="@xml/backup_respaldo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App"
@@ -16,7 +21,7 @@
         tools:targetApi="m">
         <activity
             android:name=".PrincipalActivity"
-            android:label="@string/title_activity_entrada"></activity>
+            android:label="@string/title_activity_entrada" />
         <activity
             android:name=".EntradaActivity"
             android:label="@string/app_name">

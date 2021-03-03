@@ -55,4 +55,14 @@
     <string name="texto_notificaciones">Notificaciones</string>
     <string name="texto_sonidos">Sonidos</string>
     <string name="texto_modo_oscuro">Modo oscuro</string>
+    <string name="texto_clave_actual">Clave actual</string>
+    <string name="texto_nueva_clave">Nueva clave</string>
+    <string name="texto_confirmar_clave">Confirmar clave</string>
+    <string name="texto_clave_cambiada">Tu clave se ha cambiado exitosamente</string>
+    <string name="texto_campo_requerido">Llena todos los campos</string>
+    <string name="texto_clave_minimo">Las contraseñas deben ser al menos de 6 caracteres</string>
+    <string name="texto_claves_no_coinciden">Tu nueva contraseña y la de confirmación no son iguales</string>
+    <string name="texto_error_clave">Tu contraseña actual  es incorrecta</string>
+    <string name="texto_clave_incorrecta">Tu clave actual es incorrecta</string>
+    <string name="texto_guardar_clave">GUARDAR</string>
 </resources>

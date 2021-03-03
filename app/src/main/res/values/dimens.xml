@@ -25,4 +25,5 @@
     <dimen name="dimensiones_labels_configuraciones">20sp</dimen>
     <dimen name="dimensiones_textos_tablas">16sp</dimen>
     <dimen name="margin_filas_tablas">1dp</dimen>
+    <dimen name="dimensiones_botones_iniciar">18sp</dimen>
 </resources>

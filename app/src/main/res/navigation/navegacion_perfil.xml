@@ -52,5 +52,11 @@
         android:id="@+id/cambiarClaveFragment"
         android:name="com.alp.app.ui.perfil.CambiarClaveFragment"
         android:label="Cambiar clave"
-        tools:layout="@layout/fragment_cambiar_clave" />
+        tools:layout="@layout/fragment_cambiar_clave" >
+        <action
+            android:id="@+id/accion_cambiar_clave_a_perfil"
+            app:destination="@id/perfilFragment"
+            app:popUpTo="@id/cambiarClaveFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

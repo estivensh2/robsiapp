@@ -51,4 +51,13 @@ interface APIServicio {
         @Field("idcursodetalle") idcursodetalle:String,
         @Field("idcurso") idcurso:String)
     : Call<RespuestaInsertarProgreso>
+
+
+    @FormUrlEncoded
+    @POST("cambiarClave.php")
+    fun cambiarClave(
+            @Field("claveAccesoActual") claveactual:String,
+            @Field("claveAccesoNuevaConfirmada") actualconfirmada:String,
+            @Field("idusuario") idusuario:String)
+            : Call<RespuestaCambiarClave>
 }
