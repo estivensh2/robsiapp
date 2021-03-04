@@ -15,6 +15,7 @@ import com.alp.app.data.RespuestaCursosDetalleData
 import com.alp.app.databinding.FragmentInicioCursosDetalleBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
+import com.alp.app.servicios.Preferencias
 import com.alp.app.servicios.ServicioBuilder
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
@@ -56,7 +57,7 @@ class InicioCursosDetalleFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
-                call.recuperarCursosDetalle(id).enqueue(object :
+                call.recuperarCursosDetalle(id, Preferencias.leer("id","0").toString()).enqueue(object :
                     Callback<List<RespuestaCursosDetalleData>> {
                     override fun onResponse(call: Call<List<RespuestaCursosDetalleData>>, response: Response<List<RespuestaCursosDetalleData>>) {
                         activity?.runOnUiThread {

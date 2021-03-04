@@ -15,6 +15,7 @@ import com.alp.app.data.RespuestaInsertarProgreso
 import com.alp.app.databinding.FragmentInicioCursosDetalleTemarioBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
+import com.alp.app.servicios.Preferencias
 import com.alp.app.servicios.ServicioBuilder
 import io.github.kbiakov.codeview.adapters.Options
 import io.github.kbiakov.codeview.highlight.ColorTheme
@@ -44,7 +45,6 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
             val descripcion = bundle.getString("descripcion", "no")
             val tipolenguaje = bundle.getString("tipolenguaje", "no")
             val codigo = bundle.getString("codigo", "no")
-            val habilitado = bundle.getString("habilitado", "no")
             binding.tituloTemario.text = nombre
             binding.descripcionTemario.text = descripcion
             if (descripcion.isEmpty()){
@@ -77,12 +77,12 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
-                call.insertarProgreso("1", id, idcurso).enqueue(object :
+                call.insertarProgreso("1", id, idcurso, Preferencias.leer("id","0").toString()).enqueue(object :
                     Callback<RespuestaInsertarProgreso> {
                     override fun onResponse(call: Call<RespuestaInsertarProgreso>, response: Response<RespuestaInsertarProgreso>) {
-                        val response = response.body()!!
+                        val responsex = response.body()!!
                         activity?.runOnUiThread {
-                            if (response.respuesta == "1") {
+                            if (responsex.respuesta == "1") {
                                 Handler().postDelayed({
                                     binding.cargaContenido.visibility = View.GONE
                                 }, 3000)

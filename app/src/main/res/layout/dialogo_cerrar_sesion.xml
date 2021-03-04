@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="?attr/estiloDialogo"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="20dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="@string/texto_cerrar_sesion"
+            android:textColor="?attr/colorTextoDialogo"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/botonSi"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:background="?attr/estiloGeneralBotonPrimario"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/texto_si"
+                android:textColor="@color/colorBlanco"
+                android:textSize="24sp"
+                android:layout_marginEnd="10dp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/botonNo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:background="?attr/estiloGeneralBotonPrimario"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/texto_no"
+                android:textColor="@color/colorBlanco"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -7,9 +7,6 @@ object Preferencias {
 
     private lateinit var prefs: SharedPreferences
 
-    const val ID_USER = "id_user"
-    const val TOKEN = "token"
-
     fun init(context: Context, PREFS_NOMBRE : String) {
         prefs = context.getSharedPreferences(PREFS_NOMBRE, Context.MODE_PRIVATE)
     }

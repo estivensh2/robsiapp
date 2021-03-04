@@ -29,7 +29,7 @@
             android:name="apellidos"
             app:argType="string" />
         <argument
-            android:name="idnotificaicones"
+            android:name="idnotificaciones"
             app:argType="string" />
         <argument
             android:name="correoElectronico"

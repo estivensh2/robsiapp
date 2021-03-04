@@ -41,7 +41,9 @@ interface APIServicio {
 
     @FormUrlEncoded
     @POST("recuperarDatosCursosDetalle.php")
-    fun recuperarCursosDetalle(@Field("idcurso") idcurso:String)
+    fun recuperarCursosDetalle(
+        @Field("idcurso") idcurso:String,
+        @Field("idusuario") idusuario:String)
     : Call<List<RespuestaCursosDetalleData>>
 
     @FormUrlEncoded
@@ -49,7 +51,8 @@ interface APIServicio {
     fun insertarProgreso(
         @Field("idhabilitado") idhabilitado:String,
         @Field("idcursodetalle") idcursodetalle:String,
-        @Field("idcurso") idcurso:String)
+        @Field("idcurso") idcurso:String,
+        @Field("idusuario") idusuario:String)
     : Call<RespuestaInsertarProgreso>
 
 
@@ -60,4 +63,22 @@ interface APIServicio {
             @Field("claveAccesoNuevaConfirmada") actualconfirmada:String,
             @Field("idusuario") idusuario:String)
             : Call<RespuestaCambiarClave>
+
+    @FormUrlEncoded
+    @POST("actualizarDatosUsuario.php")
+    fun actualizarDatos(
+            @Field("id") id:String,
+            @Field("nombres") nombres:String,
+            @Field("imagen") imagen:String,
+            @Field("apellidos") apellidos:String,
+            @Field("correoElectronico") correo:String
+            )
+            : Call<RespuestaActualizarDatos>
+
+    @FormUrlEncoded
+    @POST("recuperarClave.php")
+    fun recuperarClave(
+        @Field("correoElectronico") correo:String
+    )
+    : Call<RespuestaRecuperarClave>
 }

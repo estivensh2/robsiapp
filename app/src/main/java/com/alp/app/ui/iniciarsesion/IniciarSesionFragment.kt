@@ -5,24 +5,20 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
-import com.alp.app.data.RespuestaCrearCuentaData
 import com.alp.app.data.RespuestaIniciarSesionData
-import com.alp.app.data.RespuestaSliderData
-import com.alp.app.data.RespuestaUsuarioData
 import com.alp.app.databinding.FragmentIniciarSesionBinding
-import com.alp.app.databinding.FragmentPerfilBinding
-import com.alp.app.databinding.FragmentRegistrarUsuarioBinding
 import com.alp.app.servicios.*
-import com.alp.app.ui.bienvenida.BienvenidaFragmentDirections
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,12 +35,8 @@ class IniciarSesionFragment : Fragment() {
     private var _binding: FragmentIniciarSesionBinding? = null
     private val binding get() = _binding!!
     private lateinit var contexto: Context
-    private var bundle = Bundle()
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentIniciarSesionBinding.inflate(layoutInflater, container, false)
         Preferencias.init(requireContext(), "preferenciasDeUsuario")
         with(binding){
@@ -54,6 +46,11 @@ class IniciarSesionFragment : Fragment() {
             botonIngresar.setOnClickListener { iniciarSesion() }
             correoElectronico.onChange       { habilitarBoton() }
             claveAcceso.onChange             { habilitarBoton() }
+            mostrarClaveActual.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) claveAcceso.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                else claveAcceso.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+            botonRecuperarClave.setOnClickListener { v -> Navigation.findNavController(v).navigate(R.id.accion_iniciar_sesion_a_recuperar_clave) }
         }
 
         return binding.root
@@ -62,40 +59,45 @@ class IniciarSesionFragment : Fragment() {
     private fun iniciarSesion() {
         val correo = binding.correoElectronico.text.toString()
         val clave = binding.claveAcceso.text.toString()
-        ProgressDialogo.mostrar(contexto)
+        binding.cargaContenido.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
                 call.iniciarSesion(correo, clave).enqueue(object : Callback<RespuestaIniciarSesionData> {
                     override fun onResponse(call: Call<RespuestaIniciarSesionData>, response: Response<RespuestaIniciarSesionData>) {
-                        val response = response.body()!!
+                        val responsex = response.body()!!
                         activity?.runOnUiThread {
-                            if (response.respuesta.equals("1")) {
-                                ProgressDialogo.ocultar()
-                                Preferencias.escribir("id", response.datos.id)
+                            if (responsex.respuesta == "1") {
+                                Preferencias.escribir("id", responsex.datos.id)
                                 Preferencias.escribir("sesionActiva", true)
                                 val action = IniciarSesionFragmentDirections.accionIniciarANavegacionPrincipal(
-                                    response.datos.nombres,
-                                    response.datos.nombres,
-                                    response.datos.apellidos,
-                                    response.datos.notificaciones,
-                                    response.datos.correo,
-                                    response.datos.clave)
+                                    responsex.datos.nombres,
+                                    responsex.datos.nombres,
+                                    responsex.datos.apellidos,
+                                    responsex.datos.notificaciones,
+                                    responsex.datos.correo,
+                                    responsex.datos.clave)
                                 findNavController().navigate(action)
+                                binding.cargaContenido.visibility = View.GONE
                             } else {
-                                ProgressDialogo.ocultar()
-                                ClaseToast.mostrarx(contexto, "Este correo ya existe", ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                                ClaseToast.mostrarx(contexto, resources.getString(R.string.texto_datos_incorrectos), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                                binding.cargaContenido.visibility = View.GONE
                             }
                         }
                     }
+
                     override fun onFailure(call: Call<RespuestaIniciarSesionData>, t: Throwable) {
                         activity!!.runOnUiThread {
-                            Log.d("error", t.toString())
+                            ClaseToast.mostrarx(contexto, getString(R.string.texto_error_conexion), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                            binding.cargaContenido.visibility = View.VISIBLE
                         }
                     }
                 })
             } catch (e: Throwable) {
-                e.printStackTrace()
+                requireActivity().runOnUiThread {
+                    ClaseToast.mostrarx(contexto, getString(R.string.texto_error_grave), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                    binding.cargaContenido.visibility = View.VISIBLE
+                }
             }
         }
     }

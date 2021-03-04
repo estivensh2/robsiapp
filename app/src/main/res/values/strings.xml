@@ -65,4 +65,18 @@
     <string name="texto_error_clave">Tu contraseña actual  es incorrecta</string>
     <string name="texto_clave_incorrecta">Tu clave actual es incorrecta</string>
     <string name="texto_guardar_clave">GUARDAR</string>
+    <string name="texto_activar_permisos">Ve ajustes para activar los permisos</string>
+    <string name="texto_datos_actualizados">Datos actualizados correctamente</string>
+    <string name="texto_error_datos">Error al actualizar. Revisa tus datos</string>
+    <string name="descripcion_imagen_perfil">Esta es la imagen de perfil</string>
+    <string name="texto_cerrar_sesion">Estas seguro que deseas cerrar sesion?</string>
+    <string name="texto_si">Si</string>
+    <string name="texto_no">No</string>
+    <string name="texto_recuperar_clave">Recuperar contraseña</string>
+    <string name="texto_datos_incorrectos">Tu correo o clave son incorrectas</string>
+    <string name="texto_recuperar_clave_correo">enviar correo electrónico</string>
+    <string name="texto_olvidaste_tu_clave">¿Olvidaste tu contraseña?</string>
+    <string name="descripcion_imagen_recuperar_clave">esta es la imagen de recuperar clave</string>
+    <string name="texto_corre_no_registrado">No hay ninguna cuenta registrada con este correo</string>
+    <string name="texto_correo_enviado">Se ha enviado el correo para recuperar tu clave</string>
 </resources>

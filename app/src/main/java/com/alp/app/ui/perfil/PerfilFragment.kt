@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
@@ -13,9 +12,10 @@ import com.alp.app.data.RespuestaUsuarioData
 import com.alp.app.databinding.FragmentPerfilBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
+import com.alp.app.servicios.Preferencias
 import com.alp.app.servicios.ServicioBuilder
-import com.alp.app.ui.bienvenida.BienvenidaFragmentDirections
 import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +29,6 @@ class PerfilFragment : Fragment() {
     private var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
     private lateinit var contexto: Context
-    private var bundle = Bundle()
     private lateinit var imagen:String
     private lateinit var nombres:String
     private lateinit var apellidos:String
@@ -37,14 +36,10 @@ class PerfilFragment : Fragment() {
     private lateinit var correo:String
     private lateinit var clave:String
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         perfilViewModel = ViewModelProvider(this).get(PerfilViewModel::class.java)
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
-        perfilViewModel.text.observe(viewLifecycleOwner, Observer {
+        perfilViewModel.text.observe(viewLifecycleOwner, {
             //binding.textNotifications.text = it
         })
         setHasOptionsMenu(true)
@@ -56,19 +51,24 @@ class PerfilFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
-                call.recuperarDatosUsuario("7").enqueue(object : Callback<RespuestaUsuarioData> {
+                call.recuperarDatosUsuario(Preferencias.leer("id","0").toString()).enqueue(object : Callback<RespuestaUsuarioData> {
                     override fun onResponse(call: Call<RespuestaUsuarioData>, response: Response<RespuestaUsuarioData>) {
                         activity?.runOnUiThread {
-                            val response = response.body()!!
-                            if (response.respuesta.equals("1")) {
-                                Glide.with(requireContext()).load(response.datos.imagen).into(binding.imagenPerfil)
-                                binding.nombreCompleto.text = "${response.datos.nombres} ${response.datos.apellidos}"
-                                imagen = response.datos.imagen
-                                nombres = response.datos.nombres
-                                apellidos = response.datos.apellidos
-                                notificaciones = response.datos.notificaciones
-                                correo = response.datos.correo
-                                clave = response.datos.clave
+                            val responsex = response.body()!!
+                            if (responsex.respuesta == "1") {
+                                if (responsex.datos.imagen.isEmpty()){
+                                    Glide.with(contexto).load(R.drawable.boton_facebook_claro).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
+                                } else {
+                                    Glide.with(requireContext()).load(responsex.datos.imagen).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
+                                }
+                                val nombre = "${responsex.datos.nombres} ${responsex.datos.apellidos}"
+                                binding.nombreCompleto.text = nombre
+                                imagen = responsex.datos.imagen
+                                nombres = responsex.datos.nombres
+                                apellidos = responsex.datos.apellidos
+                                notificaciones = responsex.datos.notificaciones
+                                correo = responsex.datos.correo
+                                clave = responsex.datos.clave
                                 binding.cargaContenido.visibility = View.GONE
                             }
                         }

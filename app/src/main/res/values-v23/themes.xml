@@ -27,6 +27,9 @@
         <item name="estiloNavegacionExpandida">@style/TituloExpandidaClaro</item>
         <item name="estiloNavegacionCollapsada">@style/TituloCollapsadaClaro</item>
         <item name="colorTextoFormulario">@color/colorGrisMedio</item>
+        <!-- Dialogos -->
+        <item name="estiloDialogo">@drawable/estilo_alertas_claro</item>
+        <item name="colorTextoDialogo">@color/colorGrisOscuro</item>
 
 
 
