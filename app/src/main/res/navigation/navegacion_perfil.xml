@@ -13,6 +13,9 @@
         <action
             android:id="@+id/accion_perfil_a_perfil_configuracion"
             app:destination="@id/perfilDetalleFragment" />
+        <action
+            android:id="@+id/accion_perfil_a_diplomas"
+            app:destination="@id/listadoDiplomadosFragment" />
     </fragment>
     <fragment
         android:id="@+id/perfilDetalleFragment"
@@ -59,4 +62,9 @@
             app:popUpTo="@id/cambiarClaveFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/listadoDiplomadosFragment"
+        android:name="com.alp.app.ui.perfil.ListadoDiplomadosFragment"
+        android:label="Certificados"
+        tools:layout="@layout/fragment_listado_diplomados" />
 </navigation>

@@ -1,12 +1,10 @@
 package com.alp.app.adaptadores
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
@@ -22,11 +20,11 @@ class CategoriasAdaptador(val arrayList: ArrayList<RespuestaCategoriaData>, val 
             if (binding.nuevo.text==""){
                 binding.nuevo.visibility = View.GONE
             } else {
-                binding.nuevo.text = "Nuevo"
+                binding.nuevo.text = contexto.getString(R.string.texto_nuevo)
                 binding.nuevo.visibility = View.VISIBLE
             }
+            //binding.nuevo.text = "Nuevo"
             binding.descripcionCurso.text = modelo.descripcion
-            binding.fondoCategorias.setBackgroundColor(Color.parseColor(modelo.fondo))
             Glide.with(contexto).load(modelo.icono).into(binding.iconoCursos)
         }
     }

@@ -60,6 +60,8 @@ class CursosDetalleAdaptador (val arrayList: ArrayList<RespuestaCursosDetalleDat
             bundle.putString("descripcion", descripcion)
             bundle.putString("codigo", codigo)
             bundle.putString("tipolenguaje", tipolenguaje)
+            bundle.putString("total", arrayList.size.toString())
+            bundle.putString("ultimoelemento", arrayList.last().total)
             Navigation.findNavController(v).navigate(R.id.accion_detalle_a_temario, bundle)
         }
     }

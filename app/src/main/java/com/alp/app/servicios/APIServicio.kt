@@ -47,6 +47,13 @@ interface APIServicio {
     : Call<List<RespuestaCursosDetalleData>>
 
     @FormUrlEncoded
+    @POST("recuperarDiploma.php")
+    fun recuperarDiploma(
+        @Field("idusuario") idusuario:String
+    )
+    : Call<List<RespuestaRecuperarDiploma>>
+
+    @FormUrlEncoded
     @POST("insertarHabilitado.php")
     fun insertarProgreso(
         @Field("idhabilitado") idhabilitado:String,
@@ -81,4 +88,23 @@ interface APIServicio {
         @Field("correoElectronico") correo:String
     )
     : Call<RespuestaRecuperarClave>
+
+    @FormUrlEncoded
+    @POST("insertarDiploma.php")
+    fun insertarDiploma (
+            @Field("idusuario") idusuario:String,
+            @Field("idcurso") idcurso:String,
+            @Field("idcompletado") idcompletado:String
+    )
+    : Call<RespuestaInsertarDiploma>
+
+
+    @FormUrlEncoded
+    @POST("descargarPDF.php")
+    fun descargarPDF (
+        @Field("nombres") nombres:String,
+        @Field("apellidos") apellidos:String,
+        @Field("nombrecurso") nombrecurso:String
+    )
+    : Call<RespuestaDescargarPDF>
 }

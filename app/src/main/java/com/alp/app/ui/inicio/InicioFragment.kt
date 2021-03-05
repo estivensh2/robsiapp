@@ -3,15 +3,12 @@ package com.alp.app.ui.inicio
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -31,7 +28,6 @@ import java.lang.Runnable
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.concurrent.timerTask
 
 class InicioFragment : Fragment() {
 
@@ -50,7 +46,7 @@ class InicioFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         inicioViewModel = ViewModelProvider(this).get(InicioViewModel::class.java)
         _binding = FragmentInicioBinding.inflate(inflater, container, false)
-        inicioViewModel.text.observe(viewLifecycleOwner, Observer {
+        inicioViewModel.text.observe(viewLifecycleOwner, {
         })
         binding.cargaContenido.visibility = View.VISIBLE
         return binding.root
@@ -77,14 +73,14 @@ class InicioFragment : Fragment() {
                     override fun onFailure(call: Call<List<RespuestaSliderData>>, t: Throwable) {
                         activity!!.runOnUiThread {
                             ClaseToast.mostrarx(contexto, getString(R.string.texto_error_conexion), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                            binding.cargaContenido.visibility = View.GONE
+                            binding.cargaContenido.visibility = View.VISIBLE
                         }
                     }
                 })
             } catch (e: Throwable) {
                 requireActivity().runOnUiThread {
                     ClaseToast.mostrarx(contexto, getString(R.string.texto_error_grave), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                    binding.cargaContenido.visibility = View.GONE
+                    binding.cargaContenido.visibility = View.VISIBLE
                 }
             }
         }
@@ -111,14 +107,14 @@ class InicioFragment : Fragment() {
                     override fun onFailure(call: Call<List<RespuestaCategoriaData>>, t: Throwable) {
                         activity!!.runOnUiThread {
                             ClaseToast.mostrarx(contexto, getString(R.string.texto_error_conexion), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                            binding.cargaContenido.visibility = View.GONE
+                            binding.cargaContenido.visibility = View.VISIBLE
                         }
                     }
                 })
             } catch (e: Throwable) {
                 requireActivity().runOnUiThread {
                     ClaseToast.mostrarx(contexto, getString(R.string.texto_error_grave), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                    binding.cargaContenido.visibility = View.GONE
+                    binding.cargaContenido.visibility = View.VISIBLE
                 }
             }
         }
@@ -137,10 +133,20 @@ class InicioFragment : Fragment() {
         handler.post(runnable)
     }
 
-    private fun actualizarHora(fecha: TextView) {
+    private fun actualizarHora(fecha: TextView, saludox:TextView) {
         runnablex = object: Runnable {
             override fun run() {
                 fecha.text = fechaActual("hh:mm a")
+                val saludo = fechaActual("a")
+                if (saludo == "p. m."){
+                    if (fechaActual("hh:mm a")<"5:59 p. m."){
+                        saludox.text = resources.getString(R.string.texto_buenas_tardes)
+                    } else {
+                        saludox.text = resources.getString(R.string.texto_buenas_noches)
+                    }
+                } else {
+                    saludox.text = resources.getString(R.string.texto_buenos_dias)
+                }
                 handler.postDelayed(this, 1000)
             }
         }
@@ -172,7 +178,7 @@ class InicioFragment : Fragment() {
     override fun onStart() {
         recuperarSlider()
         recuperarCategorias()
-        actualizarHora(binding.fechaActual)
+        actualizarHora(binding.fechaActual,binding.bienvenido)
         ejecutarSlider(binding.paginadorx)
         super.onStart()
     }

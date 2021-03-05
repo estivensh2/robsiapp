@@ -9,7 +9,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.RespuestaCursosData
-import com.alp.app.databinding.InduccionFilaBinding
 import com.alp.app.databinding.TarjetasCursosBinding
 import com.bumptech.glide.Glide
 

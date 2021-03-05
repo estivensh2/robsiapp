@@ -29,12 +29,12 @@ class PerfilFragment : Fragment() {
     private var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
     private lateinit var contexto: Context
-    private lateinit var imagen:String
-    private lateinit var nombres:String
-    private lateinit var apellidos:String
-    private lateinit var notificaciones:String
-    private lateinit var correo:String
-    private lateinit var clave:String
+    private var imagen:String? = null
+    private var nombres:String? = null
+    private var apellidos:String? = null
+    private var notificaciones:String? = null
+    private var correo:String? = null
+    private var clave:String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         perfilViewModel = ViewModelProvider(this).get(PerfilViewModel::class.java)
@@ -42,6 +42,9 @@ class PerfilFragment : Fragment() {
         perfilViewModel.text.observe(viewLifecycleOwner, {
             //binding.textNotifications.text = it
         })
+        binding.misCertificados.setOnClickListener {
+            findNavController().navigate(R.id.accion_perfil_a_diplomas)
+        }
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -113,8 +116,10 @@ class PerfilFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.configuraciones_perfil -> {
-                val action = PerfilFragmentDirections.accionPerfilAPerfilConfiguracion(imagen, nombres, apellidos, notificaciones, correo, clave)
-                findNavController().navigate(action)
+                if(nombres != null){
+                    val action = PerfilFragmentDirections.accionPerfilAPerfilConfiguracion(imagen!!, nombres!!, apellidos!!, notificaciones!!, correo!!, clave!!)
+                    findNavController().navigate(action)
+                }
             }
         }
         return super.onOptionsItemSelected(item)

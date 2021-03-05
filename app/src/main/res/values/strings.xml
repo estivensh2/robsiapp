@@ -79,4 +79,14 @@
     <string name="descripcion_imagen_recuperar_clave">esta es la imagen de recuperar clave</string>
     <string name="texto_corre_no_registrado">No hay ninguna cuenta registrada con este correo</string>
     <string name="texto_correo_enviado">Se ha enviado el correo para recuperar tu clave</string>
+    <string name="texto_buenas_noches">Buenas noches</string>
+    <string name="texto_buenas_tardes">Buenas tardes</string>
+    <string name="texto_buenos_dias">Buenos dias</string>
+    <string name="texto_diploma_activo">Ya tienes un diploma de este curso. Revisa en tu perfil en la opcion mis certificados</string>
+    <string name="texto_sin_certificados">Aun no tienes certificaciones</string>
+    <string name="texto_nuevo">Nuevo</string>
+    <string name="texto_excelente">!Excelente!</string>
+    <string name="texto_descripcion_curso_completado">haz completado este curso. Puedes ver y descargar tu diploma</string>
+    <string name="texto_ver_diplomas">ver mis diplomas</string>
+    <string name="descripcion_icono_ver_certificados">este es el icono de ver certificados</string>
 </resources>

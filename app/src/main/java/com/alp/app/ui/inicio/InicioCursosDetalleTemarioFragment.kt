@@ -5,12 +5,14 @@ import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.alp.app.R
+import com.alp.app.data.RespuestaInsertarDiploma
 import com.alp.app.data.RespuestaInsertarProgreso
 import com.alp.app.databinding.FragmentInicioCursosDetalleTemarioBinding
 import com.alp.app.servicios.APIServicio
@@ -22,25 +24,31 @@ import io.github.kbiakov.codeview.highlight.ColorTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.michaelbel.bottomsheet.BottomSheet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class InicioCursosDetalleTemarioFragment : Fragment() {
 
-    private lateinit var viewModel: InicioCursosDetalleTemarioViewModel
     private var _binding: FragmentInicioCursosDetalleTemarioBinding? = null
     private val binding get() = _binding!!
+    private lateinit var id : String
+    private lateinit var total : String
+    private lateinit var idcurso : String
     private lateinit var contexto: Context
-    private lateinit var id :String
-    private lateinit var idcurso :String
+    private lateinit var ultimoelemento : String
+    private lateinit var viewModel: InicioCursosDetalleTemarioViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentInicioCursosDetalleTemarioBinding.inflate(inflater, container, false)
+        Preferencias.init(requireContext(), "preferenciasDeUsuario")
         val bundle = this.arguments
         if (bundle != null) {
             id = bundle.getString("id", "no")
             idcurso = bundle.getString("idcurso", "no")
+            total = bundle.getString("total", "no")
+            ultimoelemento = bundle.getString("ultimoelemento", "no")
             val nombre = bundle.getString("nombre", "no")
             val descripcion = bundle.getString("descripcion", "no")
             val tipolenguaje = bundle.getString("tipolenguaje", "no")
@@ -65,11 +73,57 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
             }
         }
         binding.completar.setOnClickListener {
-            val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
-            mediaPlayer.start()
-            insertarProgreso()
+            if (Preferencias.leer("idsonidos", false)==true){
+                val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
+                mediaPlayer.start()
+            }
+            if (total==ultimoelemento){
+                insertarDiploma()
+                insertarProgreso()
+            } else {
+                insertarProgreso()
+            }
         }
         return binding.root
+    }
+
+    private fun insertarDiploma() {
+        binding.cargaContenido.visibility = View.VISIBLE
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = ServicioBuilder.buildServicio(APIServicio::class.java)
+            try {
+                call.insertarDiploma(Preferencias.leer("id","0").toString(), idcurso,"1").enqueue(object :
+                        Callback<RespuestaInsertarDiploma> {
+                    override fun onResponse(call: Call<RespuestaInsertarDiploma>, response: Response<RespuestaInsertarDiploma>) {
+                        val responsex = response.body()!!
+                        activity?.runOnUiThread {
+                            if (responsex.respuesta == "1") {
+                                binding.cargaContenido.visibility = View.GONE
+                                mostrarBottomSheet()
+                            } else {
+                                binding.cargaContenido.visibility = View.GONE
+                                ClaseToast.mostrarx(contexto, getString(R.string.texto_diploma_activo), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                            }
+                        }
+                    }
+                    override fun onFailure(call: Call<RespuestaInsertarDiploma>, t: Throwable) {
+                        activity!!.runOnUiThread {
+                            ClaseToast.mostrarx(contexto, getString(R.string.texto_error_conexion), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                        }
+                    }
+                })
+            } catch (e: Throwable) {
+                requireActivity().runOnUiThread {
+                    ClaseToast.mostrarx(contexto, getString(R.string.texto_error_grave), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                }
+            }
+        }
+    }
+
+    private fun mostrarBottomSheet() {
+        val bottomSheet = BottomSheet.Builder(contexto)
+            .setCustomView(R.layout.ventana_bottom_sheet)
+        bottomSheet.show()
     }
 
     private fun insertarProgreso() {
