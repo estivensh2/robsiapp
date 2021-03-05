@@ -25,7 +25,7 @@
     <string name="texto_ingresar">ingresar</string>
     <string name="texto_nulo">nulo</string>
     <string name="descripcion_imagen_actual">esta es la imagen de perfil</string>
-    <string name="texto_que_deseas_aprender">Que deseas aprender?</string>
+    <string name="texto_que_deseas_aprender">¿Qué deseas aprender?</string>
     <string name="texto_segundario_que_deseas_aprender">Estos son los cursos que tenemos para ti</string>
     <string name="descripcion_imagen_slider">esta son las imagenes del slider</string>
     <string name="descripcion_imagen_categoria">este es el icono de la categoria de cursos</string>
@@ -72,7 +72,7 @@
     <string name="texto_cerrar_sesion">Estas seguro que deseas cerrar sesion?</string>
     <string name="texto_si">Si</string>
     <string name="texto_no">No</string>
-    <string name="texto_recuperar_clave">Recuperar contraseña</string>
+    <string name="texto_recuperar_clave">¿Olvidaste tú contraseña?</string>
     <string name="texto_datos_incorrectos">Tu correo o clave son incorrectas</string>
     <string name="texto_recuperar_clave_correo">enviar correo electrónico</string>
     <string name="texto_olvidaste_tu_clave">¿Olvidaste tu contraseña?</string>
@@ -89,4 +89,7 @@
     <string name="texto_descripcion_curso_completado">haz completado este curso. Puedes ver y descargar tu diploma</string>
     <string name="texto_ver_diplomas">ver mis diplomas</string>
     <string name="descripcion_icono_ver_certificados">este es el icono de ver certificados</string>
+    <string name="texto_ingresa_tu_correo">Ingresa tu correo electrónico para recibir un enlace de recuperación de contraseña</string>
+    <string name="texto_correo_invalido">Correo no valido</string>
+    <string name="texto_mis_codigos">Lista de codigos</string>
 </resources>

@@ -24,11 +24,7 @@ class SliderAdaptador(val arrayList: ArrayList<RespuestaSliderData>, val context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val vista = LayoutInflater.from(parent.context).inflate(
-            R.layout.slider_pagina,
-            parent,
-            false
-        )
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.slider_pagina, parent, false)
         return ViewHolder(vista)
     }
 

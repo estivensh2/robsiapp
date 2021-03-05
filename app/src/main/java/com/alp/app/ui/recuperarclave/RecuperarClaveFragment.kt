@@ -19,12 +19,14 @@ import com.alp.app.databinding.FragmentRecuperarClaveBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
 import com.alp.app.servicios.ServicioBuilder
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.regex.Pattern
 
 class RecuperarClaveFragment : Fragment() {
     private var _binding: FragmentRecuperarClaveBinding? = null
@@ -39,6 +41,7 @@ class RecuperarClaveFragment : Fragment() {
         binding.correoElectronico.onChange { habilitarBoton() }
         binding.botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
         binding.resultadoerror.visibility = View.GONE
+        Glide.with(contexto).load(R.drawable.saludando).into(binding.imagenRecuperarClave)
         return binding.root
     }
 
@@ -51,9 +54,15 @@ class RecuperarClaveFragment : Fragment() {
         with(binding){
             if (correoElectronico.length()>0){
                 botonRecuperarClave.isEnabled = true
-                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorBlanco))
+                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
             } else {
+                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
                 botonRecuperarClave.isEnabled = false
+            }
+            if (!validarCorreo(correoElectronico.text.toString())){
+                correoElectronico.error =  resources.getString(R.string.texto_correo_invalido)
+                botonRecuperarClave.isEnabled = false
+                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
             }
         }
     }
@@ -103,6 +112,17 @@ class RecuperarClaveFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun validarCorreo(email: String): Boolean {
+        return Pattern.compile(
+            "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                    + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                    + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                    + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
+        ).matcher(email).matches()
     }
 
     override fun onDestroyView() {

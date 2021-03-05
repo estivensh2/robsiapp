@@ -7,12 +7,10 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -40,10 +38,7 @@ class RegistrarUsuarioFragment : Fragment() {
     private var _binding : FragmentRegistrarUsuarioBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?,
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentRegistrarUsuarioBinding.inflate(layoutInflater, container, false)
         with(binding){
             Glide.with(contexto).load(R.drawable.saludando).into(imagenCrearCuenta)
@@ -78,9 +73,9 @@ class RegistrarUsuarioFragment : Fragment() {
             try {
                 call.registrarUsuario(nombres, apellidos, correo, clave).enqueue(object : Callback<RespuestaCrearCuentaData> {
                     override fun onResponse(call: Call<RespuestaCrearCuentaData>, response: Response<RespuestaCrearCuentaData>) {
-                        val response = response.body()!!
+                        val responsex = response.body()!!
                         activity?.runOnUiThread {
-                            if (response.respuestax.equals("1")) {
+                            if (responsex.respuestax == "1") {
                                 ProgressDialogo.ocultar()
                                 ClaseToast.mostrarx(contexto, "Usuario registrado correctamente", ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
                                 findNavController().navigate(R.id.accion_registrar_a_iniciar_sesion)
@@ -109,10 +104,15 @@ class RegistrarUsuarioFragment : Fragment() {
                 correoElectronico.length()>0 &&
                 claveAcceso.length()>0 && validarCorreo(correoElectronico.text.toString())){ // validamos que los campos sean mayor a vacio y correo sea valido para habilitar el boton
                 botonRegistrar.isEnabled = true
-                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorBlanco))
+                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
             } else {
-                correoElectronico.error = "Correo no valido"
+                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
                 botonRegistrar.isEnabled = false
+            }
+            if (!validarCorreo(correoElectronico.text.toString())){
+                correoElectronico.error =  resources.getString(R.string.texto_correo_invalido)
+                botonRegistrar.isEnabled = false
+                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
             }
         }
     }

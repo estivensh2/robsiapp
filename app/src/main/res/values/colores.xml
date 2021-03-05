@@ -11,4 +11,12 @@
     <color name="colorGrisOscuro">#191919</color>
     <color name="colorVerdeClaro">#04DA0E</color>
     <color name="colorVerdeOscuro">#019308</color>
+
+
+    <color name="colorTextoLabel">#B1B1B1</color>
+    <color name="colorBordeCampoFormulario">#e5e5e5</color>
+    <color name="colorFondoCampoFormulario">#f7f7f7</color>
+
+    <color name="BordeTablas">#e5e5e5</color>
+    <color name="colorFondoTablas">#f7f7f7</color>
 </resources>

@@ -14,7 +14,7 @@
 
         <item name="colorPrimario">@color/colorAzulOscuro</item>
         <item name="colorSegundario">@color/colorAmarilloClaro</item>
-        <item name="colorTextoLabel">@color/colorGrisMedio</item>
+        <item name="colorTextoLabel">@color/colorTextoLabel</item>
         <item name="estiloCampoFormulario">@drawable/fondo_campo_claro</item>
         <item name="colorCursor">@drawable/cursor_claro</item>
         <item name="estiloMostrarClave">@drawable/estilo_toggle_clave_claro</item>
@@ -37,7 +37,7 @@
         <item name="estiloFilaArriba">@drawable/estilo_tabla_fila_arriba_claro</item>
         <item name="estiloFilaMedio">@drawable/estilo_tabla_fila_medio_claro</item>
         <item name="estiloFilaAbajo">@drawable/estilo_tabla_fila_abajo_claro</item>
-        <item name="colorTextoTabla">@color/colorGrisOscuro</item>
+        <item name="colorTextoTabla">@color/colorTextoLabel</item>
 
 
         <item name="estiloSwitchThumb">@drawable/switch_thumb_claro</item>

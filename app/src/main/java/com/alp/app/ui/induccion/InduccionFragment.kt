@@ -25,10 +25,7 @@ class InduccionFragment : Fragment() {
 
     private lateinit var viewModel: InduccionViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentInduccionBinding.inflate(layoutInflater, container, false)
         Preferencias.init(requireContext(), "preferenciasDeUsuario")
         arrayList.add(InduccionData(R.drawable.logobienvenida, "Bienvenido", "En esta aplicacion podrás aprender las bases básicas para iniciar en la programación totalmente gratis."))

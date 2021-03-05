@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorGrisClaro"/>
-            <stroke android:width="2dp" android:color="@color/colorGrisClaroMedio"/>
-            <corners android:radius="15dp"/>
-            <padding android:left="15dp" android:right="5dp" android:top="15dp" android:bottom="15dp"/>
+            <solid android:color="@color/colorFondoCampoFormulario"/>
+            <stroke android:width="2dp" android:color="@color/colorBordeCampoFormulario"/>
+            <corners android:radius="16dp"/>
+            <padding android:left="13dp" android:right="8dp" android:top="13dp" android:bottom="14dp"/>
         </shape>
     </item>
 </selector>

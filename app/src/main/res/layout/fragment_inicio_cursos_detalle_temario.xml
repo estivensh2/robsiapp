@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFondo"
@@ -38,9 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/nunito_black"
                     android:text="@string/texto_prueba"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -89,10 +90,10 @@
                         android:id="@+id/descripcion_temario"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/nunito"
                         android:text="@string/texto_prueba"
                         android:textColor="?attr/colorTextoEnFondo"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -128,14 +129,16 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="?attr/estiloGeneralBotonPrimario"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/nunito_black"
                 android:text="@string/texto_completar"
                 android:textColor="?attr/colorSegundario"
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:letterSpacing="@dimen/dimensiones_letter_spacing"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:targetApi="lollipop" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

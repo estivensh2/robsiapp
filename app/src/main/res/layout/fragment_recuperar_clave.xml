@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorFondo"
     tools:context=".ui.recuperarclave.RecuperarClaveFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,43 +19,44 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="?attr/estiloCampoFormulario"
             android:ems="10"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textCursorDrawable="?attr/colorCursor"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
             tools:ignore="LabelFor" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:id="@+id/imagen_recuperar_clave"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="80dp"
             android:contentDescription="@string/descripcion_imagen_recuperar_clave"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/saludando" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/nunito_black"
             android:text="@string/texto_olvidaste_tu_clave"
             android:textColor="?attr/colorTextoEnFondo"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imagen_recuperar_clave" />
 
         <Button
             android:id="@+id/botonRecuperarClave"
@@ -62,11 +64,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="?attr/estiloGeneralBotonPrimario"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/nunito_black"
             android:stateListAnimator="@null"
             android:text="@string/texto_recuperar_clave_correo"
             android:textColor="?attr/colorSegundario"
@@ -86,14 +88,30 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/nunito_bold"
             android:text="@string/texto_prueba"
             android:textColor="#9F0404"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/correoElectronico" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="@string/texto_ingresa_tu_correo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/carga_contenido"

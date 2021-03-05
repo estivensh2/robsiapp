@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.alp.app.R
 
 object ClaseToast {
@@ -16,7 +17,7 @@ object ClaseToast {
         val contenido = view.findViewById<ViewGroup>(R.id.vista_personalizada)
         val layout = inflater.inflate(R.layout.vista_toast_personalizada, contenido)
         val texto = layout.findViewById<TextView>(R.id.texto_mensaje)
-        val fondo = layout.findViewById<LinearLayout>(R.id.fondo_ventana)
+        val fondo = layout.findViewById<ConstraintLayout>(R.id.vista_personalizada)
         val imagen = layout.findViewById<ImageView>(R.id.imagen_ventana)
         val mostrarMensaje = Toast.makeText(contexto, "", Toast.LENGTH_SHORT)
             texto.text = mensaje

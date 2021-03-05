@@ -113,11 +113,15 @@ class IniciarSesionFragment : Fragment() {
         with(binding){
             if (correoElectronico.length()>0 && claveAcceso.length()>0 ){
                 botonIngresar.isEnabled = true
-                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorBlanco))
-            } else if (!validarCorreo(correoElectronico.text.toString())){
-                correoElectronico.error = "Correo no valido"
+                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
             } else {
+                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
                 botonIngresar.isEnabled = false
+            }
+            if (!validarCorreo(correoElectronico.text.toString())){
+                correoElectronico.error = resources.getString(R.string.texto_correo_invalido)
+                botonIngresar.isEnabled = false
+                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
             }
         }
     }
@@ -129,6 +133,7 @@ class IniciarSesionFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
     }
+
     private fun validarCorreo(email: String): Boolean {
         return Pattern.compile(
             "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
