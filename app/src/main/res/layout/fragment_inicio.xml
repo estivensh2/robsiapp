@@ -71,7 +71,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/estilo_tarjeta_inicio_hora_claro">
+                            android:background="?attr/estiloCardViewInicio">
 
                             <TextView
                                 android:id="@+id/bienvenido"
@@ -81,7 +81,7 @@
                                 android:layout_marginLeft="24dp"
                                 android:fontFamily="@font/nunito_black"
                                 android:text="@string/texto_prueba"
-                                android:textColor="?attr/colorPrimario"
+                                android:textColor="?attr/colorTextoCardViewInicio"
                                 android:textSize="18sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/fechaActual"
@@ -97,7 +97,7 @@
                                 android:layout_marginRight="24dp"
                                 android:fontFamily="@font/nunito_black"
                                 android:text="@string/texto_prueba"
-                                android:textColor="?attr/colorPrimario"
+                                android:textColor="?attr/colorTextoCardViewInicio"
                                 android:textSize="17sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"

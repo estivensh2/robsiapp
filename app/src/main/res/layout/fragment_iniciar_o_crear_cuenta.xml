@@ -36,7 +36,7 @@
         android:fontFamily="@font/nunito_black"
         android:stateListAnimator="@null"
         android:text="@string/texto_iniciar_sesion"
-        android:textColor="@color/colorAzulOscuro"
+        android:textColor="?attr/colorSegundario"
         android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
         android:letterSpacing="@dimen/dimensiones_letter_spacing"
         app:layout_constraintBottom_toTopOf="@+id/botonRegistrarCuenta"

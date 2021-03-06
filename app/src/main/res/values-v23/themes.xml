@@ -1,69 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.App" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-
-
-        <item name="colorPrimario">@color/colorAzulOscuro</item>
-        <item name="colorSegundario">@color/colorAmarilloClaro</item>
-        <item name="colorTextoLabel">@color/colorTextoLabel</item>
-        <item name="estiloCampoFormulario">@drawable/fondo_campo_claro</item>
-        <item name="colorCursor">@drawable/cursor_claro</item>
-        <item name="estiloMostrarClave">@drawable/estilo_toggle_clave_claro</item>
+    <style name="Tema.App.Claro" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Colores generales de textos y fondos -->
         <item name="colorFondo">@color/colorBlanco</item>
-        <!-- Tarjetas -->
+        <item name="colorPrimario">@color/colorAzulOscuro</item>
+        <item name="colorTextoEnFondo">@color/colorGrisMedio</item>
+        <item name="colorSegundario">@color/colorAmarilloClaro</item>
+        <!-- Formularios -->
+        <item name="colorCursor">@drawable/cursor_claro</item>
+        <item name="colorTextoLabel">@color/colorTextoLabel</item>
+        <item name="colorTextoFormulario">@color/colorGrisMedio</item>
+        <item name="estiloCampoFormulario">@drawable/fondo_campo_claro</item>
+        <item name="estiloMostrarClave">@drawable/estilo_toggle_clave_claro</item>
+        <!-- Cardview -->
+        <item name="iconoCardView">@drawable/flecha_adelante_claro</item>
         <item name="estiloTarjetas">@drawable/estilo_tarjeta_claro</item>
+        <item name="estiloCardView">@drawable/estilo_cardview_claro</item>
+        <item name="estiloCardViewCategoria">@drawable/estilo_tarjeta_categoria_claro</item>
         <item name="estiloTarjetasSegundarias">@drawable/estilo_tarjeta_segundario_claro</item>
-        <item name="estiloNavegcionExpandible">@drawable/fondo_navegacion_top_claro</item>
-
+        <!-- Navegacion expandible -->
         <item name="estiloNavegacionExpandida">@style/TituloExpandidaClaro</item>
         <item name="estiloNavegacionCollapsada">@style/TituloCollapsadaClaro</item>
-        <item name="colorTextoFormulario">@color/colorGrisMedio</item>
+        <item name="estiloNavegcionExpandible">@drawable/fondo_navegacion_top_claro</item>
         <!-- Dialogos -->
-        <item name="estiloDialogo">@drawable/estilo_alertas_claro</item>
         <item name="colorTextoDialogo">@color/colorGrisOscuro</item>
-
-
-
+        <item name="estiloDialogo">@drawable/estilo_alertas_claro</item>
+        <!-- Tablas -->
+        <item name="colorTextoTabla">@color/colorTextoLabel</item>
         <item name="estiloTabla">@drawable/fondo_tabla_claro</item>
-        <item name="estiloFilaArriba">@drawable/estilo_tabla_fila_arriba_claro</item>
         <item name="estiloFilaMedio">@drawable/estilo_tabla_fila_medio_claro</item>
         <item name="estiloFilaAbajo">@drawable/estilo_tabla_fila_abajo_claro</item>
-        <item name="colorTextoTabla">@color/colorTextoLabel</item>
-
-
+        <item name="estiloFilaArriba">@drawable/estilo_tabla_fila_arriba_claro</item>
+        <!-- Switch -->
         <item name="estiloSwitchThumb">@drawable/switch_thumb_claro</item>
         <item name="estiloSwitchTrack">@drawable/switch_track_claro</item>
-
-
         <!-- Status bar color. -->
         <item name="toolbarStyle">@style/Toolbar_Claro</item>
-        <item name="estiloCardView">@drawable/estilo_cardview_claro</item>
-        <item name="colorTextoEnFondo">@color/colorGrisMedio</item>
-        <item name="iconoCardView">@drawable/flecha_adelante_claro</item>
-        <!-- Customize your theme here. -->
-
-        <!-- Bottom Navegacion -->
-        <item name="estiloFondoBottomNavegacion">@drawable/estilo_fondo_bottom_navegacion_claro
-        </item>
-        <item name="estiloIconosBottomNavegacion">@drawable/estilo_iconos_bottom_navegacion_claro
-        </item>
-        <item name="estiloGeneralBotonFacebook">@drawable/boton_facebook_claro</item>
-        <item name="estiloGeneralBotonSegundario">@drawable/boton_segundario_claro</item>
-        <item name="estiloGeneralBotonPrimario">@drawable/boton_primario_claro</item>
-
-
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/colorBlanco</item>
+        <!-- Bottom Navegacion -->
+        <item name="estiloFondoBottomNavegacion">@drawable/estilo_fondo_bottom_navegacion_claro</item>
+        <!-- Botones generales -->
+        <item name="estiloGeneralBotonFacebook">@drawable/boton_facebook_claro</item>
+        <item name="estiloGeneralBotonPrimario">@drawable/boton_primario_claro</item>
+        <item name="estiloGeneralBotonSegundario">@drawable/boton_segundario_claro</item>
     </style>
+
+    <style name="Tema.App.Oscuro" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Colores generales de textos y fondos -->
+        <item name="colorFondo">@color/colorGrisOscuro</item>
+        <item name="colorPrimario">@color/colorAmarilloClaro</item>
+        <item name="colorTextoEnFondo">@color/colorBlanco</item>
+        <item name="colorSegundario">@color/colorAmarilloClaro</item>
+        <!-- Formularios -->
+        <item name="colorCursor">@drawable/cursor_oscuro</item>
+        <item name="colorTextoLabel">@color/colorTextoLabel</item>
+        <item name="colorTextoFormulario">@color/colorBordeCampoFormularioOscuro</item>
+        <item name="estiloCampoFormulario">@drawable/fondo_campo_oscuro</item>
+        <item name="estiloMostrarClave">@drawable/estilo_toggle_clave_claro</item>
+        <!-- Cardview -->
+        <item name="iconoCardView">@drawable/flecha_adelante_claro</item>
+        <item name="estiloTarjetas">@drawable/estilo_tarjeta_claro</item>
+        <item name="estiloCardView">@drawable/estilo_cardview_claro</item>
+        <item name="estiloCardViewCategoria">@drawable/estilo_tarjeta_categoria_oscuro</item>
+        <item name="estiloCardViewCursos">@drawable/estilo_tarjeta_curso_oscuro</item>
+        <item name="estiloCardViewCursosDetalle">@drawable/estilo_tarjeta_curso_detalle_oscuro</item>
+        <item name="estiloCardViewCursosDetalleTemario">@drawable/estilo_tarjeta_curso_detalle_temario_oscuro</item>
+        <item name="estiloCardViewPerfil">@drawable/estilo_tarjeta_perfil_oscuro</item>
+        <item name="estiloCardViewInicio">@drawable/estilo_tarjeta_inicio_oscuro</item>
+        <item name="colorTextoCardViewInicio">@color/colorAzulOscuro</item>
+        <item name="estiloCardViewDiploma">@drawable/estilo_tarjeta_diploma_oscuro</item>
+        <item name="estiloTarjetasSegundarias">@drawable/estilo_tarjeta_segundario_claro</item>
+        <!-- Navegacion expandible -->
+        <item name="estiloNavegacionExpandida">@style/TituloExpandidaOscuro</item>
+        <item name="estiloNavegacionCollapsada">@style/TituloCollapsadaOscuro</item>
+        <item name="estiloNavegcionExpandible">@drawable/fondo_navegacion_top_oscuro</item>
+        <!-- Dialogos -->
+        <item name="colorTextoDialogo">@color/colorBlanco</item>
+        <item name="estiloDialogo">@drawable/estilo_alertas_claro</item>
+        <!-- Tablas -->
+        <item name="colorTextoTabla">@color/colorTextoLabel</item>
+        <item name="estiloTabla">@drawable/fondo_tabla_oscuro</item>
+        <item name="estiloFilaMedio">@drawable/estilo_tabla_fila_medio_oscuro</item>
+        <item name="estiloFilaAbajo">@drawable/estilo_tabla_fila_abajo_oscuro</item>
+        <item name="estiloFilaArriba">@drawable/estilo_tabla_fila_arriba_oscuro</item>
+        <!-- Switch -->
+        <item name="estiloSwitchThumb">@drawable/switch_thumb_oscuro</item>
+        <item name="estiloSwitchTrack">@drawable/switch_track_oscuro</item>
+        <!-- Status bar color. -->
+        <item name="toolbarStyle">@style/Toolbar_Oscuro</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/colorGrisOscuro</item>
+        <!-- Bottom Navegacion -->
+        <item name="estiloFondoBottomNavegacion">@drawable/estilo_fondo_bottom_navegacion_oscuro</item>
+        <!-- Botones generales -->
+        <item name="estiloGeneralBotonFacebook">@drawable/boton_facebook_claro</item>
+        <item name="estiloGeneralBotonPrimario">@drawable/boton_primario_oscuro</item>
+        <item name="estiloGeneralBotonSegundario">@drawable/boton_segundario_oscuro</item>
+        <!-- Botones generales -->
+        <item name="colorBordeImagen">@color/colorBlanco</item>
+    </style>
+
 
     <style name="Tema.ALP.StatusBarColor" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowLightStatusBar">true</item>

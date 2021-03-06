@@ -2,6 +2,14 @@
 <resources>
     <declare-styleable name="atributosCardview">
         <attr name="estiloCardView" format="reference"/>
+        <attr name="estiloCardViewCategoria" format="reference"/>
+        <attr name="estiloCardViewCursos" format="reference"/>
+        <attr name="estiloCardViewCursosDetalle" format="reference"/>
+        <attr name="estiloCardViewCursosDetalleTemario" format="reference"/>
+        <attr name="estiloCardViewPerfil" format="reference"/>
+        <attr name="estiloCardViewInicio" format="reference"/>
+        <attr name="colorTextoCardViewInicio" format="color"/>
+        <attr name="estiloCardViewDiploma" format="reference"/>
         <attr name="iconoCardView" format="reference"/>
     </declare-styleable>
 </resources>

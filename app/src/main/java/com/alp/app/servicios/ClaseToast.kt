@@ -17,7 +17,7 @@ object ClaseToast {
         val contenido = view.findViewById<ViewGroup>(R.id.vista_personalizada)
         val layout = inflater.inflate(R.layout.vista_toast_personalizada, contenido)
         val texto = layout.findViewById<TextView>(R.id.texto_mensaje)
-        val fondo = layout.findViewById<ConstraintLayout>(R.id.vista_personalizada)
+        val fondo = layout.findViewById<LinearLayout>(R.id.fondo_ventana)
         val imagen = layout.findViewById<ImageView>(R.id.imagen_ventana)
         val mostrarMensaje = Toast.makeText(contexto, "", Toast.LENGTH_SHORT)
             texto.text = mensaje

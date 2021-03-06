@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorFondo"
     tools:context=".ui.perfil.CambiarClaveFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,6 +44,7 @@
             android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:textColor="?attr/colorTextoFormulario"
             android:textCursorDrawable="?attr/colorCursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
@@ -77,6 +79,7 @@
             android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:textColor="?attr/colorTextoFormulario"
             android:textCursorDrawable="?attr/colorCursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
@@ -124,6 +127,7 @@
             android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:textColor="?attr/colorTextoFormulario"
             android:textCursorDrawable="?attr/colorCursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"

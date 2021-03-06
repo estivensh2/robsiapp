@@ -27,7 +27,9 @@
     <Button
         android:id="@+id/botonSi"
         android:layout_width="80dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:background="?attr/estiloGeneralBotonPrimario"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
@@ -35,7 +37,7 @@
         android:textColor="@color/colorBlanco"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/botonNo"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/botonNo"
         tools:ignore="ButtonStyle" />
@@ -43,10 +45,10 @@
     <Button
         android:id="@+id/botonNo"
         android:layout_width="80dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:background="?attr/estiloGeneralBotonPrimario"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"

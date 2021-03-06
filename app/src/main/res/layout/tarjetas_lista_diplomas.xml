@@ -18,7 +18,7 @@
         android:id="@+id/fondo_categorias"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="?attr/estiloTarjetas"
+        android:background="?attr/estiloCardViewDiploma"
         android:paddingLeft="@dimen/padding_cardview_curso_detalle"
         android:paddingRight="@dimen/padding_cardview_curso_detalle"
         android:stateListAnimator="@null"

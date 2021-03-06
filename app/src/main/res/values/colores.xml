@@ -5,7 +5,7 @@
     <color name="colorAzulOscuro">#001363</color>
     <color name="colorAzulClaro">#010F49</color>
     <color name="colorBlanco">#FFFFFF</color>
-    <color name="colorGrisClaro">#E3E2E2</color>
+    <color name="colorGrisClaro">#e5e5e5</color>
     <color name="colorGrisClaroMedio">#D5D5D5</color>
     <color name="colorGrisMedio">#2C2C2C</color>
     <color name="colorGrisOscuro">#191919</color>
@@ -14,9 +14,18 @@
 
 
     <color name="colorTextoLabel">#B1B1B1</color>
+    <color name="colorFondoOscuro">#010829</color>
+    <color name="colorBordeCardViewOscuro">#1F2542</color>
     <color name="colorBordeCampoFormulario">#e5e5e5</color>
     <color name="colorFondoCampoFormulario">#f7f7f7</color>
 
-    <color name="BordeTablas">#e5e5e5</color>
-    <color name="colorFondoTablas">#f7f7f7</color>
+    <color name="colorBordeTablaClaro">#e5e5e5</color>
+    <color name="colorFondoTablaClaro">#f7f7f7</color>
+
+    <color name="colorBordeTablaOscuro">#e5e5e5</color>
+    <color name="colorFondoTablaOscuro">#e5e5e5</color>
+
+
+    <color name="colorBordeCardView">#e5e5e5</color>
+    <color name="colorFondoCardView">#f7f7f7</color>
 </resources>

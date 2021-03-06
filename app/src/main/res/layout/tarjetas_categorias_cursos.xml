@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
         app:cardElevation="0dp"
+        app:cardBackgroundColor="?attr/colorFondo"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +20,7 @@
             android:id="@+id/fondo_categorias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/estilo_tarjeta_claro"
+            android:background="?attr/estiloCardViewCategoria"
             android:padding="@dimen/padding_cardview_generales">
 
             <ImageView
@@ -56,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_black"
                 android:text="@string/texto_prueba"
+                android:textColor="?attr/colorTextoEnFondo"
                 android:textSize="@dimen/dimensiones_titulo_categoria"
                 app:layout_constraintStart_toStartOf="@+id/descripcion_curso"
                 app:layout_constraintTop_toBottomOf="@+id/nuevo" />
@@ -68,6 +70,7 @@
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/nunito"
                 android:text="@string/texto_prueba"
+                android:textColor="?attr/colorTextoEnFondo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/icono_cursos"

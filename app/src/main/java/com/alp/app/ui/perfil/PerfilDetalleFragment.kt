@@ -20,10 +20,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alp.app.R
 import com.alp.app.data.RespuestaActualizarDatos
-import com.alp.app.databinding.PerfilDetalleFragmentBinding
+import com.alp.app.databinding.FragmentPerfilDetalleBinding
 import com.alp.app.servicios.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
@@ -46,12 +47,12 @@ class PerfilDetalleFragment : Fragment() {
     private val SELECCIONAR_FOTO = 103
     private val SELECCIONAR_FOTO_PERMISO = 3
     private val args: PerfilDetalleFragmentArgs by navArgs()
-    private var _binding: PerfilDetalleFragmentBinding? = null
+    private var _binding: FragmentPerfilDetalleBinding? = null
     private lateinit var contexto: Context
     private lateinit var viewModel: PerfilDetalleViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = PerfilDetalleFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentPerfilDetalleBinding.inflate(inflater, container, false)
         Preferencias.init(requireContext(), "preferenciasDeUsuario")
         with(binding){
             // colocamos los argumentos que nos lleguen en sus edittext
@@ -77,10 +78,16 @@ class PerfilDetalleFragment : Fragment() {
                     false -> Preferencias.escribir("idsonidos", false)
                 }
             }
-            switchModoOscuro.setOnCheckedChangeListener { _, isChecked ->
+            switchModoOscuro.setOnCheckedChangeListener { v, isChecked ->
                 when(isChecked){
-                    true ->  Preferencias.escribir("idoscuro", true)
-                    false -> Preferencias.escribir("idoscuro", false)
+                    true ->  {
+                        Preferencias.escribir("idoscuro", true)
+                        Navigation.findNavController(v).navigate(R.id.action_perfilDetalleFragment_self)
+                    }
+                    false -> {
+                        Preferencias.escribir("idoscuro", false)
+                        Navigation.findNavController(v).navigate(R.id.action_perfilDetalleFragment_self)
+                    }
                 }
             }
             when (args.idnotificaciones) {

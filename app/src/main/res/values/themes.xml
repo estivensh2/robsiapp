@@ -1,22 +1,33 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-
+<resources>
     <style name="Toolbar_Claro">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="android:background">@drawable/estilo_fondo_toolbar_claro</item>
-        <item name="android:theme">@style/Base_Toolbar</item>
+        <item name="android:theme">@style/Base_Toolbar_Claro</item>
     </style>
     <style name="Toolbar_Oscuro">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="android:background">@drawable/icono_perfil</item>
+        <item name="android:theme">@style/Base_Toolbar_Oscuro</item>
     </style>
-    <style name="Base_Toolbar">
-        <item name="android:textColorPrimary">@color/colorGrisOscuro</item>
-        <item name="android:fontFamily">@font/poppins_bold</item>
+    <style name="Base_Toolbar_Claro">
+        <item name="android:textColorPrimary">@color/colorAzulOscuro</item>
+        <item name="android:background">@color/colorBlanco</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
     </style>
+
+    <style name="Base_Toolbar_Oscuro">
+        <item name="android:textColorPrimary">@color/colorBlanco</item>
+        <item name="android:background">@drawable/estilo_toolbar_oscuro</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+    </style>
+
     <style name="AppCompatAlertaDialogoEstilo" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorBlanco</item>
         <item name="android:textColor">@color/colorBlanco</item>
         <item name="fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="PopUpTemaToolbarOscuro" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/colorFondoOscuro</item>
+        <item name="android:textColor">@color/colorBlanco</item>
     </style>
 
     <style name="TituloCollapsadaClaro" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">

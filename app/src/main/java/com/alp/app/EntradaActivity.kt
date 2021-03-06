@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.alp.app.databinding.ActivityEntradaBinding
+import com.alp.app.servicios.Preferencias
 
 class EntradaActivity : AppCompatActivity() {
 
@@ -17,6 +18,11 @@ class EntradaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEntradaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Preferencias.init(this, "preferenciasDeUsuario")
+        when(Preferencias.leer("idoscuro",true)){
+            true -> setTheme(R.style.Tema_App_Oscuro)
+            false -> setTheme(R.style.Tema_App_Claro)
+        }
 
         navController = findNavController(R.id.navegacion_entradax)
         val appBarConfiguration = AppBarConfiguration(

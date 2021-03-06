@@ -25,7 +25,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_height="0dp"
-                android:layout_width="match_parent"></androidx.appcompat.widget.Toolbar>
+                android:layout_width="match_parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -50,6 +50,7 @@
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/nunito_black"
                     android:text="@string/texto_prueba"
+                    android:textColor="?attr/colorTextoEnFondo"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

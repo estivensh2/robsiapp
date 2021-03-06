@@ -16,7 +16,7 @@
         android:fullBackupContent="@xml/backup_respaldo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App"
+        android:theme="@style/Tema.App.Claro"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity

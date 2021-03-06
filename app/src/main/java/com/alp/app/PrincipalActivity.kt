@@ -4,23 +4,18 @@ package com.alp.app
  * Extraido de https://github.com/android/architecture-components-samples/tree/master/NavigationAdvancedSample
  */
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.navArgs
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.alp.app.ui.inicio.InicioFragment
+import com.alp.app.servicios.Preferencias
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PrincipalActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
-
-    val args: PrincipalActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +23,11 @@ class PrincipalActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-        Log.d("nombres", args.imagen)
-        Log.d("nombres", args.nombres)
-        Log.d("nombres", args.apellidos)
-        Log.d("nombres", args.notificaciones)
-        Log.d("nombres", args.correo)
-        Log.d("nombres", args.clave)
+        Preferencias.init(this, "preferenciasDeUsuario")
+        when(Preferencias.leer("idoscuro",true)){
+            true -> setTheme(R.style.Tema_App_Oscuro)
+            false -> setTheme(R.style.Tema_App_Claro)
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -45,7 +39,6 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationBar() {
-        intent.putExtra("Esto","eeeeeee")
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navegacion)
 
         val navGraphIds = listOf(R.navigation.navegacion_inicio, R.navigation.navegacion_perfil)
@@ -60,7 +53,7 @@ class PrincipalActivity : AppCompatActivity() {
         bottomNavigationView.itemIconTintList = null
 
         //Siempre que cambie el controlador seleccionado, configure la barra de acción.
-        controller.observe(this, Observer { navController ->
+        controller.observe(this, { navController ->
             setupActionBarWithNavController(navController)
         })
         currentNavController = controller

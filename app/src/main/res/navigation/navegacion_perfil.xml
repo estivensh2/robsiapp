@@ -21,7 +21,7 @@
         android:id="@+id/perfilDetalleFragment"
         android:name="com.alp.app.ui.perfil.PerfilDetalleFragment"
         android:label="Configuración"
-        tools:layout="@layout/perfil_detalle_fragment" >
+        tools:layout="@layout/fragment_perfil_detalle" >
         <argument
             android:name="imagen"
             app:argType="string" />
@@ -46,6 +46,10 @@
         <action
             android:id="@+id/accion_configuracion_a_cambiar_clave"
             app:destination="@id/cambiarClaveFragment" />
+        <action
+            android:id="@+id/action_perfilDetalleFragment_self"
+            app:destination="@id/perfilDetalleFragment"
+            app:launchSingleTop="false" />
     </fragment>
     <activity
         android:id="@+id/entradaActivity"

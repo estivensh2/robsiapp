@@ -18,7 +18,7 @@
         android:id="@+id/fondo_categorias"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="?attr/estiloTarjetas"
+        android:background="?attr/estiloCardViewCursos"
         android:paddingLeft="@dimen/padding_cardview_curso_detalle"
         android:paddingRight="@dimen/padding_cardview_curso_detalle"
         android:stateListAnimator="@null"
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/titulo_cursox"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/nunito_black"
@@ -51,8 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/icono_cursos"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

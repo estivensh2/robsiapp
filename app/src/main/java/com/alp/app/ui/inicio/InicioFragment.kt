@@ -1,5 +1,6 @@
 package com.alp.app.ui.inicio
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -141,7 +142,7 @@ class InicioFragment : Fragment() {
                 if (saludo == "p. m."){
                     if (fechaActual("hh:mm a")<"5:59 p. m."){
                         saludox.text = resources.getString(R.string.texto_buenas_tardes)
-                    } else {
+                    } else if(fechaActual("hh:mm a")>"06:01 p. m.") {
                         saludox.text = resources.getString(R.string.texto_buenas_noches)
                     }
                 } else {
@@ -153,12 +154,12 @@ class InicioFragment : Fragment() {
         handlerx.post(runnablex)
     }
     
+    @SuppressLint("SimpleDateFormat")
     private fun fechaActual(patron: String): String {
         val simpleDateFormat = SimpleDateFormat(patron)
         return simpleDateFormat.format(Date())
     }
     
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
