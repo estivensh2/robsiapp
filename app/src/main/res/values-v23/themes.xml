@@ -115,4 +115,6 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/colorAzulOscuro</item>
     </style>
+
+
 </resources>

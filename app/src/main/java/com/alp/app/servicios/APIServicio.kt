@@ -62,7 +62,6 @@ interface APIServicio {
         @Field("idusuario") idusuario:String)
     : Call<RespuestaInsertarProgreso>
 
-
     @FormUrlEncoded
     @POST("cambiarClave.php")
     fun cambiarClave(
@@ -97,14 +96,4 @@ interface APIServicio {
             @Field("idcompletado") idcompletado:String
     )
     : Call<RespuestaInsertarDiploma>
-
-
-    @FormUrlEncoded
-    @POST("descargarPDF.php")
-    fun descargarPDF (
-        @Field("nombres") nombres:String,
-        @Field("apellidos") apellidos:String,
-        @Field("nombrecurso") nombrecurso:String
-    )
-    : Call<RespuestaDescargarPDF>
 }
