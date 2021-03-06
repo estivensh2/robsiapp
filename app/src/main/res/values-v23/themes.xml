@@ -17,6 +17,13 @@
         <item name="estiloTarjetas">@drawable/estilo_tarjeta_claro</item>
         <item name="estiloCardView">@drawable/estilo_cardview_claro</item>
         <item name="estiloCardViewCategoria">@drawable/estilo_tarjeta_categoria_claro</item>
+        <item name="estiloCardViewCursos">@drawable/estilo_tarjeta_curso_claro</item>
+        <item name="estiloCardViewCursosDetalle">@drawable/estilo_tarjeta_curso_detalle_claro</item>
+        <item name="estiloCardViewCursosDetalleTemario">@drawable/estilo_tarjeta_curso_detalle_temario_claro</item>
+        <item name="estiloCardViewPerfil">@drawable/estilo_tarjeta_perfil_claro</item>
+        <item name="estiloCardViewInicio">@drawable/estilo_tarjeta_inicio_claro</item>
+        <item name="colorTextoCardViewInicio">@color/colorAzulOscuro</item>
+        <item name="estiloCardViewDiploma">@drawable/estilo_tarjeta_diploma_claro</item>
         <item name="estiloTarjetasSegundarias">@drawable/estilo_tarjeta_segundario_claro</item>
         <!-- Navegacion expandible -->
         <item name="estiloNavegacionExpandida">@style/TituloExpandidaClaro</item>
@@ -44,6 +51,8 @@
         <item name="estiloGeneralBotonFacebook">@drawable/boton_facebook_claro</item>
         <item name="estiloGeneralBotonPrimario">@drawable/boton_primario_claro</item>
         <item name="estiloGeneralBotonSegundario">@drawable/boton_segundario_claro</item>
+        <!-- Botones generales -->
+        <item name="colorBordeImagen">@color/colorAzulOscuro</item>
     </style>
 
     <style name="Tema.App.Oscuro" parent="Theme.AppCompat.Light.DarkActionBar">
