@@ -22,7 +22,7 @@
     <style name="AppCompatAlertaDialogoEstilo" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorBlanco</item>
         <item name="android:textColor">@color/colorBlanco</item>
-        <item name="fontFamily">@font/poppins</item>
+        <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
     <style name="PopUpTemaToolbarOscuro" parent="ThemeOverlay.AppCompat.Light">
@@ -31,20 +31,20 @@
     </style>
 
     <style name="TituloCollapsadaClaro" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">@color/colorGrisOscuro</item>
     </style>
     <style name="TituloExpandidaClaro" parent="@style/TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">@color/colorGrisOscuro</item>
     </style>
 
     <style name="TituloCollapsadaOscuro" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">@color/colorBlanco</item>
     </style>
     <style name="TituloExpandidaOscuro" parent="@style/TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">@color/colorBlanco</item>
     </style>
 </resources>

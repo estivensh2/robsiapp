@@ -13,7 +13,7 @@
         <action
             android:id="@+id/accion_bienvenida_a_induccion"
             app:destination="@id/induccionFragment"
-            app:enterAnim="@anim/animacion_fragment_entrada_derecha"
+            app:enterAnim="@anim/slide_in_left"
             app:popUpTo="@id/navegacion_bienvenida"
             app:popUpToInclusive="true" />
         <action
