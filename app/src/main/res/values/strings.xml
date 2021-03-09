@@ -72,6 +72,7 @@
     <string name="texto_cerrar_sesion">Estas seguro que deseas cerrar sesion?</string>
     <string name="texto_si">Si</string>
     <string name="texto_no">No</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="texto_recuperar_clave">¿Olvidaste tú contraseña?</string>
     <string name="texto_datos_incorrectos">Tu correo o clave son incorrectas</string>
     <string name="texto_recuperar_clave_correo">enviar correo electrónico</string>

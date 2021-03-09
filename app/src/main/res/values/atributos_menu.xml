@@ -2,6 +2,5 @@
 <resources>
     <declare-styleable name="estiloBottomNavegacion">
         <attr name="estiloFondoBottomNavegacion" format="reference"/>
-        <attr name="estiloIconosBottomNavegacion" format="reference"/>
     </declare-styleable>
 </resources>

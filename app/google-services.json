@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "827876660603",
+    "project_id": "app-produccion",
+    "storage_bucket": "app-produccion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827876660603:android:047fd263416758318c99de",
+        "android_client_info": {
+          "package_name": "com.alp.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827876660603-hdhko0tb4g0dmf048uuh2sjf2ageuce6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alp.app",
+            "certificate_hash": "f6759249b2e19e269e35813be262cd5ef13aa9df"
+          }
+        },
+        {
+          "client_id": "827876660603-7hr4es5mll480mhhtsa2ll0ecvka0uo9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9T3NFzrlZj6BmoSZfY6tHni13PadQbq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827876660603-7hr4es5mll480mhhtsa2ll0ecvka0uo9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

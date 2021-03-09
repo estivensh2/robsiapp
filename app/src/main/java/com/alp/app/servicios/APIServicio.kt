@@ -89,6 +89,14 @@ interface APIServicio {
     : Call<RespuestaRecuperarClave>
 
     @FormUrlEncoded
+    @POST("insertarOActualizarToken.php")
+    fun insertarToken(
+        @Field("idusuario") idusuario:String,
+        @Field("idtoken") idtoken:String
+    )
+    : Call<RespuestaInsertarToken>
+
+    @FormUrlEncoded
     @POST("insertarDiploma.php")
     fun insertarDiploma (
             @Field("idusuario") idusuario:String,

@@ -7,8 +7,9 @@ package com.alp.app
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.alp.app.servicios.Preferencias
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,11 +24,10 @@ class PrincipalActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-        Preferencias.init(this, "preferenciasDeUsuario")
-        when(Preferencias.leer("idoscuro",true)){
-            true -> setTheme(R.style.Tema_App_Oscuro)
-            false -> setTheme(R.style.Tema_App_Claro)
-        }
+        //Preferencias.init(this, "preferenciasDeUsuario")
+        //val estado = Preferencias.leer("idoscuro",true)
+        //setTheme(if (estado==true) R.style.Theme_ALP_Oscuro else R.style.Theme_ALP)
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -40,6 +40,7 @@ class PrincipalActivity : AppCompatActivity() {
 
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navegacion)
+
 
         val navGraphIds = listOf(R.navigation.navegacion_inicio, R.navigation.navegacion_perfil)
 

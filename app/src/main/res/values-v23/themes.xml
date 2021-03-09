@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Tema.App.Claro" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.ALP" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Colores generales de textos y fondos -->
         <item name="colorFondo">@color/colorBlanco</item>
         <item name="colorPrimario">@color/colorAzulOscuro</item>
@@ -55,7 +55,7 @@
         <item name="colorBordeImagen">@color/colorAzulOscuro</item>
     </style>
 
-    <style name="Tema.App.Oscuro" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.ALP.Oscuro" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Colores generales de textos y fondos -->
         <item name="colorFondo">@color/colorGrisOscuro</item>
         <item name="colorPrimario">@color/colorAmarilloClaro</item>
