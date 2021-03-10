@@ -58,6 +58,8 @@ class PerfilDetalleFragment : Fragment() {
     private lateinit var contexto: Context
     private lateinit var viewModel: PerfilDetalleViewModel
 
+    private lateinit var item: MenuItem
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPerfilDetalleBinding.inflate(inflater, container, false)
         Preferencias.init(requireContext(), "preferenciasDeUsuario")
@@ -137,15 +139,12 @@ class PerfilDetalleFragment : Fragment() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        val item = menu.findItem(R.id.guardar)
+        item = menu.findItem(R.id.guardar)
         item.isVisible = false
         with(binding){
             nombres.onChange           { habilitarBoton(nombres, args.nombres, item) }
             apellidos.onChange         { habilitarBoton(apellidos, args.apellidos, item) }
             correoElectronico.onChange { habilitarBoton(correoElectronico, args.correoElectronico, item) }
-            if (bitmap!=null) {
-                item.isVisible = true
-            }
         }
         super.onPrepareOptionsMenu(menu)
     }
@@ -263,11 +262,13 @@ class PerfilDetalleFragment : Fragment() {
                         if (Build.VERSION.SDK_INT >= 29){
                             bitmap = MediaStore.Images.Media.getBitmap(contexto.contentResolver, imagenSeleccionada)
                             binding.imagen.setImageBitmap(bitmap)
+                            item.isVisible = true
                         }
                     }
                     TOMAR_FOTO -> {
                         bitmap = data.extras?.get("data") as Bitmap
                         binding.imagen.setImageBitmap(bitmap)
+                        item.isVisible = true
                     }
                 }
             } catch (e: IOException) {

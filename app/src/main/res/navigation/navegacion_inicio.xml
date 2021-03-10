@@ -34,6 +34,15 @@
     <fragment
         android:id="@+id/inicioCursosDetalleTemarioFragment"
         android:name="com.alp.app.ui.inicio.InicioCursosDetalleTemarioFragment"
-        android:label="Contenido" />
+        android:label="Contenido" >
+        <action
+            android:id="@+id/accion_inicio_cursos_detalle_a_diplomados"
+            app:destination="@id/listadoDiplomadosFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/listadoDiplomadosFragment2"
+        android:name="com.alp.app.ui.perfil.ListadoDiplomadosFragment"
+        android:label="Certificados"
+        tools:layout="@layout/fragment_listado_diplomados" />
 
 </navigation>

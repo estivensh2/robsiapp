@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,8 +41,8 @@ class InicioFragment : Fragment() {
     private val binding get() = _binding!!
     private val displayListaSlider = ArrayList<RespuestaSliderData>()
     private val displayListaCategorias = ArrayList<RespuestaCategoriaData>()
-    private val handler = Handler()
-    private val handlerx = Handler()
+    private val handler = Handler(Looper.getMainLooper())
+    private val handlerx = Handler(Looper.getMainLooper())
     private lateinit var runnablex: Runnable
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

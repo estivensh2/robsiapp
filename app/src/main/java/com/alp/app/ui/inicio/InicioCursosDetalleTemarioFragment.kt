@@ -5,12 +5,14 @@ import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.RespuestaInsertarDiploma
 import com.alp.app.data.RespuestaInsertarProgreso
@@ -19,12 +21,12 @@ import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
 import com.alp.app.servicios.Preferencias
 import com.alp.app.servicios.ServicioBuilder
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.kbiakov.codeview.adapters.Options
 import io.github.kbiakov.codeview.highlight.ColorTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.michaelbel.bottomsheet.BottomSheet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,7 +81,7 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
             }
             if (total==ultimoelemento){
                 insertarDiploma()
-                insertarProgreso()
+                //insertarProgreso()
             } else {
                 insertarProgreso()
             }
@@ -121,13 +123,25 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
     }
 
     private fun mostrarBottomSheet() {
-        val bottomSheet = BottomSheet.Builder(contexto)
-            .setCustomView(R.layout.ventana_bottom_sheet)
-        bottomSheet.show()
+        val view = layoutInflater.inflate(R.layout.ventana_bottom_sheet, null)
+        val dialogo = BottomSheetDialog(contexto)
+        val boton = view.findViewById<Button>(R.id.ver_diplomas)
+        dialogo.setContentView(view)
+        dialogo.show()
+        boton.setOnClickListener {
+            findNavController().navigate(R.id.accion_inicio_cursos_detalle_a_diplomados)
+            dialogo.dismiss()
+        }
+    }
+
+    private fun mostrarBottomSheetx() {
+        val view = layoutInflater.inflate(R.layout.ventana_temario_completado, null)
+        val dialogo = BottomSheetDialog(contexto)
+        dialogo.setContentView(view)
+        dialogo.show()
     }
 
     private fun insertarProgreso() {
-        binding.cargaContenido.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
@@ -137,11 +151,8 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
                         val responsex = response.body()!!
                         activity?.runOnUiThread {
                             if (responsex.respuesta == "1") {
-                                Handler().postDelayed({
-                                    binding.cargaContenido.visibility = View.GONE
-                                }, 3000)
+                                mostrarBottomSheetx()
                             } else {
-                                binding.cargaContenido.visibility = View.GONE
                                 ClaseToast.mostrarx(contexto, getString(R.string.texto_error_completado_anteriormente), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
                             }
                         }
@@ -174,6 +185,4 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
         super.onAttach(context)
         this.contexto = context
     }
-
-
 }
