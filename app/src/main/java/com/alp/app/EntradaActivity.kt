@@ -26,14 +26,6 @@ class EntradaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEntradaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Preferencias.init(this, "preferenciasDeUsuario")
-        val estado = Preferencias.leer("idoscuro",true)
-        if (estado==true){
-            setTheme(R.style.Theme_ALP_Oscuro)
-        } else {
-            setTheme(R.style.Theme_ALP)
-        }
-
 
         navController = findNavController(R.id.navegacion_entradax)
         val appBarConfiguration = AppBarConfiguration(
@@ -64,7 +56,7 @@ class EntradaActivity : AppCompatActivity() {
                     if (responsex.respuesta == "1") {
                         Log.d("token", "insertado")
                     } else {
-                        Log.d("token", "ya existe")
+                        Log.d("token", "actualizado")
                     }
                 }
                 override fun onFailure(call: Call<RespuestaInsertarToken>, t: Throwable) {

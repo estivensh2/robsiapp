@@ -97,6 +97,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:visibility="gone"
             app:cardBackgroundColor="?attr/colorFondo"
             app:cardCornerRadius="@dimen/cardview_radius_generales"
             app:layout_constraintEnd_toEndOf="parent"

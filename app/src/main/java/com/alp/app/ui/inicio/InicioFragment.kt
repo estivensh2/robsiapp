@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -37,7 +38,6 @@ class InicioFragment : Fragment() {
     private lateinit var contexto: Context
     private var _binding: FragmentInicioBinding? = null
     private val binding get() = _binding!!
-    private val arrayListaSlider = ArrayList<RespuestaSliderData>()
     private val displayListaSlider = ArrayList<RespuestaSliderData>()
     private val displayListaCategorias = ArrayList<RespuestaCategoriaData>()
     private val handler = Handler()
@@ -61,13 +61,15 @@ class InicioFragment : Fragment() {
                     Callback<List<RespuestaSliderData>> {
                     override fun onResponse(call: Call<List<RespuestaSliderData>>, response: Response<List<RespuestaSliderData>>) {
                         activity?.runOnUiThread {
-                            binding.cargaContenido.visibility = View.GONE
-                            displayListaSlider.clear()
-                            displayListaSlider.addAll(response.body()!!)
-                            binding.paginadorx.adapter = SliderAdaptador(displayListaSlider, contexto)
-                            TabLayoutMediator(binding.puntosTab, binding.paginadorx) { tab, _ ->
-                                tab.text = ""
-                            }.attach()
+                            with(binding){
+                                cargaContenido.visibility = View.GONE
+                                displayListaSlider.clear()
+                                displayListaSlider.addAll(response.body()!!)
+                                paginadorx.adapter = SliderAdaptador(displayListaSlider, contexto)
+                                TabLayoutMediator(puntosTab, paginadorx) { tab, _ ->
+                                    tab.icon = ContextCompat.getDrawable(contexto, R.drawable.slider_puntos)
+                                }.attach()
+                            }
                         }
                     }
 
@@ -126,7 +128,7 @@ class InicioFragment : Fragment() {
             override fun run() {
                 var contador = paginador.currentItem
                 if (contador == paginador.currentItem) contador++
-                if (contador == arrayListaSlider.size) contador = 0
+                if (contador == displayListaSlider.size) contador = 0
                 paginador.setCurrentItem(contador, true)
                 handler.postDelayed(this, 3000)
             }
@@ -139,20 +141,22 @@ class InicioFragment : Fragment() {
             override fun run() {
                 fecha.text = fechaActual("hh:mm a")
                 val saludo = fechaActual("a")
+                val hora = fechaActual("h")
                 if (saludo == "p. m."){
-                    if (fechaActual("hh:mm a")<"5:59 p. m."){
-                        saludox.text = resources.getString(R.string.texto_buenas_tardes)
-                    } else if(fechaActual("hh:mm a")>"06:01 p. m.") {
-                        saludox.text = resources.getString(R.string.texto_buenas_noches)
+                    if (hora.toInt()<6){
+                        saludox.text = contexto.getString(R.string.texto_buenas_tardes)
+                    } else {
+                        saludox.text = contexto.getString(R.string.texto_buenas_noches)
                     }
                 } else {
-                    saludox.text = resources.getString(R.string.texto_buenos_dias)
+                    saludox.text = contexto.getString(R.string.texto_buenos_dias)
                 }
                 handler.postDelayed(this, 1000)
             }
         }
         handlerx.post(runnablex)
     }
+
     
     @SuppressLint("SimpleDateFormat")
     private fun fechaActual(patron: String): String {
@@ -174,6 +178,11 @@ class InicioFragment : Fragment() {
         handler.removeCallbacks(runnable)
         handlerx.removeCallbacks(runnablex)
         super.onPause()
+    }
+
+    override fun onResume() {
+        handlerx.postDelayed(runnablex,1000) // reloj
+        super.onResume()
     }
 
     override fun onStart() {

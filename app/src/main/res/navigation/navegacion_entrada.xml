@@ -19,14 +19,16 @@
         <action
             android:id="@+id/accion_bienvenida_a_iniciar_o_crear_cuenta"
             app:destination="@id/iniciarOCrearCuentaFragment"
-            app:enterAnim="@anim/slide_in_right"
+            app:enterAnim="@anim/slide_in_left"
             app:popUpTo="@id/navegacion_bienvenida"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/accion_bienvenida_a_inicio"
             app:destination="@id/principalActivity2"
-            app:popUpTo="@id/navegacion_bienvenida"
-            app:popUpToInclusive="true" />
+            app:enterAnim="@anim/slide_in_left"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/principalActivity2"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/induccionFragment"
@@ -35,7 +37,11 @@
         tools:layout="@layout/fragment_induccion" >
         <action
             android:id="@+id/accion_induccion_a_iniciar_o_crear"
-            app:destination="@id/iniciarOCrearCuentaFragment" />
+            app:destination="@id/iniciarOCrearCuentaFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/induccionFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/iniciarOCrearCuentaFragment"
@@ -45,24 +51,26 @@
         <action
             android:id="@+id/accion_iniciar_o_crear_a_registrarme"
             app:destination="@id/registrarUsuarioFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/accion_iniciar_o_crear_a_iniciar_sesion"
             app:destination="@id/iniciarSesionFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/iniciarOCrearCuentaFragment" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/registrarUsuarioFragment"
         android:name="com.alp.app.ui.registrar.RegistrarUsuarioFragment"
-        android:label="registrarme"
-        tools:layout="@layout/fragment_registrar_usuario" >
+        android:label="Registrarme"
+        tools:layout="@layout/fragment_registrar_usuario">
         <action
             android:id="@+id/accion_registrar_a_iniciar_sesion"
             app:destination="@id/iniciarSesionFragment"
             app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
             app:popUpTo="@id/iniciarOCrearCuentaFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -74,33 +82,19 @@
         <action
             android:id="@+id/accion_iniciar_a_navegacion_principal"
             app:destination="@id/principalActivity2"
+            app:enterAnim="@anim/slide_in_left"
             app:popUpTo="@id/iniciarOCrearCuentaFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/accion_iniciar_sesion_a_recuperar_clave"
-            app:destination="@id/recuperarClaveFragment" />
+            app:destination="@id/recuperarClaveFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
     </fragment>
     <activity
         android:id="@+id/principalActivity2"
         android:name="com.alp.app.PrincipalActivity"
         android:label="PrincipalActivity" >
-        <argument
-            android:name="nombres"
-            app:argType="string" />
-        <argument android:name="apellidos"
-            app:argType="string" />
-        <argument
-            android:name="notificaciones"
-            app:argType="string" />
-        <argument
-            android:name="correo"
-            app:argType="string" />
-        <argument
-            android:name="clave"
-            app:argType="string" />
-        <argument
-            android:name="imagen"
-            app:argType="string" />
     </activity>
     <fragment
         android:id="@+id/recuperarClaveFragment"
@@ -109,6 +103,8 @@
         tools:layout="@layout/fragment_recuperar_clave" >
         <action
             android:id="@+id/accion_recuperar_a_iniciar_o_crear"
-            app:destination="@id/iniciarSesionFragment" />
+            app:destination="@id/iniciarSesionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

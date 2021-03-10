@@ -67,7 +67,8 @@ class RegistrarUsuarioFragment : Fragment() {
         val apellidos = binding.apellidos.text.toString()
         val correo = binding.correoElectronico.text.toString()
         val clave = binding.claveAcceso.text.toString()
-        ProgressDialogo.mostrar(contexto)
+        binding.animationView2.visibility = View.VISIBLE
+        binding.botonRegistrar.text = ""
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
@@ -76,23 +77,28 @@ class RegistrarUsuarioFragment : Fragment() {
                         val responsex = response.body()!!
                         activity?.runOnUiThread {
                             if (responsex.respuestax == "1") {
-                                ProgressDialogo.ocultar()
                                 ClaseToast.mostrarx(contexto, "Usuario registrado correctamente", ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
                                 findNavController().navigate(R.id.accion_registrar_a_iniciar_sesion)
                             } else {
-                                ProgressDialogo.ocultar()
-                                ClaseToast.mostrarx(contexto, "Este correo ya existe", ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                                with(binding){
+                                    animationView2.visibility = View.GONE
+                                    resultadoerror.visibility = View.VISIBLE
+                                    botonRegistrar.text = resources.getString(R.string.texto_registrarme)
+                                    resultadoerror.text = resources.getString(R.string.texto_correo_existente)
+                                }
                             }
                         }
                     }
                     override fun onFailure(call: Call<RespuestaCrearCuentaData>, t: Throwable) {
                         activity!!.runOnUiThread {
-                            Log.d("error", t.toString())
+                            ClaseToast.mostrarx(contexto, getString(R.string.texto_error_conexion), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
                         }
                     }
                 })
             } catch (e: Throwable) {
-                e.printStackTrace()
+                requireActivity().runOnUiThread {
+                    ClaseToast.mostrarx(contexto, getString(R.string.texto_error_grave), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                }
             }
         }
     }
@@ -110,9 +116,12 @@ class RegistrarUsuarioFragment : Fragment() {
                 botonRegistrar.isEnabled = false
             }
             if (!validarCorreo(correoElectronico.text.toString())){
-                correoElectronico.error =  resources.getString(R.string.texto_correo_invalido)
                 botonRegistrar.isEnabled = false
+                resultadoerror.visibility = View.VISIBLE
+                resultadoerror.text = resources.getString(R.string.texto_correo_invalido)
                 botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
+            } else {
+                resultadoerror.visibility = View.GONE
             }
         }
     }

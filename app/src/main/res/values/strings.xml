@@ -93,4 +93,5 @@
     <string name="texto_ingresa_tu_correo">Ingresa tu correo electrónico para recibir un enlace de recuperación de contraseña</string>
     <string name="texto_correo_invalido">Correo no valido</string>
     <string name="texto_mis_codigos">Lista de codigos</string>
+    <string name="texto_correo_existente">Este correo ya existe</string>
 </resources>

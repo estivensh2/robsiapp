@@ -52,8 +52,8 @@ class BienvenidaFragment : Fragment() {
     private fun validarInicioPrimeraVezYEstadoSesion() {
         if (Preferencias.leer("nuevo", false) == true) { // aca verificamos si el usuario ya inicio la app por primera vez
             if (Preferencias.leer("sesionActiva", false) == true){ // aca verificamos el estado de la sesion
-                val action = BienvenidaFragmentDirections.accionBienvenidaAInicio("Orlando","ejeajae","e","ekeja","ejejaeja","jaajaj")
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.accion_bienvenida_a_inicio)
+                activity?.finish()
             } else { // si no existe lo redirigimos al iniciar sesion o crear cuenta
                 findNavController().navigate(R.id.accion_bienvenida_a_iniciar_o_crear_cuenta)
             }

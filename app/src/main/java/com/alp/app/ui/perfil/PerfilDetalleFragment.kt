@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,17 +16,23 @@ import android.util.Base64
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.alp.app.EntradaActivity
 import com.alp.app.R
 import com.alp.app.data.RespuestaActualizarDatos
 import com.alp.app.databinding.FragmentPerfilDetalleBinding
 import com.alp.app.servicios.*
+import com.alp.app.ui.bienvenida.BienvenidaFragment
+import com.alp.app.ui.iniciarocrearcuenta.IniciarOCrearCuentaFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import kotlinx.coroutines.CoroutineScope
@@ -57,7 +64,7 @@ class PerfilDetalleFragment : Fragment() {
         with(binding){
             // colocamos los argumentos que nos lleguen en sus edittext
             if(args.imagen.isEmpty()){
-                Glide.with(contexto).load(R.drawable.boton_facebook_claro).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
+                Glide.with(contexto).load(R.drawable.usuario).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
             } else {
                 Glide.with(contexto).load(args.imagen).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
             }
@@ -105,9 +112,10 @@ class PerfilDetalleFragment : Fragment() {
         val botonSi = vistaDialogo.findViewById<Button>(R.id.botonSi)
         val dialogo = AlertDialog.Builder(context).setCancelable(false).create()
         botonNo.setOnClickListener { dialogo.dismiss() }
-        botonSi.setOnClickListener { v ->
+        botonSi.setOnClickListener {
             Preferencias.eliminar("sesionActiva")
-            Navigation.findNavController(v).navigate(R.id.accion_configuracion_a_iniciar_o_crear)
+            startActivity(Intent(contexto, EntradaActivity::class.java))
+            activity?.finish()
         }
         dialogo.setView(vistaDialogo)
         dialogo.show()
@@ -135,6 +143,9 @@ class PerfilDetalleFragment : Fragment() {
             nombres.onChange           { habilitarBoton(nombres, args.nombres, item) }
             apellidos.onChange         { habilitarBoton(apellidos, args.apellidos, item) }
             correoElectronico.onChange { habilitarBoton(correoElectronico, args.correoElectronico, item) }
+            if (bitmap!=null) {
+                item.isVisible = true
+            }
         }
         super.onPrepareOptionsMenu(menu)
     }
@@ -249,8 +260,10 @@ class PerfilDetalleFragment : Fragment() {
             try {
                 when(requestCode){
                     SELECCIONAR_FOTO -> {
-                        bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, imagenSeleccionada)
-                        binding.imagen.setImageBitmap(bitmap)
+                        if (Build.VERSION.SDK_INT >= 29){
+                            bitmap = MediaStore.Images.Media.getBitmap(contexto.contentResolver, imagenSeleccionada)
+                            binding.imagen.setImageBitmap(bitmap)
+                        }
                     }
                     TOMAR_FOTO -> {
                         bitmap = data.extras?.get("data") as Bitmap

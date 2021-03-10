@@ -41,9 +41,8 @@
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/puntos_tab"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/slider_puntos"
                         app:layout_constraintBottom_toBottomOf="@+id/paginadorx"
                         app:layout_constraintEnd_toEndOf="@+id/paginadorx"
                         app:layout_constraintStart_toStartOf="parent"

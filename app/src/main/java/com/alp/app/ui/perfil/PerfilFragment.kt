@@ -60,7 +60,7 @@ class PerfilFragment : Fragment() {
                             val responsex = response.body()!!
                             if (responsex.respuesta == "1") {
                                 if (responsex.datos.imagen.isEmpty()){
-                                    Glide.with(contexto).load(R.drawable.boton_facebook_claro).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
+                                    Glide.with(contexto).load(R.drawable.usuario).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
                                 } else {
                                     Glide.with(requireContext()).load(responsex.datos.imagen).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
                                 }

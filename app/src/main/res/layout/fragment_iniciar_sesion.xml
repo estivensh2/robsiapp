@@ -41,6 +41,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/saludando" />
 
+
         <EditText
             android:id="@+id/claveAcceso"
             android:layout_width="0dp"
@@ -49,7 +50,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:background="?attr/estiloCampoFormulario"
             android:ems="10"
             android:fontFamily="@font/nunito"
@@ -57,11 +58,11 @@
             android:inputType="textPassword"
             android:textColor="?attr/colorTextoFormulario"
             android:textCursorDrawable="?attr/colorCursor"
-            app:layout_constraintBottom_toTopOf="@+id/botonIngresar"
+            app:layout_constraintBottom_toTopOf="@+id/resultadoerror"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="LabelFor" />
-
 
         <ToggleButton
             android:id="@+id/mostrarClaveActual"
@@ -99,6 +100,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:targetApi="lollipop" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/botonIngresar"
+            app:layout_constraintEnd_toEndOf="@+id/botonIngresar"
+            app:layout_constraintStart_toStartOf="@+id/botonIngresar"
+            app:layout_constraintTop_toTopOf="@+id/botonIngresar"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
 
         <EditText
             android:id="@+id/correoElectronico"
@@ -149,6 +163,23 @@
             android:textSize="@dimen/dimensiones_texto_olvidaste_tu_clave"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/resultadoerror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/texto_prueba"
+            android:textColor="#9F0404"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/botonIngresar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout

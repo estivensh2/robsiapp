@@ -59,7 +59,9 @@ class IniciarSesionFragment : Fragment() {
     private fun iniciarSesion() {
         val correo = binding.correoElectronico.text.toString()
         val clave = binding.claveAcceso.text.toString()
-        binding.cargaContenido.visibility = View.VISIBLE
+        //binding.cargaContenido.visibility = View.VISIBLE
+        binding.animationView2.visibility = View.VISIBLE
+        binding.botonIngresar.text = ""
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
@@ -70,18 +72,16 @@ class IniciarSesionFragment : Fragment() {
                             if (responsex.respuesta == "1") {
                                 Preferencias.escribir("id", responsex.datos.id)
                                 Preferencias.escribir("sesionActiva", true)
-                                val action = IniciarSesionFragmentDirections.accionIniciarANavegacionPrincipal(
-                                    responsex.datos.nombres,
-                                    responsex.datos.nombres,
-                                    responsex.datos.apellidos,
-                                    responsex.datos.notificaciones,
-                                    responsex.datos.correo,
-                                    responsex.datos.clave)
-                                findNavController().navigate(action)
-                                binding.cargaContenido.visibility = View.GONE
+                                findNavController().navigate(R.id.accion_iniciar_a_navegacion_principal)
+                                activity?.finish()
+                                binding.animationView2.visibility = View.GONE
                             } else {
-                                ClaseToast.mostrarx(contexto, resources.getString(R.string.texto_datos_incorrectos), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                                binding.cargaContenido.visibility = View.GONE
+                                with(binding){
+                                    animationView2.visibility = View.GONE
+                                    resultadoerror.visibility = View.VISIBLE
+                                    botonIngresar.text = resources.getString(R.string.texto_ingresar)
+                                    resultadoerror.text = resources.getString(R.string.texto_datos_incorrectos)
+                                }
                             }
                         }
                     }
@@ -115,13 +115,16 @@ class IniciarSesionFragment : Fragment() {
                 botonIngresar.isEnabled = true
                 botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
             } else {
-                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
                 botonIngresar.isEnabled = false
+                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
             }
             if (!validarCorreo(correoElectronico.text.toString())){
-                correoElectronico.error = resources.getString(R.string.texto_correo_invalido)
                 botonIngresar.isEnabled = false
+                resultadoerror.visibility = View.VISIBLE
+                resultadoerror.text = resources.getString(R.string.texto_correo_invalido)
                 botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
+            } else {
+                resultadoerror.visibility = View.GONE
             }
         }
     }
