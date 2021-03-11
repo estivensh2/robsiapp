@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alp.app.EntradaActivity
 import com.alp.app.R
@@ -29,6 +30,7 @@ import com.alp.app.databinding.FragmentPerfilDetalleBinding
 import com.alp.app.servicios.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -97,9 +99,18 @@ class PerfilDetalleFragment : Fragment() {
                 "1" -> switchNotificaciones.isChecked = true
                 "2" -> switchNotificaciones.isChecked = false
             }
+            botonacercade.setOnClickListener { mostrarBottomSheet() }
         }
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    private fun mostrarBottomSheet() {
+        val view = layoutInflater.inflate(R.layout.ventana_acerde_de, null)
+        val dialogo = BottomSheetDialog(contexto)
+        val boton = view.findViewById<Button>(R.id.ver_diplomas)
+        dialogo.setContentView(view)
+        dialogo.show()
     }
 
     private fun ventanaCerrarSesion() {

@@ -371,7 +371,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
                     <Button
-                        android:id="@+id/botonTerminos"
+                        android:id="@+id/botonacercade"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -382,7 +382,7 @@
                         android:background="?attr/estiloGeneralBotonPrimario"
                         android:fontFamily="@font/nunito_black"
                         android:stateListAnimator="@null"
-                        android:text="@string/texto_boton_terminos_y_condiciones"
+                        android:text="@string/texto_acercade"
                         android:textColor="?attr/colorSegundario"
                         android:textSize="@dimen/dimensiones_botones_generales"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -411,7 +411,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/botonTerminos"
+                        app:layout_constraintTop_toBottomOf="@+id/botonacercade"
                         app:layout_constraintVertical_bias="0.0"
                         tools:targetApi="lollipop" />
 

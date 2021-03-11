@@ -95,4 +95,7 @@
     <string name="texto_mis_codigos">Lista de codigos</string>
     <string name="texto_correo_existente">Este correo ya existe</string>
     <string name="texto_sin_temario">No hay temarios en este curso</string>
+    <string name="texto_acercade">Acerca de</string>
+    <string name="texto_acerca_del_desarrollador">Hola, mi nombre es Estiven esta es mi primera aplicación para que usuarios de habla latina que tengan nada o poca experiencia sobre programación puedan tener las bases básicas
+   de esta misma. Tienes la opción de obtener tu certificado de cada curso y espero sacar actualizaciones para mejorar la experiencia de usuario como también más cursos y contenido.</string>
 </resources>
