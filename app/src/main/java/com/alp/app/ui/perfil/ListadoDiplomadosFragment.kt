@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alp.app.R
-import com.alp.app.adaptadores.CursosDetalleAdaptador
 import com.alp.app.adaptadores.DiplomasAdaptador
-import com.alp.app.data.RespuestaCursosDetalleData
 import com.alp.app.data.RespuestaRecuperarDiploma
-import com.alp.app.databinding.FragmentInicioCursosDetalleBinding
 import com.alp.app.databinding.FragmentListadoDiplomadosBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast

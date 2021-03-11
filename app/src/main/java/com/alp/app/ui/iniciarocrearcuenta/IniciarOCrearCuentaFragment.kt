@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
-import com.alp.app.databinding.FragmentBienvenidaBinding
 import com.alp.app.databinding.FragmentIniciarOCrearCuentaBinding
 
 class IniciarOCrearCuentaFragment : Fragment() {

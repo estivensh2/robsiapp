@@ -8,10 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.alp.app.servicios.Preferencias
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PrincipalActivity : AppCompatActivity() {

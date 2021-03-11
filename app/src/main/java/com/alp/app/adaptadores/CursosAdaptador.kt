@@ -12,7 +12,7 @@ import com.alp.app.data.RespuestaCursosData
 import com.alp.app.databinding.TarjetasCursosBinding
 import com.bumptech.glide.Glide
 
-class CursosAdaptador (val arrayList: ArrayList<RespuestaCursosData>, val contexto: Context): RecyclerView.Adapter<CursosAdaptador.ViewHolder>() {
+class CursosAdaptador (private val arrayList: ArrayList<RespuestaCursosData>, private val contexto: Context): RecyclerView.Adapter<CursosAdaptador.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bintItems(modelo: RespuestaCursosData, contexto: Context){
@@ -31,7 +31,7 @@ class CursosAdaptador (val arrayList: ArrayList<RespuestaCursosData>, val contex
         holder.bintItems(arrayList[position], contexto)
         holder.itemView.setOnClickListener { v ->
             val bundle = Bundle()
-            val modelo = arrayList.get(position)
+            val modelo = arrayList[position]
             val id = modelo.id
             val nombre = modelo.nombre
             val icono = modelo.imagen

@@ -11,7 +11,7 @@ import com.alp.app.databinding.InduccionFilaBinding
 import com.bumptech.glide.Glide
 
 
-class InduccionAdaptador(val context: Context, val arrayList: ArrayList<InduccionData>) : RecyclerView.Adapter<InduccionAdaptador.ViewHolder>() {
+class InduccionAdaptador(val context: Context, private val arrayList: ArrayList<InduccionData>) : RecyclerView.Adapter<InduccionAdaptador.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bindItems(modelo: InduccionData, context: Context){

@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ import com.alp.app.data.RespuestaCrearCuentaData
 import com.alp.app.databinding.FragmentRegistrarUsuarioBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
-import com.alp.app.servicios.ProgressDialogo
 import com.alp.app.servicios.ServicioBuilder
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope

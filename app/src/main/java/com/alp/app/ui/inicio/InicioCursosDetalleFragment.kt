@@ -34,7 +34,7 @@ class InicioCursosDetalleFragment : Fragment() {
     private val binding get() = _binding!!
     private val displayListaCursosDetalle = ArrayList<RespuestaCursosDetalleData>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentInicioCursosDetalleBinding.inflate(inflater, container, false)
         val bundle = this.arguments
         if (bundle != null) {
@@ -62,7 +62,9 @@ class InicioCursosDetalleFragment : Fragment() {
                     override fun onResponse(call: Call<List<RespuestaCursosDetalleData>>, response: Response<List<RespuestaCursosDetalleData>>) {
                         activity?.runOnUiThread {
                             if (response.body() == null) {
-                                ClaseToast.mostrarx(contexto, getString(R.string.texto_sin_cursos), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                                binding.cargaContenido.visibility = View.GONE
+                                binding.cargarError.visibility = View.VISIBLE
+                                binding.textoErrorSinTemario.text = resources.getString(R.string.texto_sin_temario)
                             } else {
                                 val adaptador = CursosDetalleAdaptador(displayListaCursosDetalle, contexto)
                                 val responsex = response.body()!!

@@ -1,6 +1,5 @@
 package com.alp.app.ui.bienvenida
 
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler

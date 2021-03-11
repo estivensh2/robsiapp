@@ -68,7 +68,7 @@ interface APIServicio {
             @Field("claveAccesoActual") claveactual:String,
             @Field("claveAccesoNuevaConfirmada") actualconfirmada:String,
             @Field("idusuario") idusuario:String)
-            : Call<RespuestaCambiarClave>
+    : Call<RespuestaCambiarClave>
 
     @FormUrlEncoded
     @POST("actualizarDatosUsuario.php")
@@ -79,7 +79,7 @@ interface APIServicio {
             @Field("apellidos") apellidos:String,
             @Field("correoElectronico") correo:String
             )
-            : Call<RespuestaActualizarDatos>
+    : Call<RespuestaActualizarDatos>
 
     @FormUrlEncoded
     @POST("recuperarClave.php")

@@ -3,8 +3,8 @@ package com.alp.app.data
 import com.google.gson.annotations.SerializedName
 
 data class RespuestaIniciarSesionData(
-    @SerializedName("respuesta") var respuesta: String,
-    @SerializedName("datos") var datos: DatosUsuarioData
+    @SerializedName("respuesta")         var respuesta: String,
+    @SerializedName("datos")             var datos: DatosUsuarioData
 )
 data class DatosUsuarioData (
     @SerializedName("id")                var id: String,

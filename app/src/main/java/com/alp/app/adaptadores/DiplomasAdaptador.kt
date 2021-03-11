@@ -13,7 +13,7 @@ import com.alp.app.databinding.TarjetasListaDiplomasBinding
 import com.bumptech.glide.Glide
 
 
-class DiplomasAdaptador(val arrayList: ArrayList<RespuestaRecuperarDiploma>, val contexto: Context): RecyclerView.Adapter<DiplomasAdaptador.ViewHolder>() {
+class DiplomasAdaptador(private val arrayList: ArrayList<RespuestaRecuperarDiploma>, val contexto: Context): RecyclerView.Adapter<DiplomasAdaptador.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bintItems(modelo: RespuestaRecuperarDiploma, contexto: Context){

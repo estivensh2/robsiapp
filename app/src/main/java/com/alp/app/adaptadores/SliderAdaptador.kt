@@ -1,6 +1,5 @@
 package com.alp.app.adaptadores
 
-import android.R.attr.resource
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import com.alp.app.databinding.SliderPaginaBinding
 import com.bumptech.glide.Glide
 
 
-class SliderAdaptador(val arrayList: ArrayList<RespuestaSliderData>, val contexto: Context): RecyclerView.Adapter<SliderAdaptador.ViewHolder>()  {
+class SliderAdaptador(private val arrayList: ArrayList<RespuestaSliderData>, val contexto: Context): RecyclerView.Adapter<SliderAdaptador.ViewHolder>()  {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bintItems(modelo: RespuestaSliderData, contexto: Context){
