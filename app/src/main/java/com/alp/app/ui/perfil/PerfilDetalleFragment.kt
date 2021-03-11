@@ -1,11 +1,14 @@
 package com.alp.app.ui.perfil
 
 import android.Manifest
+import android.app.ActionBar
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -16,12 +19,12 @@ import android.util.Base64
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alp.app.EntradaActivity
 import com.alp.app.R
@@ -83,6 +86,7 @@ class PerfilDetalleFragment : Fragment() {
                     false -> Preferencias.escribir("idsonidos", false)
                 }
             }
+            imagen.setOnClickListener { mostrarImagen() }
             switchModoOscuro.setOnCheckedChangeListener { v, isChecked ->
                 when(isChecked){
                     true ->  {
@@ -105,10 +109,26 @@ class PerfilDetalleFragment : Fragment() {
         return binding.root
     }
 
+    private fun mostrarImagen() {
+        val dialogo = Dialog(contexto)
+        dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogo.setContentView(R.layout.ventana_abrir_imagen)
+        dialogo.setCancelable(false)
+        dialogo.window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
+        dialogo.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        val imagen = dialogo.findViewById<ImageView>(R.id.imagenCompleta)
+        val cerrar = dialogo.findViewById<Button>(R.id.botonCerrar)
+        val convertir = binding.imagen.drawable
+        imagen.setImageDrawable(convertir)
+        cerrar.setOnClickListener { dialogo.dismiss() }
+        dialogo.show()
+    }
+
     private fun mostrarBottomSheet() {
         val view = layoutInflater.inflate(R.layout.ventana_acerde_de, null)
         val dialogo = BottomSheetDialog(contexto)
-        val boton = view.findViewById<Button>(R.id.ver_diplomas)
+        val boton = view.findViewById<Button>(R.id.boton_donar)
+        boton.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/donate?hosted_button_id=3WMF7PP7FMGVQ"))) }
         dialogo.setContentView(view)
         dialogo.show()
     }
