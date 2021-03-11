@@ -56,6 +56,7 @@ class InduccionFragment : Fragment() {
             })
             finalizar.setOnClickListener {
                 Preferencias.escribir("nuevo", true)
+                Preferencias.escribir("idsonidos", true)
                 findNavController().navigate(R.id.accion_induccion_a_iniciar_o_crear)
             }
         }
@@ -65,6 +66,7 @@ class InduccionFragment : Fragment() {
 
     private fun saltarInduccion() {
         Preferencias.escribir("nuevo", true)
+        Preferencias.escribir("idsonidos", true)
         findNavController().navigate(R.id.accion_induccion_a_iniciar_o_crear)
     }
 
