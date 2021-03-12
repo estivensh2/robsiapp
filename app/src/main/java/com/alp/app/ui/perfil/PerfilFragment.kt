@@ -64,7 +64,7 @@ class PerfilFragment : Fragment() {
                                 } else {
                                     Glide.with(requireContext()).load(responsex.datos.imagen).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
                                 }
-                                val nombre = "${responsex.datos.nombres}${responsex.datos.apellidos}"
+                                val nombre = "${responsex.datos.nombres} ${responsex.datos.apellidos}"
                                 binding.nombreCompleto.text = nombre
                                 imagen = responsex.datos.imagen
                                 nombres = responsex.datos.nombres

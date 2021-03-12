@@ -41,11 +41,9 @@ class CategoriasAdaptador(private val arrayList: ArrayList<RespuestaCategoriaDat
             val modelo = arrayList[position]
             val id = modelo.id
             val nombre = modelo.nombre
-            val fondo = modelo.fondo
             val icono = modelo.icono
             bundle.putString("id", id)
             bundle.putString("nombre", nombre)
-            bundle.putString("fondo", fondo)
             bundle.putString("icono", icono)
             Navigation.findNavController(v).navigate(R.id.accion_inicio_a_cursos, bundle)
         }

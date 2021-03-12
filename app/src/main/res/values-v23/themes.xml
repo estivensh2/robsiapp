@@ -7,7 +7,7 @@
         <item name="colorTextoEnFondo">@color/colorGrisMedio</item>
         <item name="colorSegundario">@color/colorAmarilloClaro</item>
         <!-- Formularios -->
-        <item name="colorCursor">@drawable/cursor_claro</item>
+        <item name="colorCursorx">@drawable/cursor_claro</item>
         <item name="colorTextoLabel">@color/colorTextoLabel</item>
         <item name="colorTextoFormulario">@color/colorGrisMedio</item>
         <item name="estiloCampoFormulario">@drawable/fondo_campo_claro</item>
@@ -62,7 +62,7 @@
         <item name="colorTextoEnFondo">@color/colorBlanco</item>
         <item name="colorSegundario">@color/colorAmarilloClaro</item>
         <!-- Formularios -->
-        <item name="colorCursor">@drawable/cursor_oscuro</item>
+        <item name="colorCursorx">@drawable/cursor_oscuro</item>
         <item name="colorTextoLabel">@color/colorTextoLabel</item>
         <item name="colorTextoFormulario">@color/colorBordeCampoFormularioOscuro</item>
         <item name="estiloCampoFormulario">@drawable/fondo_campo_oscuro</item>

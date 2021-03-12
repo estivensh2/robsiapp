@@ -4,6 +4,6 @@
         <attr name="colorTextoLabel" format="color"/>
         <attr name="estiloCampoFormulario" format="reference"/>
         <attr name="colorTextoFormulario" format="color"/>
-        <attr name="colorCursor" format="reference"/>
+        <attr name="colorCursorx" format="reference"/>
     </declare-styleable>
 </resources>

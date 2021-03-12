@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorFondo"
     tools:context=".ui.inicio.InicioFragment">
 
@@ -138,6 +139,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/reciclador"
                         android:layout_width="0dp"
@@ -147,14 +149,12 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="12dp"
                         android:layout_marginRight="12dp"
-                        android:layout_marginBottom="8dp"
                         android:overScrollMode="never"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView25"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

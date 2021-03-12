@@ -28,7 +28,7 @@
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textColor="?attr/colorTextoFormulario"
-            android:textCursorDrawable="?attr/colorCursor"
+            android:textCursorDrawable="?attr/colorCursorx"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

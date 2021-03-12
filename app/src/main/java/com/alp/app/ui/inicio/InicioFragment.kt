@@ -21,6 +21,9 @@ import com.alp.app.data.RespuestaCategoriaData
 import com.alp.app.data.RespuestaSliderData
 import com.alp.app.databinding.FragmentInicioBinding
 import com.alp.app.servicios.*
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -43,16 +46,59 @@ class InicioFragment : Fragment() {
     private val handler = Handler(Looper.getMainLooper())
     private val handlerx = Handler(Looper.getMainLooper())
     private lateinit var runnablex: Runnable
+    private var interstitial:InterstitialAd? = null
+    private var count = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         inicioViewModel = ViewModelProvider(this).get(InicioViewModel::class.java)
         _binding = FragmentInicioBinding.inflate(inflater, container, false)
         inicioViewModel.text.observe(viewLifecycleOwner, {
         })
+        initAds()
+        initListeners()
+        count += 1
+        checkCounter()
         binding.cargaContenido.visibility = View.VISIBLE
         return binding.root
     }
 
+    private fun initListeners() {
+        interstitial?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+            }
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            }
+            override fun onAdShowedFullScreenContent() {
+                interstitial = null
+            }
+        }
+    }
+    private fun initAds() {
+        val adRequest = AdRequest
+            .Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .addTestDevice("9E03F6B2BD01C42FCB0C36D6D2AA7767")
+            .build()
+        InterstitialAd.load(requireActivity(), "ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback(){
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                interstitial = interstitialAd
+            }
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                interstitial = null
+            }
+        })
+    }
+    private fun checkCounter() {
+        if(count == 4){
+            showAds()
+            count = 0
+            initAds()
+        }
+    }
+
+    private fun showAds(){
+        interstitial?.show(requireActivity())
+    }
     private fun recuperarSlider() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)

@@ -28,9 +28,8 @@ class InduccionFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentInduccionBinding.inflate(layoutInflater, container, false)
         Preferencias.init(requireContext(), "preferenciasDeUsuario")
-        arrayList.add(InduccionData(R.drawable.logobienvenida, "Bienvenido", "En esta aplicacion podrás aprender las bases básicas para iniciar en la programación totalmente gratis."))
-        arrayList.add(InduccionData(R.drawable.pruebaimagen, "Aprende en cualquier lugar", "Sin tener una conexion a internet podrás acceder a los contenidos de cada lenguaje."))
-        arrayList.add(InduccionData(R.drawable.pruebaimagen, "Y Práctica", "Tienes un compilador donde harás tus ejercicios de cualquier lenguaje que este disponible en la app."))
+        arrayList.add(InduccionData(R.drawable.paso1, "Bienvenido", "En esta aplicacion podrás aprender las bases básicas para iniciar en la programación totalmente gratis."))
+        arrayList.add(InduccionData(R.drawable.paso2, "Obten tu certificado", "Podrás obtener y descargar tu certificado de cada curso."))
         displayList.addAll(arrayList)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val adaptador = InduccionAdaptador(requireContext(), displayList)
@@ -43,7 +42,7 @@ class InduccionFragment : Fragment() {
             saltar.setOnClickListener { saltarInduccion() }
             paginadorInduccion.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    if (tab.position == 2){
+                    if (tab.position == 1){
                         binding.saltar.visibility = View.INVISIBLE
                         binding.finalizar.visibility = View.VISIBLE
                     } else {
