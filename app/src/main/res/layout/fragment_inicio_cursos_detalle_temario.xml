@@ -35,10 +35,12 @@
 
                 <TextView
                     android:id="@+id/titulo_temario"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
                     android:fontFamily="@font/nunito_black"
                     android:text="@string/texto_prueba"
                     android:textColor="?attr/colorTextoEnFondo"
@@ -144,15 +146,51 @@
                 android:layout_marginBottom="16dp"
                 android:background="?attr/estiloGeneralBotonPrimario"
                 android:fontFamily="@font/nunito_black"
+                android:letterSpacing="@dimen/dimensiones_letter_spacing"
                 android:text="@string/texto_completar"
                 android:textColor="?attr/colorSegundario"
                 android:textSize="16sp"
-                android:letterSpacing="@dimen/dimensiones_letter_spacing"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/contenedorimagen"
                 tools:targetApi="lollipop" />
+
+            <TextView
+                android:id="@+id/texto_resultado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_black"
+                android:text="@string/texto_resultado"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <LinearLayout
+                android:id="@+id/contenedorimagen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/fondo_imagen_ejemplo"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/texto_resultado">
+
+                <ImageView
+                    android:id="@+id/imgresultado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

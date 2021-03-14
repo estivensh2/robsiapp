@@ -96,6 +96,7 @@
     <string name="texto_correo_existente">Este correo ya existe</string>
     <string name="texto_sin_temario">No hay temarios en este curso</string>
     <string name="texto_acercade">Acerca de</string>
+    <string name="texto_acercade_segundario">Acerca del desarrollador</string>
     <string name="id_banner">ca-app-pub-2689265379329623/6579224714</string>
     <string name="texto_acerca_del_desarrollador">Hola, mi nombre es Estiven esta es mi primera aplicación para que usuarios de habla latina que tengan nada o poca experiencia sobre programación puedan tener las bases básicas
    de esta misma. Tienes la opción de obtener tu certificado de cada curso y espero sacar actualizaciones para mejorar la experiencia de usuario como también más cursos y contenido.</string>
@@ -103,4 +104,6 @@
     <string name="adbom_idprueba">ca-app-pub-3940256099942544~3347511713</string>
     <string name="adbom_idbannerproduccion">ca-app-pub-3940256099942544/6300978111</string>
     <string name="adbom_idbannerprueba">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="texto_resultado">Resultado</string>
+    <string name="texto_donar">DONAR</string>
 </resources>

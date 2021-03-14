@@ -26,7 +26,7 @@ class CursosDetalleAdaptador (private val arrayList: ArrayList<RespuestaCursosDe
                 binding.cardViewCursosDetalle.isEnabled = true
             } else {
                 binding.iconoCursos.setBackgroundResource(R.drawable.candado)
-                binding.cardViewCursosDetalle.isEnabled = false
+                binding.cardViewCursosDetalle.isEnabled = true
             }
         }
     }
@@ -53,6 +53,7 @@ class CursosDetalleAdaptador (private val arrayList: ArrayList<RespuestaCursosDe
             val descripcion = modelo.descripcion
             val codigo = modelo.codigo
             val tipolenguaje = modelo.tipolenguaje
+            val imgresultado = modelo.imgresultado
             bundle.putString("id", id)
             bundle.putString("idcurso", idcurso)
             bundle.putString("nombre", nombre)
@@ -60,6 +61,7 @@ class CursosDetalleAdaptador (private val arrayList: ArrayList<RespuestaCursosDe
             bundle.putString("descripcion", descripcion)
             bundle.putString("codigo", codigo)
             bundle.putString("tipolenguaje", tipolenguaje)
+            bundle.putString("imgresultado", imgresultado)
             bundle.putString("total", arrayList.size.toString())
             bundle.putString("ultimoelemento", arrayList.last().total)
             Navigation.findNavController(v).navigate(R.id.accion_detalle_a_temario, bundle)

@@ -9,6 +9,7 @@ data class RespuestaCursosDetalleData (
     @SerializedName("descripcion")  var descripcion:String,
     @SerializedName("codigo")       var codigo:String,
     @SerializedName("tipolenguaje") var tipolenguaje:String,
+    @SerializedName("imgresultado") var imgresultado:String,
     @SerializedName("total")        var total:String,
     @SerializedName("habilitado")   var habilitado:String
     )

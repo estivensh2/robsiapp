@@ -1,24 +1,34 @@
 package com.alp.app.ui.inicio
 
+import android.app.ActionBar
+import android.app.Dialog
 import android.content.Context
 import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Html
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.RespuestaInsertarDiploma
 import com.alp.app.data.RespuestaInsertarProgreso
+import com.alp.app.databinding.FragmentInicioBinding
 import com.alp.app.databinding.FragmentInicioCursosDetalleTemarioBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
 import com.alp.app.servicios.Preferencias
 import com.alp.app.servicios.ServicioBuilder
+import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.kbiakov.codeview.adapters.Options
 import io.github.kbiakov.codeview.highlight.ColorTheme
@@ -53,16 +63,31 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
             val descripcion = bundle.getString("descripcion", "no")
             val tipolenguaje = bundle.getString("tipolenguaje", "no")
             val codigo = bundle.getString("codigo", "no")
+            val imgresultado = bundle.getString("imgresultado", "no")
             binding.tituloTemario.text = nombre
-            binding.descripcionTemario.text = descripcion
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                binding.descripcionTemario.setText(Html.fromHtml(descripcion, Html.FROM_HTML_MODE_COMPACT))
+            }
+            Log.d("img", imgresultado)
+            if (!imgresultado.contains(".png")){
+                binding.textoResultado.visibility = View.GONE
+                binding.contenedorimagen.visibility = View.GONE
+            } else {
+                binding.textoResultado.visibility = View.VISIBLE
+                binding.contenedorimagen.visibility = View.VISIBLE
+                Glide.with(contexto).load(imgresultado).signature(ObjectKey(System.currentTimeMillis())).into(binding.imgresultado)
+            }
             if (descripcion.isEmpty()){
+                binding.fondoDescripcionTemario.visibility = View.GONE
                 binding.fondoDescripcionTemario.visibility = View.GONE
             } else {
                 binding.fondoDescripcionTemario.visibility = View.VISIBLE
             }
             if (codigo.isEmpty()){
+                binding.linearLayout2.visibility = View.GONE
                 binding.codeView.visibility = View.GONE
             } else {
+                binding.linearLayout2.visibility = View.VISIBLE
                 binding.codeView.visibility = View.VISIBLE
                 binding.codeView.setOptions(
                     Options.Default.get(requireContext())
@@ -72,6 +97,7 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
                 )
             }
         }
+        binding.imgresultado.setOnClickListener { mostrarImagen() }
         binding.completar.setOnClickListener {
             if (Preferencias.leer("idsonidos", false)==true){
                 val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
@@ -85,6 +111,21 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun mostrarImagen() {
+        val dialogo = Dialog(contexto)
+        dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogo.setContentView(R.layout.ventana_abrir_imagen)
+        dialogo.setCancelable(false)
+        dialogo.window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
+        dialogo.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        val imagen = dialogo.findViewById<ImageView>(R.id.imagenCompleta)
+        val cerrar = dialogo.findViewById<Button>(R.id.botonCerrar)
+        val convertir = binding.imgresultado.drawable
+        imagen.setImageDrawable(convertir)
+        cerrar.setOnClickListener { dialogo.dismiss() }
+        dialogo.show()
     }
 
     private fun insertarDiploma() {

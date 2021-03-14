@@ -53,7 +53,9 @@ class ListadoDiplomadosFragment : Fragment() {
                     override fun onResponse(call: Call<List<RespuestaRecuperarDiploma>>, response: Response<List<RespuestaRecuperarDiploma>>) {
                         activity?.runOnUiThread {
                             if (response.body() == null) {
-                                ClaseToast.mostrarx(contexto, getString(R.string.texto_sin_certificados), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+                                binding.cargaContenido.visibility = View.GONE
+                                binding.cargarError.visibility = View.VISIBLE
+                                binding.textoErrorSinDiploma.text = resources.getString(R.string.texto_sin_certificados)
                             } else {
                                 val adaptador = DiplomasAdaptador(displayListaDiploma, contexto)
                                 adaptador.notifyDataSetChanged()
