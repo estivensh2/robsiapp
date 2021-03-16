@@ -34,6 +34,10 @@ interface APIServicio {
     @POST("recuperarCategorias.php")
     fun recuperarCategorias() : Call<List<RespuestaCategoriaData>>
 
+
+    @POST("recuperarDatosExamen.php")
+    fun recuperarExamen() : Call<List<RespuestaExamen>>
+
     @FormUrlEncoded
     @POST("recuperarDatosCursos.php")
     fun recuperarCursos(@Field("idcategoria") idcategoria:String)

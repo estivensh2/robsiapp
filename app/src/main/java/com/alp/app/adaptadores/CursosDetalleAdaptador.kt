@@ -26,7 +26,7 @@ class CursosDetalleAdaptador (private val arrayList: ArrayList<RespuestaCursosDe
                 binding.cardViewCursosDetalle.isEnabled = true
             } else {
                 binding.iconoCursos.setBackgroundResource(R.drawable.candado)
-                binding.cardViewCursosDetalle.isEnabled = true
+                binding.cardViewCursosDetalle.isEnabled = false
             }
         }
     }

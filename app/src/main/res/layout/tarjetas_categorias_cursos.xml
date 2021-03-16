@@ -55,10 +55,13 @@
                 android:id="@+id/titulo_curso"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="@font/nunito_black"
                 android:text="@string/texto_prueba"
                 android:textColor="?attr/colorTextoEnFondo"
                 android:textSize="@dimen/dimensiones_titulo_categoria"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/descripcion_curso"
                 app:layout_constraintTop_toBottomOf="@+id/nuevo" />
 
@@ -68,6 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="@font/nunito"
                 android:text="@string/texto_prueba"
                 android:textColor="?attr/colorTextoEnFondo"

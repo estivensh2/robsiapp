@@ -18,6 +18,12 @@ class CursosAdaptador (private val arrayList: ArrayList<RespuestaCursosData>, pr
         fun bintItems(modelo: RespuestaCursosData, contexto: Context){
             val binding = TarjetasCursosBinding.bind(itemView)
             binding.tituloCursox.text = modelo.nombre
+            if (binding.nuevo.text==""){
+                binding.nuevo.visibility = View.GONE
+            } else {
+                binding.nuevo.text = contexto.getString(R.string.texto_nuevo)
+                binding.nuevo.visibility = View.VISIBLE
+            }
             Glide.with(contexto).load(modelo.imagen).into(binding.iconoCursos)
         }
     }
@@ -33,6 +39,7 @@ class CursosAdaptador (private val arrayList: ArrayList<RespuestaCursosData>, pr
             val bundle = Bundle()
             val modelo = arrayList[position]
             val id = modelo.id
+            val idcursox = modelo.id
             val nombre = modelo.nombre
             val icono = modelo.imagen
             bundle.putString("id", id)

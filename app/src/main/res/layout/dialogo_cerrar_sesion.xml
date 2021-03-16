@@ -27,7 +27,7 @@
     <Button
         android:id="@+id/botonSi"
         android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:background="?attr/estiloGeneralBotonPrimario"
@@ -45,7 +45,7 @@
     <Button
         android:id="@+id/botonNo"
         android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"

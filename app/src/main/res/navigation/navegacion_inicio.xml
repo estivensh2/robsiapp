@@ -21,7 +21,8 @@
         tools:layout="@layout/fragment_inicio_cursos" >
         <action
             android:id="@+id/accion_inicio_cursos_a_detalle"
-            app:destination="@id/inicioCursosDetalleFragment" />
+            app:destination="@id/inicioCursosDetalleFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/inicioCursosDetalleFragment"
@@ -38,11 +39,22 @@
         <action
             android:id="@+id/accion_inicio_cursos_detalle_a_diplomados"
             app:destination="@id/listadoDiplomadosFragment2" />
+        <action
+            android:id="@+id/accion_curso_detalle_a_examen"
+            app:destination="@id/inicioCursosDetalleTemarioExamenFragment" />
     </fragment>
     <fragment
         android:id="@+id/listadoDiplomadosFragment2"
         android:name="com.alp.app.ui.perfil.ListadoDiplomadosFragment"
         android:label="Certificados"
         tools:layout="@layout/fragment_listado_diplomados" />
+    <fragment
+        android:id="@+id/inicioCursosDetalleTemarioExamenFragment"
+        android:name="com.alp.app.ui.inicio.InicioCursosDetalleTemarioExamenFragment"
+        android:label="Examen" >
+        <argument
+            android:name="idcursox"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

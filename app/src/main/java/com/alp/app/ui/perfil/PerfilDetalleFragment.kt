@@ -284,11 +284,9 @@ class PerfilDetalleFragment : Fragment() {
             try {
                 when(requestCode){
                     SELECCIONAR_FOTO -> {
-                        if (Build.VERSION.SDK_INT >= 29){
-                            bitmap = MediaStore.Images.Media.getBitmap(contexto.contentResolver, imagenSeleccionada)
-                            binding.imagen.setImageBitmap(bitmap)
-                            item.isVisible = true
-                        }
+                        bitmap = MediaStore.Images.Media.getBitmap(contexto.contentResolver, imagenSeleccionada)
+                        binding.imagen.setImageBitmap(bitmap)
+                        item.isVisible = true
                     }
                     TOMAR_FOTO -> {
                         bitmap = data.extras?.get("data") as Bitmap

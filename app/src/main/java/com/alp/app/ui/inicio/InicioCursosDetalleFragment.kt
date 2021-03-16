@@ -18,6 +18,12 @@ import com.alp.app.servicios.ClaseToast
 import com.alp.app.servicios.Preferencias
 import com.alp.app.servicios.ServicioBuilder
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +39,8 @@ class InicioCursosDetalleFragment : Fragment() {
     private var _binding: FragmentInicioCursosDetalleBinding? = null
     private val binding get() = _binding!!
     private val displayListaCursosDetalle = ArrayList<RespuestaCursosDetalleData>()
+    private var interstitial:InterstitialAd? = null
+    private var count = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentInicioCursosDetalleBinding.inflate(inflater, container, false)
@@ -44,8 +52,50 @@ class InicioCursosDetalleFragment : Fragment() {
             Glide.with(contexto).load(icono).into(binding.iconoCurso)
             binding.tituloCurso.text = nombre
         }
+        initAds()
+        initListeners()
+        count += 1
+        checkCounter()
         binding.cargaContenido.visibility = View.VISIBLE
         return binding.root
+    }
+
+    private fun initListeners() {
+        interstitial?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+            }
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            }
+            override fun onAdShowedFullScreenContent() {
+                interstitial = null
+            }
+        }
+    }
+    private fun initAds() {
+        val adRequest = AdRequest
+            .Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .addTestDevice("9E03F6B2BD01C42FCB0C36D6D2AA7767")
+            .build()
+        InterstitialAd.load(requireActivity(), "ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback(){
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                interstitial = interstitialAd
+            }
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                interstitial = null
+            }
+        })
+    }
+    private fun checkCounter() {
+        if(count == 5){
+            showAds()
+            count = 0
+            initAds()
+        }
+    }
+
+    private fun showAds(){
+        interstitial?.show(requireActivity())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

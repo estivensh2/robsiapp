@@ -8,7 +8,7 @@ object ServicioBuilder {
 
     private val cliente = OkHttpClient.Builder().build()
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.0.12/webservices/modulos/webservices/") // change this IP for testing by your actual machine IP
+        .baseUrl("https://alpapp.000webhostapp.com/webservices/modulos/webservices/") // change this IP for testing by your actual machine IP
         .addConverterFactory(GsonConverterFactory.create())
         .client(cliente)
         .build()

@@ -68,8 +68,7 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 binding.descripcionTemario.setText(Html.fromHtml(descripcion, Html.FROM_HTML_MODE_COMPACT))
             }
-            Log.d("img", imgresultado)
-            if (!imgresultado.contains(".png")){
+            if (!imgresultado.contains(".PNG")){
                 binding.textoResultado.visibility = View.GONE
                 binding.contenedorimagen.visibility = View.GONE
             } else {
@@ -108,9 +107,15 @@ class InicioCursosDetalleTemarioFragment : Fragment() {
                 //insertarProgreso()
             } else {
                 insertarProgreso()
+                //realizarExamen()
             }
         }
         return binding.root
+    }
+
+    private fun realizarExamen() {
+        val action = InicioCursosDetalleTemarioFragmentDirections.accionCursoDetalleAExamen(idcurso) // /!\
+        findNavController().navigate(action)
     }
 
     private fun mostrarImagen() {

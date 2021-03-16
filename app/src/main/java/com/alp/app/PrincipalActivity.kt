@@ -21,6 +21,7 @@ class PrincipalActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
+       
         //Preferencias.init(this, "preferenciasDeUsuario")
         //val estado = Preferencias.leer("idoscuro",true)
         //setTheme(if (estado==true) R.style.Theme_ALP_Oscuro else R.style.Theme_ALP)
