@@ -10,11 +10,10 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import com.alp.app.EntradaActivity
+import com.alp.app.ui.main.views.view.activities.HomeActivity
 import com.alp.app.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlin.random.Random
 
 
 class FirebaseMensajesServicio : FirebaseMessagingService() {
@@ -26,7 +25,7 @@ class FirebaseMensajesServicio : FirebaseMessagingService() {
     }
 
     private fun enviarNotificacion(titulo: String, mensaje: String) {
-        val intent = Intent(this, EntradaActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT)
         val canalID = getString(R.string.default_notification_channel_id)

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorFondo"
+    tools:context=".ui.main.views.view.fragments.SignInFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="373dp">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="@string/texto_clave_acceso"
+            android:textColor="?attr/colorTextoLabel"
+            android:textSize="@dimen/dimensiones_labels"
+            app:layout_constraintBottom_toTopOf="@+id/claveAcceso"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imagenIniciarSesion"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:contentDescription="@string/descripcion_imagen_iniciar_sesion"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/saludando" />
+
+
+        <EditText
+            android:id="@+id/claveAcceso"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/estiloCampoFormulario"
+            android:ems="10"
+            android:fontFamily="@font/nunito"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="?attr/colorTextoFormulario"
+            android:textCursorDrawable="?attr/colorCursorx"
+            app:layout_constraintBottom_toTopOf="@+id/resultadoerror"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="LabelFor" />
+
+        <ToggleButton
+            android:id="@+id/mostrarClaveActual"
+            android:layout_width="38dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="?attr/estiloMostrarClave"
+            android:textOff="@string/texto_vacio_toggle"
+            android:textOn="@string/texto_vacio_toggle"
+            app:layout_constraintBottom_toBottomOf="@+id/claveAcceso"
+            app:layout_constraintEnd_toEndOf="@+id/claveAcceso"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/claveAcceso"
+            app:layout_constraintTop_toTopOf="@+id/claveAcceso" />
+
+        <Button
+            android:id="@+id/botonIngresar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/estiloGeneralBotonPrimario"
+            android:fontFamily="@font/nunito_black"
+            android:letterSpacing="@dimen/dimensiones_letter_spacing"
+            android:stateListAnimator="@null"
+            android:text="@string/texto_ingresar"
+            android:textColor="?attr/colorSegundario"
+            android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
+            app:layout_constraintBottom_toTopOf="@+id/boton_recuperar_clave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:targetApi="lollipop" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/botonIngresar"
+            app:layout_constraintEnd_toEndOf="@+id/botonIngresar"
+            app:layout_constraintStart_toStartOf="@+id/botonIngresar"
+            app:layout_constraintTop_toTopOf="@+id/botonIngresar"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
+
+        <EditText
+            android:id="@+id/correoElectronico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/estiloCampoFormulario"
+            android:ems="10"
+            android:fontFamily="@font/nunito"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="?attr/colorTextoFormulario"
+            android:textCursorDrawable="?attr/colorCursorx"
+            app:layout_constraintBottom_toTopOf="@+id/textView11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="@string/texto_correo_electronico"
+            android:textColor="?attr/colorTextoLabel"
+            android:textSize="@dimen/dimensiones_labels"
+            app:layout_constraintBottom_toTopOf="@+id/correoElectronico"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/boton_recuperar_clave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="@string/texto_recuperar_clave"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorTextoEnFondo"
+            android:textSize="@dimen/dimensiones_texto_olvidaste_tu_clave"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/resultadoerror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/texto_prueba"
+            android:textColor="#9F0404"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/botonIngresar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorFondo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

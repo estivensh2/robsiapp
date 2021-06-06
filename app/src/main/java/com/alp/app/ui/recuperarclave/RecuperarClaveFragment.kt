@@ -13,7 +13,7 @@ import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
-import com.alp.app.data.RespuestaRecuperarClave
+import com.alp.app.data.model.RespuestaRecuperarClave
 import com.alp.app.databinding.FragmentRecuperarClaveBinding
 import com.alp.app.servicios.APIServicio
 import com.alp.app.servicios.ClaseToast
@@ -30,7 +30,6 @@ import java.util.regex.Pattern
 class RecuperarClaveFragment : Fragment() {
     private var _binding: FragmentRecuperarClaveBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: RecuperarClaveViewModel
     private lateinit var contexto: Context
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -44,10 +43,6 @@ class RecuperarClaveFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RecuperarClaveViewModel::class.java)
-    }
 
     private fun habilitarBoton(){
         with(binding){
@@ -76,7 +71,7 @@ class RecuperarClaveFragment : Fragment() {
 
     private fun recuperarClave(){
         val correo = binding.correoElectronico.text.toString()
-        binding.cargaContenido.visibility = View.VISIBLE
+        binding.progress.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch {
             val call = ServicioBuilder.buildServicio(APIServicio::class.java)
             try {
@@ -87,12 +82,12 @@ class RecuperarClaveFragment : Fragment() {
                         activity?.runOnUiThread {
                             if (responsex.respuesta == "1") {
                                 ClaseToast.mostrarx(contexto, getString(R.string.texto_correo_enviado), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                                binding.cargaContenido.visibility = View.GONE
+                                binding.progress.visibility = View.GONE
                                 findNavController().navigate(R.id.accion_recuperar_a_iniciar_o_crear)
                             } else {
                                 binding.resultadoerror.visibility = View.VISIBLE
                                 binding.resultadoerror.text = resources.getString(R.string.texto_corre_no_registrado)
-                                binding.cargaContenido.visibility = View.GONE
+                                binding.progress.visibility = View.GONE
                             }
                         }
                     }
@@ -100,14 +95,14 @@ class RecuperarClaveFragment : Fragment() {
                     override fun onFailure(call: Call<RespuestaRecuperarClave>, t: Throwable) {
                         activity!!.runOnUiThread {
                             ClaseToast.mostrarx(contexto, getString(R.string.texto_error_conexion), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                            binding.cargaContenido.visibility = View.VISIBLE
+                            binding.progress.visibility = View.VISIBLE
                         }
                     }
                 })
             } catch (e: Throwable) {
                 requireActivity().runOnUiThread {
                     ClaseToast.mostrarx(contexto, getString(R.string.texto_error_grave), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-                    binding.cargaContenido.visibility = View.VISIBLE
+                    binding.progress.visibility = View.VISIBLE
                 }
             }
         }

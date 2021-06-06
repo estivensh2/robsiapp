@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
-import com.alp.app.data.InduccionData
+import com.alp.app.data.model.InduccionData
 import com.alp.app.databinding.InduccionFilaBinding
 import com.bumptech.glide.Glide
 

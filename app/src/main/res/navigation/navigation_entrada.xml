@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navegacion_bienvenida">
+
+    <fragment
+        android:id="@+id/navegacion_bienvenida"
+        android:name="com.alp.app.ui.main.views.view.fragments.WelcomeFragment"
+        android:label="bienvenida_fragment"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/accion_bienvenida_a_induccion"
+            app:destination="@id/induccionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popUpTo="@id/navegacion_bienvenida"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/accion_bienvenida_a_iniciar_o_crear_cuenta"
+            app:destination="@id/iniciarOCrearCuentaFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popUpTo="@id/navegacion_bienvenida"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/accion_bienvenida_a_inicio"
+            app:destination="@id/principalActivity2"
+            app:enterAnim="@anim/slide_in_left"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/principalActivity2"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/induccionFragment"
+        android:name="com.alp.app.ui.main.views.view.fragments.OnboardingFragment"
+        android:label="induccion_fragment"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/accion_induccion_a_iniciar_o_crear"
+            app:destination="@id/iniciarOCrearCuentaFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/induccionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarOCrearCuentaFragment"
+        android:name="com.alp.app.ui.main.views.view.fragments.LoginFragment"
+        android:label="Iniciar o crear cuenta"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/accion_iniciar_o_crear_a_registrarme"
+            app:destination="@id/registrarUsuarioFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/accion_iniciar_o_crear_a_iniciar_sesion"
+            app:destination="@id/iniciarSesionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrarUsuarioFragment"
+        android:name="com.alp.app.ui.main.views.view.fragments.SignUpFragment"
+        android:label="Registrarme"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/accion_registrar_a_iniciar_sesion"
+            app:destination="@id/iniciarSesionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/iniciarSesionFragment"
+        android:name="com.alp.app.ui.main.views.view.fragments.SignInFragment"
+        android:label="Iniciar sesión"
+        tools:layout="@layout/fragment_signin" >
+        <action
+            android:id="@+id/accion_iniciar_a_navegacion_principal"
+            app:destination="@id/principalActivity2"
+            app:enterAnim="@anim/slide_in_left"
+            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/accion_iniciar_sesion_a_recuperar_clave"
+            app:destination="@id/recuperarClaveFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
+    </fragment>
+    <activity
+        android:id="@+id/principalActivity2"
+        android:name="com.alp.app.ui.main.views.view.activities.DashboardActivity"
+        android:label="PrincipalActivity" >
+    </activity>
+    <fragment
+        android:id="@+id/recuperarClaveFragment"
+        android:name="com.alp.app.ui.recuperarclave.RecuperarClaveFragment"
+        android:label="Recuperar clave"
+        tools:layout="@layout/fragment_recuperar_clave" >
+        <action
+            android:id="@+id/accion_recuperar_a_iniciar_o_crear"
+            app:destination="@id/iniciarSesionFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>
