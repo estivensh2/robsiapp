@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAzulOscuro"
-    tools:context=".ui.main.views.view.fragments.WelcomeFragment" >
+    tools:context=".ui.main.view.fragments.WelcomeFragment" >
 
     <ImageView
         android:id="@+id/logoanimacion"

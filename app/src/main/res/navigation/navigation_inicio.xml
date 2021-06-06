@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.HomeFragment"
+        android:name="com.alp.app.ui.main.view.fragments.HomeFragment"
         android:label="Inicio"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/inicioCursosFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.CoursesFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CoursesFragment"
         android:label="Cursos"
         tools:layout="@layout/fragment_courses" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/inicioCursosDetalleFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.CoursesTemaryFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CoursesTemaryFragment"
         android:label="Temario" >
         <action
             android:id="@+id/accion_detalle_a_temario"
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/inicioCursosDetalleTemarioFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.CoursesTemaryDetailsFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CoursesTemaryDetailsFragment"
         android:label="Contenido" >
         <action
             android:id="@+id/accion_inicio_cursos_detalle_a_diplomados"
@@ -45,12 +45,12 @@
     </fragment>
     <fragment
         android:id="@+id/listadoDiplomadosFragment2"
-        android:name="com.alp.app.ui.main.views.view.fragments.CertificateFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CertificateFragment"
         android:label="Certificados"
         tools:layout="@layout/fragment_listado_diplomados" />
     <fragment
         android:id="@+id/inicioCursosDetalleTemarioExamenFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.CoursesReviewFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CoursesReviewFragment"
         android:label="Examen" >
         <argument
             android:name="idcursox"

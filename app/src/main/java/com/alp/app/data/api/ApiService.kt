@@ -28,6 +28,9 @@ interface ApiService {
     @POST("recuperarCategorias.php")
     suspend fun getCategories(): List<CategoryModel>
 
+    @POST("recuperarDatosExamen.php")
+    suspend fun getReview(): List<CategoryModel>
+
     @POST("recuperarSlider.php")
     suspend fun getSlider(): List<SliderModel>
 
@@ -84,6 +87,14 @@ interface ApiService {
             @Field("claveAcceso") clave:String
     ) : Response<SigninModel>
 
+    @FormUrlEncoded
+    @POST("insertarOActualizarToken.php")
+    suspend fun setToken (
+            @Field("idusuario") idusuario:String,
+            @Field("idtoken") idtoken:String
+    ) : Response<InsertTokenModel>
+
+
 
     @FormUrlEncoded
     @POST("registrarUsuario.php")
@@ -93,6 +104,32 @@ interface ApiService {
             @Field("correoElectronico") correo:String,
             @Field("claveAcceso") clave:String
     ) : Response<SignUpModel>
+
+    @FormUrlEncoded
+    @POST("recuperarClave.php")
+    suspend fun setResetPassword (
+            @Field("correoElectronico") correo:String
+    ) : Response<ResetPasswordModel>
+
+    @FormUrlEncoded
+    @POST("insertarDiploma.php")
+    suspend fun setCertificate (
+            @Field("idusuario") idusuario:String,
+            @Field("idcurso") idcurso:String,
+            @Field("idcompletado") idcompletado:String
+    ) : Response<InsertCertificateModel>
+
+
+    @FormUrlEncoded
+    @POST("insertarHabilitado.php")
+    suspend fun setProgress (
+            @Field("idhabilitado") idhabilitado:String,
+            @Field("idcursodetalle") idcursodetalle:String,
+            @Field("idcurso") idcurso:String,
+            @Field("idusuario") idusuario:String
+    ) : Response<InsertProgressModel>
+
+
 
 
 }

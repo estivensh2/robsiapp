@@ -20,6 +20,10 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getCourses(id)
     }
 
+    suspend fun setResetPassword(clave: String) : Response<ResetPasswordModel> {
+        return apiService.setResetPassword(clave)
+    }
+
     suspend fun getInfoProfile(id: String) : Response<ProfileModel> {
         return apiService.getInfoProfile(id)
     }
@@ -29,6 +33,18 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
 
     suspend fun setSignIn(correo: String, clave: String) : Response<SigninModel> {
         return apiService.setSignIn(correo, clave)
+    }
+
+    suspend fun setToken(idusuario: String, idtoken: String) : Response<InsertTokenModel> {
+        return apiService.setToken(idusuario, idtoken)
+    }
+
+    suspend fun setCertificate(idusuario : String ,idcurso: String, idcompletado: String) : Response<InsertCertificateModel> {
+        return apiService.setCertificate(idusuario, idcurso, idcompletado)
+    }
+
+    suspend fun setProgress(idhabilitado : String ,idcursodetalle: String, idcurso: String, idusuario: String) : Response<InsertProgressModel> {
+        return apiService.setProgress(idhabilitado, idcursodetalle,idcurso,idusuario)
     }
 
     suspend fun setSignUp(nombres: String, apellidos: String, correo: String, clave: String) : Response<SignUpModel> {

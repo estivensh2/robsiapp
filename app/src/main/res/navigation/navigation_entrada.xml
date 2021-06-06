@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navegacion_bienvenida"
-        android:name="com.alp.app.ui.main.views.view.fragments.WelcomeFragment"
+        android:name="com.alp.app.ui.main.view.fragments.WelcomeFragment"
         android:label="bienvenida_fragment"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/induccionFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.OnboardingFragment"
+        android:name="com.alp.app.ui.main.view.fragments.OnboardingFragment"
         android:label="induccion_fragment"
         tools:layout="@layout/fragment_onboarding" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/iniciarOCrearCuentaFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.LoginFragment"
+        android:name="com.alp.app.ui.main.view.fragments.LoginFragment"
         android:label="Iniciar o crear cuenta"
         tools:layout="@layout/fragment_login" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrarUsuarioFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.SignUpFragment"
+        android:name="com.alp.app.ui.main.view.fragments.SignUpFragment"
         android:label="Registrarme"
         tools:layout="@layout/fragment_signup">
         <action
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/iniciarSesionFragment"
-        android:name="com.alp.app.ui.main.views.view.fragments.SignInFragment"
+        android:name="com.alp.app.ui.main.view.fragments.SignInFragment"
         android:label="Iniciar sesión"
         tools:layout="@layout/fragment_signin" >
         <action
@@ -93,12 +93,12 @@
     </fragment>
     <activity
         android:id="@+id/principalActivity2"
-        android:name="com.alp.app.ui.main.views.view.activities.DashboardActivity"
+        android:name="com.alp.app.ui.main.view.activities.DashboardActivity"
         android:label="PrincipalActivity" >
     </activity>
     <fragment
         android:id="@+id/recuperarClaveFragment"
-        android:name="com.alp.app.ui.recuperarclave.RecuperarClaveFragment"
+        android:name="com.alp.app.ui.main.view.fragments.ResetPasswordFragment"
         android:label="Recuperar clave"
         tools:layout="@layout/fragment_recuperar_clave" >
         <action
