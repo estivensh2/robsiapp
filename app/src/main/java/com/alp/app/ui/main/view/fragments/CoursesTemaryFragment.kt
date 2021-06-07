@@ -57,7 +57,6 @@ class CoursesTemaryFragment : Fragment() {
         initListeners()
         count += 1
         checkCounter()
-        binding.progress.visibility = View.VISIBLE
         return binding.root
     }
 
@@ -142,12 +141,8 @@ class CoursesTemaryFragment : Fragment() {
         }
     }
     private fun initAds() {
-        val adRequest = AdRequest
-            .Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .addTestDevice("9E03F6B2BD01C42FCB0C36D6D2AA7767")
-            .build()
-        InterstitialAd.load(requireActivity(), "ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback(){
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(requireActivity(), "ca-app-pub-2689265379329623/8627761416", adRequest, object : InterstitialAdLoadCallback(){
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 interstitial = interstitialAd
             }
@@ -157,7 +152,7 @@ class CoursesTemaryFragment : Fragment() {
         })
     }
     private fun checkCounter() {
-        if(count == 5){
+        if(count == 3){
             showAds()
             count = 0
             initAds()

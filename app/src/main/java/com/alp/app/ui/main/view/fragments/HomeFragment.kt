@@ -23,8 +23,6 @@ import com.alp.app.ui.main.adapter.SliderAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Status
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Runnable
@@ -32,7 +30,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
-
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -45,10 +42,7 @@ class HomeFragment : Fragment() {
     private val handler = Handler(Looper.getMainLooper())
     private val handlerx = Handler(Looper.getMainLooper())
     private lateinit var runnablex: Runnable
-    private var interstitial:InterstitialAd? = null
     private val dashboardViewModel: DashboardViewModel by viewModels()
-    private var count = 0
-
     @Inject
     lateinit var adapterCategories: CategoriesAdapter
     lateinit var adapterSlider: SliderAdapter
@@ -57,12 +51,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         setupUI()
         setupShowData()
-
-        initAds()
-        initListeners()
-        count += 1
-        checkCounter()
-        binding.progress.visibility = View.VISIBLE
+        initLoadAds()
         return binding.root
     }
 
@@ -156,42 +145,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initListeners() {
-        interstitial?.fullScreenContentCallback = object: FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-            }
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-            }
-            override fun onAdShowedFullScreenContent() {
-                interstitial = null
-            }
-        }
-    }
-    private fun initAds() {
-        val adRequest = AdRequest
-            .Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .addTestDevice("9E03F6B2BD01C42FCB0C36D6D2AA7767")
-            .build()
-        InterstitialAd.load(requireActivity(), "ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback(){
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                interstitial = interstitialAd
-            }
-            override fun onAdFailedToLoad(p0: LoadAdError) {
-                interstitial = null
-            }
-        })
-    }
-    private fun checkCounter() {
-        if(count == 4){
-            showAds()
-            count = 0
-            initAds()
-        }
-    }
-
-    private fun showAds(){
-        interstitial?.show(requireActivity())
+    private fun initLoadAds() {
+        val adRequest = AdRequest.Builder().build()
+        binding.banner.loadAd(adRequest)
     }
 
     private fun ejecutarSlider(paginador: ViewPager2){

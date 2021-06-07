@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.InduccionData
-import com.alp.app.databinding.InduccionFilaBinding
+import com.alp.app.databinding.TemplateOnboardingBinding
 import com.bumptech.glide.Glide
 
 
@@ -15,7 +15,7 @@ class OnboardingAdapter(val context: Context, private val arrayList: ArrayList<I
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bindItems(modelo: InduccionData, context: Context){
-            val binding = InduccionFilaBinding.bind(itemView)
+            val binding = TemplateOnboardingBinding.bind(itemView)
             binding.tituloInduccion.text = modelo.titulo
             binding.descripcionInduccion.text = modelo.descripcion
             Glide.with(itemView).load(modelo.imagen).into(binding.imagenInduccion)
@@ -23,7 +23,7 @@ class OnboardingAdapter(val context: Context, private val arrayList: ArrayList<I
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val vista = LayoutInflater.from(context).inflate(R.layout.induccion_fila, parent, false)
+        val vista = LayoutInflater.from(context).inflate(R.layout.template_onboarding, parent, false)
         return ViewHolder(vista)
     }
 

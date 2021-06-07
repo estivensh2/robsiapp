@@ -15,6 +15,12 @@ import com.alp.app.ui.main.adapter.CoursesAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Status
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,6 +32,8 @@ class CoursesFragment : Fragment() {
     private lateinit var id : String
     private var _binding: FragmentCoursesBinding? = null
     private val binding get() = _binding!!
+    private var interstitial:InterstitialAd? = null
+    private var count = 0
     private val dashboardViewModel: DashboardViewModel by viewModels()
     @Inject
     lateinit var coursesAdapter: CoursesAdapter
@@ -43,7 +51,54 @@ class CoursesFragment : Fragment() {
         binding.progress.visibility = View.VISIBLE
         setupUI()
         setupShowData()
+        initAds()
+        initLoadAds()
+        initListeners()
+        count += 1
+        checkCounter()
         return binding.root
+    }
+
+    private fun initListeners() {
+        interstitial?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+            }
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            }
+            override fun onAdShowedFullScreenContent() {
+                interstitial = null
+            }
+        }
+    }
+
+    private fun initLoadAds() {
+        val adRequest = AdRequest.Builder().build()
+        binding.banner.loadAd(adRequest)
+    }
+
+
+    private fun initAds() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(requireActivity(), "ca-app-pub-2689265379329623/8627761416", adRequest, object : InterstitialAdLoadCallback(){
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                interstitial = interstitialAd
+            }
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                interstitial = null
+            }
+        })
+    }
+
+    private fun checkCounter() {
+        if(count == 3){
+            showAds()
+            count = 0
+            initAds()
+        }
+    }
+
+    private fun showAds(){
+        interstitial?.show(requireActivity())
     }
 
     private fun setupUI() {
