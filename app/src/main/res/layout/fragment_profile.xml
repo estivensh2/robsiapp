@@ -52,8 +52,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/estiloCardViewPerfil">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView3x"
@@ -77,7 +76,6 @@
                     android:layout_marginRight="16dp"
                     android:background="@null"
                     android:contentDescription="@string/descripcion_icono_ver_certificados"
-                    android:src="?attr/iconoCardView"
                     android:tint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,8 +104,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/estiloCardViewPerfil">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -131,7 +128,6 @@
                     android:layout_marginRight="16dp"
                     android:background="@null"
                     android:contentDescription="@string/descripcion_icono_ver_certificados"
-                    android:src="?attr/iconoCardView"
                     android:tint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

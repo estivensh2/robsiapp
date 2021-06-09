@@ -25,45 +25,42 @@ import retrofit2.http.POST
 
 interface ApiService {
 
-    @POST("recuperarCategorias.php")
+    @POST("get_categories.php")
     suspend fun getCategories(): List<CategoryModel>
 
-    @POST("recuperarDatosExamen.php")
-    suspend fun getReview(): List<CategoryModel>
+    //@POST("get_review.php")
+    //suspend fun getReview(): List<CategoryModel>
 
-    @POST("recuperarSlider.php")
+    @POST("get_slider.php")
     suspend fun getSlider(): List<SliderModel>
 
     @FormUrlEncoded
-    @POST("recuperarDatosCursos.php")
+    @POST("get_courses.php")
     suspend fun getCourses(
-            @Field("idcategoria") id_category : String
+            @Field("id_category") id_category : String
     ): List<CoursesModel>
 
     @FormUrlEncoded
-    @POST("recuperarDiploma.php")
+    @POST("get_certificate.php")
     suspend fun getCertificate(
-            @Field("idusuario") idusuario:String
+            @Field("id_user") id_user:String
     ): List<CertificateModel>
 
-
-
     @FormUrlEncoded
-    @POST("recuperarDatosCursosDetalle.php")
+    @POST("get_courses_temary.php")
     suspend fun getCoursesTemary(
             @Field("idcurso")   idcurso   : String,
             @Field("idusuario") idusuario : String
     ): List<CoursesTemaryModel>
 
-
     @FormUrlEncoded
-    @POST("recuperarDatosUsuario.php")
+    @POST("get_user_data.php")
     suspend fun getInfoProfile (
-            @Field("id") id:String
+            @Field("id_user") id:String
     ) : Response<ProfileModel>
 
     @FormUrlEncoded
-    @POST("actualizarDatosUsuario.php")
+    @POST("update_user_data.php")
     suspend fun setInfoProfile (
             @Field("id") id:String,
             @Field("nombres") nombres:String,
@@ -73,63 +70,58 @@ interface ApiService {
     ) : Response<UpdateInfoModel>
 
     @FormUrlEncoded
-    @POST("cambiarClave.php")
+    @POST("change_password.php")
     suspend fun setPassword (
-            @Field("claveAccesoActual") claveactual:String,
-            @Field("claveAccesoNuevaConfirmada") actualconfirmada:String,
-            @Field("idusuario") idusuario:String
+            @Field("current_password") current_password:String,
+            @Field("new_password")     new_password:String,
+            @Field("id_user")          id_user:String
     ) : Response<UpdatePasswordModel>
 
     @FormUrlEncoded
-    @POST("iniciarSesion.php")
+    @POST("sign_in.php")
     suspend fun setSignIn (
-            @Field("correoElectronico") correo:String,
-            @Field("claveAcceso") clave:String
+            @Field("email")    email:String,
+            @Field("password") password:String
     ) : Response<SigninModel>
 
     @FormUrlEncoded
-    @POST("insertarOActualizarToken.php")
+    @POST("set_token.php")
     suspend fun setToken (
-            @Field("idusuario") idusuario:String,
-            @Field("idtoken") idtoken:String
+            @Field("id_user") id_user:String,
+            @Field("token") token:String
     ) : Response<InsertTokenModel>
 
 
-
     @FormUrlEncoded
-    @POST("registrarUsuario.php")
+    @POST("sign_up.php")
     suspend fun setSignUp (
-            @Field("nombres") nombres:String,
-            @Field("apellidos") apellidos:String,
-            @Field("correoElectronico") correo:String,
-            @Field("claveAcceso") clave:String
+            @Field("names") names:String,
+            @Field("last_names") last_names:String,
+            @Field("email") email:String,
+            @Field("password") password:String
     ) : Response<SignUpModel>
 
     @FormUrlEncoded
-    @POST("recuperarClave.php")
+    @POST("reset_password.php")
     suspend fun setResetPassword (
-            @Field("correoElectronico") correo:String
+            @Field("email") email:String
     ) : Response<ResetPasswordModel>
 
     @FormUrlEncoded
-    @POST("insertarDiploma.php")
+    @POST("insert_certificate.php")
     suspend fun setCertificate (
-            @Field("idusuario") idusuario:String,
-            @Field("idcurso") idcurso:String,
-            @Field("idcompletado") idcompletado:String
+            @Field("id_user") id_user:String,
+            @Field("id_course") id_course:String,
+            @Field("id_completed") id_completed:String
     ) : Response<InsertCertificateModel>
 
-
     @FormUrlEncoded
-    @POST("insertarHabilitado.php")
+    @POST("insert_progress.php")
     suspend fun setProgress (
-            @Field("idhabilitado") idhabilitado:String,
-            @Field("idcursodetalle") idcursodetalle:String,
-            @Field("idcurso") idcurso:String,
-            @Field("idusuario") idusuario:String
+            @Field("id_enabled") id_enabled:String,
+            @Field("id_details_course") id_details_course:String,
+            @Field("id_course") id_course:String,
+            @Field("id_user") id_user:String
     ) : Response<InsertProgressModel>
-
-
-
 
 }

@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun renderList(data: Response<InsertTokenModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
+        if (response.data == "1") {
             Log.d("token", "insertado")
         } else {
             Log.d("token", "actualizado")

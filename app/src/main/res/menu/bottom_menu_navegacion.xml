@@ -4,11 +4,11 @@
     <item
         android:title="inicio"
         android:id="@+id/inicio"
-        android:icon="@drawable/icono_inicio"/>
+        android:icon="@android:drawable/ic_menu_send"/>
 
     <item
         android:id="@+id/perfil"
-        android:icon="@drawable/icono_perfil"
+        android:icon="@android:drawable/ic_delete"
         android:title="perfil" />
 
 </menu>

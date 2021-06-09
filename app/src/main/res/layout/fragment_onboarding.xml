@@ -40,7 +40,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/finalizar"
         app:layout_constraintEnd_toStartOf="@+id/finalizar"
         app:layout_constraintStart_toEndOf="@+id/saltar"
-        app:tabBackground="@drawable/induccion_puntos"
         app:tabIndicator="@null">
 
     </com.google.android.material.tabs.TabLayout>

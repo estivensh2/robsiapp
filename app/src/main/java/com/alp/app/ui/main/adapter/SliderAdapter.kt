@@ -29,9 +29,9 @@ class SliderAdapter @Inject constructor(@ActivityContext val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = list[position]
         with(holder.binding){
-            tituloSlider.text = list.titulo
-            descripcionSlider.text = list.descripcion
-            Glide.with(context).load(list.imagen).into(imagenFondo)
+            tituloSlider.text = list.title
+            descripcionSlider.text = list.description
+            Glide.with(context).load(list.image).into(imagenFondo)
         }
     }
 

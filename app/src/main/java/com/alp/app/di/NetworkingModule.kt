@@ -35,7 +35,7 @@ object NetworkingModule {
 
     @Provides
     fun providesBaseUrl(): String {
-        return "https://alpapp.000webhostapp.com/webservices/modulos/webservices/"
+        return "http://estiven.tubarberia.co/webservices/modulos/webservices/"
     }
 
     @Provides

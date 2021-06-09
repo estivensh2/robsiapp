@@ -3,9 +3,9 @@ package com.alp.app.data.model
 import com.google.gson.annotations.SerializedName
 
 data class CategoryModel (
-    @SerializedName("id")           var id: String,
-    @SerializedName("nombre")       var nombre:String,
-    @SerializedName("descripcion")  var descripcion:String,
-    @SerializedName("icono")        var icono:String,
-    @SerializedName("nuevo")        var nuevo:String,
+        @SerializedName("id_category") var id_category : String,
+        @SerializedName("name")        var name        : String,
+        @SerializedName("description") var description : String,
+        @SerializedName("icon")        var icon        : String,
+        @SerializedName("new")         var new         : String,
 )

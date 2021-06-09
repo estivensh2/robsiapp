@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragmentx"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -22,7 +21,6 @@
         android:id="@+id/bottom_navegacion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/estiloFondoBottomNavegacion"
         android:tooltipText="@null"
         app:itemIconSize="40dp"
         app:labelVisibilityMode="unlabeled"

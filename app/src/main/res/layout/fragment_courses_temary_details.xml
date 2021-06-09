@@ -88,7 +88,6 @@
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/padding_cardview_curso_detalle"
                     android:paddingRight="@dimen/padding_cardview_curso_detalle"
-                    android:background="?attr/estiloCardViewCursosDetalleTemario"
                     tools:targetApi="lollipop">
 
                     <TextView

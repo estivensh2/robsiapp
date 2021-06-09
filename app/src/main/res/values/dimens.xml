@@ -27,5 +27,7 @@
     <dimen name="margin_filas_tablas">2dp</dimen>
     <dimen name="dimensiones_botones_iniciar">18sp</dimen>
     <dimen name="dimensiones_texto_olvidaste_tu_clave">20sp</dimen>
+    <dimen name="size_button_radius">25dp</dimen>
+    <dimen name="size_input_radius">30dp</dimen>
     <item name="dimensiones_letter_spacing" type="dimen" format="float">0.07</item>
 </resources>

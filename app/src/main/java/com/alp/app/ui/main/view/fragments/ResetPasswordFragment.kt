@@ -8,121 +8,93 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.model.ResetPasswordModel
 import com.alp.app.databinding.FragmentRecuperarClaveBinding
-import com.alp.app.singleton.ClaseToast
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
-import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class ResetPasswordFragment : Fragment() {
     private var _binding: FragmentRecuperarClaveBinding? = null
+    private lateinit var functions : Functions
     private val binding get() = _binding!!
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentRecuperarClaveBinding.inflate(layoutInflater, container, false)
-        binding.botonRecuperarClave.isEnabled = false
-        binding.botonRecuperarClave.setOnClickListener { setupShowData() }
-        binding.correoElectronico.onChange { habilitarBoton() }
-        binding.botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
-        binding.resultadoerror.visibility = View.GONE
-        Glide.with(contexto).load(R.drawable.saludando).into(binding.imagenRecuperarClave)
+        functions = Functions(contexto)
+        with(binding){
+            functions.enabledButton(false, btnResetPassword)
+            btnResetPassword.setOnClickListener { setupShowData() }
+            iEEmail.onChange { habilitarBoton() }
+        }
         return binding.root
     }
 
     private fun setupShowData() {
-        val correo = binding.correoElectronico.text.toString()
-        dashboardViewModel.setResetPassword(correo).observe(requireActivity(), Observer { response ->
+        val email = binding.iEEmail.text.toString()
+        dashboardViewModel.setResetPassword(email).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
     }
 
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
-    }
-
     private fun renderList(data: Response<ResetPasswordModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_correo_enviado), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+        if (response.data == "1") {
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_send_email), Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.accion_recuperar_a_iniciar_o_crear)
         } else {
-            binding.resultadoerror.visibility = View.VISIBLE
-            binding.resultadoerror.text = resources.getString(R.string.texto_corre_no_registrado)
+            binding.iLEmail.error = resources.getString(R.string.texto_corre_no_registrado)
         }
     }
 
     private fun habilitarBoton(){
         with(binding){
-            if (correoElectronico.length()>0){
-                botonRecuperarClave.isEnabled = true
-                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
+            if (iEEmail.length()>0){
+                functions.enabledButton(true, btnResetPassword)
             } else {
-                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
-                botonRecuperarClave.isEnabled = false
+                functions.enabledButton(false, btnResetPassword)
             }
-            if (!validarCorreo(correoElectronico.text.toString())){
-                correoElectronico.error =  resources.getString(R.string.texto_correo_invalido)
-                botonRecuperarClave.isEnabled = false
-                botonRecuperarClave.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
+            if (!functions.validarCorreo(iEEmail.text.toString())){
+                binding.iLEmail.error = resources.getString(R.string.texto_correo_invalido)
+                functions.enabledButton(false, btnResetPassword)
+            } else {
+                binding.iLEmail.error = ""
             }
         }
     }
 
-    private fun EditText.onChange(cb: (String) -> Unit) {
+    private fun TextInputEditText.onChange(cb: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-    }
-
-    private fun validarCorreo(email: String): Boolean {
-        return Pattern.compile(
-            "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                    + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                    + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                    + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
-        ).matcher(email).matches()
     }
 
     override fun onDestroyView() {
@@ -134,5 +106,4 @@ class ResetPasswordFragment : Fragment() {
         super.onAttach(context)
         this.contexto = context
     }
-
 }

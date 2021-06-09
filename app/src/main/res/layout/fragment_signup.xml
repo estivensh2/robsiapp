@@ -5,268 +5,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorFondo"
+    android:background="?attr/colorOnPrimary"
     tools:context=".ui.main.view.fragments.SignUpFragment">
 
-    <ImageView
-        android:id="@+id/imagenCrearCuenta"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:contentDescription="@string/descripcion_imagen_crear_cuenta"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/iLNames"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/saludando" />
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_goeb1fbr.json" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/iLNames"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_black"
-        android:text="@string/texto_nombres"
-        android:textColor="?attr/colorTextoLabel"
-        android:textSize="@dimen/dimensiones_labels"
-        app:layout_constraintBottom_toTopOf="@+id/nombres"
+        android:hint="@string/text_names"
+        app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+        app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+        app:layout_constraintBottom_toTopOf="@+id/iLLastNames"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <EditText
-        android:id="@+id/nombres"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/iENames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/iLLastNames"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/text_last_names"
+        app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+        app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+        app:layout_constraintBottom_toTopOf="@+id/iLEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/iELastNames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/iLEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/text_email"
+        app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+        app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+        app:layout_constraintBottom_toTopOf="@+id/iLPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/iEEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/iLPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="24dp"
+        android:hint="@string/text_password"
+        app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+        app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+        app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/iEPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="?attr/estiloCampoFormulario"
-        android:ems="10"
-        android:fontFamily="@font/nunito"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName|textCapWords"
-        android:textColor="?attr/colorTextoFormulario"
-        android:textCursorDrawable="?attr/colorCursorx"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/nunito_black"
-        android:text="@string/texto_apellidos"
-        android:textColor="?attr/colorTextoLabel"
-        android:textSize="@dimen/dimensiones_labels"
-        app:layout_constraintBottom_toTopOf="@+id/apellidos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/apellidos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="?attr/estiloCampoFormulario"
-        android:ems="10"
-        android:fontFamily="@font/nunito"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName|textCapWords"
-        android:textColor="?attr/colorTextoFormulario"
-        android:textCursorDrawable="?attr/colorCursorx"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_black"
-        android:text="@string/texto_correo_electronico"
-        android:textColor="?attr/colorTextoLabel"
-        android:textSize="@dimen/dimensiones_labels"
-        app:layout_constraintBottom_toTopOf="@+id/correoElectronico"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/correoElectronico"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:autofillHints="no"
-        android:background="?attr/estiloCampoFormulario"
-        android:ems="10"
-        android:fontFamily="@font/nunito"
-        android:inputType="textEmailAddress"
-        android:textColor="?attr/colorTextoFormulario"
-        android:textCursorDrawable="?attr/colorCursorx"
-        app:layout_constraintBottom_toTopOf="@+id/textView13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_black"
-        android:text="@string/texto_clave_acceso"
-        android:textColor="?attr/colorTextoLabel"
-        android:textSize="@dimen/dimensiones_labels"
-        app:layout_constraintBottom_toTopOf="@+id/claveAcceso"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/claveAcceso"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="?attr/estiloCampoFormulario"
-        android:ems="10"
-        android:fontFamily="@font/nunito"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textColor="?attr/colorTextoFormulario"
-        android:textCursorDrawable="?attr/colorCursorx"
-        app:layout_constraintBottom_toTopOf="@+id/resultadoerror"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="LabelFor" />
-
-    <TextView
-        android:id="@+id/resultadoerror"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/texto_prueba"
-        android:textColor="#9F0404"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/botonRegistrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/botonRegistrar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="32dp"
-        android:background="?attr/estiloGeneralBotonPrimario"
-        android:fontFamily="@font/nunito_black"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:letterSpacing="@dimen/dimensiones_letter_spacing"
         android:stateListAnimator="@null"
         android:text="@string/texto_registrarme"
-        android:textColor="?attr/colorSegundario"
         android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
+        app:cornerRadius="@dimen/size_button_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="lollipop" />
 
-
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView2"
+        android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/botonRegistrar"
-        app:layout_constraintEnd_toEndOf="@+id/botonRegistrar"
-        app:layout_constraintStart_toStartOf="@+id/botonRegistrar"
-        app:layout_constraintTop_toTopOf="@+id/botonRegistrar"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
-
-    <ToggleButton
-        android:id="@+id/mostrarClaveActual"
-        android:layout_width="38dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:background="?attr/estiloMostrarClave"
-        android:textOff="@string/texto_vacio_toggle"
-        android:textOn="@string/texto_vacio_toggle"
-        app:layout_constraintBottom_toBottomOf="@+id/claveAcceso"
-        app:layout_constraintEnd_toEndOf="@+id/claveAcceso"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/claveAcceso"
-        app:layout_constraintTop_toTopOf="@+id/claveAcceso" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorFondo"
+        android:background="?attr/colorOnPrimary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

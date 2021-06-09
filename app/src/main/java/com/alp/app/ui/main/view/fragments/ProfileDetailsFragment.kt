@@ -31,7 +31,6 @@ import com.alp.app.ui.main.view.activities.HomeActivity
 import com.alp.app.R
 import com.alp.app.data.model.UpdateInfoModel
 import com.alp.app.databinding.FragmentProfileDetailsBinding
-import com.alp.app.singleton.ClaseToast
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Status
@@ -39,6 +38,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
@@ -155,9 +155,9 @@ class ProfileDetailsFragment : Fragment() {
     private fun renderList(data: Response<UpdateInfoModel>) {
         val response = data.body()!!
         if (response.respuesta == "1") {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_datos_actualizados), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+            DynamicToast.makeSuccess(contexto, getString(R.string.texto_datos_actualizados), Toast.LENGTH_LONG).show()
         } else {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_error_datos), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+            DynamicToast.makeError(contexto, getString(R.string.texto_error_datos), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -267,7 +267,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private fun solicitarPermisosGaleria() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_activar_permisos), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+            DynamicToast.makeError(contexto, getString(R.string.texto_activar_permisos), Toast.LENGTH_LONG).show()
         } else {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), selectPhotoPermission)
         }
@@ -275,7 +275,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private fun solicitarPermisosCamara() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.CAMERA)) {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_activar_permisos), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+            DynamicToast.makeSuccess(contexto, getString(R.string.texto_activar_permisos), Toast.LENGTH_LONG).show()
         } else {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), codeCapturePhoto)
         }

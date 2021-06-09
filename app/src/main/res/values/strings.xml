@@ -9,7 +9,7 @@
     <string name="descripcion_imagen_crear_cuenta">imagen de iniciar o crear cuenta</string>
     <string name="texto_iniciar_sesion">iniciar sesión</string>
     <string name="texto_iniciar_facebook">iniciar con facebook</string>
-    <string name="texto_registrar_usuario">registrarme con correo</string>
+    <string name="texto_registrar_usuario">registrarme</string>
     <string name="texto_induccion_finalizar">finalizar</string>
     <string name="texto_induccion_saltar">saltar</string>
     <string name="descripcion_imagen_induccion">estas son las imagenes de induccion</string>
@@ -108,4 +108,12 @@
     <string name="texto_donar">DONAR</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_email">Correo electrónico</string>
+    <string name="text_password">Contraseña</string>
+    <string name="text_names">Nombres</string>
+    <string name="text_last_names">Apellidos</string>
+    <string name="text_current_password">Contrase;a actual</string>
+    <string name="text_new_password">Nueva contrase;a</string>
+    <string name="text_confirmed_new_password">Confirma tu nueva clave</string>
+    <string name="text_send_email">Correo electronico enviado</string>
 </resources>

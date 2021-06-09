@@ -31,20 +31,20 @@ class CoursesAdapter @Inject constructor(@ActivityContext val context: Context) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = list[position]
         with(holder.binding){
-            tituloCursox.text = list.nombre
+            tituloCursox.text = list.name
             if (nuevo.text==""){
                 nuevo.visibility = View.GONE
             } else {
                 nuevo.text = context.getString(R.string.texto_nuevo)
                 nuevo.visibility = View.VISIBLE
             }
-            Glide.with(context).load(list.imagen).into(iconoCursos)
+            Glide.with(context).load(list.image).into(iconoCursos)
         }
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            val id = list.id
-            val nombre = list.nombre
-            val icono = list.imagen
+            val id = list.id_course
+            val nombre = list.name
+            val icono = list.image
             bundle.putString("id", id)
             bundle.putString("nombre", nombre)
             bundle.putString("icono", icono)

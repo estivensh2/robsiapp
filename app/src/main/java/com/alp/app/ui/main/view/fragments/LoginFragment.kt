@@ -20,23 +20,14 @@ class LoginFragment : Fragment() {
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
         supportActionBar?.show()
         with(binding){
-            botonIniciarSesion.setOnClickListener    { iniciarSesion()      }
-            botonRegistrarCuenta.setOnClickListener  { crearCuenta()        }
-            botonFacebook.setOnClickListener         { iniciarConFacebook() }
+            botonIniciarSesion.setOnClickListener    {
+                findNavController().navigate(R.id.accion_iniciar_o_crear_a_iniciar_sesion)
+            }
+            botonRegistrarCuenta.setOnClickListener  {
+                findNavController().navigate(R.id.accion_iniciar_o_crear_a_registrarme)
+            }
         }
         return binding.root
-    }
-
-    private fun iniciarConFacebook() {
-
-    }
-
-    private fun iniciarSesion() {
-        findNavController().navigate(R.id.accion_iniciar_o_crear_a_iniciar_sesion)
-    }
-
-    private fun crearCuenta() {
-        findNavController().navigate(R.id.accion_iniciar_o_crear_a_registrarme)
     }
 
     override fun onDestroyView() {

@@ -3,8 +3,8 @@ package com.alp.app.data.model
 import com.google.gson.annotations.SerializedName
 
 data class CoursesModel (
-    @SerializedName("id")     var id: String,
-    @SerializedName("nombre") var nombre:String,
-    @SerializedName("imagen") var imagen:String,
-    @SerializedName("idnuevo") var nuevo:String
+        @SerializedName("id_course") var id_course: String,
+        @SerializedName("name")      var name:String,
+        @SerializedName("image")     var image:String,
+        @SerializedName("new")       var new:String
 )

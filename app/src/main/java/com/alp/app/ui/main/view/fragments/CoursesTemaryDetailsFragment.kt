@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,7 +22,6 @@ import com.alp.app.R
 import com.alp.app.data.model.InsertCertificateModel
 import com.alp.app.data.model.InsertProgressModel
 import com.alp.app.databinding.FragmentCoursesTemaryDetailsBinding
-import com.alp.app.singleton.ClaseToast
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Status
@@ -29,6 +29,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.kbiakov.codeview.adapters.Options
 import io.github.kbiakov.codeview.highlight.ColorTheme
@@ -166,19 +167,19 @@ class CoursesTemaryDetailsFragment : Fragment() {
 
     private fun renderList(data: Response<InsertCertificateModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
+        if (response.data == "1") {
             mostrarBottomSheet()
         } else {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_diploma_activo), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+            DynamicToast.makeSuccess(contexto, getString(R.string.texto_diploma_activo), Toast.LENGTH_LONG).show()
         }
     }
 
     private fun renderProgress(data: Response<InsertProgressModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
+        if (response.data == "1") {
             mostrarBottomSheetx()
         } else {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_error_completado_anteriormente), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+            DynamicToast.makeError(contexto, getString(R.string.texto_error_completado_anteriormente), Toast.LENGTH_LONG).show()
         }
     }
 

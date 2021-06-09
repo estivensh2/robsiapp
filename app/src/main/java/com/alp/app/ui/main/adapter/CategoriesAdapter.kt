@@ -31,21 +31,21 @@ class CategoriesAdapter @Inject constructor(@ActivityContext val context: Contex
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = list[position]
         with(holder.binding){
-            tituloCurso.text = list.nombre
+            tituloCurso.text = list.name
             if (nuevo.text==""){
                 nuevo.visibility = View.GONE
             } else {
                 nuevo.text = context.getString(R.string.texto_nuevo)
                 nuevo.visibility = View.VISIBLE
             }
-            descripcionCurso.text = list.descripcion
-            Glide.with(context).load(list.icono).into(iconoCursos)
+            descripcionCurso.text = list.description
+            Glide.with(context).load(list.icon).into(iconoCursos)
         }
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            val id = list.id
-            val nombre = list.nombre
-            val icono = list.icono
+            val id = list.id_category
+            val nombre = list.name
+            val icono = list.icon
             bundle.putString("id", id)
             bundle.putString("nombre", nombre)
             bundle.putString("icono", icono)

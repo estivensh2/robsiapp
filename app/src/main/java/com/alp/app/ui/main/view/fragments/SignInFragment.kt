@@ -4,14 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -21,13 +18,12 @@ import com.alp.app.data.model.SigninModel
 import com.alp.app.databinding.FragmentSigninBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
-import java.util.regex.Pattern
-
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
@@ -36,116 +32,81 @@ class SignInFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private lateinit var functions: Functions
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSigninBinding.inflate(layoutInflater, container, false)
         PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
+        functions = Functions(contexto)
         with(binding){
-            Glide.with(contexto).load(R.drawable.saludando).into(imagenIniciarSesion)
-            botonIngresar.isEnabled = false
-            botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
-            botonIngresar.setOnClickListener { setupShowData() }
-            correoElectronico.onChange       { habilitarBoton() }
-            claveAcceso.onChange             { habilitarBoton() }
-            mostrarClaveActual.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) claveAcceso.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                else claveAcceso.transformationMethod = PasswordTransformationMethod.getInstance()
-            }
-            botonRecuperarClave.setOnClickListener { v -> Navigation.findNavController(v).navigate(R.id.accion_iniciar_sesion_a_recuperar_clave) }
+            functions.enabledButton(false, binding.btnSignIn)
+            btnSignIn.setOnClickListener { setupShowData() }
+            iEEmail.onChange     { habilitarBoton() }
+            iEPassword.onChange  { habilitarBoton() }
+            btnResetPassword.setOnClickListener { v -> Navigation.findNavController(v).navigate(R.id.accion_iniciar_sesion_a_recuperar_clave) }
         }
-
         return binding.root
     }
 
     private fun setupShowData() {
-        val correo = binding.correoElectronico.text.toString()
-        val clave = binding.claveAcceso.text.toString()
-        dashboardViewModel.setSignIn(correo, clave).observe(requireActivity(), Observer { response ->
+        val email    = binding.iEEmail.text.toString()
+        val password = binding.iEPassword.text.toString()
+        dashboardViewModel.setSignIn(email, password).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
+                        DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
     }
 
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
-    }
-
     private fun renderList(data: Response<SigninModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
-            PreferencesSingleton.escribir("id", response.id)
+        if (response.data == "1") {
+            PreferencesSingleton.escribir("id", response.id_user)
             PreferencesSingleton.escribir("sesionActiva", true)
             findNavController().navigate(R.id.accion_iniciar_a_navegacion_principal)
             activity?.finish()
         } else {
             with(binding){
-                resultadoerror.visibility = View.VISIBLE
-                botonIngresar.text = resources.getString(R.string.texto_ingresar)
-                resultadoerror.text = resources.getString(R.string.texto_datos_incorrectos)
+                btnSignIn.text = resources.getString(R.string.texto_ingresar)
+                DynamicToast.makeError(contexto, resources.getString(R.string.texto_datos_incorrectos), Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun habilitarBoton(){
         with(binding){
-            if (correoElectronico.length()>0 && claveAcceso.length()>0 ){
-                botonIngresar.isEnabled = true
-                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
+            if (iEEmail.length()>0 && iEPassword.length()>0 ){
+                functions.enabledButton(true, btnSignIn)
             } else {
-                botonIngresar.isEnabled = false
-                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
+                functions.enabledButton(false, btnSignIn)
             }
-            if (!validarCorreo(correoElectronico.text.toString())){
-                botonIngresar.isEnabled = false
-                resultadoerror.visibility = View.VISIBLE
-                resultadoerror.text = resources.getString(R.string.texto_correo_invalido)
-                botonIngresar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
+            if (!functions.validarCorreo(iEEmail.text.toString())){
+                iLEmail.error = resources.getString(R.string.texto_correo_invalido)
+                functions.enabledButton(false, btnSignIn)
             } else {
-                resultadoerror.visibility = View.GONE
+                iLEmail.error = ""
             }
         }
     }
 
-    private fun EditText.onChange(cb: (String) -> Unit) {
+    private fun TextInputEditText.onChange(cb: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-    }
-
-    private fun validarCorreo(email: String): Boolean {
-        return Pattern.compile(
-            "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                    + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                    + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                    + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
-        ).matcher(email).matches()
     }
 
     override fun onDestroyView() {
@@ -157,5 +118,4 @@ class SignInFragment : Fragment() {
         super.onAttach(context)
         this.contexto = context
     }
-
 }

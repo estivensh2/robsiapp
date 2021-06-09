@@ -4,13 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,114 +16,88 @@ import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.model.SignUpModel
 import com.alp.app.databinding.FragmentSignupBinding
-import com.alp.app.singleton.ClaseToast
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
-import java.util.regex.Pattern
-
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var contexto: Context
+    private lateinit var functions: Functions
     private var _binding : FragmentSignupBinding? = null
     private val binding get() = _binding!!
     private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSignupBinding.inflate(layoutInflater, container, false)
+        functions = Functions(contexto)
         with(binding){
-            Glide.with(contexto).load(R.drawable.saludando).into(imagenCrearCuenta)
-            botonRegistrar.isEnabled = false
-            botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
-            botonRegistrar.setOnClickListener { setupShowData() }
-            nombres.onChange { habilitarBoton() }
-            apellidos.onChange { habilitarBoton() }
-            correoElectronico.onChange { habilitarBoton() }
-            claveAcceso.onChange { habilitarBoton() }
-            mostrarClaveActual.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) claveAcceso.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                else claveAcceso.transformationMethod = PasswordTransformationMethod.getInstance()
-            }
+            functions.enabledButton(false, btnSignUp)
+            btnSignUp.setOnClickListener { setupShowData() }
+            iENames.onChange     { habilitarBoton() }
+            iELastNames.onChange { habilitarBoton() }
+            iEEmail.onChange     { habilitarBoton() }
+            iEPassword.onChange  { habilitarBoton() }
         }
         return binding.root
     }
 
     private fun setupShowData() {
-        val nombres = binding.nombres.text.toString()
-        val apellidos = binding.apellidos.text.toString()
-        val correo = binding.correoElectronico.text.toString()
-        val clave = binding.claveAcceso.text.toString()
+        val nombres = binding.iENames.text.toString()
+        val apellidos = binding.iELastNames.text.toString()
+        val correo = binding.iEEmail.text.toString()
+        val clave = binding.iEPassword.text.toString()
         dashboardViewModel.setSignUp(nombres, apellidos, correo, clave).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
     }
 
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
-    }
-
     private fun renderList(data: Response<SignUpModel>) {
         val response = data.body()!!
-        if (response.respuestax == "1") {
-            ClaseToast.mostrarx(contexto, "Usuario registrado correctamente", ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
+        if (response.data == "1") {
+            DynamicToast.makeSuccess(contexto, "usuario registrado correctamente", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.accion_registrar_a_iniciar_sesion)
         } else {
             with(binding){
-                resultadoerror.visibility = View.VISIBLE
-                botonRegistrar.text = resources.getString(R.string.texto_registrarme)
-                resultadoerror.text = resources.getString(R.string.texto_correo_existente)
+                btnSignUp.text = resources.getString(R.string.texto_registrarme)
+                DynamicToast.makeError(contexto, resources.getString(R.string.texto_correo_existente), Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun habilitarBoton(){
         with(binding){
-            if (nombres.length()>0 &&
-                apellidos.length()>0 &&
-                correoElectronico.length()>0 &&
-                claveAcceso.length()>0 && validarCorreo(correoElectronico.text.toString())){ // validamos que los campos sean mayor a vacio y correo sea valido para habilitar el boton
-                botonRegistrar.isEnabled = true
-                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorAmarilloClaro))
+            if (iENames.length()>0 &&
+                iELastNames.length()>0 &&
+                iEEmail.length()>0 &&
+                iEPassword.length()>0 && functions.validarCorreo(iEEmail.text.toString())){ // validamos que los campos sean mayor a vacio y correo sea valido para habilitar el boton
+                functions.enabledButton(true, btnSignUp)
             } else {
-                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
-                botonRegistrar.isEnabled = false
+                functions.enabledButton(false, btnSignUp)
             }
-            if (!validarCorreo(correoElectronico.text.toString())){
-                botonRegistrar.isEnabled = false
-                resultadoerror.visibility = View.VISIBLE
-                resultadoerror.text = resources.getString(R.string.texto_correo_invalido)
-                botonRegistrar.setTextColor(ContextCompat.getColor(contexto, R.color.colorGrisClaroMedio))
+            if (!functions.validarCorreo(iEEmail.text.toString())){
+                functions.enabledButton(false, btnSignUp)
+                iLEmail.error = resources.getString(R.string.texto_correo_invalido)
             } else {
-                resultadoerror.visibility = View.GONE
+                iLEmail.error = ""
             }
         }
     }
@@ -138,17 +110,6 @@ class SignUpFragment : Fragment() {
         })
     }
 
-    private fun validarCorreo(email: String): Boolean {
-        return Pattern.compile(
-            "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                    + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                    + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                    + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
-        ).matcher(email).matches()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -158,5 +119,4 @@ class SignUpFragment : Fragment() {
         super.onAttach(context)
         this.contexto = context
     }
-
 }

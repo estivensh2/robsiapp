@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fondo_categoriasx"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentPadding="8dp"
-    app:cardBackgroundColor="?attr/colorFondo"
     app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
-    app:cardElevation="0dp"
-    app:cardUseCompatPadding="false"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -18,7 +15,6 @@
         android:id="@+id/fondo_categorias"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="?attr/estiloCardViewCursos"
         android:paddingLeft="@dimen/padding_cardview_curso_detalle"
         android:paddingRight="@dimen/padding_cardview_curso_detalle"
         android:stateListAnimator="@null"
@@ -74,4 +70,4 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SmallSp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

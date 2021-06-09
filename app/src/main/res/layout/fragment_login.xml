@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorFondo"
+    android:background="?attr/colorOnPrimary"
     tools:context=".ui.main.view.fragments.LoginFragment">
 
     <ImageView
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@drawable/saludando" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/botonIniciarSesion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,21 +31,22 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
-        android:background="?attr/estiloGeneralBotonSegundario"
         android:clickable="false"
         android:fontFamily="@font/nunito_black"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:letterSpacing="@dimen/dimensiones_letter_spacing"
         android:stateListAnimator="@null"
         android:text="@string/texto_iniciar_sesion"
-        android:textColor="@color/colorAzulOscuro"
         android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
+        app:cornerRadius="@dimen/size_button_radius"
         app:layout_constraintBottom_toTopOf="@+id/botonRegistrarCuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="lollipop" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/botonRegistrarCuenta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -53,39 +54,15 @@
         android:layout_marginLeft="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="?attr/estiloGeneralBotonPrimario"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/nunito_black"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:letterSpacing="@dimen/dimensiones_letter_spacing"
         android:stateListAnimator="@null"
         android:text="@string/texto_registrar_usuario"
-        android:textColor="?attr/colorSegundario"
         android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
-        android:letterSpacing="@dimen/dimensiones_letter_spacing"
-        app:layout_constraintBottom_toTopOf="@+id/botonFacebook"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="lollipop" />
-
-    <Button
-        android:id="@+id/botonFacebook"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="32dp"
-        android:background="?attr/estiloGeneralBotonFacebook"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/nunito_black"
-        android:letterSpacing="@dimen/dimensiones_letter_spacing"
-        android:stateListAnimator="@null"
-        android:text="@string/texto_iniciar_facebook"
-        android:textAllCaps="true"
-        android:textColor="?attr/colorPrimario"
-        android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
-        android:visibility="gone"
+        app:cornerRadius="@dimen/size_button_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

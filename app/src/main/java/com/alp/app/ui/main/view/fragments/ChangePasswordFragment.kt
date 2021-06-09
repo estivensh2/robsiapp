@@ -4,12 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.*
-import android.widget.EditText
-import android.widget.ToggleButton
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -17,11 +13,12 @@ import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.model.UpdatePasswordModel
 import com.alp.app.databinding.FragmentChangePasswordBinding
-import com.alp.app.singleton.ClaseToast
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
 
@@ -29,78 +26,49 @@ import retrofit2.Response
 class ChangePasswordFragment : Fragment() {
 
     private var _binding: FragmentChangePasswordBinding? = null
+    private lateinit var functions: Functions
     private val binding get() = _binding!!
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
+        functions = Functions(contexto)
         setHasOptionsMenu(true)
-        with(binding){
-            resultadoerror.visibility = View.GONE
-            mostrarClave(mostrarClaveActual, claveAccesoActual)
-            mostrarClave(mostrarClaveNueva, claveAccesoNueva)
-            mostrarClave(mostrarClaveNuevaConfirmada, claveAccesoNuevaConfirmada)
-        }
         return binding.root
     }
 
     private fun setupShowData() {
-        val actualPassword = binding.claveAccesoActual.text.toString()
-        val newPassword = binding.claveAccesoNuevaConfirmada.text.toString()
+        val actualPassword = binding.iECurrentPassword.text.toString()
+        val newPassword = binding.iEConfirmedNewPassword.text.toString()
         dashboardViewModel.setPassword(actualPassword, newPassword , PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
     }
 
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
-    }
-
     private fun renderList(data: Response<UpdatePasswordModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
-            ClaseToast.mostrarx(contexto, getString(R.string.texto_clave_cambiada), ContextCompat.getColor(contexto, R.color.colorGrisOscuro), R.drawable.exclamacion)
-            with(binding) {
-                claveAccesoNueva.setText("")
-                claveAccesoActual.setText("")
-                claveAccesoNuevaConfirmada.setText("")
-                findNavController().navigate(R.id.accion_cambiar_clave_a_perfil)
-            }
+        if (response.data == "1") {
+            DynamicToast.makeSuccess(contexto, getString(R.string.texto_clave_cambiada), Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.accion_cambiar_clave_a_perfil)
         } else {
-            activity?.runOnUiThread {
-                with(binding){
-                    resultadoerror.visibility = View.VISIBLE
-                    resultadoerror.text = resources.getString(R.string.texto_clave_incorrecta)
-                }
-            }
+            DynamicToast.makeError(contexto, resources.getString(R.string.texto_clave_incorrecta), Toast.LENGTH_LONG).show()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -117,50 +85,35 @@ class ChangePasswordFragment : Fragment() {
         val item = menu.findItem(R.id.cambiar_clave)
         item.isVisible = false
         with(binding){
-            claveAccesoNueva.onChange           { habilitarBoton(item) }
-            claveAccesoActual.onChange          { habilitarBoton(item) }
-            claveAccesoNuevaConfirmada.onChange { habilitarBoton(item) }
+            iECurrentPassword.onChange           { habilitarBoton(item) }
+            iENewPassword.onChange          { habilitarBoton(item) }
+            iEConfirmedNewPassword.onChange { habilitarBoton(item) }
         }
         super.onPrepareOptionsMenu(menu)
     }
 
     private fun habilitarBoton(item: MenuItem) {
         with(binding){
-            if (claveAccesoActual.length()>0){
-                if (claveAccesoNueva.length()>0 && claveAccesoNuevaConfirmada.length()>0){
-                    if (claveAccesoNueva.length()<6 && claveAccesoNuevaConfirmada.length()<6){
-                        resultadoerror.visibility = View.VISIBLE
-                        resultadoerror.text = resources.getString(R.string.texto_clave_minimo)
-                    } else if (claveAccesoNueva.text.toString()!=claveAccesoNuevaConfirmada.text.toString()){
-                        resultadoerror.visibility = View.VISIBLE
-                        resultadoerror.text = resources.getString(R.string.texto_claves_no_coinciden)
+            if (iECurrentPassword.length()>0){
+                if (iENewPassword.length()>0 && iEConfirmedNewPassword.length()>0){
+                    if (iENewPassword.length()<6 && iEConfirmedNewPassword.length()<6){
+                        DynamicToast.makeError(contexto, resources.getString(R.string.texto_clave_minimo), Toast.LENGTH_LONG).show()
+                    } else if (iENewPassword.text.toString()!=iEConfirmedNewPassword.text.toString()){
+                        DynamicToast.makeError(contexto, resources.getString(R.string.texto_claves_no_coinciden), Toast.LENGTH_LONG).show()
                         item.isVisible = false
                     } else {
-                        resultadoerror.visibility = View.GONE
                         item.isVisible = true
                     }
                 } else {
-                    resultadoerror.visibility = View.GONE
                     item.isVisible = false
                 }
             } else {
-                resultadoerror.visibility = View.GONE
                 item.isVisible = false
             }
         }
     }
 
-    private fun mostrarClave(boton: ToggleButton, campo: EditText){
-        boton.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
-                campo.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            } else {
-                campo.transformationMethod = PasswordTransformationMethod.getInstance()
-            }
-        }
-    }
-
-    private fun EditText.onChange(cb: (String) -> Unit) {
+    private fun TextInputEditText.onChange(cb: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
