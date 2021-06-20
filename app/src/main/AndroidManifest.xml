@@ -17,7 +17,7 @@
         android:fullBackupContent="@xml/backup_respaldo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ALP2"
+        android:theme="@style/Theme.ALP"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
@@ -37,7 +37,7 @@
             android:resource="@drawable/logobienvenida" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAzulClaro" />
+            android:resource="@color/blue_700" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />

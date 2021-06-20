@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="estiloSwitch">
-        <attr name="estiloSwitchThumb" format="reference"/>
-        <attr name="estiloSwitchTrack" format="reference"/>
-    </declare-styleable>
-</resources>

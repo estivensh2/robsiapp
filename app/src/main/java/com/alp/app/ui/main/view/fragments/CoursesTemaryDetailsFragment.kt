@@ -14,117 +14,102 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.alp.app.R
+import com.alp.app.data.model.CoursesTemaryDetailsModel
 import com.alp.app.data.model.InsertCertificateModel
 import com.alp.app.data.model.InsertProgressModel
 import com.alp.app.databinding.FragmentCoursesTemaryDetailsBinding
 import com.alp.app.singleton.PreferencesSingleton
+import com.alp.app.ui.main.adapter.CoursesTemaryAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.kbiakov.codeview.adapters.Options
 import io.github.kbiakov.codeview.highlight.ColorTheme
 import retrofit2.Response
-
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CoursesTemaryDetailsFragment : Fragment() {
 
     private var _binding: FragmentCoursesTemaryDetailsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var id : String
+    var id_course_details : Int = 0
+    var idcurso : Int = 0
     private lateinit var total : String
-    private lateinit var idcurso : String
     private lateinit var contexto: Context
-    private lateinit var ultimoelemento : String
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private lateinit var functions: Functions
+    @Inject
+    lateinit var coursesTemaryAdapter: CoursesTemaryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCoursesTemaryDetailsBinding.inflate(inflater, container, false)
+        functions = Functions(contexto)
         PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
+        val args: CoursesTemaryDetailsFragmentArgs by navArgs()
         val bundle = this.arguments
         if (bundle != null) {
-            id = bundle.getString("id", "no")
-            idcurso = bundle.getString("idcurso", "no")
+            id_course_details = bundle.getInt("id", 0)
+            idcurso = bundle.getInt("idcurso", 0)
             total = bundle.getString("total", "no")
-            ultimoelemento = bundle.getString("ultimoelemento", "no")
-            val nombre = bundle.getString("nombre", "no")
-            val descripcion = bundle.getString("descripcion", "no")
-            val tipolenguaje = bundle.getString("tipolenguaje", "no")
-            val codigo = bundle.getString("codigo", "no")
-            val imgresultado = bundle.getString("imgresultado", "no")
-            binding.tituloTemario.text = nombre
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                binding.descripcionTemario.setText(Html.fromHtml(descripcion, Html.FROM_HTML_MODE_COMPACT))
+            if (args.idCourseDetails!=0){
+                id_course_details = args.idCourseDetails
             }
-            if (!imgresultado.contains(".PNG")){
-                binding.textoResultado.visibility = View.GONE
-                binding.contenedorimagen.visibility = View.GONE
-            } else {
-                binding.textoResultado.visibility = View.VISIBLE
-                binding.contenedorimagen.visibility = View.VISIBLE
-                Glide.with(contexto).load(imgresultado).signature(ObjectKey(System.currentTimeMillis())).into(binding.imgresultado)
-            }
-            if (descripcion.isEmpty()){
-                binding.fondoDescripcionTemario.visibility = View.GONE
-                binding.fondoDescripcionTemario.visibility = View.GONE
-            } else {
-                binding.fondoDescripcionTemario.visibility = View.VISIBLE
-            }
-            if (codigo.isEmpty()){
-                binding.linearLayout2.visibility = View.GONE
-                binding.codeView.visibility = View.GONE
-            } else {
-                binding.linearLayout2.visibility = View.VISIBLE
-                binding.codeView.visibility = View.VISIBLE
-                binding.codeView.setOptions(
-                    Options.Default.get(requireContext())
-                        .withLanguage(tipolenguaje)
-                        .withCode(codigo)
-                        .withTheme(ColorTheme.MONOKAI)
-                )
+            if(args.idCourse!=0){
+                idcurso = args.idCourse
             }
         }
         binding.imgresultado.setOnClickListener { mostrarImagen() }
-        binding.completar.setOnClickListener {
-            if (PreferencesSingleton.leer("idsonidos", false)==true){
-                val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
-                mediaPlayer.start()
-            }
-            if (total==ultimoelemento){
-                insertCertificate()
-            } else {
-                insertProgress()
-                //realizarExamen()
-            }
-        }
+        getDetailsTemary()
         return binding.root
     }
 
-
-    private fun insertProgress() {
-        dashboardViewModel.setProgress("1", id, idcurso, PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
+    private fun getDetailsTemary() {
+        dashboardViewModel.getDetailsTemary(id_course_details, idcurso, PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
+                        resource.data?.let { data -> renderTemary(data) }
+                    }
+                    Status.ERROR   -> {
+                        functions.showHideProgressBar(false, binding.progress)
+                        DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun insertProgress() {
+        dashboardViewModel.setProgress(1, id_course_details, idcurso, PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
+            response?.let { resource ->
+                when(resource.status){
+                    Status.SUCCESS -> {
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderProgress(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
+                        DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
@@ -136,33 +121,19 @@ class CoursesTemaryDetailsFragment : Fragment() {
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
+                        DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
-    }
-
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
     }
 
     private fun renderList(data: Response<InsertCertificateModel>) {
@@ -174,10 +145,65 @@ class CoursesTemaryDetailsFragment : Fragment() {
         }
     }
 
+    private fun renderTemary(data: Response<CoursesTemaryDetailsModel>) {
+        val response = data.body()!!
+        if (response.data == "1") {
+            with(binding){
+                tituloTemario.text = response.name
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    descripcionTemario.text = Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
+                }
+                if (response.description.isEmpty()){
+                    fondoDescripcionTemario.visibility = View.GONE
+                } else {
+                    fondoDescripcionTemario.visibility = View.VISIBLE
+                }
+
+
+                if (response.code.isEmpty()){
+                    binding.linearLayout2.visibility = View.GONE
+                    binding.codeView.visibility = View.GONE
+                } else {
+                    binding.linearLayout2.visibility = View.VISIBLE
+                    binding.codeView.visibility = View.VISIBLE
+                    binding.codeView.setOptions(
+                        Options.Default.get(requireContext())
+                            .withLanguage(response.type_language)
+                            .withCode(response.code)
+                            .withTheme(ColorTheme.MONOKAI)
+                    )
+                }
+                if (!response.image.contains(".PNG")){
+                    binding.textoResultado.visibility = View.GONE
+                    binding.contenedorimagen.visibility = View.GONE
+                } else {
+                    binding.textoResultado.visibility = View.VISIBLE
+                    binding.contenedorimagen.visibility = View.VISIBLE
+                    Glide.with(contexto).load(response.image).signature(ObjectKey(System.currentTimeMillis())).into(binding.imgresultado)
+                }
+                btnNext.setOnClickListener {
+                    if (PreferencesSingleton.leer("idsonidos", false)==true){
+                        val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
+                        mediaPlayer.start()
+                    }
+                    if (id_course_details == response.total){
+                        //Toast.makeText(contexto, "Si", Toast.LENGTH_SHORT).show()
+                        it.findNavController().navigate(R.id.action_inicioCursosDetalleTemarioFragment_to_coursesReviewFragment)
+                        //insertCertificate()
+                    } else {
+                        insertProgress()
+                        val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentSelf(id_course_details+1, idcurso)
+                        it.findNavController().navigate(action)
+                    }
+                }
+            }
+        }
+    }
+
     private fun renderProgress(data: Response<InsertProgressModel>) {
         val response = data.body()!!
         if (response.data == "1") {
-            mostrarBottomSheetx()
+            DynamicToast.makeError(contexto, "ya", Toast.LENGTH_LONG).show()
         } else {
             DynamicToast.makeError(contexto, getString(R.string.texto_error_completado_anteriormente), Toast.LENGTH_LONG).show()
         }
@@ -208,13 +234,6 @@ class CoursesTemaryDetailsFragment : Fragment() {
             findNavController().navigate(R.id.accion_inicio_cursos_detalle_a_diplomados)
             dialogo.dismiss()
         }
-    }
-
-    private fun mostrarBottomSheetx() {
-        val view = layoutInflater.inflate(R.layout.ventana_temario_completado, null)
-        val dialogo = BottomSheetDialog(contexto)
-        dialogo.setContentView(view)
-        dialogo.show()
     }
 
     override fun onDestroyView() {

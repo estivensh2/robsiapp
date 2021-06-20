@@ -92,7 +92,7 @@ class SignInFragment : Fragment() {
             } else {
                 functions.enabledButton(false, btnSignIn)
             }
-            if (!functions.validarCorreo(iEEmail.text.toString())){
+            if (!functions.validateEmail(iEEmail.text.toString())){
                 iLEmail.error = resources.getString(R.string.texto_correo_invalido)
                 functions.enabledButton(false, btnSignIn)
             } else {

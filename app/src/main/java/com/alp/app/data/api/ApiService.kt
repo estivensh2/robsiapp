@@ -28,8 +28,11 @@ interface ApiService {
     @POST("get_categories.php")
     suspend fun getCategories(): List<CategoryModel>
 
-    //@POST("get_review.php")
-    //suspend fun getReview(): List<CategoryModel>
+    @FormUrlEncoded
+    @POST("get_review.php")
+    suspend fun getReview(
+            @Field("id_course") id_course : Int
+    ): Response<ReviewModel>
 
     @POST("get_slider.php")
     suspend fun getSlider(): List<SliderModel>
@@ -111,17 +114,25 @@ interface ApiService {
     @POST("insert_certificate.php")
     suspend fun setCertificate (
             @Field("id_user") id_user:String,
-            @Field("id_course") id_course:String,
+            @Field("id_course") id_course:Int,
             @Field("id_completed") id_completed:String
     ) : Response<InsertCertificateModel>
 
     @FormUrlEncoded
-    @POST("insert_progress.php")
+    @POST("set_progress.php")
     suspend fun setProgress (
-            @Field("id_enabled") id_enabled:String,
-            @Field("id_details_course") id_details_course:String,
-            @Field("id_course") id_course:String,
+            @Field("id_enabled") id_enabled:Int,
+            @Field("id_details_course") id_details_course:Int,
+            @Field("id_course") id_course:Int,
             @Field("id_user") id_user:String
     ) : Response<InsertProgressModel>
+
+    @FormUrlEncoded
+    @POST("get_courses_temary_details.php")
+    suspend fun getDetailsTemary (
+        @Field("id_course_temary") id_course_temary :Int,
+        @Field("id_course") id_course :Int,
+        @Field("id_user") id_user :String
+    ) : Response<CoursesTemaryDetailsModel>
 
 }

@@ -2,6 +2,7 @@ package com.alp.app.data.repository
 
 import com.alp.app.data.api.ApiService
 import com.alp.app.data.model.*
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.FormUrlEncoded
 import javax.inject.Inject
@@ -39,12 +40,20 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.setToken(idusuario, idtoken)
     }
 
-    suspend fun setCertificate(idusuario : String ,idcurso: String, idcompletado: String) : Response<InsertCertificateModel> {
+    suspend fun setCertificate(idusuario : String ,idcurso: Int, idcompletado: String) : Response<InsertCertificateModel> {
         return apiService.setCertificate(idusuario, idcurso, idcompletado)
     }
 
-    suspend fun setProgress(idhabilitado : String ,idcursodetalle: String, idcurso: String, idusuario: String) : Response<InsertProgressModel> {
-        return apiService.setProgress(idhabilitado, idcursodetalle,idcurso,idusuario)
+    suspend fun getReview(id_course: Int) : Response<ReviewModel> {
+        return apiService.getReview(id_course)
+    }
+
+    suspend fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: String) : Response<InsertProgressModel> {
+        return apiService.setProgress(id_enabled, id_course_temary,id_course,id_user)
+    }
+
+    suspend fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: String) : Response<CoursesTemaryDetailsModel> {
+        return apiService.getDetailsTemary(id_course_temary, id_course, id_user)
     }
 
     suspend fun setSignUp(nombres: String, apellidos: String, correo: String, clave: String) : Response<SignUpModel> {

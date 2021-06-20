@@ -7,6 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorBordeCampoFormularioOscuro">#B1B1B1</color>
-    <color name="colorRojoOscuro">#9F0404</color>
+    <color name="yellow_500">#FEBE0A</color>
+    <color name="yellow_700">#C18F01</color>
+    <color name="blue_700">#001363</color>
+    <color name="blue_900">#010F49</color>
+    <color name="gray">#202020</color>
+    <color name="green_200">#04DA0E</color>
+    <color name="green_500">#019308</color>
 </resources>

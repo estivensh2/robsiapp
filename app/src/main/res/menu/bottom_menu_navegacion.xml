@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:iconTint="?attr/colorOnSecondary"
+        android:title="@string/text_home"
+        android:id="@+id/home"
+        android:icon="@drawable/ic_round_home_24"/>
 
     <item
-        android:title="inicio"
-        android:id="@+id/inicio"
-        android:icon="@android:drawable/ic_menu_send"/>
-
-    <item
-        android:id="@+id/perfil"
-        android:icon="@android:drawable/ic_delete"
-        android:title="perfil" />
-
+        android:iconTint="?attr/colorOnSecondary"
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_round_person_24"
+        android:title="@string/text_profile"/>
 </menu>

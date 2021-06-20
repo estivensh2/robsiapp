@@ -36,11 +36,11 @@ class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Con
                 list.habilitado = "1"
             }
             if (list.habilitado == "1"){
-                Glide.with(context).load(R.drawable.iniciar).into(iconoCursos)
+                Glide.with(context).load(R.drawable.unlocked).into(iconoCursos)
                 cardViewCursosDetalle.isEnabled = true
             } else {
-                iconoCursos.setBackgroundResource(R.drawable.candado)
-                cardViewCursosDetalle.isEnabled = false
+                Glide.with(context).load(R.drawable.locked).into(iconoCursos)
+                //cardViewCursosDetalle.isEnabled = false
             }
         }
         holder.itemView.setOnClickListener {
@@ -53,8 +53,8 @@ class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Con
             val codigo = list.codigo
             val tipolenguaje = list.tipolenguaje
             val imgresultado = list.imgresultado
-            bundle.putString("id", id)
-            bundle.putString("idcurso", idcurso)
+            bundle.putInt("id", id)
+            bundle.putInt("idcurso", idcurso)
             bundle.putString("nombre", nombre)
             bundle.putString("habilitado", habil)
             bundle.putString("descripcion", descripcion)
@@ -62,7 +62,9 @@ class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Con
             bundle.putString("tipolenguaje", tipolenguaje)
             bundle.putString("imgresultado", imgresultado)
             bundle.putString("total", lista.size.toString())
+            bundle.putInt("posicion", position)
             bundle.putString("ultimoelemento", lista.last().total)
+            //bundle.putString("ultimoelemento", list.toString())
             Navigation.findNavController(it).navigate(R.id.accion_detalle_a_temario, bundle)
         }
     }

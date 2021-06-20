@@ -88,12 +88,12 @@ class SignUpFragment : Fragment() {
             if (iENames.length()>0 &&
                 iELastNames.length()>0 &&
                 iEEmail.length()>0 &&
-                iEPassword.length()>0 && functions.validarCorreo(iEEmail.text.toString())){ // validamos que los campos sean mayor a vacio y correo sea valido para habilitar el boton
+                iEPassword.length()>0 && functions.validateEmail(iEEmail.text.toString())){ // validamos que los campos sean mayor a vacio y correo sea valido para habilitar el boton
                 functions.enabledButton(true, btnSignUp)
             } else {
                 functions.enabledButton(false, btnSignUp)
             }
-            if (!functions.validarCorreo(iEEmail.text.toString())){
+            if (!functions.validateEmail(iEEmail.text.toString())){
                 functions.enabledButton(false, btnSignUp)
                 iLEmail.error = resources.getString(R.string.texto_correo_invalido)
             } else {

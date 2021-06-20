@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:contentPadding="8dp"
-    app:cardBackgroundColor="?attr/colorFondo"
+    app:cardBackgroundColor="?attr/colorOnPrimary"
     app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
-    app:cardElevation="0dp"
-    app:cardUseCompatPadding="false"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -43,21 +43,20 @@
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/nunito_black"
             android:gravity="center_vertical"
-            android:text="@string/texto_prueba"
-            android:textColor="?attr/colorTextoEnFondo"
+            android:text="@string/text_test"
             android:textSize="@dimen/dimensiones_texto_curso"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/icono_cursosx"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <Button
+        <ImageButton
             android:id="@+id/icono_descargar"
-            android:layout_width="30dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/icono_descargar_claro"
+            android:background="@drawable/ic_baseline_arrow_circle_down_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

@@ -34,7 +34,7 @@ class FirebaseMensajesServicio : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.notificaciones)
             .setContentTitle(titulo)
             .setContentText(mensaje)
-            .setColor(ContextCompat.getColor(applicationContext,R.color.colorAzulClaro))
+            .setColor(ContextCompat.getColor(applicationContext,R.color.blue_700))
             .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.notificaciones))
             .setAutoCancel(true)
             .setSound(sonido)

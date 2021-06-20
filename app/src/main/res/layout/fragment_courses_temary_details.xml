@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorFondo"
+    android:background="?attr/colorOnPrimary"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,10 +16,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/estiloNavegcionExpandible"
-            app:collapsedTitleTextAppearance="?attr/estiloNavegacionCollapsada"
-            app:contentScrim="?attr/colorFondo"
-            app:expandedTitleTextAppearance="?attr/estiloNavegacionExpandida"
+            app:contentScrim="?attr/colorOnPrimary"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             app:toolbarId="@+id/toolbar">
 
@@ -42,9 +39,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:fontFamily="@font/nunito_black"
-                    android:text="@string/texto_prueba"
-                    android:textColor="?attr/colorTextoEnFondo"
+                    android:text="@string/text_test"
                     android:textSize="22sp"
+                    android:textColor="?attr/colorSecondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -75,7 +72,6 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginRight="12dp"
                 android:stateListAnimator="@null"
-                app:cardBackgroundColor="?attr/colorFondo"
                 app:cardCornerRadius="10dp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,8 +97,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="@font/nunito"
-                        android:text="@string/texto_prueba"
-                        android:textColor="?attr/colorTextoEnFondo"
+                        android:text="@string/text_test"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -133,8 +128,8 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/completar"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -143,11 +138,9 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="?attr/estiloGeneralBotonPrimario"
                 android:fontFamily="@font/nunito_black"
                 android:letterSpacing="@dimen/dimensiones_letter_spacing"
-                android:text="@string/texto_completar"
-                android:textColor="?attr/colorSegundario"
+                android:text="@string/text_next"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -178,7 +171,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/fondo_imagen_ejemplo"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -195,29 +187,20 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#B5FFFFFF"
+        android:background="?attr/colorOnPrimary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationView"
-            android:layout_width="0dp"
-            android:layout_height="500dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_url="https://assets7.lottiefiles.com/datafiles/VtCIGqDsiVwFPNM/data.json" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

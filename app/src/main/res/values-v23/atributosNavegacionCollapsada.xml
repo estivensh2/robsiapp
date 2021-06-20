@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="estiloNavegacionCollapsada">
-        <attr name="estiloNavegacionExpandida" format="reference"/>
-        <attr name="estiloNavegacionCollapsada" format="reference"/>
-        <attr name="estiloFlechaAtras" format="reference"/>
-    </declare-styleable>
-</resources>

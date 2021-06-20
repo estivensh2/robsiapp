@@ -3,15 +3,14 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="texto_prueba">Prueba</string>
-    <string name="texto_mis_certificados">Mis certificados</string>
+    <string name="text_test">Prueba</string>
+    <string name="text_my_certificates">Mis certificados</string>
     <string name="title_activity_entrada">MainActivity</string>
-    <string name="descripcion_imagen_crear_cuenta">imagen de iniciar o crear cuenta</string>
-    <string name="texto_iniciar_sesion">iniciar sesión</string>
-    <string name="texto_iniciar_facebook">iniciar con facebook</string>
-    <string name="texto_registrar_usuario">registrarme</string>
-    <string name="texto_induccion_finalizar">finalizar</string>
-    <string name="texto_induccion_saltar">saltar</string>
+    <string name="description_create_account">imagen de iniciar o crear cuenta</string>
+    <string name="text_sign_in">iniciar sesión</string>
+    <string name="text_register_user">registrarme</string>
+    <string name="text_onboarding_end">finalizar</string>
+    <string name="text_onboarding_skip">saltar</string>
     <string name="descripcion_imagen_induccion">estas son las imagenes de induccion</string>
     <string name="descripcion_imagen_bienvenida">Esta es la imagen de bienvenida</string>
     <string name="texto_registrarme">registrarme</string>
@@ -52,9 +51,9 @@
     <string name="texto_boton_terminos_y_condiciones">terminos y condiciones</string>
     <string name="texto_label_privacidad">privacidad</string>
     <string name="texto_label_general">general</string>
-    <string name="texto_notificaciones">Notificaciones</string>
-    <string name="texto_sonidos">Sonidos</string>
-    <string name="texto_modo_oscuro">Modo oscuro</string>
+    <string name="text_notifications">Notificaciones</string>
+    <string name="text_sounds">Sonidos</string>
+    <string name="text_mode_dark">Modo oscuro</string>
     <string name="texto_clave_actual">Clave actual</string>
     <string name="texto_nueva_clave">Nueva clave</string>
     <string name="texto_confirmar_clave">Confirmar clave</string>
@@ -69,9 +68,6 @@
     <string name="texto_datos_actualizados">Datos actualizados correctamente</string>
     <string name="texto_error_datos">Error al actualizar. Revisa tus datos</string>
     <string name="descripcion_imagen_perfil">Esta es la imagen de perfil</string>
-    <string name="texto_cerrar_sesion">Estas seguro que deseas cerrar sesion?</string>
-    <string name="texto_si">Si</string>
-    <string name="texto_no">No</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="texto_recuperar_clave">¿Olvidaste tú contraseña?</string>
     <string name="texto_datos_incorrectos">Tu correo o clave son incorrectas</string>
@@ -116,4 +112,11 @@
     <string name="text_new_password">Nueva contrase;a</string>
     <string name="text_confirmed_new_password">Confirma tu nueva clave</string>
     <string name="text_send_email">Correo electronico enviado</string>
+    <string name="text_next">Siguiente</string>
+    <string name="text_option_choose">Elige una opción</string>
+    <string name="text_capture_image">Tomar foto</string>
+    <string name="text_choose_image">Elegir foto</string>
+    <string name="text_cancel">Cancelar</string>
+    <string name="text_home">Inicio</string>
+    <string name="text_profile">Perfil</string>
 </resources>

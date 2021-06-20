@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="estiloDialogo">
-        <attr name="estiloDialogo" format="reference"/>
-        <attr name="colorTextoDialogo" format="color"/>
-    </declare-styleable>
-</resources>

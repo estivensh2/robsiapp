@@ -21,13 +21,12 @@
         android:id="@+id/bottom_navegacion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:tooltipText="@null"
         app:itemIconSize="40dp"
+        app:itemIconTint="@color/yellow_700"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_menu_navegacion"
-        tools:targetApi="o" />
+        app:menu="@menu/bottom_menu_navegacion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

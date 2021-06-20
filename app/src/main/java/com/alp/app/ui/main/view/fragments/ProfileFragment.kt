@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
         val response = data.body()!!
         if (response.respuesta == "1") {
             if (response.imagen.isEmpty()){
-                Glide.with(contexto).load(R.drawable.usuario).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
+                Glide.with(contexto).load(R.drawable.user_test).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
             } else {
                 Glide.with(requireContext()).load(response.imagen).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
             }

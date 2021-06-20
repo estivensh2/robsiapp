@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/inicio"
+    android:id="@+id/home"
     app:startDestination="@id/homeFragment">
 
     <fragment
@@ -40,8 +40,19 @@
             android:id="@+id/accion_inicio_cursos_detalle_a_diplomados"
             app:destination="@id/listadoDiplomadosFragment2" />
         <action
-            android:id="@+id/accion_curso_detalle_a_examen"
-            app:destination="@id/inicioCursosDetalleTemarioExamenFragment" />
+            android:id="@+id/action_inicioCursosDetalleTemarioFragment_self"
+            app:destination="@id/inicioCursosDetalleTemarioFragment" />
+        <argument
+            android:name="id_course_details"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="id_course"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_inicioCursosDetalleTemarioFragment_to_coursesReviewFragment"
+            app:destination="@id/coursesReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/listadoDiplomadosFragment2"
@@ -49,12 +60,8 @@
         android:label="Certificados"
         tools:layout="@layout/fragment_listado_diplomados" />
     <fragment
-        android:id="@+id/inicioCursosDetalleTemarioExamenFragment"
+        android:id="@+id/coursesReviewFragment"
         android:name="com.alp.app.ui.main.view.fragments.CoursesReviewFragment"
-        android:label="Examen" >
-        <argument
-            android:name="idcursox"
-            app:argType="string" />
-    </fragment>
+        android:label="CoursesReviewFragment" />
 
 </navigation>

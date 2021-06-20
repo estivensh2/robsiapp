@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAzulOscuro"
+    android:background="@color/blue_900"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/margenes_generales"
@@ -17,7 +18,7 @@
         android:id="@+id/recicladorInduccion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/paginadorInduccion"
+        app:layout_constraintBottom_toTopOf="@+id/saltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,35 +27,49 @@
         android:id="@+id/saltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:background="@null"
         android:fontFamily="@font/nunito_black"
-        android:text="@string/texto_induccion_saltar"
-        android:textColor="@color/colorBlanco"
-        app:layout_constraintBottom_toBottomOf="@+id/paginadorInduccion"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/text_onboarding_skip"
+        android:textColor="@color/blue_900"
+        app:backgroundTint="@color/yellow_500"
+        app:cornerRadius="@dimen/size_button_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/paginadorInduccion"
-        android:layout_width="150dp"
+    <com.rd.PageIndicatorView
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/finalizar"
+        app:layout_constraintBottom_toBottomOf="@+id/saltar"
         app:layout_constraintEnd_toStartOf="@+id/finalizar"
         app:layout_constraintStart_toEndOf="@+id/saltar"
-        app:tabIndicator="@null">
-
-    </com.google.android.material.tabs.TabLayout>
+        app:layout_constraintTop_toTopOf="@+id/saltar"
+        app:piv_animationType="worm"
+        app:piv_dynamicCount="true"
+        app:piv_interactiveAnimation="true"
+        app:piv_selectedColor="?attr/colorSecondary"
+        app:piv_unselectedColor="?attr/colorOnPrimary"
+        attrs:piv_padding="15dp"
+        attrs:piv_radius="5dp" />
 
     <Button
         android:id="@+id/finalizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:background="@null"
         android:fontFamily="@font/nunito_black"
-        android:text="@string/texto_induccion_finalizar"
-        android:textColor="@color/colorBlanco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/text_onboarding_end"
+        android:textColor="@color/blue_900"
+        app:backgroundTint="@color/yellow_500"
+        app:cornerRadius="@dimen/size_button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/indicator" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

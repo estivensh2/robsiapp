@@ -80,7 +80,7 @@ class ResetPasswordFragment : Fragment() {
             } else {
                 functions.enabledButton(false, btnResetPassword)
             }
-            if (!functions.validarCorreo(iEEmail.text.toString())){
+            if (!functions.validateEmail(iEEmail.text.toString())){
                 binding.iLEmail.error = resources.getString(R.string.texto_correo_invalido)
                 functions.enabledButton(false, btnResetPassword)
             } else {
