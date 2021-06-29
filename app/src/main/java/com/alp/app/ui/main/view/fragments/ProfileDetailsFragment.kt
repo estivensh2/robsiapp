@@ -58,7 +58,7 @@ class ProfileDetailsFragment : Fragment() {
         functions = Functions(contexto)
         with(binding){
             if(args.imagen.isEmpty()){
-                Glide.with(contexto).load(R.drawable.user_test).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
+                Glide.with(contexto).load(R.drawable.ic_baseline_account_circle_24).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
             } else {
                 Glide.with(contexto).load(args.imagen).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
             }
@@ -127,9 +127,9 @@ class ProfileDetailsFragment : Fragment() {
     private fun renderList(data: Response<UpdateInfoModel>) {
         val response = data.body()!!
         if (response.respuesta == "1") {
-            DynamicToast.makeSuccess(contexto, getString(R.string.texto_datos_actualizados), Toast.LENGTH_LONG).show()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_updated_data), Toast.LENGTH_LONG).show()
         } else {
-            DynamicToast.makeError(contexto, getString(R.string.texto_error_datos), Toast.LENGTH_LONG).show()
+            DynamicToast.makeError(contexto, getString(R.string.text_error_data), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -176,7 +176,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private fun requestPermissionsGallery() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            DynamicToast.makeError(contexto, getString(R.string.texto_activar_permisos), Toast.LENGTH_LONG).show()
+            DynamicToast.makeError(contexto, getString(R.string.text_enable_permissions), Toast.LENGTH_LONG).show()
         } else {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), selectPhotoPermission)
         }
@@ -184,7 +184,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private fun requestPermissionsCamera() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.CAMERA)) {
-            DynamicToast.makeSuccess(contexto, getString(R.string.texto_activar_permisos), Toast.LENGTH_LONG).show()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_enable_permissions), Toast.LENGTH_LONG).show()
         } else {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), codeCapturePhoto)
         }

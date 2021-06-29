@@ -32,7 +32,7 @@ interface ApiService {
     @POST("get_review.php")
     suspend fun getReview(
             @Field("id_course") id_course : Int
-    ): Response<ReviewModel>
+    ): List<ReviewModel>
 
     @POST("get_slider.php")
     suspend fun getSlider(): List<SliderModel>

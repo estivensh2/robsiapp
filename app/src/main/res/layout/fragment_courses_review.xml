@@ -30,7 +30,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/titulo_temario"
+                    android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -65,6 +65,8 @@
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabIndicatorColor="?attr/colorSecondary"
+                app:tabIconTint="?attr/colorSecondary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -85,27 +87,12 @@
                     android:text="Wednesday" />
             </com.google.android.material.tabs.TabLayout>
 
-            <RadioGroup
-                android:id="@+id/radio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPager2">
-
-            </RadioGroup>
-
-            <Button
-                android:id="@+id/validar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="validar"
-                app:layout_constraintTop_toBottomOf="@+id/radio" />
-
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/indicator">
 
             </androidx.viewpager2.widget.ViewPager2>

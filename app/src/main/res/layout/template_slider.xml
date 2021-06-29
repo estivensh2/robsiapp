@@ -11,7 +11,7 @@
         android:id="@+id/imagen_fondo"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:contentDescription="@string/descripcion_imagen_slider"
+        android:contentDescription="@string/description_image_slider"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

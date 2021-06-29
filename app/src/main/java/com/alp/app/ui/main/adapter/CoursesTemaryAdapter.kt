@@ -36,10 +36,10 @@ class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Con
                 list.habilitado = "1"
             }
             if (list.habilitado == "1"){
-                Glide.with(context).load(R.drawable.unlocked).into(iconoCursos)
+                Glide.with(context).load(R.drawable.ic_baseline_play_circle_24).into(iconoCursos)
                 cardViewCursosDetalle.isEnabled = true
             } else {
-                Glide.with(context).load(R.drawable.locked).into(iconoCursos)
+                Glide.with(context).load(R.drawable.ic_baseline_lock_24).into(iconoCursos)
                 //cardViewCursosDetalle.isEnabled = false
             }
         }

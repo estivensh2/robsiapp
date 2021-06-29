@@ -62,6 +62,18 @@
     <fragment
         android:id="@+id/coursesReviewFragment"
         android:name="com.alp.app.ui.main.view.fragments.CoursesReviewFragment"
-        android:label="CoursesReviewFragment" />
+        android:label="Examen" >
+        <argument
+            android:name="id_course"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_coursesReviewFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_coursesReviewFragment_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <include app:graph="@navigation/navigation_profile" />
 
 </navigation>

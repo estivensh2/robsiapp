@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/cambiar_clave"
-        android:title="@string/texto_guardar_clave"
+        android:title="@string/text_save"
         app:showAsAction="always" />
 </menu>

@@ -44,7 +44,7 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.setCertificate(idusuario, idcurso, idcompletado)
     }
 
-    suspend fun getReview(id_course: Int) : Response<ReviewModel> {
+    suspend fun getReview(id_course: Int) : List<ReviewModel> {
         return apiService.getReview(id_course)
     }
 

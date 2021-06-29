@@ -47,11 +47,11 @@ class SignUpFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        val nombres = binding.iENames.text.toString()
-        val apellidos = binding.iELastNames.text.toString()
-        val correo = binding.iEEmail.text.toString()
-        val clave = binding.iEPassword.text.toString()
-        dashboardViewModel.setSignUp(nombres, apellidos, correo, clave).observe(requireActivity(), Observer { response ->
+        val names = binding.iENames.text.toString()
+        val lastNames = binding.iELastNames.text.toString()
+        val email = binding.iEEmail.text.toString()
+        val password = binding.iEPassword.text.toString()
+        dashboardViewModel.setSignUp(names, lastNames, email, password).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -73,12 +73,11 @@ class SignUpFragment : Fragment() {
     private fun renderList(data: Response<SignUpModel>) {
         val response = data.body()!!
         if (response.data == "1") {
-            DynamicToast.makeSuccess(contexto, "usuario registrado correctamente", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.accion_registrar_a_iniciar_sesion)
         } else {
             with(binding){
-                btnSignUp.text = resources.getString(R.string.texto_registrarme)
-                DynamicToast.makeError(contexto, resources.getString(R.string.texto_correo_existente), Toast.LENGTH_LONG).show()
+                btnSignUp.text = resources.getString(R.string.text_register)
+                DynamicToast.makeError(contexto, resources.getString(R.string.text_existing_email), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -88,14 +87,14 @@ class SignUpFragment : Fragment() {
             if (iENames.length()>0 &&
                 iELastNames.length()>0 &&
                 iEEmail.length()>0 &&
-                iEPassword.length()>0 && functions.validateEmail(iEEmail.text.toString())){ // validamos que los campos sean mayor a vacio y correo sea valido para habilitar el boton
+                iEPassword.length()>0 && functions.validateEmail(iEEmail.text.toString())){
                 functions.enabledButton(true, btnSignUp)
             } else {
                 functions.enabledButton(false, btnSignUp)
             }
             if (!functions.validateEmail(iEEmail.text.toString())){
                 functions.enabledButton(false, btnSignUp)
-                iLEmail.error = resources.getString(R.string.texto_correo_invalido)
+                iLEmail.error = resources.getString(R.string.text_invalid_email)
             } else {
                 iLEmail.error = ""
             }

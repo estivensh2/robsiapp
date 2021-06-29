@@ -45,7 +45,7 @@ class DashboardActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navegacion)
 
 
-        val navGraphIds = listOf(R.navigation.navigation_inicio, R.navigation.navigation_perfil)
+        val navGraphIds = listOf(R.navigation.navigation_dashboard, R.navigation.navigation_profile)
 
         //Configurar la vista de navegación inferior con una lista de gráficos de navegación
         val controller = bottomNavigationView.setupWithNavController(
@@ -66,4 +66,5 @@ class DashboardActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
     }
+
 }

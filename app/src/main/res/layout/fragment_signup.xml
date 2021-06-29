@@ -149,7 +149,7 @@
         android:insetBottom="0dp"
         android:letterSpacing="@dimen/dimensiones_letter_spacing"
         android:stateListAnimator="@null"
-        android:text="@string/texto_registrarme"
+        android:text="@string/text_register"
         android:textSize="@dimen/dimensiones_botones_iniciar_o_crear_cuenta"
         app:cornerRadius="@dimen/size_button_radius"
         app:layout_constraintBottom_toBottomOf="parent"

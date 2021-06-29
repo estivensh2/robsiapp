@@ -66,10 +66,10 @@ class ResetPasswordFragment : Fragment() {
     private fun renderList(data: Response<ResetPasswordModel>) {
         val response = data.body()!!
         if (response.data == "1") {
-            DynamicToast.makeSuccess(contexto, getString(R.string.text_send_email), Toast.LENGTH_LONG).show()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_sent_email), Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.accion_recuperar_a_iniciar_o_crear)
         } else {
-            binding.iLEmail.error = resources.getString(R.string.texto_corre_no_registrado)
+            binding.iLEmail.error = resources.getString(R.string.text_unregistered_email)
         }
     }
 
@@ -81,7 +81,7 @@ class ResetPasswordFragment : Fragment() {
                 functions.enabledButton(false, btnResetPassword)
             }
             if (!functions.validateEmail(iEEmail.text.toString())){
-                binding.iLEmail.error = resources.getString(R.string.texto_correo_invalido)
+                binding.iLEmail.error = resources.getString(R.string.text_invalid_email)
                 functions.enabledButton(false, btnResetPassword)
             } else {
                 binding.iLEmail.error = ""

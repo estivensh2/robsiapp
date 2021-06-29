@@ -79,8 +79,8 @@ class SignInFragment : Fragment() {
             activity?.finish()
         } else {
             with(binding){
-                btnSignIn.text = resources.getString(R.string.texto_ingresar)
-                DynamicToast.makeError(contexto, resources.getString(R.string.texto_datos_incorrectos), Toast.LENGTH_LONG).show()
+                btnSignIn.text = resources.getString(R.string.text_sign_in)
+                DynamicToast.makeError(contexto, resources.getString(R.string.text_incorrect_data), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -93,7 +93,7 @@ class SignInFragment : Fragment() {
                 functions.enabledButton(false, btnSignIn)
             }
             if (!functions.validateEmail(iEEmail.text.toString())){
-                iLEmail.error = resources.getString(R.string.texto_correo_invalido)
+                iLEmail.error = resources.getString(R.string.text_invalid_email)
                 functions.enabledButton(false, btnSignIn)
             } else {
                 iLEmail.error = ""

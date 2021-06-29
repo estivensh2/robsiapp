@@ -171,12 +171,12 @@ class HomeFragment : Fragment() {
                 val hora = fechaActual("h")
                 if (saludo == "p. m."){
                     if (hora.toInt()<6){
-                        saludox.text = contexto.getString(R.string.texto_buenas_tardes)
+                        saludox.text = contexto.getString(R.string.text_good_afternoon)
                     } else {
-                        saludox.text = contexto.getString(R.string.texto_buenas_noches)
+                        saludox.text = contexto.getString(R.string.text_good_night)
                     }
                 } else {
-                    saludox.text = contexto.getString(R.string.texto_buenos_dias)
+                    saludox.text = contexto.getString(R.string.text_good_morning)
                 }
                 handler.postDelayed(this, 1000)
             }

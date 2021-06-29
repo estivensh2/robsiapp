@@ -77,7 +77,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="44dp"
                 android:layout_weight="1"
-                android:contentDescription="@string/imagen_diplomado"
+                android:contentDescription="@string/description_image_certificate"
                 app:layout_constraintBottom_toBottomOf="@+id/progresoCurso"
                 app:layout_constraintEnd_toEndOf="@+id/reciclador"
                 app:layout_constraintHorizontal_bias="0.0"

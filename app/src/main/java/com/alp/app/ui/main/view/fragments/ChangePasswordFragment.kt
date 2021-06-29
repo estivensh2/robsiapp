@@ -63,10 +63,10 @@ class ChangePasswordFragment : Fragment() {
     private fun renderList(data: Response<UpdatePasswordModel>) {
         val response = data.body()!!
         if (response.data == "1") {
-            DynamicToast.makeSuccess(contexto, getString(R.string.texto_clave_cambiada), Toast.LENGTH_LONG).show()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_password_changed), Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.accion_cambiar_clave_a_perfil)
         } else {
-            DynamicToast.makeError(contexto, resources.getString(R.string.texto_clave_incorrecta), Toast.LENGTH_LONG).show()
+            DynamicToast.makeError(contexto, resources.getString(R.string.text_password_incorrect), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -97,9 +97,9 @@ class ChangePasswordFragment : Fragment() {
             if (iECurrentPassword.length()>0){
                 if (iENewPassword.length()>0 && iEConfirmedNewPassword.length()>0){
                     if (iENewPassword.length()<6 && iEConfirmedNewPassword.length()<6){
-                        DynamicToast.makeError(contexto, resources.getString(R.string.texto_clave_minimo), Toast.LENGTH_LONG).show()
+                        DynamicToast.makeError(contexto, resources.getString(R.string.text_minimum_characters), Toast.LENGTH_LONG).show()
                     } else if (iENewPassword.text.toString()!=iEConfirmedNewPassword.text.toString()){
-                        DynamicToast.makeError(contexto, resources.getString(R.string.texto_claves_no_coinciden), Toast.LENGTH_LONG).show()
+                        DynamicToast.makeError(contexto, resources.getString(R.string.text_passwords_do_not_match), Toast.LENGTH_LONG).show()
                         item.isVisible = false
                     } else {
                         item.isVisible = true

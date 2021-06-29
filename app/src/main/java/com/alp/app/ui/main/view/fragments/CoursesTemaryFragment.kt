@@ -118,13 +118,13 @@ class CoursesTemaryFragment : Fragment() {
         binding.progresoCurso.progressText = progreso.toInt().toString() + " %"
         when {
             progreso.toInt()==100 -> {
-                binding.textoProgreso.text = resources.getString(R.string.texto_curso_completado)
+                binding.textoProgreso.text = resources.getString(R.string.text_progress_course_completed)
             }
             progreso.toInt()==0 -> {
-                binding.textoProgreso.text = resources.getString(R.string.texto_curso_sin_iniciar)
+                binding.textoProgreso.text = resources.getString(R.string.text_uninitiated_course)
             }
             else -> {
-                binding.textoProgreso.text = resources.getString(R.string.texto_curso_en_curso)
+                binding.textoProgreso.text = resources.getString(R.string.text_progress_course)
             }
         }
     }

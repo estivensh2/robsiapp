@@ -5,10 +5,12 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ReviewModel (
-    var data: Map<Int, Questions>? = null,
+        @SerializedName("id_question")  var id_question       : Int,
+        @SerializedName("question")    var question : String,
+        @SerializedName("answers")    var answers : List<Answers>,
+        @SerializedName("response")    var response : Int,
 )
-
-data class Questions (
-        @SerializedName("question") var question: String,
-        @SerializedName("id_question") var id_question: Int
+data class Answers(
+        @SerializedName("id_option")    var id_option : Int,
+        @SerializedName("option")    var option : String,
 )

@@ -35,7 +35,7 @@ class CoursesAdapter @Inject constructor(@ActivityContext val context: Context) 
             if (nuevo.text==""){
                 nuevo.visibility = View.GONE
             } else {
-                nuevo.text = context.getString(R.string.texto_nuevo)
+                nuevo.text = context.getString(R.string.text_new)
                 nuevo.visibility = View.VISIBLE
             }
             Glide.with(context).load(list.image).into(iconoCursos)

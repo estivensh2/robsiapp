@@ -27,7 +27,7 @@
             android:id="@+id/icono_cursos"
             android:layout_width="17dp"
             android:layout_height="17dp"
-            android:contentDescription="@string/descripcion_imagen_categoria"
+            android:contentDescription="@string/description_image_category"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
