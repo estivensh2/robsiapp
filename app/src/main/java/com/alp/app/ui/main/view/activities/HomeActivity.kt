@@ -39,12 +39,12 @@ class HomeActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        instanciarID()
-
+        instantiateID()
     }
 
     private fun insertToken(token: String) {
-        dashboardViewModel.setToken(PreferencesSingleton.leer("id","0").toString(), token).observe(this, Observer { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.setToken(idUser!!, token).observe(this, Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -70,7 +70,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun instanciarID() {
+    private fun instantiateID() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if(it.isComplete){
                 insertToken(it.result.toString())

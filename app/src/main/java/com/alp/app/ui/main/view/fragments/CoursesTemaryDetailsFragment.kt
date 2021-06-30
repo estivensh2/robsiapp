@@ -40,11 +40,12 @@ class CoursesTemaryDetailsFragment : Fragment() {
 
     private var _binding: FragmentCoursesTemaryDetailsBinding? = null
     private val binding get() = _binding!!
-    private var idCourseDetails : Int = 0
+    private var idTemary : Int = 0
     private var idCourse : Int = 0
-    private lateinit var total : String
+    private var total : Int = 0
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val args: CoursesTemaryDetailsFragmentArgs by navArgs()
     private lateinit var functions: Functions
     @Inject
     lateinit var coursesTemaryAdapter: CoursesTemaryAdapter
@@ -52,27 +53,24 @@ class CoursesTemaryDetailsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCoursesTemaryDetailsBinding.inflate(inflater, container, false)
         functions = Functions(contexto)
-        PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
-        val args: CoursesTemaryDetailsFragmentArgs by navArgs()
-        val bundle = this.arguments
-        if (bundle != null) {
-            idCourseDetails = bundle.getInt("id", 0)
-            idCourse = bundle.getInt("idcurso", 0)
-            total = bundle.getString("total", "no")
-            if (args.idCourseDetails!=0){
-                idCourseDetails = args.idCourseDetails
-            }
-            if(args.idCourse!=0){
-                idCourse = args.idCourse
-            }
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
+        idTemary = args.idTemary
+        idCourse = args.idCourse
+        total = args.itemsTotal
+        if (args.idTemary!=0){
+            idTemary = args.idTemary
         }
-        binding.imgresultado.setOnClickListener { mostrarImagen() }
+        if(args.idCourse!=0){
+            idCourse = args.idCourse
+        }
+        binding.imgresultado.setOnClickListener { showImage() }
         getDetailsTemary()
         return binding.root
     }
 
     private fun getDetailsTemary() {
-        dashboardViewModel.getDetailsTemary(idCourseDetails, idCourse, PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.getDetailsTemary(idTemary, idCourse ,idUser!! ).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -92,7 +90,8 @@ class CoursesTemaryDetailsFragment : Fragment() {
     }
 
     private fun insertProgress() {
-        dashboardViewModel.setProgress(1, idCourseDetails, idCourse, PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.setProgress(1, idTemary, idCourse, idUser!!).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -126,7 +125,6 @@ class CoursesTemaryDetailsFragment : Fragment() {
                     fondoDescripcionTemario.visibility = View.VISIBLE
                 }
 
-
                 if (response.code.isEmpty()){
                     binding.linearLayout2.visibility = View.GONE
                     binding.codeView.visibility = View.GONE
@@ -149,16 +147,16 @@ class CoursesTemaryDetailsFragment : Fragment() {
                     Glide.with(contexto).load(response.image).signature(ObjectKey(System.currentTimeMillis())).into(binding.imgresultado)
                 }
                 btnNext.setOnClickListener {
-                    if (PreferencesSingleton.leer("idsonidos", false)==true){
+                    if (PreferencesSingleton.read("enabled_sound", false)==true){
                         val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
                         mediaPlayer.start()
                     }
-                    if (idCourseDetails == response.total){
+                    if (idTemary == response.total){
                         val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentToCoursesReviewFragment(idCourse)
                         it.findNavController().navigate(action)
                     } else {
                         insertProgress()
-                        val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentSelf(idCourseDetails+1, idCourse)
+                        val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentSelf(idTemary+1, idCourse)
                         it.findNavController().navigate(action)
                     }
                 }
@@ -175,7 +173,7 @@ class CoursesTemaryDetailsFragment : Fragment() {
         }
     }
 
-    private fun mostrarImagen() {
+    private fun showImage() {
         val dialog = Dialog(contexto)
         val bindingBottomSheet = TemplateOpenCourseImageBinding.inflate(layoutInflater, null, false)
         val converterImage = binding.imgresultado.drawable

@@ -2,9 +2,7 @@ package com.alp.app.data.repository
 
 import com.alp.app.data.api.ApiService
 import com.alp.app.data.model.*
-import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.FormUrlEncoded
 import javax.inject.Inject
 
 class DashboardRepository @Inject constructor(private val apiService: ApiService) {
@@ -17,59 +15,63 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getSlider()
     }
 
-    suspend fun getCourses(id: String) : List<CoursesModel> {
-        return apiService.getCourses(id)
+    suspend fun getCourses(id_category: Int) : List<CoursesModel> {
+        return apiService.getCourses(id_category)
     }
 
-    suspend fun setResetPassword(clave: String) : Response<ResetPasswordModel> {
-        return apiService.setResetPassword(clave)
+    suspend fun getCoursesHome() : List<CoursesModel> {
+        return apiService.getCoursesHome()
     }
 
-    suspend fun getInfoProfile(id: String) : Response<ProfileModel> {
-        return apiService.getInfoProfile(id)
-    }
-    suspend fun setInfoProfile(id: String, nombres: String, imagen: String, apellidos: String, correo: String) : Response<UpdateInfoModel> {
-        return apiService.setInfoProfile(id, nombres, imagen, apellidos, correo)
+    suspend fun setResetPassword(password: String) : Response<ResetPasswordModel> {
+        return apiService.setResetPassword(password)
     }
 
-    suspend fun setSignIn(correo: String, clave: String) : Response<SigninModel> {
-        return apiService.setSignIn(correo, clave)
+    suspend fun getInfoProfile(id_user: Int) : Response<ProfileModel> {
+        return apiService.getInfoProfile(id_user)
     }
 
-    suspend fun setToken(idusuario: String, idtoken: String) : Response<InsertTokenModel> {
-        return apiService.setToken(idusuario, idtoken)
+    suspend fun setInfoProfile(id_user: Int, names: String, image: String, last_names: String, email: String) : Response<UpdateInfoModel> {
+        return apiService.setInfoProfile(id_user, names, image, last_names, email)
     }
 
-    suspend fun setCertificate(idusuario : String ,idcurso: Int, idcompletado: String) : Response<InsertCertificateModel> {
-        return apiService.setCertificate(idusuario, idcurso, idcompletado)
+    suspend fun setSignIn(email: String, password: String) : Response<SigninModel> {
+        return apiService.setSignIn(email, password)
+    }
+
+    suspend fun setToken(id_user: Int, id_token: String) : Response<InsertTokenModel> {
+        return apiService.setToken(id_user, id_token)
+    }
+
+    suspend fun setCertificate(id_user : Int ,id_course: Int, id_completed: String) : Response<InsertCertificateModel> {
+        return apiService.setCertificate(id_user, id_course, id_completed)
     }
 
     suspend fun getReview(id_course: Int) : List<ReviewModel> {
         return apiService.getReview(id_course)
     }
 
-    suspend fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: String) : Response<InsertProgressModel> {
+    suspend fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: Int) : Response<InsertProgressModel> {
         return apiService.setProgress(id_enabled, id_course_temary,id_course,id_user)
     }
 
-    suspend fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: String) : Response<CoursesTemaryDetailsModel> {
+    suspend fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: Int) : Response<CoursesTemaryDetailsModel> {
         return apiService.getDetailsTemary(id_course_temary, id_course, id_user)
     }
 
-    suspend fun setSignUp(nombres: String, apellidos: String, correo: String, clave: String) : Response<SignUpModel> {
-        return apiService.setSignUp(nombres,apellidos,correo,clave)
+    suspend fun setSignUp(names: String, last_names: String, email: String, password: String) : Response<SignUpModel> {
+        return apiService.setSignUp(names,last_names,email,password)
     }
 
-
-    suspend fun setPassword(claveactual: String, clavenueva: String, idusuario: String) : Response<UpdatePasswordModel> {
-        return apiService.setPassword(claveactual, clavenueva , idusuario)
+    suspend fun setPassword(current_password: String, new_password: String, id_user: Int) : Response<UpdatePasswordModel> {
+        return apiService.setPassword(current_password, new_password , id_user)
     }
 
-    suspend fun getCertificate(id: String) : List<CertificateModel> {
-        return apiService.getCertificate(id)
+    suspend fun getCertificate(id_user: Int) : List<CertificateModel> {
+        return apiService.getCertificate(id_user)
     }
 
-    suspend fun getCoursesTemary(id: String, idusuario: String) : List<CoursesTemaryModel> {
-        return apiService.getCoursesTemary(id, idusuario)
+    suspend fun getCoursesTemary(id_course: Int, id_user: Int) : List<CoursesTemaryModel> {
+        return apiService.getCoursesTemary(id_course, id_user)
     }
 }

@@ -6,7 +6,6 @@ import androidx.lifecycle.liveData
 import com.alp.app.data.repository.DashboardRepository
 import com.alp.app.utils.Resource
 import kotlinx.coroutines.Dispatchers
-import retrofit2.http.Field
 import java.lang.Exception
 
 class DashboardViewModel @ViewModelInject constructor(private val dashboardRepository: DashboardRepository) : ViewModel() {
@@ -29,55 +28,64 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
-    fun getCourses(id: String) = liveData(Dispatchers.IO){
+    fun getCourses(id_category: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.getCourses(id)))
+            emit(Resource.success(data = dashboardRepository.getCourses(id_category)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
-    fun setResetPassword(clave: String) = liveData(Dispatchers.IO){
+    fun getCoursesHome() = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setResetPassword(clave)))
+            emit(Resource.success(data = dashboardRepository.getCoursesHome()))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
-    fun setPassword(claveactual: String, clavenueva: String, idusuario: String) = liveData(Dispatchers.IO){
+    fun setResetPassword(password: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setPassword(claveactual, clavenueva, idusuario)))
+            emit(Resource.success(data = dashboardRepository.setResetPassword(password)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
-    fun setSignIn(correo: String, clave: String) = liveData(Dispatchers.IO){
+    fun setPassword(current_password: String, new_password: String, id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setSignIn(correo, clave)))
+            emit(Resource.success(data = dashboardRepository.setPassword(current_password, new_password, id_user)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
-    fun setToken(idusuario: String, idtoken: String) = liveData(Dispatchers.IO){
+    fun setSignIn(email: String, password: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setToken(idusuario, idtoken)))
+            emit(Resource.success(data = dashboardRepository.setSignIn(email, password)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
-    fun setCertificate(idusuario : String ,idcurso: Int, idcompletado: String) = liveData(Dispatchers.IO){
+    fun setToken(id_user: Int, id_token: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setCertificate(idusuario, idcurso, idcompletado)))
+            emit(Resource.success(data = dashboardRepository.setToken(id_user, id_token)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun setCertificate(id_user : Int ,id_course: Int, id_completed: String) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.setCertificate(id_user, id_course, id_completed)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
@@ -94,7 +102,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
 
 
 
-    fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: String) = liveData(Dispatchers.IO){
+    fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = dashboardRepository.setProgress(id_enabled, id_course_temary, id_course, id_user)))
@@ -103,7 +111,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
-    fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: String) = liveData(Dispatchers.IO){
+    fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = dashboardRepository.getDetailsTemary(id_course_temary, id_course, id_user)))
@@ -112,10 +120,10 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
-    fun setSignUp(nombres: String, apellidos: String, correo: String, clave: String) = liveData(Dispatchers.IO){
+    fun setSignUp(names: String, last_names: String, email: String, password: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setSignUp(nombres,apellidos,correo,clave)))
+            emit(Resource.success(data = dashboardRepository.setSignUp(names,last_names,email,password)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
@@ -123,39 +131,39 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
 
 
 
-    fun getInfoProfile(id: String) = liveData(Dispatchers.IO){
+    fun getInfoProfile(id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.getInfoProfile(id)))
+            emit(Resource.success(data = dashboardRepository.getInfoProfile(id_user)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
-    fun setInfoProfile(id: String, nombres: String, imagen: String, apellidos: String, correo: String) = liveData(Dispatchers.IO){
+    fun setInfoProfile(id_user: Int, name: String, image: String, last_names: String, email: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setInfoProfile(id, nombres, imagen, apellidos, correo)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
-        }
-    }
-
-
-    fun getCertificate(id: String) = liveData(Dispatchers.IO){
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = dashboardRepository.getCertificate(id)))
+            emit(Resource.success(data = dashboardRepository.setInfoProfile(id_user, name, image, last_names, email)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
     }
 
 
-    fun getCoursesTemary(id: String, idusuario: String) = liveData(Dispatchers.IO){
+    fun getCertificate(id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.getCoursesTemary(id, idusuario)))
+            emit(Resource.success(data = dashboardRepository.getCertificate(id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+
+    fun getCoursesTemary(id_course: Int, id_user: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.getCoursesTemary(id_course, id_user)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }

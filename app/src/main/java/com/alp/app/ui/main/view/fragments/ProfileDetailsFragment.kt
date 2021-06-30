@@ -40,7 +40,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private val binding get() = _binding!!
     private val capturePhoto = 102
-    private var imagen:String = ""
+    private var image : String = ""
     private var bitmap: Bitmap? = null
     private val codeCapturePhoto = 2
     private val codeSelectPhoto = 103
@@ -54,7 +54,7 @@ class ProfileDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileDetailsBinding.inflate(inflater, container, false)
-        PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
         with(binding){
             if(args.imagen.isEmpty()){
@@ -67,18 +67,19 @@ class ProfileDetailsFragment : Fragment() {
             iELastNames.setText(args.apellidos)
             iEPassword.setText(args.claveAcceso)
             iEEmail.setText(args.correoElectronico)
-            sounds.isChecked = PreferencesSingleton.leer("idsonidos" , true) as Boolean
+            sounds.isChecked = PreferencesSingleton.read("enabled_sound" , false) as Boolean
+            changeTheme.isChecked = PreferencesSingleton.read("mode_dark" , false) as Boolean
             botonSubirImagen.setOnClickListener  { alertaSubirImagen() }
             botonCerrarSesion.setOnClickListener {
-                PreferencesSingleton.eliminar("sesionActiva")
+                PreferencesSingleton.delete("active_session")
                 startActivity(Intent(contexto, HomeActivity::class.java))
                 activity?.finish()
             }
             iLPassword.setOnClickListener { v -> Navigation.findNavController(v).navigate(R.id.accion_configuracion_a_cambiar_clave) }
             sounds.setOnCheckedChangeListener { _, isChecked ->
                 when(isChecked){
-                    true ->  PreferencesSingleton.escribir("idsonidos", true)
-                    false -> PreferencesSingleton.escribir("idsonidos", false)
+                    true ->  PreferencesSingleton.write("enabled_sound", true)
+                    false -> PreferencesSingleton.write("enabled_sound", false)
                 }
             }
             when (args.idnotificaciones) {
@@ -87,10 +88,10 @@ class ProfileDetailsFragment : Fragment() {
             }
             changeTheme.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked){
-                    PreferencesSingleton.escribir("mode", true)
+                    PreferencesSingleton.write("mode_dark", true)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 } else {
-                    PreferencesSingleton.escribir("mode", false)
+                    PreferencesSingleton.write("mode_dark", false)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
             }
@@ -100,12 +101,12 @@ class ProfileDetailsFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        val nombres = binding.iENames.text.toString()
-        if (bitmap!=null) { imagen = ConvertImageToBase64(bitmap!!) }
-        val apellidos = binding.iELastNames.text.toString()
-        val correo = binding.iEPassword.text.toString()
-        binding.progress.visibility = View.VISIBLE
-        dashboardViewModel.setInfoProfile(PreferencesSingleton.leer("id","0").toString(),nombres, imagen, apellidos, correo).observe(requireActivity(), Observer { response ->
+        val names = binding.iENames.text.toString()
+        if (bitmap!=null) { image = ConvertImageToBase64(bitmap!!) }
+        val lastNames = binding.iELastNames.text.toString()
+        val email = binding.iEEmail.text.toString()
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.setInfoProfile(idUser!! , names, image, lastNames, email).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {

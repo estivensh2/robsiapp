@@ -33,15 +33,18 @@ class ChangePasswordFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
+        functions.showHideProgressBar(true, binding.progress)
         setHasOptionsMenu(true)
         return binding.root
     }
 
     private fun setupShowData() {
-        val actualPassword = binding.iECurrentPassword.text.toString()
+        val currentPassword = binding.iECurrentPassword.text.toString()
         val newPassword = binding.iEConfirmedNewPassword.text.toString()
-        dashboardViewModel.setPassword(actualPassword, newPassword , PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.setPassword(currentPassword, newPassword , idUser!!).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -85,14 +88,14 @@ class ChangePasswordFragment : Fragment() {
         val item = menu.findItem(R.id.cambiar_clave)
         item.isVisible = false
         with(binding){
-            iECurrentPassword.onChange           { habilitarBoton(item) }
-            iENewPassword.onChange          { habilitarBoton(item) }
-            iEConfirmedNewPassword.onChange { habilitarBoton(item) }
+            iECurrentPassword.onChange           { enabledButton(item) }
+            iENewPassword.onChange          { enabledButton(item) }
+            iEConfirmedNewPassword.onChange { enabledButton(item) }
         }
         super.onPrepareOptionsMenu(menu)
     }
 
-    private fun habilitarBoton(item: MenuItem) {
+    private fun enabledButton(item: MenuItem) {
         with(binding){
             if (iECurrentPassword.length()>0){
                 if (iENewPassword.length()>0 && iEConfirmedNewPassword.length()>0){

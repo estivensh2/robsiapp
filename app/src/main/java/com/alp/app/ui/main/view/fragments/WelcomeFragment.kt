@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.databinding.FragmentWelcomeBinding
@@ -22,10 +23,10 @@ class WelcomeFragment : Fragment() {
     private val tiempo: Long = 2000
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         _binding = FragmentWelcomeBinding.inflate(layoutInflater, container, false)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        if (supportActionBar != null) supportActionBar.hide()
+        supportActionBar?.hide()
         crearAnimacion()
         return binding.root
     }
@@ -39,14 +40,16 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun validarInicioPrimeraVezYEstadoSesion() {
-        if (PreferencesSingleton.leer("nuevo", false) == true) { // aca verificamos si el usuario ya inicio la app por primera vez
-            if (PreferencesSingleton.leer("sesionActiva", false) == true){ // aca verificamos el estado de la sesion
-                findNavController().navigate(R.id.accion_bienvenida_a_inicio)
+        if (PreferencesSingleton.read("user_new", false) == true) {
+            if (PreferencesSingleton.read("active_session", false) == true){
+                lifecycleScope.launchWhenResumed {
+                    findNavController().navigate(R.id.action_navegacion_bienvenida_to_principalActivity2)
+                }
                 activity?.finish()
-            } else { // si no existe lo redirigimos al iniciar sesion o crear cuenta
+            } else {
                 findNavController().navigate(R.id.accion_bienvenida_a_iniciar_o_crear_cuenta)
             }
-        } else { // si no ha iniciado la app lo redirimos a la induccion
+        } else {
             findNavController().navigate(R.id.accion_bienvenida_a_induccion)
         }
     }

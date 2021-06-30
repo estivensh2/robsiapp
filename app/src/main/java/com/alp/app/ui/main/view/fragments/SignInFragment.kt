@@ -36,13 +36,13 @@ class SignInFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSigninBinding.inflate(layoutInflater, container, false)
-        PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
         with(binding){
             functions.enabledButton(false, binding.btnSignIn)
             btnSignIn.setOnClickListener { setupShowData() }
-            iEEmail.onChange     { habilitarBoton() }
-            iEPassword.onChange  { habilitarBoton() }
+            iEEmail.onChange     { enabledButton() }
+            iEPassword.onChange  { enabledButton() }
             btnResetPassword.setOnClickListener { v -> Navigation.findNavController(v).navigate(R.id.accion_iniciar_sesion_a_recuperar_clave) }
         }
         return binding.root
@@ -73,8 +73,8 @@ class SignInFragment : Fragment() {
     private fun renderList(data: Response<SigninModel>) {
         val response = data.body()!!
         if (response.data == "1") {
-            PreferencesSingleton.escribir("id", response.id_user)
-            PreferencesSingleton.escribir("sesionActiva", true)
+            PreferencesSingleton.write("id_user" , response.id_user)
+            PreferencesSingleton.write("active_session", true)
             findNavController().navigate(R.id.accion_iniciar_a_navegacion_principal)
             activity?.finish()
         } else {
@@ -85,7 +85,7 @@ class SignInFragment : Fragment() {
         }
     }
 
-    private fun habilitarBoton(){
+    private fun enabledButton(){
         with(binding){
             if (iEEmail.length()>0 && iEPassword.length()>0 ){
                 functions.enabledButton(true, btnSignIn)

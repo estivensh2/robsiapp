@@ -9,13 +9,16 @@ import com.alp.app.R
 import com.alp.app.data.model.SliderModel
 import com.alp.app.databinding.TemplateSliderBinding
 import com.bumptech.glide.Glide
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
 class SliderAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
-    // obtenemos la lista de datos
+
     var list = ArrayList<SliderModel>()
-    // creamos la clase para mostrar los campos en la vista
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = TemplateSliderBinding.bind(itemView)
     }
@@ -29,9 +32,11 @@ class SliderAdapter @Inject constructor(@ActivityContext val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = list[position]
         with(holder.binding){
-            tituloSlider.text = list.title
-            descripcionSlider.text = list.description
-            Glide.with(context).load(list.image).into(imagenFondo)
+            Picasso.get()
+                .load(list.image)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .into(imageSlider)
         }
     }
 

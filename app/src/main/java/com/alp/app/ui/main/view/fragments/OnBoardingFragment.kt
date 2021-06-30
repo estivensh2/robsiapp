@@ -14,7 +14,7 @@ import com.alp.app.data.model.InduccionData
 import com.alp.app.databinding.FragmentOnboardingBinding
 import com.alp.app.singleton.PreferencesSingleton
 
-class OnboardingFragment : Fragment() {
+class OnBoardingFragment : Fragment() {
 
     private val arrayList = ArrayList<InduccionData>()
     private val displayList = ArrayList<InduccionData>()
@@ -23,13 +23,13 @@ class OnboardingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentOnboardingBinding.inflate(layoutInflater, container, false)
-        PreferencesSingleton.init(requireContext(), "preferenciasDeUsuario")
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         arrayList.add(InduccionData(R.drawable.paso1, "Bienvenido", "En esta aplicacion podrás aprender las bases básicas para iniciar en la programación totalmente gratis."))
         arrayList.add(InduccionData(R.drawable.paso2, "Obten tu certificado", "Podrás obtener y descargar tu certificado de cada curso."))
         displayList.addAll(arrayList)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        val adaptador = OnboardingAdapter(requireContext(), displayList)
-        binding.recicladorInduccion.adapter = adaptador
+        val adapter = OnboardingAdapter(requireContext(), displayList)
+        binding.recicladorInduccion.adapter = adapter
         binding.indicator.count = displayList.size
         with(binding){
             recicladorInduccion.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
@@ -47,8 +47,8 @@ class OnboardingFragment : Fragment() {
             finalizar.visibility = View.INVISIBLE
             saltar.setOnClickListener { saltarInduccion() }
             finalizar.setOnClickListener {
-                PreferencesSingleton.escribir("nuevo", true)
-                PreferencesSingleton.escribir("idsonidos", true)
+                PreferencesSingleton.write("user_new", true)
+                PreferencesSingleton.write("enabled_sound", true)
                 findNavController().navigate(R.id.accion_induccion_a_iniciar_o_crear)
             }
         }
@@ -57,8 +57,8 @@ class OnboardingFragment : Fragment() {
     }
 
     private fun saltarInduccion() {
-        PreferencesSingleton.escribir("nuevo", true)
-        PreferencesSingleton.escribir("idsonidos", true)
+        PreferencesSingleton.write("user_new", true)
+        PreferencesSingleton.write("enabled_sound", true)
         findNavController().navigate(R.id.accion_induccion_a_iniciar_o_crear)
     }
 

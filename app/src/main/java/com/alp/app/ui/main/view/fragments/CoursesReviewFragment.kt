@@ -17,9 +17,9 @@ import androidx.navigation.fragment.navArgs
 import com.alp.app.R
 import com.alp.app.data.model.InsertCertificateModel
 import com.alp.app.data.model.ReviewModel
-import com.alp.app.databinding.BottomSheetQuestionBinding
 import com.alp.app.databinding.FragmentCoursesReviewBinding
-import com.alp.app.databinding.VentanaBottomSheetBinding
+import com.alp.app.databinding.TemplateCorrectQuestionBinding
+import com.alp.app.databinding.TemplateCourseCompletedBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.ReviewAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
@@ -56,6 +56,7 @@ class CoursesReviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCoursesReviewBinding.inflate(inflater, container, false)
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
         val args: CoursesReviewFragmentArgs by navArgs()
         if (args.idCourse!=0){
@@ -127,7 +128,8 @@ class CoursesReviewFragment : Fragment() {
 
 
     private fun insertCertificate() {
-        dashboardViewModel.setCertificate(PreferencesSingleton.leer("id","0").toString(), idcourse,"1").observe(requireActivity(), Observer { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.setCertificate(idUser!!, idcourse,"1").observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -158,7 +160,7 @@ class CoursesReviewFragment : Fragment() {
 
     private fun bottomSheetCertificate() {
         val dialog = BottomSheetDialog(contexto)
-        val bindingBottomSheet = VentanaBottomSheetBinding.inflate(layoutInflater, null, false)
+        val bindingBottomSheet = TemplateCourseCompletedBinding.inflate(layoutInflater, null, false)
         dialog.setContentView(bindingBottomSheet.root)
         dialog.setCancelable(false)
         dialog.show()
@@ -170,7 +172,7 @@ class CoursesReviewFragment : Fragment() {
 
     private fun loadBottomSheet(message: String, icon: Int, boolean: Boolean){
         val dialog = BottomSheetDialog(contexto)
-        val bindingBottomSheet = BottomSheetQuestionBinding.inflate(layoutInflater, null, false)
+        val bindingBottomSheet = TemplateCorrectQuestionBinding.inflate(layoutInflater, null, false)
         bindingBottomSheet.textResult.text = message
         if (boolean){
             count += 1

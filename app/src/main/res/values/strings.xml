@@ -18,7 +18,7 @@
     <string name="text_null">nulo</string>
     <string name="description_image_current">esta es la imagen de perfil</string>
     <string name="text_you_want_to_learn">¿Qué deseas aprender?</string>
-    <string name="text_courses_for_you">Estos son los cursos que tenemos para ti</string>
+    <string name="text_courses_for_you">Estos son las rutas que tenemos para ti</string>
     <string name="description_image_slider">esta son las imagenes del slider</string>
     <string name="description_image_category">este es el icono de la categoria de cursos</string>
     <string name="description_image_certificate">esta es la imagen del diplomado</string>
@@ -82,4 +82,11 @@
     <string name="text_click_again">Pulsa de nuevo para salir</string>
     <string name="text_continue">Continuar</string>
     <string name="text_retry">Reintentar</string>
+    <string name="name_preferences">preferences_user</string>
+    <string name="text_choose_for_courses">Elige por cursos</string>
+    <string name="text_choose_for_categories">Elige por categorias</string>
+    <string name="name_app">ALP</string>
+    <string name="text_app_secondary">Aprende lenguajes de programacion</string>
+    <string name="description_image_logo">Esta es la descripcion de la imagen principal</string>
+    <string name="description_profile_image">Esta es la imagen principal para ir al perfil</string>
 </resources>

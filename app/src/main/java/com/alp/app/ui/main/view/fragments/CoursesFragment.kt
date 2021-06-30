@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alp.app.data.model.CoursesModel
 import com.alp.app.databinding.FragmentCoursesBinding
 import com.alp.app.ui.main.adapter.CoursesAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdError
@@ -21,7 +24,7 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.material.snackbar.Snackbar
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,26 +32,24 @@ import javax.inject.Inject
 class CoursesFragment : Fragment() {
 
     private lateinit var contexto: Context
-    private lateinit var id : String
+    private var idCategory = 0
     private var _binding: FragmentCoursesBinding? = null
     private val binding get() = _binding!!
     private var interstitial:InterstitialAd? = null
     private var count = 0
+    private lateinit var functions: Functions
     private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val args: CoursesFragmentArgs by navArgs()
     @Inject
     lateinit var coursesAdapter: CoursesAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCoursesBinding.inflate(inflater, container, false)
-        val bundle = this.arguments
-        if (bundle!= null) {
-            val name = bundle.getString("nombre", "no")
-            val icon = bundle.getString("icono", "no")
-            id = bundle.getString("id", "no")
-            binding.tituloCategoria.text = name
-            Glide.with(contexto).load(icon).into(binding.iconoCategoria)
-        }
-        binding.progress.visibility = View.VISIBLE
+        idCategory = args.idCategory
+        binding.tituloCategoria.text = args.nameCategory
+        functions = Functions(contexto)
+        Glide.with(contexto).load(args.imageCategory).into(binding.iconoCategoria)
+        functions.showHideProgressBar(true, binding.progress)
         setupUI()
         setupShowData()
         initAds()
@@ -110,40 +111,26 @@ class CoursesFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        dashboardViewModel.getCourses(id).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getCourses(idCategory).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
                         binding.recycler.visibility = View.VISIBLE
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
                         binding.recycler.visibility = View.VISIBLE
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
                         binding.recycler.visibility = View.GONE
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
-    }
-
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
     }
 
     private fun renderList(data: List<CoursesModel>) {

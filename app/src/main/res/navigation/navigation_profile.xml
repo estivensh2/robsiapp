@@ -70,5 +70,5 @@
         android:id="@+id/listadoDiplomadosFragment"
         android:name="com.alp.app.ui.main.view.fragments.CertificateFragment"
         android:label="Certificados"
-        tools:layout="@layout/fragment_listado_diplomados" />
+        tools:layout="@layout/fragment_list_certificates" />
 </navigation>

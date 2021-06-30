@@ -3,6 +3,7 @@ package com.alp.app.ui.main.view.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,10 +13,11 @@ import com.alp.app.data.model.ProfileModel
 import com.alp.app.databinding.FragmentProfileBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
+import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
-import com.google.android.material.snackbar.Snackbar
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
 
@@ -31,10 +33,14 @@ class ProfileFragment : Fragment() {
     private var notificaciones:String? = null
     private var correo:String? = null
     private var clave:String? = null
+    private lateinit var functions: Functions
     private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
+        functions = Functions(contexto)
+        functions.showHideProgressBar(true, binding.progress)
         binding.misCertificados.setOnClickListener {
             findNavController().navigate(R.id.accion_perfil_a_diplomas)
         }
@@ -44,37 +50,24 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        dashboardViewModel.getInfoProfile(PreferencesSingleton.leer("id","0").toString()).observe(requireActivity(), Observer { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.getInfoProfile(idUser!!).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        showHideProgressBar(false)
+                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        showMessage(response.message!!)
-                        showHideProgressBar(false)
+                        DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
-                        showHideProgressBar(true)
+                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
         })
-    }
-
-    private fun showHideProgressBar(showHide: Boolean){
-        with(binding){
-            if(showHide){
-                progress.visibility = View.VISIBLE
-            } else {
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun showMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-        Snackbar.make(requireView(), message, duration).show()
     }
 
     private fun renderList(data: Response<ProfileModel>) {

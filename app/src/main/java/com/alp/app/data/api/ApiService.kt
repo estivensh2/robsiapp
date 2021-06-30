@@ -40,36 +40,39 @@ interface ApiService {
     @FormUrlEncoded
     @POST("get_courses.php")
     suspend fun getCourses(
-            @Field("id_category") id_category : String
+            @Field("id_category") id_category : Int
     ): List<CoursesModel>
+
+    @POST("get_courses_home.php")
+    suspend fun getCoursesHome(): List<CoursesModel>
 
     @FormUrlEncoded
     @POST("get_certificate.php")
     suspend fun getCertificate(
-            @Field("id_user") id_user:String
+            @Field("id_user") id_user:Int
     ): List<CertificateModel>
 
     @FormUrlEncoded
     @POST("get_courses_temary.php")
     suspend fun getCoursesTemary(
-            @Field("idcurso")   idcurso   : String,
-            @Field("idusuario") idusuario : String
+            @Field("idcurso")   id_course   : Int,
+            @Field("id_user") id_user : Int
     ): List<CoursesTemaryModel>
 
     @FormUrlEncoded
     @POST("get_user_data.php")
     suspend fun getInfoProfile (
-            @Field("id_user") id:String
+            @Field("id_user") id_user: Int
     ) : Response<ProfileModel>
 
     @FormUrlEncoded
     @POST("update_user_data.php")
     suspend fun setInfoProfile (
-            @Field("id") id:String,
-            @Field("nombres") nombres:String,
-            @Field("imagen") imagen:String,
-            @Field("apellidos") apellidos:String,
-            @Field("correoElectronico") correo:String
+            @Field("id") id_user:Int,
+            @Field("nombres") names :String,
+            @Field("imagen") image:String,
+            @Field("apellidos") last_names:String,
+            @Field("correoElectronico") email:String
     ) : Response<UpdateInfoModel>
 
     @FormUrlEncoded
@@ -77,7 +80,7 @@ interface ApiService {
     suspend fun setPassword (
             @Field("current_password") current_password:String,
             @Field("new_password")     new_password:String,
-            @Field("id_user")          id_user:String
+            @Field("id_user")          id_user:Int
     ) : Response<UpdatePasswordModel>
 
     @FormUrlEncoded
@@ -90,7 +93,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("set_token.php")
     suspend fun setToken (
-            @Field("id_user") id_user:String,
+            @Field("id_user") id_user:Int,
             @Field("token") token:String
     ) : Response<InsertTokenModel>
 
@@ -113,7 +116,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("insert_certificate.php")
     suspend fun setCertificate (
-            @Field("id_user") id_user:String,
+            @Field("id_user") id_user:Int,
             @Field("id_course") id_course:Int,
             @Field("id_completed") id_completed:String
     ) : Response<InsertCertificateModel>
@@ -124,15 +127,14 @@ interface ApiService {
             @Field("id_enabled") id_enabled:Int,
             @Field("id_details_course") id_details_course:Int,
             @Field("id_course") id_course:Int,
-            @Field("id_user") id_user:String
+            @Field("id_user") id_user:Int
     ) : Response<InsertProgressModel>
 
     @FormUrlEncoded
     @POST("get_courses_temary_details.php")
     suspend fun getDetailsTemary (
         @Field("id_course_temary") id_course_temary :Int,
-        @Field("id_course") id_course :Int,
-        @Field("id_user") id_user :String
+        @Field("id_course") id_course : Int,
+        @Field("id_user") id_user : Int
     ) : Response<CoursesTemaryDetailsModel>
-
 }

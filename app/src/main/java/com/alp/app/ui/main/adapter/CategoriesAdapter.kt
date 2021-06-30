@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.CategoryModel
 import com.alp.app.databinding.TemplateCategoriesBinding
+import com.alp.app.ui.main.view.fragments.HomeFragmentDirections
 import com.bumptech.glide.Glide
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -42,14 +44,11 @@ class CategoriesAdapter @Inject constructor(@ActivityContext val context: Contex
             Glide.with(context).load(list.icon).into(iconoCursos)
         }
         holder.itemView.setOnClickListener {
-            val bundle = Bundle()
-            val id = list.id_category
-            val nombre = list.name
-            val icono = list.icon
-            bundle.putString("id", id)
-            bundle.putString("nombre", nombre)
-            bundle.putString("icono", icono)
-            Navigation.findNavController(it).navigate(R.id.accion_inicio_a_cursos, bundle)
+            val idCategory = list.id_category
+            val name = list.name
+            val image = list.icon
+            val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
+            it.findNavController().navigate(action)
         }
     }
 

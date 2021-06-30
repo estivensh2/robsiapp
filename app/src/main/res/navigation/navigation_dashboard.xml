@@ -11,39 +11,25 @@
         android:label="Inicio"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/accion_inicio_a_cursos"
-            app:destination="@id/inicioCursosFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/inicioCursosFragment"
-        android:name="com.alp.app.ui.main.view.fragments.CoursesFragment"
-        android:label="Cursos"
-        tools:layout="@layout/fragment_courses" >
+            android:id="@+id/action_homeFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
         <action
-            android:id="@+id/accion_inicio_cursos_a_detalle"
-            app:destination="@id/inicioCursosDetalleFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
-    <fragment
-        android:id="@+id/inicioCursosDetalleFragment"
-        android:name="com.alp.app.ui.main.view.fragments.CoursesTemaryFragment"
-        android:label="Temario" >
+            android:id="@+id/action_homeFragment_to_coursesTemaryFragment"
+            app:destination="@id/coursesTemaryFragment" />
         <action
-            android:id="@+id/accion_detalle_a_temario"
-            app:destination="@id/inicioCursosDetalleTemarioFragment" />
+            android:id="@+id/action_homeFragment_to_profile2"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
-        android:id="@+id/inicioCursosDetalleTemarioFragment"
+        android:id="@+id/coursesTemaryDetailsFragment"
         android:name="com.alp.app.ui.main.view.fragments.CoursesTemaryDetailsFragment"
-        android:label="Contenido" >
-        <action
-            android:id="@+id/accion_inicio_cursos_detalle_a_diplomados"
-            app:destination="@id/listadoDiplomadosFragment2" />
+        android:label="Contenido"
+        tools:layout="@layout/fragment_courses_temary_details">
         <action
             android:id="@+id/action_inicioCursosDetalleTemarioFragment_self"
-            app:destination="@id/inicioCursosDetalleTemarioFragment" />
+            app:destination="@id/coursesTemaryDetailsFragment" />
         <argument
-            android:name="id_course_details"
+            android:name="id_temary"
             app:argType="integer"
             android:defaultValue="0" />
         <argument
@@ -53,16 +39,16 @@
         <action
             android:id="@+id/action_inicioCursosDetalleTemarioFragment_to_coursesReviewFragment"
             app:destination="@id/coursesReviewFragment" />
+        <argument
+            android:name="items_total"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
-    <fragment
-        android:id="@+id/listadoDiplomadosFragment2"
-        android:name="com.alp.app.ui.main.view.fragments.CertificateFragment"
-        android:label="Certificados"
-        tools:layout="@layout/fragment_listado_diplomados" />
     <fragment
         android:id="@+id/coursesReviewFragment"
         android:name="com.alp.app.ui.main.view.fragments.CoursesReviewFragment"
-        android:label="Examen" >
+        android:label="Examen"
+        tools:layout="@layout/fragment_courses_review">
         <argument
             android:name="id_course"
             app:argType="integer"
@@ -75,5 +61,46 @@
             app:destination="@id/profile" />
     </fragment>
     <include app:graph="@navigation/navigation_profile" />
-
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CoursesFragment"
+        android:label="CoursesFragment"
+        tools:layout="@layout/fragment_courses">
+        <argument
+            android:name="id_category"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="name_category"
+            app:argType="string"
+            android:defaultValue="empty" />
+        <argument
+            android:name="image_category"
+            app:argType="string"
+            android:defaultValue="empty" />
+        <action
+            android:id="@+id/action_coursesFragment_to_coursesTemaryFragment"
+            app:destination="@id/coursesTemaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesTemaryFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CoursesTemaryFragment"
+        android:label="CoursesTemaryFragment"
+        tools:layout="@layout/fragment_courses_temary">
+        <argument
+            android:name="id_course"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="name_course"
+            app:argType="string"
+            android:defaultValue="empty" />
+        <argument
+            android:name="image_course"
+            app:argType="string"
+            android:defaultValue="empty" />
+        <action
+            android:id="@+id/action_coursesTemaryFragment_to_coursesTemaryDetailsFragment"
+            app:destination="@id/coursesTemaryDetailsFragment" />
+    </fragment>
 </navigation>

@@ -23,16 +23,12 @@
             app:popUpTo="@id/navegacion_bienvenida"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/accion_bienvenida_a_inicio"
-            app:destination="@id/principalActivity2"
-            app:enterAnim="@anim/slide_in_left"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/principalActivity2"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_navegacion_bienvenida_to_principalActivity2"
+            app:destination="@id/principalActivity2" />
     </fragment>
     <fragment
         android:id="@+id/induccionFragment"
-        android:name="com.alp.app.ui.main.view.fragments.OnboardingFragment"
+        android:name="com.alp.app.ui.main.view.fragments.OnBoardingFragment"
         android:label="induccion_fragment"
         tools:layout="@layout/fragment_onboarding" >
         <action

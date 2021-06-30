@@ -6,11 +6,13 @@ package com.alp.app.ui.main.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.alp.app.R
+import com.alp.app.singleton.PreferencesSingleton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,14 +25,16 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+        PreferencesSingleton.init(this, resources.getString(R.string.name_preferences))
+        val mode = PreferencesSingleton.read("mode_dark", false)
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-       
-        //Preferencias.init(this, "preferenciasDeUsuario")
-        //val estado = Preferencias.leer("idoscuro",true)
-        //setTheme(if (estado==true) R.style.Theme_ALP_Oscuro else R.style.Theme_ALP)
-
+        if (mode!!){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -42,16 +46,14 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navegacion)
-
-
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navGraphIds = listOf(R.navigation.navigation_dashboard, R.navigation.navigation_profile)
 
         //Configurar la vista de navegación inferior con una lista de gráficos de navegación
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_fragmentx,
+            containerId = R.id.nav_host_container,
             intent = intent
         )
         bottomNavigationView.itemIconTintList = null

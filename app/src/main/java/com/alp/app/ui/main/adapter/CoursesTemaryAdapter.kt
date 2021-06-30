@@ -6,18 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.CoursesTemaryModel
 import com.alp.app.databinding.TemplateCoursesTemaryBinding
+import com.alp.app.ui.main.view.fragments.CoursesFragmentDirections
+import com.alp.app.ui.main.view.fragments.CoursesTemaryFragmentDirections
 import com.bumptech.glide.Glide
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
 class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<CoursesTemaryAdapter.ViewHolder>() {
-    // obtenemos la lista de datos
+
     var lista = ArrayList<CoursesTemaryModel>()
-    // creamos la clase para mostrar los campos en la vista
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = TemplateCoursesTemaryBinding.bind(itemView)
     }
@@ -44,28 +47,11 @@ class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Con
             }
         }
         holder.itemView.setOnClickListener {
-            val bundle = Bundle()
-            val id = list.id
-            val idcurso = list.idcurso
-            val nombre = list.nombre
-            val habil = list.habilitado
-            val descripcion = list.descripcion
-            val codigo = list.codigo
-            val tipolenguaje = list.tipolenguaje
-            val imgresultado = list.imgresultado
-            bundle.putInt("id", id)
-            bundle.putInt("idcurso", idcurso)
-            bundle.putString("nombre", nombre)
-            bundle.putString("habilitado", habil)
-            bundle.putString("descripcion", descripcion)
-            bundle.putString("codigo", codigo)
-            bundle.putString("tipolenguaje", tipolenguaje)
-            bundle.putString("imgresultado", imgresultado)
-            bundle.putString("total", lista.size.toString())
-            bundle.putInt("posicion", position)
-            bundle.putString("ultimoelemento", lista.last().total)
-            //bundle.putString("ultimoelemento", list.toString())
-            Navigation.findNavController(it).navigate(R.id.accion_detalle_a_temario, bundle)
+            val idTemary = list.id_temary
+            val idCourse = list.idcurso
+            val total = lista.size
+            val action = CoursesTemaryFragmentDirections.actionCoursesTemaryFragmentToCoursesTemaryDetailsFragment(idTemary, idCourse, total)
+            it.findNavController().navigate(action)
         }
     }
 

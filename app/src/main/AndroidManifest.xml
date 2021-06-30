@@ -46,7 +46,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <service
-            android:name=".utils.FirebaseMensajesServicio"
+            android:name=".utils.FirebaseMessageService"
             android:directBootAware="true"
             android:exported="false"
             tools:targetApi="n">

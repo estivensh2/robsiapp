@@ -38,10 +38,10 @@ class SignUpFragment : Fragment() {
         with(binding){
             functions.enabledButton(false, btnSignUp)
             btnSignUp.setOnClickListener { setupShowData() }
-            iENames.onChange     { habilitarBoton() }
-            iELastNames.onChange { habilitarBoton() }
-            iEEmail.onChange     { habilitarBoton() }
-            iEPassword.onChange  { habilitarBoton() }
+            iENames.onChange     { enabledButton() }
+            iELastNames.onChange { enabledButton() }
+            iEEmail.onChange     { enabledButton() }
+            iEPassword.onChange  { enabledButton() }
         }
         return binding.root
     }
@@ -82,7 +82,7 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun habilitarBoton(){
+    private fun enabledButton(){
         with(binding){
             if (iENames.length()>0 &&
                 iELastNames.length()>0 &&

@@ -37,7 +37,7 @@ class ResetPasswordFragment : Fragment() {
         with(binding){
             functions.enabledButton(false, btnResetPassword)
             btnResetPassword.setOnClickListener { setupShowData() }
-            iEEmail.onChange { habilitarBoton() }
+            iEEmail.onChange { enabledButton() }
         }
         return binding.root
     }
@@ -73,7 +73,7 @@ class ResetPasswordFragment : Fragment() {
         }
     }
 
-    private fun habilitarBoton(){
+    private fun enabledButton(){
         with(binding){
             if (iEEmail.length()>0){
                 functions.enabledButton(true, btnResetPassword)
