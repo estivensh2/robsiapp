@@ -89,4 +89,5 @@
     <string name="text_app_secondary">Aprende lenguajes de programacion</string>
     <string name="description_image_logo">Esta es la descripcion de la imagen principal</string>
     <string name="description_profile_image">Esta es la imagen principal para ir al perfil</string>
+    <string name="text_no_found">No hay ningun resultado</string>
 </resources>

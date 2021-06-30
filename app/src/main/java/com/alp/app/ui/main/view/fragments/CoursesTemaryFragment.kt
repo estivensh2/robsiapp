@@ -52,7 +52,7 @@ class CoursesTemaryFragment : Fragment() {
         functions = Functions(contexto)
         idCourse = args.idCourse
         Glide.with(contexto).load(args.imageCourse).into(binding.iconoCurso)
-        binding.tituloCurso.text = args.nameCourse
+        binding.titleCourses.text = args.nameCourse
         functions.showHideProgressBar(true, binding.progress)
         setupUI()
         setupShowData()

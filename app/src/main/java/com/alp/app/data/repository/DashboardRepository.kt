@@ -15,6 +15,10 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getSlider()
     }
 
+    suspend fun searchCourses(search: String) : List<CoursesModel> {
+        return apiService.searchCourses(search)
+    }
+
     suspend fun getCourses(id_category: Int) : List<CoursesModel> {
         return apiService.getCourses(id_category)
     }

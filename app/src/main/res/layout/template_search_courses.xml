@@ -3,52 +3,51 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view_cursos_detalle"
+    android:id="@+id/fondo_categoriasx"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentPadding="6dp"
-    app:cardBackgroundColor="?attr/colorOnPrimary"
     app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
-    app:cardElevation="2dp"
+    app:cardBackgroundColor="?attr/colorOnPrimary"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fondo_categorias"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:paddingLeft="@dimen/padding_cardview_curso_detalle"
         android:paddingRight="@dimen/padding_cardview_curso_detalle"
         android:stateListAnimator="@null"
         tools:targetApi="lollipop">
 
-        <ImageView
-            android:id="@+id/icono_cursos"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_course"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:contentDescription="@string/description_image_category"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59000003"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/title_course_temary"
+            android:id="@+id/title_course"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:fontFamily="@font/nunito"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/nunito_black"
+            android:gravity="center_vertical"
             android:text="@string/text_test"
-            android:textSize="@dimen/dimensiones_texto_curso_detalle"
+            android:textSize="@dimen/dimensiones_texto_curso"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/icono_cursos"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toEndOf="@+id/image_course"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

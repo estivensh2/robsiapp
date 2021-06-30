@@ -28,6 +28,15 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
+    fun searchCourses(search: String) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.searchCourses(search)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
     fun getCourses(id_category: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {

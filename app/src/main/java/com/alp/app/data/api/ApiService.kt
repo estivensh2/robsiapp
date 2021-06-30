@@ -19,9 +19,7 @@ package com.alp.app.data.api
 
 import com.alp.app.data.model.*
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -45,6 +43,11 @@ interface ApiService {
 
     @POST("get_courses_home.php")
     suspend fun getCoursesHome(): List<CoursesModel>
+
+    @GET("search_courses.php")
+    suspend fun searchCourses(
+            @Query("search") search : String
+    ): List<CoursesModel>
 
     @FormUrlEncoded
     @POST("get_certificate.php")

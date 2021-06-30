@@ -41,7 +41,7 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/titulo_curso"
+                    android:id="@+id/title_courses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -79,7 +79,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/description_image_certificate"
                 app:layout_constraintBottom_toBottomOf="@+id/progresoCurso"
-                app:layout_constraintEnd_toEndOf="@+id/reciclador"
+                app:layout_constraintEnd_toEndOf="@+id/recycler"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

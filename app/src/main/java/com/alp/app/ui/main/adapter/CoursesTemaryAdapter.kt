@@ -34,7 +34,7 @@ class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Con
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = lista[position]
         with(holder.binding){
-            tituloCursox.text = list.nombre
+            titleCourseTemary.text = list.nombre
             if (position==0){
                 list.habilitado = "1"
             }

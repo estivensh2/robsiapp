@@ -33,7 +33,7 @@ class CategoriesAdapter @Inject constructor(@ActivityContext val context: Contex
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val list = list[position]
         with(holder.binding){
-            tituloCurso.text = list.name
+            titleCategory.text = list.name
             if (nuevo.text==""){
                 nuevo.visibility = View.GONE
             } else {
