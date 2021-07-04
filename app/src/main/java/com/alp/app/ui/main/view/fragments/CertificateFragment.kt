@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 05:30 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
@@ -20,7 +28,6 @@ import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CertificateFragment : Fragment() {
@@ -30,7 +37,6 @@ class CertificateFragment : Fragment() {
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var functions: Functions
-    @Inject
     lateinit var certificateAdapter: CertificateAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -45,9 +51,9 @@ class CertificateFragment : Fragment() {
 
     private fun setupUI() {
         with(binding){
-            certificateAdapter  = CertificateAdapter(contexto)
-            recycler.layoutManager = LinearLayoutManager(contexto)
-            recycler.adapter = certificateAdapter
+            certificateAdapter  = CertificateAdapter()
+            recyclerview.layoutManager = LinearLayoutManager(contexto)
+            recyclerview.adapter = certificateAdapter
         }
     }
 
@@ -57,17 +63,17 @@ class CertificateFragment : Fragment() {
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        binding.recycler.visibility = View.VISIBLE
+                        binding.recyclerview.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
                     Status.ERROR   -> {
-                        binding.recycler.visibility = View.VISIBLE
+                        binding.recyclerview.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
-                        binding.recycler.visibility = View.GONE
+                        binding.recyclerview.visibility = View.GONE
                         functions.showHideProgressBar(true, binding.progress)
                     }
                 }
@@ -76,9 +82,13 @@ class CertificateFragment : Fragment() {
     }
 
     private fun renderList(data: List<CertificateModel>) {
-        certificateAdapter.apply {
-            updateData(data)
-            notifyDataSetChanged()
+        if (data[0].data == 1){
+            certificateAdapter.apply {
+                updateData(data)
+                notifyDataSetChanged()
+            }
+        } else {
+            binding.noResults.visibility = View.VISIBLE
         }
     }
 

@@ -1,64 +1,67 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 11:23 PM
+ *
+ */
+
 package com.alp.app.ui.main.adapter
 
-import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.CoursesTemaryModel
 import com.alp.app.databinding.TemplateCoursesTemaryBinding
-import com.alp.app.ui.main.view.fragments.CoursesFragmentDirections
 import com.alp.app.ui.main.view.fragments.CoursesTemaryFragmentDirections
 import com.bumptech.glide.Glide
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
 
-class CoursesTemaryAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<CoursesTemaryAdapter.ViewHolder>() {
+class CoursesTemaryAdapter : RecyclerView.Adapter<CoursesTemaryAdapter.ViewHolder>() {
 
-    var lista = ArrayList<CoursesTemaryModel>()
+    companion object {
+        val list = mutableListOf<CoursesTemaryModel>()
+    }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = TemplateCoursesTemaryBinding.bind(itemView)
+    class ViewHolder(val binding: TemplateCoursesTemaryBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(data: CoursesTemaryModel) {
+            with(binding){
+                titleCourseTemary.text = data.nombre
+                if (adapterPosition==0){
+                    data.habilitado = "1"
+                }
+                if (data.habilitado == "1"){
+                    Glide.with(itemView.context).load(R.drawable.ic_baseline_play_circle_24).into(iconoCursos)
+                    cardView.isEnabled = true
+                } else {
+                    Glide.with(itemView.context).load(R.drawable.ic_baseline_lock_24).into(iconoCursos)
+                    cardView.isEnabled = false
+                }
+            }
+            itemView.setOnClickListener {
+                val idTemary = data.id_temary
+                val idCourse = data.idcurso
+                val total = list.size
+                val action = CoursesTemaryFragmentDirections.actionCoursesTemaryFragmentToCoursesTemaryDetailsFragment(idTemary, idCourse, total)
+                it.findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.template_courses_temary, parent, false))
+        return ViewHolder(TemplateCoursesTemaryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun getItemCount(): Int = lista.size
+    override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list = lista[position]
-        with(holder.binding){
-            titleCourseTemary.text = list.nombre
-            if (position==0){
-                list.habilitado = "1"
-            }
-            if (list.habilitado == "1"){
-                Glide.with(context).load(R.drawable.ic_baseline_play_circle_24).into(iconoCursos)
-                cardViewCursosDetalle.isEnabled = true
-            } else {
-                Glide.with(context).load(R.drawable.ic_baseline_lock_24).into(iconoCursos)
-                //cardViewCursosDetalle.isEnabled = false
-            }
-        }
-        holder.itemView.setOnClickListener {
-            val idTemary = list.id_temary
-            val idCourse = list.idcurso
-            val total = lista.size
-            val action = CoursesTemaryFragmentDirections.actionCoursesTemaryFragmentToCoursesTemaryDetailsFragment(idTemary, idCourse, total)
-            it.findNavController().navigate(action)
-        }
+        holder.bindView(list[position])
     }
 
-    fun updateData(users: List<CoursesTemaryModel>) {
-        this.lista.apply {
-            clear()
-            addAll(users)
-        }
+    fun updateData(data: List<CoursesTemaryModel>) {
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
     }
 }

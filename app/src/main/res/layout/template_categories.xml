@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 30/06/21 01:41 AM
+  ~  */
+  -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,21 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="?attr/colorOnPrimary"
-        app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/dimen_card_view_rounded"
+        app:cardElevation="@dimen/elevation_card_view"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="209dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fondo_categorias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_cardview_generales">
+            android:padding="@dimen/padding_card_view">
 
             <ImageView
-                android:id="@+id/icono_cursos"
+                android:id="@+id/image_category"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:contentDescription="@string/description_image_category"
@@ -33,7 +40,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/nuevo"
+                android:id="@+id/text_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -46,7 +53,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="@+id/title_courses"
+                app:layout_constraintStart_toStartOf="@+id/title_category"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SmallSp" />
 
@@ -58,13 +65,13 @@
                 android:layout_marginRight="8dp"
                 android:fontFamily="@font/nunito_black"
                 android:text="@string/text_test"
-                android:textSize="@dimen/dimensiones_titulo_categoria"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/descripcion_curso"
-                app:layout_constraintTop_toBottomOf="@+id/nuevo" />
+                app:layout_constraintStart_toStartOf="@+id/description_category"
+                app:layout_constraintTop_toBottomOf="@+id/text_new" />
 
             <TextView
-                android:id="@+id/descripcion_curso"
+                android:id="@+id/description_category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -75,7 +82,7 @@
                 android:text="@string/text_test"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/icono_cursos"
+                app:layout_constraintStart_toEndOf="@+id/image_category"
                 app:layout_constraintTop_toBottomOf="@+id/title_category" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

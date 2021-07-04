@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 9/06/21 03:09 AM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.os.Bundle

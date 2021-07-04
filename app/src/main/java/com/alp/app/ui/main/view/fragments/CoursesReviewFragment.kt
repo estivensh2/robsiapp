@@ -1,7 +1,14 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 3/07/21 09:52 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +58,6 @@ class CoursesReviewFragment : Fragment() {
     private var interstitial:InterstitialAd? = null
     private var count = 0
     var lastClickTime: Long = 0
-    @Inject
     lateinit var reviewAdapter: ReviewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -101,16 +107,14 @@ class CoursesReviewFragment : Fragment() {
             reviewAdapter.onItemClick = {
                 if(reviewAdapter.optionSelected == it.response){
                     val list = listOf("¡Eres lo máximo!", "¡Correcto!", "¡Buen trabajo!")
-                    val position = (0..2).random()
                     if(binding.viewPager2.currentItem == reviewAdapter.list.size-1){
                         insertCertificate()
                     } else {
-                        loadBottomSheet(list[position], R.drawable.ic_baseline_check_circle_24, true)
+                        loadBottomSheet(functions.stringRandom(list), R.drawable.ic_baseline_check_circle_24, true)
                     }
                 } else {
                     val list = listOf("Ups, inténtalo de nuevo", "La respuesta es incorrecta", "Hmm, piénsalo de nuevo")
-                    val position = (0..2).random()
-                    loadBottomSheet(list[position], R.drawable.ic_baseline_cancel_24, false)
+                    loadBottomSheet(functions.stringRandom(list), R.drawable.ic_baseline_cancel_24, false)
                 }
             }
 
@@ -176,8 +180,7 @@ class CoursesReviewFragment : Fragment() {
         bindingBottomSheet.textResult.text = message
         if (boolean){
             count += 1
-            val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
-            mediaPlayer.start()
+            functions.playSound(R.raw.correct)
             bindingBottomSheet.buttonResult.text = resources.getString(R.string.text_continue)
             bindingBottomSheet.buttonResult.setOnClickListener {
                 dialog.dismiss()
@@ -186,6 +189,7 @@ class CoursesReviewFragment : Fragment() {
             }
         } else {
             count += 1
+            functions.playSound(R.raw.wrong)
             bindingBottomSheet.buttonResult.text = resources.getString(R.string.text_retry)
             bindingBottomSheet.buttonResult.setOnClickListener {
                 dialog.dismiss()
@@ -237,7 +241,7 @@ class CoursesReviewFragment : Fragment() {
     }
     private fun initAds() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(requireActivity(), "ca-app-pub-2689265379329623/8627761416", adRequest, object : InterstitialAdLoadCallback(){
+        InterstitialAd.load(requireActivity(), resources.getString(R.string.intersitial_review_ad_unit_id), adRequest, object : InterstitialAdLoadCallback(){
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 interstitial = interstitialAd
             }

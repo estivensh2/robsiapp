@@ -1,3 +1,11 @@
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 2/07/21 04:08 PM
+  ~  */
+  -->
+
 <resources>
     <string name="app_name">app</string>
     <string name="title_home">Home</string>
@@ -5,7 +13,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="text_test">Prueba</string>
     <string name="text_my_certificates">Mis certificados</string>
-    <string name="title_activity_entrada">MainActivity</string>
+    <string name="title_activity_home">MainActivity</string>
     <string name="description_create_account">imagen de iniciar o crear cuenta</string>
     <string name="text_sign_in">iniciar sesión</string>
     <string name="text_register_user">registrarme</string>
@@ -33,7 +41,7 @@
     <string name="text_sounds">Sonidos</string>
     <string name="text_mode_dark">Modo oscuro</string>
     <string name="text_password_changed">Tu clave se ha cambiado exitosamente</string>
-    <string name="text_minimum_characters">Las contraseñas deben ser al menos de 6 caracteres</string>
+    <string name="text_minimum_characters">Las contraseña debe ser al menos de 6 caracteres</string>
     <string name="text_passwords_do_not_match">Tu nueva contraseña y la de confirmación no son iguales</string>
     <string name="text_password_incorrect">Tu clave actual es incorrecta</string>
     <string name="text_save">GUARDAR</string>
@@ -64,9 +72,9 @@
     <string name="text_password">Contraseña</string>
     <string name="text_names">Nombres</string>
     <string name="text_last_names">Apellidos</string>
-    <string name="text_current_password">Contrase;a actual</string>
-    <string name="text_new_password">Nueva contrase;a</string>
-    <string name="text_confirmed_new_password">Confirma tu nueva clave</string>
+    <string name="text_current_password">Contraseña actual</string>
+    <string name="text_new_password">Nueva contraseña</string>
+    <string name="text_confirmed_new_password">Confirma tu nueva contraseña</string>
     <string name="text_sent_email">Correo electronico enviado</string>
     <string name="text_next">Siguiente</string>
     <string name="text_option_choose">Elige una opción</string>
@@ -90,4 +98,23 @@
     <string name="description_image_logo">Esta es la descripcion de la imagen principal</string>
     <string name="description_profile_image">Esta es la imagen principal para ir al perfil</string>
     <string name="text_no_found">No hay ningun resultado</string>
+    <string name="text_review_confirm">Haz completado el curso. ¿Deseas realizar tu examen para obtener tu certificado?</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_code">Compilador de código</string>
+    <string name="title_languages">Selecciona un lenguaje</string>
+    <string name="banner_home_ad_unit_id">ca-app-pub-2689265379329623/1379381616</string>
+    <string name="banner_courses_ad_unit_id">ca-app-pub-2689265379329623/6839059026</string>
+    <string name="banner_review_ad_unit_id">ca-app-pub-2689265379329623/3829752302</string>
+    <string name="banner_temary_ad_unit_id">ca-app-pub-2689265379329623/7577425621</string>
+    <string name="banner_temary_details_ad_unit_id">ca-app-pub-2689265379329623/3638180617</string>
+    <string name="banner_certificate_ad_unit_id">ca-app-pub-2689265379329623/1012017271</string>
+    <string name="intersitial_courses_ad_unit_id">ca-app-pub-2689265379329623/2142277871</string>
+    <string name="intersitial_review_ad_unit_id">ca-app-pub-2689265379329623/1563994698</string>
+    <string name="intersitial_temary_ad_unit_id">ca-app-pub-2689265379329623/6624749682</string>
+    <string name="description_image_result">Esta es la imagen del resultado del codigo</string>
+    <string name="text_again">REINTENTAR</string>
+    <string name="description_image_result_question">Esta es la imagen del resultado de la pregunta</string>
+    <string name="description_image_new_code">Esta es la imagen para crear nuevo codigo de compilacion</string>
+    <string name="icon_setting">Configuraciones</string>
+    <string name="text_icon_save">GUARDAR</string>
 </resources>

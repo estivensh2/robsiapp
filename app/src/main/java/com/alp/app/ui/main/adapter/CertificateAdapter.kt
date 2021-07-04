@@ -1,48 +1,55 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 6/06/21 05:31 PM
+ *
+ */
+
 package com.alp.app.ui.main.adapter
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alp.app.R
 import com.alp.app.data.model.CertificateModel
 import com.alp.app.databinding.TemplateCertificatesBinding
-import com.bumptech.glide.Glide
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 
-class CertificateAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<CertificateAdapter.ViewHolder>() {
-    // obtenemos la lista de datos
-    var list = ArrayList<CertificateModel>()
-    // creamos la clase para mostrar los campos en la vista
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = TemplateCertificatesBinding.bind(itemView)
+class CertificateAdapter : RecyclerView.Adapter<CertificateAdapter.ViewHolder>() {
+
+    val list = ArrayList<CertificateModel>()
+
+    class ViewHolder(val binding: TemplateCertificatesBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(data: CertificateModel) {
+            binding.title.text = data.nombrecurso
+            binding.btnDownload.setOnClickListener {
+                itemView.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.urldescarga)))
+            }
+            Picasso.get()
+                    .load(data.imagen)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_STORE)
+                    .into(binding.image)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.template_certificates, parent, false))
+        return ViewHolder(TemplateCertificatesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list = list[position]
-        with(holder.binding){
-            tituloCursoDiploma.text = list.nombrecurso
-            iconoDescargar.setOnClickListener {
-                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(list.urldescarga)))
-            }
-            Glide.with(context).load(list.imagen).into(iconoCursosx)
-        }
+        holder.bindView(list[position])
     }
 
     fun updateData(data: List<CertificateModel>) {
-        this.list.apply {
-            clear()
-            addAll(data)
-        }
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
     }
 }

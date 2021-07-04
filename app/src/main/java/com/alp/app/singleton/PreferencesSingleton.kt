@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 01:34 AM
+ *
+ */
+
 package com.alp.app.singleton
 
 import android.content.Context

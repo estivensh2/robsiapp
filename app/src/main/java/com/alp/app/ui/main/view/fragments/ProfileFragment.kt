@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 3/07/21 09:18 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
@@ -15,9 +23,10 @@ import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
-import com.bumptech.glide.Glide
-import com.bumptech.glide.signature.ObjectKey
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
 
@@ -41,7 +50,7 @@ class ProfileFragment : Fragment() {
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
         functions.showHideProgressBar(true, binding.progress)
-        binding.misCertificados.setOnClickListener {
+        binding.btnMyCertificates.setOnClickListener {
             findNavController().navigate(R.id.accion_perfil_a_diplomas)
         }
         setupShowData()
@@ -74,12 +83,16 @@ class ProfileFragment : Fragment() {
         val response = data.body()!!
         if (response.respuesta == "1") {
             if (response.imagen.isEmpty()){
-                Glide.with(contexto).load(R.drawable.ic_baseline_account_circle_24).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
+                Picasso.get().load(R.drawable.ic_baseline_account_circle_24).into(binding.image)
             } else {
-                Glide.with(requireContext()).load(response.imagen).signature(ObjectKey(System.currentTimeMillis())).into(binding.imagenPerfil)
+                Picasso.get()
+                    .load(response.imagen)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_STORE)
+                    .into(binding.image)
             }
             val nombre = "${response.nombres} ${response.apellidos}"
-            binding.nombreCompleto.text = nombre
+            binding.fullName.text = nombre
             imagen = response.imagen
             nombres = response.nombres
             apellidos = response.apellidos
@@ -100,13 +113,13 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_perfil, menu)
+        inflater.inflate(R.menu.profile, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.configuraciones_perfil -> {
+            R.id.settings_profile -> {
                 if(nombres != null){
                     val action = ProfileFragmentDirections.accionPerfilAPerfilConfiguracion(imagen!!, nombres!!, apellidos!!, notificaciones!!, correo!!, clave!!)
                     findNavController().navigate(action)

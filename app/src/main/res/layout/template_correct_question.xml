@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 28/06/21 04:44 PM
+  ~  */
+  -->
+
+<!--
   ~ EHOALAELEALAE
   -->
 
@@ -20,7 +28,6 @@
         android:layout_marginRight="16dp"
         android:fontFamily="@font/nunito_black"
         android:gravity="center"
-        android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textResult"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/description_image_result_question" />
 
     <Button
         android:id="@+id/buttonResult"
@@ -46,10 +54,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/nunito_bold"
+        android:fontFamily="@font/nunito_black"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="REINTENTAR"
+        android:text="@string/text_again"
+        app:backgroundTint="@color/yellow_500"
         app:cornerRadius="@dimen/size_button_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

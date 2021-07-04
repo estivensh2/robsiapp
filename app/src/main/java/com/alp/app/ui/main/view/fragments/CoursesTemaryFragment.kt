@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 11:24 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
@@ -28,7 +36,6 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CoursesTemaryFragment : Fragment() {
@@ -41,9 +48,7 @@ class CoursesTemaryFragment : Fragment() {
     private var interstitial:InterstitialAd? = null
     private var count = 0
     private val args: CoursesTemaryFragmentArgs by navArgs()
-
     private val dashboardViewModel: DashboardViewModel by viewModels()
-    @Inject
     lateinit var coursesTemaryAdapter: CoursesTemaryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -66,7 +71,7 @@ class CoursesTemaryFragment : Fragment() {
 
     private fun setupUI() {
         with(binding){
-            coursesTemaryAdapter  = CoursesTemaryAdapter(contexto)
+            coursesTemaryAdapter  = CoursesTemaryAdapter()
             recycler.layoutManager = LinearLayoutManager(contexto)
             recycler.adapter = coursesTemaryAdapter
         }
@@ -132,7 +137,7 @@ class CoursesTemaryFragment : Fragment() {
     }
     private fun initAds() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(requireActivity(), "ca-app-pub-2689265379329623/8627761416", adRequest, object : InterstitialAdLoadCallback(){
+        InterstitialAd.load(requireActivity(), resources.getString(R.string.intersitial_temary_ad_unit_id), adRequest, object : InterstitialAdLoadCallback(){
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 interstitial = interstitialAd
             }

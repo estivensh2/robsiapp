@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 20/06/21 07:11 PM
+  ~  */
+  -->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/configuraciones_perfil"
+        android:id="@+id/settings_profile"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Item One"
+        android:title="@string/icon_setting"
         app:showAsAction="always" />
 </menu>

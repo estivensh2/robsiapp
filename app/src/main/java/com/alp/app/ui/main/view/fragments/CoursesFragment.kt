@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 05:40 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
@@ -11,6 +19,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alp.app.R
 import com.alp.app.data.model.CoursesModel
 import com.alp.app.databinding.FragmentCoursesBinding
 import com.alp.app.ui.main.adapter.CoursesAdapter
@@ -26,22 +35,20 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CoursesFragment : Fragment() {
 
-    private lateinit var contexto: Context
     private var idCategory = 0
     private var _binding: FragmentCoursesBinding? = null
     private val binding get() = _binding!!
     private var interstitial:InterstitialAd? = null
     private var count = 0
-    private lateinit var functions: Functions
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val args: CoursesFragmentArgs by navArgs()
-    @Inject
-    lateinit var coursesAdapter: CoursesAdapter
+    private lateinit var contexto: Context
+    private lateinit var functions: Functions
+    private lateinit var coursesAdapter: CoursesAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCoursesBinding.inflate(inflater, container, false)
@@ -80,7 +87,7 @@ class CoursesFragment : Fragment() {
 
     private fun initAds() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(requireActivity(), "ca-app-pub-2689265379329623/8627761416", adRequest, object : InterstitialAdLoadCallback(){
+        InterstitialAd.load(requireActivity(), resources.getString(R.string.intersitial_courses_ad_unit_id), adRequest, object : InterstitialAdLoadCallback(){
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 interstitial = interstitialAd
             }
@@ -104,7 +111,7 @@ class CoursesFragment : Fragment() {
 
     private fun setupUI() {
         with(binding){
-            coursesAdapter  = CoursesAdapter(contexto)
+            coursesAdapter  = CoursesAdapter()
             recycler.layoutManager = LinearLayoutManager(contexto)
             recycler.adapter = coursesAdapter
         }

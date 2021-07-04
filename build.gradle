@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 30/06/21 01:39 AM
+ *
+ */
+
 buildscript {
     ext.kotlin_version = "1.4.21"
     ext.hilt_version = '2.28-alpha'
@@ -15,7 +23,6 @@ buildscript {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath 'com.google.gms:google-services:4.3.5'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

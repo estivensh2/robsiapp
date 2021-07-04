@@ -1,15 +1,27 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 3/07/21 09:18 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,18 +30,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.alp.app.ui.main.view.activities.HomeActivity
 import com.alp.app.R
 import com.alp.app.data.model.UpdateInfoModel
 import com.alp.app.databinding.FragmentProfileDetailsBinding
 import com.alp.app.singleton.PreferencesSingleton
+import com.alp.app.ui.main.view.activities.HomeActivity
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
-import com.bumptech.glide.Glide
-import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
@@ -39,18 +52,15 @@ import java.io.IOException
 class ProfileDetailsFragment : Fragment() {
 
     private val binding get() = _binding!!
-    private val capturePhoto = 102
     private var image : String = ""
     private var bitmap: Bitmap? = null
     private val codeCapturePhoto = 2
-    private val codeSelectPhoto = 103
     private val selectPhotoPermission = 3
     private val args: ProfileDetailsFragmentArgs by navArgs()
     private var _binding: FragmentProfileDetailsBinding? = null
+    private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var contexto: Context
     private lateinit var functions: Functions
-    private val dashboardViewModel: DashboardViewModel by viewModels()
-    private lateinit var item: MenuItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileDetailsBinding.inflate(inflater, container, false)
@@ -58,9 +68,13 @@ class ProfileDetailsFragment : Fragment() {
         functions = Functions(contexto)
         with(binding){
             if(args.imagen.isEmpty()){
-                Glide.with(contexto).load(R.drawable.ic_baseline_account_circle_24).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
+                Picasso.get().load(R.drawable.ic_baseline_account_circle_24).into(image)
             } else {
-                Glide.with(contexto).load(args.imagen).signature(ObjectKey(System.currentTimeMillis())).into(imagen)
+                Picasso.get()
+                    .load(args.imagen)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_STORE)
+                    .into(image)
             }
             iENames.setText(args.nombres)
             iEPassword.isEnabled = false
@@ -69,13 +83,13 @@ class ProfileDetailsFragment : Fragment() {
             iEEmail.setText(args.correoElectronico)
             sounds.isChecked = PreferencesSingleton.read("enabled_sound" , false) as Boolean
             changeTheme.isChecked = PreferencesSingleton.read("mode_dark" , false) as Boolean
-            botonSubirImagen.setOnClickListener  { alertaSubirImagen() }
-            botonCerrarSesion.setOnClickListener {
+            btnUploadImage.setOnClickListener  { alertaSubirImagen() }
+            btnLogout.setOnClickListener {
                 PreferencesSingleton.delete("active_session")
                 startActivity(Intent(contexto, HomeActivity::class.java))
                 activity?.finish()
             }
-            iLPassword.setOnClickListener { v -> Navigation.findNavController(v).navigate(R.id.accion_configuracion_a_cambiar_clave) }
+            iLPassword.setEndIconOnClickListener {  Navigation.findNavController(it).navigate(R.id.action_profileDetailsFragment_to_changePasswordFragment) }
             sounds.setOnCheckedChangeListener { _, isChecked ->
                 when(isChecked){
                     true ->  PreferencesSingleton.write("enabled_sound", true)
@@ -102,7 +116,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private fun setupShowData() {
         val names = binding.iENames.text.toString()
-        if (bitmap!=null) { image = ConvertImageToBase64(bitmap!!) }
+        if (bitmap!=null) { image = convertImageToBase64(bitmap!!) }
         val lastNames = binding.iELastNames.text.toString()
         val email = binding.iEEmail.text.toString()
         val idUser = PreferencesSingleton.read("id_user", 0)
@@ -141,15 +155,15 @@ class ProfileDetailsFragment : Fragment() {
                 .setCancelable(false)
                 .setItems(options) { dialog, position ->
                     when(options[position]){
-                        resources.getString(R.string.text_capture_image) -> openCamera()
+                        resources.getString(R.string.text_capture_image)   -> openCamera()
                         resources.getString(R.string.text_choose_image)  -> loadGallery()
-                        resources.getString(R.string.text_cancel)        -> dialog.dismiss()
+                        resources.getString(R.string.text_cancel)     -> dialog.dismiss()
                     }
                 }
                 .show()
     }
 
-    private fun ConvertImageToBase64(bitmap: Bitmap): String {
+    private fun convertImageToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val imgBytes = byteArrayOutputStream.toByteArray()
@@ -163,7 +177,7 @@ class ProfileDetailsFragment : Fragment() {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(intent, codeSelectPhoto)
+            resultSelectPhoto.launch(intent)
         }
     }
 
@@ -171,7 +185,8 @@ class ProfileDetailsFragment : Fragment() {
         if (ContextCompat.checkSelfPermission(contexto.applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissionsCamera()
         } else {
-            startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE), capturePhoto)
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            captureResult.launch(intent)
         }
     }
 
@@ -201,30 +216,38 @@ class ProfileDetailsFragment : Fragment() {
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (data!=null){
-            val imagenSeleccionada = data.data
+    private var resultSelectPhoto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = it.data
+            val imageSelected = data!!.data
             try {
-                when(requestCode){
-                    codeSelectPhoto -> {
-                        bitmap = MediaStore.Images.Media.getBitmap(contexto.contentResolver, imagenSeleccionada)
-                        binding.imagen.setImageBitmap(bitmap)
-                        item.isVisible = true
-                    }
-                    capturePhoto -> {
-                        bitmap = data.extras?.get("data") as Bitmap
-                        binding.imagen.setImageBitmap(bitmap)
-                        item.isVisible = true
+                imageSelected?.let {
+                    if(Build.VERSION.SDK_INT < 28) {
+                        bitmap = MediaStore.Images.Media.getBitmap(contexto.contentResolver, imageSelected)
+                        binding.image.setImageBitmap(bitmap)
+                    } else {
+                        val source = ImageDecoder.createSource(contexto.contentResolver, imageSelected)
+                        bitmap = ImageDecoder.decodeBitmap(source)
+                        binding.image.setImageBitmap(bitmap)
                     }
                 }
-            } catch (e: IOException) {
-                if (bitmap!=null) binding.imagen.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
+    private var captureResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = it.data
+            try {
+                bitmap = data!!.extras?.get("data") as Bitmap
+                binding.image.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                if (bitmap!=null) binding.image.setImageBitmap(bitmap)
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -232,13 +255,13 @@ class ProfileDetailsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_configuracion, menu)
+        inflater.inflate(R.menu.settings, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.guardar -> setupShowData()
+        when(item.itemId) {
+            R.id.save -> setupShowData()
         }
         return super.onOptionsItemSelected(item)
     }

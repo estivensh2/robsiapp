@@ -1,61 +1,70 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 30/06/21 01:45 AM
+ *
+ */
+
 package com.alp.app.ui.main.adapter
 
-import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.CategoryModel
 import com.alp.app.databinding.TemplateCategoriesBinding
 import com.alp.app.ui.main.view.fragments.HomeFragmentDirections
-import com.bumptech.glide.Glide
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 
-class CategoriesAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
-    // obtenemos la lista de datos
-    var list = ArrayList<CategoryModel>()
-    // creamos la clase para mostrar los campos en la vista
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = TemplateCategoriesBinding.bind(itemView)
+class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+
+    val list = ArrayList<CategoryModel>()
+
+    class ViewHolder(val binding: TemplateCategoriesBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(data: CategoryModel) {
+            with(binding){
+                titleCategory.text = data.name
+                if (textNew.text==""){
+                    textNew.visibility = View.GONE
+                } else {
+                    textNew.text = itemView.context.getString(R.string.text_new)
+                    textNew.visibility = View.VISIBLE
+                }
+                descriptionCategory.text = data.description
+                Picasso.get()
+                        .load(data.icon)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_STORE)
+                        .into(imageCategory)
+            }
+            itemView.setOnClickListener {
+                val idCategory = data.id_category
+                val name = data.name
+                val image = data.icon
+                val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
+                it.findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.template_categories, parent, false))
+        return ViewHolder(TemplateCategoriesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list = list[position]
-        with(holder.binding){
-            titleCategory.text = list.name
-            if (nuevo.text==""){
-                nuevo.visibility = View.GONE
-            } else {
-                nuevo.text = context.getString(R.string.text_new)
-                nuevo.visibility = View.VISIBLE
-            }
-            descripcionCurso.text = list.description
-            Glide.with(context).load(list.icon).into(iconoCursos)
-        }
-        holder.itemView.setOnClickListener {
-            val idCategory = list.id_category
-            val name = list.name
-            val image = list.icon
-            val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
-            it.findNavController().navigate(action)
-        }
+        holder.bindView(list[position])
     }
 
     fun updateData(data: List<CategoryModel>) {
-        this.list.apply {
-            clear()
-            addAll(data)
-        }
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
     }
 }

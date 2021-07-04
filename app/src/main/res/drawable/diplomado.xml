@@ -1,4 +1,13 @@
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 1/06/21 12:30 AM
+  ~  */
+  -->
+
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="112.291dp"
     android:height="123.913dp"
     android:viewportWidth="112.291"
@@ -53,7 +62,8 @@
       android:fillColor="#ffd97b"/>
   <group>
     <clip-path
-        android:pathData="M94.573,68.145L17.725,68.145a2.372,2.372 0,0 0,-2.365 2.365v51.038a2.372,2.372 0,0 0,2.365 2.365L94.575,123.913a2.372,2.372 0,0 0,2.365 -2.365L96.94,70.505A2.373,2.373 0,0 0,94.573 68.145Z"/>
+        android:pathData="M94.573,68.145L17.725,68.145a2.372,2.372 0,0 0,-2.365 2.365v51.038a2.372,2.372 0,0 0,2.365 2.365L94.575,123.913a2.372,2.372 0,0 0,2.365 -2.365L96.94,70.505A2.373,2.373 0,0 0,94.573 68.145Z"
+        tools:ignore="VectorRaster" />
     <path
         android:pathData="M14.274,83.18L23.313,83.18a2.471,2.471 0,0 1,0 4.942L14.274,88.122a2.471,2.471 0,0 1,0 -4.942Z"
         android:fillColor="#ffd97b"/>
@@ -69,7 +79,8 @@
   </group>
   <group>
     <clip-path
-        android:pathData="M94.573,68.145L17.725,68.145a2.372,2.372 0,0 0,-2.365 2.365v51.038a2.372,2.372 0,0 0,2.365 2.365L94.575,123.913a2.372,2.372 0,0 0,2.365 -2.365L96.94,70.505A2.373,2.373 0,0 0,94.573 68.145Z"/>
+        android:pathData="M94.573,68.145L17.725,68.145a2.372,2.372 0,0 0,-2.365 2.365v51.038a2.372,2.372 0,0 0,2.365 2.365L94.575,123.913a2.372,2.372 0,0 0,2.365 -2.365L96.94,70.505A2.373,2.373 0,0 0,94.573 68.145Z"
+        tools:ignore="VectorRaster" />
     <path
         android:pathData="M99.128,108.876h-9.037a2.471,2.471 0,0 1,0 -4.942h9.037a2.471,2.471 0,0 1,0 4.942Z"
         android:fillColor="#ffd97b"/>

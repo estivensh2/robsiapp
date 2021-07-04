@@ -1,9 +1,16 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 30/06/21 02:20 AM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
@@ -15,6 +22,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alp.app.R
 import com.alp.app.data.model.CoursesTemaryDetailsModel
@@ -22,18 +30,17 @@ import com.alp.app.data.model.InsertProgressModel
 import com.alp.app.databinding.FragmentCoursesTemaryDetailsBinding
 import com.alp.app.databinding.TemplateOpenCourseImageBinding
 import com.alp.app.singleton.PreferencesSingleton
-import com.alp.app.ui.main.adapter.CoursesTemaryAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.kbiakov.codeview.adapters.Options
 import io.github.kbiakov.codeview.highlight.ColorTheme
 import retrofit2.Response
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CoursesTemaryDetailsFragment : Fragment() {
@@ -43,12 +50,10 @@ class CoursesTemaryDetailsFragment : Fragment() {
     private var idTemary : Int = 0
     private var idCourse : Int = 0
     private var total : Int = 0
-    private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val args: CoursesTemaryDetailsFragmentArgs by navArgs()
+    private lateinit var contexto: Context
     private lateinit var functions: Functions
-    @Inject
-    lateinit var coursesTemaryAdapter: CoursesTemaryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCoursesTemaryDetailsBinding.inflate(inflater, container, false)
@@ -126,10 +131,10 @@ class CoursesTemaryDetailsFragment : Fragment() {
                 }
 
                 if (response.code.isEmpty()){
-                    binding.linearLayout2.visibility = View.GONE
+                    binding.codeView.visibility = View.GONE
                     binding.codeView.visibility = View.GONE
                 } else {
-                    binding.linearLayout2.visibility = View.VISIBLE
+                    binding.codeView.visibility = View.VISIBLE
                     binding.codeView.visibility = View.VISIBLE
                     binding.codeView.setOptions(
                         Options.Default.get(requireContext())
@@ -148,12 +153,10 @@ class CoursesTemaryDetailsFragment : Fragment() {
                 }
                 btnNext.setOnClickListener {
                     if (PreferencesSingleton.read("enabled_sound", false)==true){
-                        val mediaPlayer = MediaPlayer.create(context, R.raw.completado)
-                        mediaPlayer.start()
+                        functions.playSound(R.raw.completed)
                     }
                     if (idTemary == response.total){
-                        val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentToCoursesReviewFragment(idCourse)
-                        it.findNavController().navigate(action)
+                        alertReviewConfirm()
                     } else {
                         insertProgress()
                         val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentSelf(idTemary+1, idCourse)
@@ -162,6 +165,20 @@ class CoursesTemaryDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun alertReviewConfirm() {
+        MaterialAlertDialogBuilder(contexto)
+                .setMessage(resources.getString(R.string.text_review_confirm))
+                .setNegativeButton(resources.getString(R.string.text_no)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(resources.getString(R.string.text_yes)){ _, _ ->
+                    val action = CoursesTemaryDetailsFragmentDirections.actionInicioCursosDetalleTemarioFragmentToCoursesReviewFragment(idCourse)
+                    findNavController().navigate(action)
+                }
+                .setCancelable(false)
+                .show()
     }
 
     private fun renderProgress(data: Response<InsertProgressModel>) {
@@ -177,8 +194,8 @@ class CoursesTemaryDetailsFragment : Fragment() {
         val dialog = Dialog(contexto)
         val bindingBottomSheet = TemplateOpenCourseImageBinding.inflate(layoutInflater, null, false)
         val converterImage = binding.imgresultado.drawable
-        bindingBottomSheet.imagenCompleta.setImageDrawable(converterImage)
-        bindingBottomSheet.botonCerrar.setOnClickListener { dialog.dismiss() }
+        bindingBottomSheet.image.setImageDrawable(converterImage)
+        bindingBottomSheet.btnClose.setOnClickListener { dialog.dismiss() }
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)

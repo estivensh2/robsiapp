@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 29/06/21 05:05 PM
+  ~  */
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.alp.app">
@@ -22,7 +30,7 @@
         tools:targetApi="m">
         <activity
             android:name="com.alp.app.ui.main.view.activities.DashboardActivity"
-            android:label="@string/title_activity_entrada" />
+            android:label="@string/title_activity_home" />
         <activity
             android:name="com.alp.app.ui.main.view.activities.HomeActivity"
             android:label="@string/app_name">

@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 01:55 AM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.os.Bundle
@@ -9,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.alp.app.R
-import com.alp.app.ui.main.adapter.OnboardingAdapter
+import com.alp.app.ui.main.adapter.OnBoardingAdapter
 import com.alp.app.data.model.InduccionData
 import com.alp.app.databinding.FragmentOnboardingBinding
 import com.alp.app.singleton.PreferencesSingleton
@@ -28,7 +36,7 @@ class OnBoardingFragment : Fragment() {
         arrayList.add(InduccionData(R.drawable.paso2, "Obten tu certificado", "Podrás obtener y descargar tu certificado de cada curso."))
         displayList.addAll(arrayList)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
-        val adapter = OnboardingAdapter(requireContext(), displayList)
+        val adapter = OnBoardingAdapter(requireContext(), displayList)
         binding.recicladorInduccion.adapter = adapter
         binding.indicator.count = displayList.size
         with(binding){

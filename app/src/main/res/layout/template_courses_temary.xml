@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 29/06/21 11:23 PM
+  ~  */
+  -->
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view_cursos_detalle"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentPadding="6dp"
     app:cardBackgroundColor="?attr/colorOnPrimary"
-    app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
-    app:cardElevation="2dp"
+    app:cardCornerRadius="@dimen/dimen_card_view_rounded"
+    app:cardElevation="@dimen/elevation_card_view"
     app:cardUseCompatPadding="true"
+    app:contentPadding="6dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fondo_categorias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/padding_cardview_curso_detalle"
-        android:paddingRight="@dimen/padding_cardview_curso_detalle"
         android:stateListAnimator="@null"
         tools:targetApi="lollipop">
 
@@ -27,6 +31,8 @@
             android:id="@+id/icono_cursos"
             android:layout_width="17dp"
             android:layout_height="17dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:contentDescription="@string/description_image_category"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +46,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:fontFamily="@font/nunito"
             android:text="@string/text_test"
-            android:textSize="@dimen/dimensiones_texto_curso_detalle"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

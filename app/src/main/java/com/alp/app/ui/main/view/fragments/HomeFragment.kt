@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 1/07/21 02:14 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
@@ -28,7 +36,7 @@ import com.google.android.gms.ads.AdRequest
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -38,8 +46,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val dashboardViewModel: DashboardViewModel by viewModels()
-    @Inject
-    lateinit var adapterCategories: CategoriesAdapter
+    private lateinit var adapterCategories: CategoriesAdapter
     private lateinit var adapterSlider: SliderAdapter
     private lateinit var adapterCourses: CoursesHomeAdapter
     private lateinit var adapterSearchCourses: SearchCoursesAdapter
@@ -48,6 +55,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         functions = Functions(contexto)
         functions.showHideProgressBar(true, binding.progress)
+
         setupUI()
         setupShowData()
         initLoadAds()
@@ -60,18 +68,18 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun setupUI() {
         with(binding){
-            adapterCategories = CategoriesAdapter(contexto)
-            adapterSlider     = SliderAdapter(contexto)
-            adapterCourses    = CoursesHomeAdapter(contexto)
-            adapterSearchCourses    = SearchCoursesAdapter(contexto)
+            adapterCategories = CategoriesAdapter()
+            adapterSlider     = SliderAdapter()
+            adapterCourses    = CoursesHomeAdapter()
+            adapterSearchCourses    = SearchCoursesAdapter()
             recyclerViewSlider.adapter     = adapterSlider
             recyclerViewCourses.adapter    = adapterCourses
             recyclerViewCategories.adapter = adapterCategories
             recyclerViewSearchCourses.adapter = adapterSearchCourses
             recyclerViewCategories.layoutManager    = LinearLayoutManager(contexto)
             recyclerViewSearchCourses.layoutManager = LinearLayoutManager(contexto)
-            recyclerViewSlider.layoutManager        = LinearLayoutManager(contexto, LinearLayoutManager.HORIZONTAL, true)
-            recyclerViewCourses.layoutManager       = LinearLayoutManager(contexto, LinearLayoutManager.HORIZONTAL, true)
+            recyclerViewSlider.layoutManager        = LinearLayoutManager(contexto, LinearLayoutManager.HORIZONTAL, false)
+            recyclerViewCourses.layoutManager       = LinearLayoutManager(contexto, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
@@ -139,17 +147,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun retrieveSlider(list: List<SliderModel>) {
-        adapterSlider.apply {
-            updateData(list)
-            notifyDataSetChanged()
-        }
+        adapterSlider.updateData(list)
     }
 
+
     private fun retrieveCourses(list: List<CoursesModel>) {
-        adapterCourses.apply {
-            updateData(list)
-            notifyDataSetChanged()
-        }
+        adapterCourses.updateData(list)
     }
 
     private fun renderList(data: List<CategoryModel>) {
@@ -205,10 +208,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun renderSearchCourses(list: List<CoursesModel>) {
-        adapterSearchCourses.apply {
-            updateData(list)
-            notifyDataSetChanged()
-        }
+        adapterSearchCourses.updateData(list)
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {

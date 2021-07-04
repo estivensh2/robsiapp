@@ -1,33 +1,19 @@
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 9/06/21 03:34 PM
+  ~  */
+  -->
+
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="cardview_radius_generales">10dp</dimen>
-    <dimen name="dimensiones_14">14sp</dimen>
-    <dimen name="dimensiones_16">16sp</dimen>
-    <dimen name="dimensiones_18">18sp</dimen>
-    <dimen name="dimensiones_20">20sp</dimen>
-    <dimen name="dimensiones_22">22sp</dimen>
-    <dimen name="dimensiones_24">24sp</dimen>
-    <dimen name="dimensiones_26">26sp</dimen>
-    <dimen name="dimensiones_botones_iniciar_o_crear_cuenta">16sp</dimen>
-    <dimen name="margenes_generales">16sp</dimen>
-    <dimen name="dimensiones_labels">18sp</dimen>
-    <dimen name="dimensiones_titulo_que_deseas_aprender">24sp</dimen>
-    <dimen name="dimensiones_titulo_categoria">22sp</dimen>
-    <dimen name="dimensiones_cardview_redondeados">10dp</dimen>
-    <dimen name="padding_cardview_generales">20dp</dimen>
-    <dimen name="dimensiones_texto_curso">22sp</dimen>
-    <dimen name="padding_cardview_curso_detalle">10dp</dimen>
-    <dimen name="dimensiones_texto_curso_detalle">14sp</dimen>
-    <dimen name="dimensiones_texto_actualizar_imagen">18sp</dimen>
-    <dimen name="dimensiones_botones_generales">16sp</dimen>
-    <dimen name="dimensiones_labels_configuraciones">20sp</dimen>
-    <dimen name="dimensiones_textos_tablas">16sp</dimen>
-    <dimen name="margin_filas_tablas">2dp</dimen>
-    <dimen name="dimensiones_botones_iniciar">18sp</dimen>
-    <dimen name="dimensiones_texto_olvidaste_tu_clave">20sp</dimen>
+    <dimen name="dimen_card_view_rounded">10dp</dimen>
+    <dimen name="padding_card_view">20dp</dimen>
     <dimen name="size_button_radius">25dp</dimen>
     <dimen name="size_input_radius">30dp</dimen>
-    <item name="dimensiones_letter_spacing" type="dimen" format="float">0.07</item>
+    <dimen name="elevation_card_view">5dp</dimen>
+    <item name="dimen_letter_spacing" type="dimen" format="float">0.2</item>
 </resources>

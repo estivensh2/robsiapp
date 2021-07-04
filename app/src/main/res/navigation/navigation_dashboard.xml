@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 30/06/21 02:12 AM
+  ~  */
+  -->
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -64,7 +72,7 @@
     <fragment
         android:id="@+id/coursesFragment"
         android:name="com.alp.app.ui.main.view.fragments.CoursesFragment"
-        android:label="CoursesFragment"
+        android:label="Cursos"
         tools:layout="@layout/fragment_courses">
         <argument
             android:name="id_category"
@@ -85,7 +93,7 @@
     <fragment
         android:id="@+id/coursesTemaryFragment"
         android:name="com.alp.app.ui.main.view.fragments.CoursesTemaryFragment"
-        android:label="CoursesTemaryFragment"
+        android:label="Temario"
         tools:layout="@layout/fragment_courses_temary">
         <argument
             android:name="id_course"

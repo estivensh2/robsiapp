@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 05:44 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.activities
 
 import android.os.Bundle
@@ -32,12 +40,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = findNavController(R.id.navegacion_entradax)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                    R.id.iniciarOCrearCuentaFragment
-            )
-        )
+        navController = findNavController(R.id.navigation_home)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.iniciarOCrearCuentaFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         instantiateID()
     }

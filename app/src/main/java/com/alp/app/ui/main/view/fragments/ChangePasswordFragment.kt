@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 3/07/21 09:18 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
@@ -35,7 +43,6 @@ class ChangePasswordFragment : Fragment() {
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
-        functions.showHideProgressBar(true, binding.progress)
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -67,7 +74,7 @@ class ChangePasswordFragment : Fragment() {
         val response = data.body()!!
         if (response.data == "1") {
             DynamicToast.makeSuccess(contexto, getString(R.string.text_password_changed), Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.accion_cambiar_clave_a_perfil)
+            findNavController().navigate(R.id.action_changePasswordFragment_to_perfilFragment)
         } else {
             DynamicToast.makeError(contexto, resources.getString(R.string.text_password_incorrect), Toast.LENGTH_LONG).show()
         }
@@ -79,13 +86,12 @@ class ChangePasswordFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_cambiar_clave, menu)
+        inflater.inflate(R.menu.change_password, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu) {
-        val item = menu.findItem(R.id.cambiar_clave)
+        val item = menu.findItem(R.id.change_password)
         item.isVisible = false
         with(binding){
             iECurrentPassword.onChange           { enabledButton(item) }
@@ -100,11 +106,15 @@ class ChangePasswordFragment : Fragment() {
             if (iECurrentPassword.length()>0){
                 if (iENewPassword.length()>0 && iEConfirmedNewPassword.length()>0){
                     if (iENewPassword.length()<6 && iEConfirmedNewPassword.length()<6){
-                        DynamicToast.makeError(contexto, resources.getString(R.string.text_minimum_characters), Toast.LENGTH_LONG).show()
+                        textError.visibility = View.GONE
+                        iLNewPassword.error = resources.getString(R.string.text_minimum_characters)
                     } else if (iENewPassword.text.toString()!=iEConfirmedNewPassword.text.toString()){
-                        DynamicToast.makeError(contexto, resources.getString(R.string.text_passwords_do_not_match), Toast.LENGTH_LONG).show()
+                        iLNewPassword.error = ""
+                        textError.visibility = View.VISIBLE
+                        textError.text = resources.getString(R.string.text_passwords_do_not_match)
                         item.isVisible = false
                     } else {
+                        textError.visibility = View.GONE
                         item.isVisible = true
                     }
                 } else {
@@ -126,7 +136,7 @@ class ChangePasswordFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.cambiar_clave -> setupShowData()
+            R.id.change_password -> setupShowData()
         }
         return super.onOptionsItemSelected(item)
     }

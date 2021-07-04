@@ -1,49 +1,49 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 07:59 PM
+ *
+ */
+
 package com.alp.app.ui.main.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alp.app.R
 import com.alp.app.data.model.SliderModel
 import com.alp.app.databinding.TemplateSliderBinding
-import com.bumptech.glide.Glide
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
 
-class SliderAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
+class SliderAdapter : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
 
-    var list = ArrayList<SliderModel>()
+    val list = ArrayList<SliderModel>()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = TemplateSliderBinding.bind(itemView)
+    class ViewHolder(val binding: TemplateSliderBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(data: SliderModel) {
+            Picasso.get()
+                    .load(data.image)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_STORE)
+                    .into(binding.imageSlider)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.template_slider, parent, false))
+        return ViewHolder(TemplateSliderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list = list[position]
-        with(holder.binding){
-            Picasso.get()
-                .load(list.image)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(imageSlider)
-        }
+        holder.bindView(list[position])
     }
 
-    fun updateData(users: List<SliderModel>) {
-        this.list.apply {
-            clear()
-            addAll(users)
-        }
+    fun updateData(data: List<SliderModel>) {
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
     }
 }

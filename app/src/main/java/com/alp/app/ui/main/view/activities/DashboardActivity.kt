@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 3/07/21 09:20 PM
+ *
+ */
+
 package com.alp.app.ui.main.view.activities
 
 /**
@@ -13,6 +21,7 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.alp.app.R
 import com.alp.app.singleton.PreferencesSingleton
+import com.google.android.gms.common.util.CollectionUtils.listOf
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +56,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
-        val navGraphIds = listOf(R.navigation.navigation_dashboard, R.navigation.navigation_profile)
+        val navGraphIds = mutableListOf(R.navigation.navigation_code, R.navigation.navigation_dashboard, R.navigation.navigation_profile)
 
         //Configurar la vista de navegación inferior con una lista de gráficos de navegación
         val controller = bottomNavigationView.setupWithNavController(

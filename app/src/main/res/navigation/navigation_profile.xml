@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 29/06/21 01:13 AM
+  ~  */
+  -->
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,15 +20,15 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/accion_perfil_a_perfil_configuracion"
-            app:destination="@id/perfilDetalleFragment" />
+            app:destination="@id/profileDetailsFragment" />
         <action
             android:id="@+id/accion_perfil_a_diplomas"
             app:destination="@id/listadoDiplomadosFragment" />
     </fragment>
     <fragment
-        android:id="@+id/perfilDetalleFragment"
+        android:id="@+id/profileDetailsFragment"
         android:name="com.alp.app.ui.main.view.fragments.ProfileDetailsFragment"
-        android:label="Configuración"
+        android:label="Perfil"
         tools:layout="@layout/fragment_profile_details" >
         <argument
             android:name="imagen"
@@ -42,33 +50,28 @@
             app:argType="string" />
         <action
             android:id="@+id/accion_configuracion_a_iniciar_o_crear"
-            app:destination="@id/entradaActivity" />
+            app:destination="@id/homeActivity" />
         <action
-            android:id="@+id/accion_configuracion_a_cambiar_clave"
-            app:destination="@id/cambiarClaveFragment" />
-        <action
-            android:id="@+id/action_perfilDetalleFragment_self"
-            app:destination="@id/perfilDetalleFragment"
-            app:launchSingleTop="false" />
+            android:id="@+id/action_profileDetailsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <activity
-        android:id="@+id/entradaActivity"
+        android:id="@+id/homeActivity"
         android:name="com.alp.app.ui.main.view.activities.HomeActivity"
-        android:label="EntradaActivity" />
-    <fragment
-        android:id="@+id/cambiarClaveFragment"
-        android:name="com.alp.app.ui.main.view.fragments.ChangePasswordFragment"
-        android:label="Cambiar clave"
-        tools:layout="@layout/fragment_change_password" >
-        <action
-            android:id="@+id/accion_cambiar_clave_a_perfil"
-            app:destination="@id/perfilFragment"
-            app:popUpTo="@id/cambiarClaveFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        android:label="HomeActivity"
+        tools:layout="@layout/activity_home" />
     <fragment
         android:id="@+id/listadoDiplomadosFragment"
         android:name="com.alp.app.ui.main.view.fragments.CertificateFragment"
         android:label="Certificados"
         tools:layout="@layout/fragment_list_certificates" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.alp.app.ui.main.view.fragments.ChangePasswordFragment"
+        android:label="Cambiar clave"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
 </navigation>

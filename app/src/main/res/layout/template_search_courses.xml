@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ /**
+  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 29/06/21 11:11 PM
+  ~  */
+  -->
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fondo_categoriasx"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/dimensiones_cardview_redondeados"
     app:cardBackgroundColor="?attr/colorOnPrimary"
-    app:cardElevation="4dp"
+    app:cardCornerRadius="@dimen/dimen_card_view_rounded"
+    app:cardElevation="@dimen/elevation_card_view"
     app:cardUseCompatPadding="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -16,8 +22,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:paddingLeft="@dimen/padding_cardview_curso_detalle"
-        android:paddingRight="@dimen/padding_cardview_curso_detalle"
         android:stateListAnimator="@null"
         tools:targetApi="lollipop">
 
@@ -39,10 +43,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:fontFamily="@font/nunito_black"
             android:gravity="center_vertical"
             android:text="@string/text_test"
-            android:textSize="@dimen/dimensiones_texto_curso"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_course"

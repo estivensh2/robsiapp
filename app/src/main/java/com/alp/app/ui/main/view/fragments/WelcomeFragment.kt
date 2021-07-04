@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 01:55 AM
+ *
+ */
+
 package com.alp.app.ui.main.view.fragments
 
 import android.os.Bundle
@@ -20,26 +28,26 @@ class WelcomeFragment : Fragment() {
 
     private var _binding : FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
-    private val tiempo: Long = 2000
+    private val time: Long = 2000
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         _binding = FragmentWelcomeBinding.inflate(layoutInflater, container, false)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
         supportActionBar?.hide()
-        crearAnimacion()
+        createAnimation()
         return binding.root
     }
 
-    private fun crearAnimacion() {
+    private fun createAnimation() {
         val url = ContextCompat.getDrawable(requireContext(), R.drawable.logobienvenida)
         Glide.with(this).load(url).into(binding.logoanimacion)
         Handler(Looper.getMainLooper()).postDelayed({
-            validarInicioPrimeraVezYEstadoSesion()
-        }, tiempo)
+            validateStatusSessionAndWelcome()
+        }, time)
     }
 
-    private fun validarInicioPrimeraVezYEstadoSesion() {
+    private fun validateStatusSessionAndWelcome() {
         if (PreferencesSingleton.read("user_new", false) == true) {
             if (PreferencesSingleton.read("active_session", false) == true){
                 lifecycleScope.launchWhenResumed {

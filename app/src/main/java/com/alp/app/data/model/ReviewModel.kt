@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 20/06/21 04:47 PM
+ *
+ */
+
 package com.alp.app.data.model
 
 import android.util.ArrayMap

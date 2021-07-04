@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Copyright (c) 2021 . All rights reserved.
+ *  * Last modified 29/06/21 11:02 PM
+ *
+ */
+
 package com.alp.app.ui.main.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
@@ -7,6 +15,7 @@ import com.alp.app.data.repository.DashboardRepository
 import com.alp.app.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
+
 
 class DashboardViewModel @ViewModelInject constructor(private val dashboardRepository: DashboardRepository) : ViewModel() {
 
