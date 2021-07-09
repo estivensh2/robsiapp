@@ -82,7 +82,7 @@ class CertificateFragment : Fragment() {
     }
 
     private fun renderList(data: List<CertificateModel>) {
-        if (data[0].data == 1){
+        if (data.isNotEmpty()){
             certificateAdapter.apply {
                 updateData(data)
                 notifyDataSetChanged()

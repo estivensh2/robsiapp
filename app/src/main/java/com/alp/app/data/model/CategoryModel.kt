@@ -12,8 +12,8 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoryModel (
         @SerializedName("id_category") var id_category : Int,
-        @SerializedName("name")        var name        : String,
+        @SerializedName("title")       var title       : String,
         @SerializedName("description") var description : String,
-        @SerializedName("icon")        var icon        : String,
-        @SerializedName("new")         var new         : String,
+        @SerializedName("image")       var image       : String,
+        @SerializedName("created_at")  var created_at  : String
 )

@@ -47,7 +47,7 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.setInfoProfile(id_user, names, image, last_names, email)
     }
 
-    suspend fun setSignIn(email: String, password: String) : Response<SigninModel> {
+    suspend fun setSignIn(email: String, password: String) : Response<SignInModel> {
         return apiService.setSignIn(email, password)
     }
 

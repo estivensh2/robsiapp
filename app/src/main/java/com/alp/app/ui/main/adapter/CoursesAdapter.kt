@@ -29,7 +29,7 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
     class ViewHolder(val binding: TemplateCoursesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: CoursesModel) {
             with(binding){
-                title.text = data.name
+                title.text = data.title
                 if (textNew.text==""){
                     textNew.visibility = View.GONE
                 } else {
@@ -43,7 +43,7 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
                         .into(binding.image)
                 itemView.setOnClickListener {
                     val idCourse = data.id_course
-                    val name = data.name
+                    val name = data.title
                     val image = data.image
                     val action = CoursesFragmentDirections.actionCoursesFragmentToCoursesTemaryFragment(idCourse, name, image)
                     it.findNavController().navigate(action)

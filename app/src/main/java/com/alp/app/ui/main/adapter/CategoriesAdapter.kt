@@ -17,37 +17,42 @@ import com.alp.app.R
 import com.alp.app.data.model.CategoryModel
 import com.alp.app.databinding.TemplateCategoriesBinding
 import com.alp.app.ui.main.view.fragments.HomeFragmentDirections
+import com.alp.app.utils.Functions
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
+import kotlin.collections.ArrayList
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     val list = ArrayList<CategoryModel>()
 
+
     class ViewHolder(val binding: TemplateCategoriesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: CategoryModel) {
             with(binding){
-                titleCategory.text = data.name
-                if (textNew.text==""){
-                    textNew.visibility = View.GONE
-                } else {
+                titleCategory.text = data.title
+                val functions = Functions(itemView.context)
+                if (functions.converterDate(data.created_at)){
                     textNew.text = itemView.context.getString(R.string.text_new)
                     textNew.visibility = View.VISIBLE
+                } else {
+                    textNew.visibility = View.GONE
                 }
-                descriptionCategory.text = data.description
+                descriptionCategory.text = functions.decodeHtml(data.description)
                 Picasso.get()
-                        .load(data.icon)
+                        .load(data.image)
                         .memoryPolicy(MemoryPolicy.NO_CACHE)
                         .networkPolicy(NetworkPolicy.NO_STORE)
                         .into(imageCategory)
             }
             itemView.setOnClickListener {
                 val idCategory = data.id_category
-                val name = data.name
-                val image = data.icon
-                val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
-                it.findNavController().navigate(action)
+                val name = data.title
+                val image = data.image
+                //val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
+                //it.findNavController().navigate(action)
+                it.findNavController().navigate(R.id.action_homeFragment_to_detailTopicFragment)
             }
         }
     }

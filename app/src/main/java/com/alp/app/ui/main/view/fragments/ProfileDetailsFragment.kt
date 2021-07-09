@@ -19,6 +19,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,6 +39,7 @@ import com.alp.app.ui.main.view.activities.HomeActivity
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import com.squareup.picasso.MemoryPolicy
@@ -68,7 +70,7 @@ class ProfileDetailsFragment : Fragment() {
         functions = Functions(contexto)
         with(binding){
             if(args.imagen.isEmpty()){
-                Picasso.get().load(R.drawable.ic_baseline_account_circle_24).into(image)
+                Glide.with(contexto).load(R.drawable.ic_baseline_account_circle_24).into(binding.image)
             } else {
                 Picasso.get()
                     .load(args.imagen)
@@ -141,7 +143,7 @@ class ProfileDetailsFragment : Fragment() {
 
     private fun renderList(data: Response<UpdateInfoModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
+        if (response.response == 1) {
             DynamicToast.makeSuccess(contexto, getString(R.string.text_updated_data), Toast.LENGTH_LONG).show()
         } else {
             DynamicToast.makeError(contexto, getString(R.string.text_error_data), Toast.LENGTH_LONG).show()

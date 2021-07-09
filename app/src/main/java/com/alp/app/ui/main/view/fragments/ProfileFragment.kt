@@ -23,6 +23,7 @@ import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
+import com.bumptech.glide.Glide
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
@@ -81,24 +82,23 @@ class ProfileFragment : Fragment() {
 
     private fun renderList(data: Response<ProfileModel>) {
         val response = data.body()!!
-        if (response.respuesta == "1") {
-            if (response.imagen.isEmpty()){
-                Picasso.get().load(R.drawable.ic_baseline_account_circle_24).into(binding.image)
+        if (response.response == 1) {
+            if (response.image.isEmpty()){
+                Glide.with(contexto).load(R.drawable.ic_baseline_account_circle_24).into(binding.image)
             } else {
-                Picasso.get()
-                    .load(response.imagen)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE)
-                    .networkPolicy(NetworkPolicy.NO_STORE)
-                    .into(binding.image)
-            }
-            val nombre = "${response.nombres} ${response.apellidos}"
-            binding.fullName.text = nombre
-            imagen = response.imagen
-            nombres = response.nombres
-            apellidos = response.apellidos
-            notificaciones = response.notificaciones
-            correo = response.correo
-            clave = response.clave
+               Picasso.get()
+                       .load(response.image)
+                       .memoryPolicy(MemoryPolicy.NO_CACHE)
+                       .networkPolicy(NetworkPolicy.NO_STORE)
+                       .into(binding.image)
+           }
+            binding.fullName.text = resources.getString(R.string.text_full_name, response.names, response.last_names)
+            imagen = response.image
+            nombres = response.names
+            apellidos = response.last_names
+            notificaciones = response.notifications.toString()
+            correo = response.email
+            clave = response.password
         }
     }
 

@@ -23,11 +23,11 @@ class SearchCoursesAdapter : RecyclerView.Adapter<SearchCoursesAdapter.ViewHolde
     class ViewHolder(val binding: TemplateSearchCoursesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: CoursesModel) {
             with(binding){
-                titleCourse.text = data.name
+                titleCourse.text = data.title
                 Glide.with(itemView.context).load(data.image).into(imageCourse)
                 itemView.setOnClickListener {
                     val idCourse = data.id_course
-                    val name = data.name
+                    val name = data.title
                     val image = data.image
                     val action = HomeFragmentDirections.actionHomeFragmentToCoursesTemaryFragment(idCourse, name, image)
                     it.findNavController().navigate(action)

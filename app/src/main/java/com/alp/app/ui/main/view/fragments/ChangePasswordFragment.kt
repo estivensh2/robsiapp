@@ -72,7 +72,7 @@ class ChangePasswordFragment : Fragment() {
 
     private fun renderList(data: Response<UpdatePasswordModel>) {
         val response = data.body()!!
-        if (response.data == "1") {
+        if (response.response == 1) {
             DynamicToast.makeSuccess(contexto, getString(R.string.text_password_changed), Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_changePasswordFragment_to_perfilFragment)
         } else {

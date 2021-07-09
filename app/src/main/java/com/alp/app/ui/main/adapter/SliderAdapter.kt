@@ -8,6 +8,8 @@
 
 package com.alp.app.ui.main.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,9 @@ class SliderAdapter : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_STORE)
                     .into(binding.imageSlider)
+            itemView.setOnClickListener {
+                itemView.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.url)))
+            }
         }
     }
 

@@ -14,7 +14,11 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.alp.app.R
+import org.jsoup.Jsoup
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
+
 
 class Functions(val context: Context) {
 
@@ -27,6 +31,19 @@ class Functions(val context: Context) {
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                         + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches()
+    }
+
+    fun converterDate(date: String): Boolean {
+        val locale = Locale("es", "CO")
+        val calendar = Calendar.getInstance()
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", locale)
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", locale)
+        val parsedDate: Date = inputFormat.parse(date)!!
+        val one_date = outputFormat.format(parsedDate)
+        val simpleDF = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", locale)
+        calendar.add(Calendar.MONTH, 1)
+        val two_date = simpleDF.format(calendar.time)
+        return one_date < two_date
     }
 
     fun enabledButton(enabled: Boolean, button: Button){
@@ -55,5 +72,9 @@ class Functions(val context: Context) {
         } else {
             progress.visibility = android.view.View.GONE
         }
+    }
+
+    fun decodeHtml(html: String?): String? {
+        return Jsoup.parse(html).text()
     }
 }

@@ -22,7 +22,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
-import com.alp.app.data.model.SigninModel
+import com.alp.app.data.model.SignInModel
 import com.alp.app.databinding.FragmentSigninBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
@@ -78,9 +78,9 @@ class SignInFragment : Fragment() {
         })
     }
 
-    private fun renderList(data: Response<SigninModel>) {
+    private fun renderList(data: Response<SignInModel>) {
         val response = data.body()!!
-        if (response.data == "1") {
+        if (response.response == 1) {
             PreferencesSingleton.write("id_user" , response.id_user)
             PreferencesSingleton.write("active_session", true)
             findNavController().navigate(R.id.accion_iniciar_a_navegacion_principal)

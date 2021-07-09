@@ -25,12 +25,12 @@ class CertificateAdapter : RecyclerView.Adapter<CertificateAdapter.ViewHolder>()
 
     class ViewHolder(val binding: TemplateCertificatesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: CertificateModel) {
-            binding.title.text = data.nombrecurso
+            binding.title.text = data.name_course
             binding.btnDownload.setOnClickListener {
-                itemView.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.urldescarga)))
+                itemView.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.url_download)))
             }
             Picasso.get()
-                    .load(data.imagen)
+                    .load(data.image_course)
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_STORE)
                     .into(binding.image)

@@ -80,7 +80,7 @@ class SignUpFragment : Fragment() {
 
     private fun renderList(data: Response<SignUpModel>) {
         val response = data.body()!!
-        if (response.data == "1") {
+        if (response.response == 1) {
             findNavController().navigate(R.id.accion_registrar_a_iniciar_sesion)
         } else {
             with(binding){

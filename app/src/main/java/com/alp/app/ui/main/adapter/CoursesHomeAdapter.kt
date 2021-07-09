@@ -27,7 +27,7 @@ class CoursesHomeAdapter : RecyclerView.Adapter<CoursesHomeAdapter.ViewHolder>()
         fun bindView(data: CoursesModel) {
             itemView.setOnClickListener {
                 val idCourse = data.id_course
-                val name = data.name
+                val name = data.title
                 val image = data.image
                 val action = HomeFragmentDirections.actionHomeFragmentToCoursesTemaryFragment(idCourse, name, image)
                 it.findNavController().navigate(action)

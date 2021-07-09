@@ -73,7 +73,7 @@ class ResetPasswordFragment : Fragment() {
 
     private fun renderList(data: Response<ResetPasswordModel>) {
         val response = data.body()!!
-        if (response.data == "1") {
+        if (response.response == "1") {
             DynamicToast.makeSuccess(contexto, getString(R.string.text_sent_email), Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.accion_recuperar_a_iniciar_o_crear)
         } else {

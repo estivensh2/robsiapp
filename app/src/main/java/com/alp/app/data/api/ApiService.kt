@@ -14,7 +14,7 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @POST("get_categories.php")
+    @GET("categories")
     suspend fun getCategories(): List<CategoryModel>
 
     @FormUrlEncoded
@@ -23,27 +23,26 @@ interface ApiService {
             @Field("id_course") id_course : Int
     ): List<ReviewModel>
 
-    @POST("get_slider.php")
+    @GET("slider")
     suspend fun getSlider(): List<SliderModel>
 
-    @FormUrlEncoded
-    @POST("get_courses.php")
+    @GET("courses")
     suspend fun getCourses(
-            @Field("id_category") id_category : Int
+            @Query("id_category") id_category : Int
     ): List<CoursesModel>
 
-    @POST("get_courses_home.php")
+    @GET("courses-home")
     suspend fun getCoursesHome(): List<CoursesModel>
 
-    @GET("search_courses.php")
+    @GET("search")
     suspend fun searchCourses(
             @Query("search") search : String
     ): List<CoursesModel>
 
     @FormUrlEncoded
-    @POST("get_certificate.php")
+    @POST("certificates")
     suspend fun getCertificate(
-            @Field("id_user") id_user:Int
+            @Field("id_user") id_user : Int
     ): List<CertificateModel>
 
     @FormUrlEncoded
@@ -54,23 +53,23 @@ interface ApiService {
     ): List<CoursesTemaryModel>
 
     @FormUrlEncoded
-    @POST("get_user_data.php")
+    @POST("user-info")
     suspend fun getInfoProfile (
             @Field("id_user") id_user: Int
     ) : Response<ProfileModel>
 
     @FormUrlEncoded
-    @POST("update_user_data.php")
+    @PUT("users/{id_user}")
     suspend fun setInfoProfile (
-            @Field("id") id_user:Int,
-            @Field("nombres") names :String,
-            @Field("imagen") image:String,
-            @Field("apellidos") last_names:String,
-            @Field("correoElectronico") email:String
+            @Path("id_user") id_user:Int,
+            @Field("names") names :String,
+            @Field("image") image:String,
+            @Field("last_names") last_names:String,
+            @Field("email") email:String,
     ) : Response<UpdateInfoModel>
 
     @FormUrlEncoded
-    @POST("change_password.php")
+    @POST("change-password")
     suspend fun setPassword (
             @Field("current_password") current_password:String,
             @Field("new_password")     new_password:String,
@@ -78,11 +77,11 @@ interface ApiService {
     ) : Response<UpdatePasswordModel>
 
     @FormUrlEncoded
-    @POST("sign_in.php")
+    @POST("login")
     suspend fun setSignIn (
             @Field("email")    email:String,
             @Field("password") password:String
-    ) : Response<SigninModel>
+    ) : Response<SignInModel>
 
     @FormUrlEncoded
     @POST("set_token.php")
@@ -91,9 +90,8 @@ interface ApiService {
             @Field("token") token:String
     ) : Response<InsertTokenModel>
 
-
     @FormUrlEncoded
-    @POST("sign_up.php")
+    @POST("users")
     suspend fun setSignUp (
             @Field("names") names:String,
             @Field("last_names") last_names:String,
@@ -102,7 +100,7 @@ interface ApiService {
     ) : Response<SignUpModel>
 
     @FormUrlEncoded
-    @POST("reset_password.php")
+    @POST("reset")
     suspend fun setResetPassword (
             @Field("email") email:String
     ) : Response<ResetPasswordModel>

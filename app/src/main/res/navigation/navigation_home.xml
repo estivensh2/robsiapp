@@ -109,6 +109,7 @@
             android:id="@+id/accion_recuperar_a_iniciar_o_crear"
             app:destination="@id/iniciarSesionFragment"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right" />
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

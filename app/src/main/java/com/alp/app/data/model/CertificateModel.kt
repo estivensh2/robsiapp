@@ -11,10 +11,7 @@ package com.alp.app.data.model
 import com.google.gson.annotations.SerializedName
 
 class CertificateModel (
-    @SerializedName("data")         var data: Int,
-    @SerializedName("nombres")      var nombrescurso: String,
-    @SerializedName("apellidos")    var apellidoscurso: String,
-    @SerializedName("nombrecurso")  var nombrecurso: String,
-    @SerializedName("imagen")       var imagen: String,
-    @SerializedName("urldescarga")  var urldescarga: String,
+        @SerializedName("name_course")   var name_course   : String,
+        @SerializedName("image_course")  var image_course  : String,
+        @SerializedName("url_download")  var url_download  : String,
 )

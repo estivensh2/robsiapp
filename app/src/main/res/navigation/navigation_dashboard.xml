@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profile2"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailTopicFragment"
+            app:destination="@id/detailTopicFragment" />
     </fragment>
     <fragment
         android:id="@+id/coursesTemaryDetailsFragment"
@@ -111,4 +114,9 @@
             android:id="@+id/action_coursesTemaryFragment_to_coursesTemaryDetailsFragment"
             app:destination="@id/coursesTemaryDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailTopicFragment"
+        android:name="com.alp.app.ui.main.view.fragments.DetailTopicFragment"
+        android:label="fragment_detail_topic"
+        tools:layout="@layout/fragment_detail_topic" />
 </navigation>
