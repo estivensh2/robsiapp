@@ -28,10 +28,10 @@ class LoginFragment : Fragment() {
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
         supportActionBar?.show()
         with(binding){
-            botonIniciarSesion.setOnClickListener    {
+            SignIn.setOnClickListener    {
                 findNavController().navigate(R.id.accion_iniciar_o_crear_a_iniciar_sesion)
             }
-            botonRegistrarCuenta.setOnClickListener  {
+            SignUp.setOnClickListener  {
                 findNavController().navigate(R.id.accion_iniciar_o_crear_a_registrarme)
             }
         }

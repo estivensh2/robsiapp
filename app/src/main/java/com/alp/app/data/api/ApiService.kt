@@ -45,12 +45,22 @@ interface ApiService {
             @Field("id_user") id_user : Int
     ): List<CertificateModel>
 
-    @FormUrlEncoded
-    @POST("get_courses_temary.php")
-    suspend fun getCoursesTemary(
-            @Field("idcurso")   id_course   : Int,
-            @Field("id_user") id_user : Int
-    ): List<CoursesTemaryModel>
+    @GET("detail-topics")
+    suspend fun getDetailTopic(
+            @Query("id_topic") id_topic : Int
+    ): List<DetailTopicModel>
+
+    @GET("comments")
+    suspend fun getComments(
+            @Query("id_user") id_topic : Int,
+            @Query("id_detail_topic") id_detail_topic : Int
+    ): List<CommentsCourseModel>
+
+    @GET("topics")
+    suspend fun getTopics(
+            @Query("id_course") id_course : Int,
+            @Query("id_user")   id_user   : Int
+    ): List<TopicsModel>
 
     @FormUrlEncoded
     @POST("user-info")
@@ -65,7 +75,7 @@ interface ApiService {
             @Field("names") names :String,
             @Field("image") image:String,
             @Field("last_names") last_names:String,
-            @Field("email") email:String,
+            @Field("email") email:String
     ) : Response<UpdateInfoModel>
 
     @FormUrlEncoded

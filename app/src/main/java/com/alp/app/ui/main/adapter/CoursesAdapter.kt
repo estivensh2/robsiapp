@@ -17,6 +17,7 @@ import com.alp.app.R
 import com.alp.app.data.model.CoursesModel
 import com.alp.app.databinding.TemplateCoursesBinding
 import com.alp.app.ui.main.view.fragments.CoursesFragmentDirections
+import com.alp.app.utils.Functions
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
@@ -27,14 +28,16 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
     val list = ArrayList<CoursesModel>()
 
     class ViewHolder(val binding: TemplateCoursesBinding) : RecyclerView.ViewHolder(binding.root) {
+
         fun bindView(data: CoursesModel) {
             with(binding){
                 title.text = data.title
-                if (textNew.text==""){
-                    textNew.visibility = View.GONE
-                } else {
+                val functions = Functions(itemView.context)
+                if (functions.converterDate(data.created_at)){
                     textNew.text = itemView.context.getString(R.string.text_new)
                     textNew.visibility = View.VISIBLE
+                } else {
+                    textNew.visibility = View.GONE
                 }
                 Picasso.get()
                         .load(data.image)

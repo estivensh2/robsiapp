@@ -13,7 +13,7 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/yellow_500</item>
+        <item name="colorSecondary">@color/green_500</item>
         <item name="colorSecondaryVariant">@color/blue_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -27,8 +27,9 @@
     </style>
 
     <style name="ThemeOverlay.App.BottomNavigationViewDay" parent="">
-        <item name="colorPrimary">@color/yellow_500</item>
+        <item name="colorPrimary">@color/green_500</item>
     </style>
+
 
     <string name="ad_attribution">Ad</string>
 </resources>

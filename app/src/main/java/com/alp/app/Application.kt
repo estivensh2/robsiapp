@@ -11,7 +11,6 @@ package com.alp.app
 import android.app.Application
 import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.HiltAndroidApp
-import io.github.kbiakov.codeview.classifier.CodeProcessor
 
 @HiltAndroidApp
 class Application : Application() {

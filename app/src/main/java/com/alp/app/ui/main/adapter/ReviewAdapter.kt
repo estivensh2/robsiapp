@@ -25,7 +25,7 @@ class ReviewAdapter (val context: Context): RecyclerView.Adapter<ReviewAdapter.V
 
     inner class ViewHolder(val binding: TemplateReviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindView(data: ReviewModel) {
+        /*fun bindView(data: ReviewModel) {
             with(binding){
                 question.text = data.question
                 for (i in data.answers.indices) {
@@ -39,7 +39,7 @@ class ReviewAdapter (val context: Context): RecyclerView.Adapter<ReviewAdapter.V
                     onItemClick?.invoke(data)
                 }
             }
-        }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,7 +49,7 @@ class ReviewAdapter (val context: Context): RecyclerView.Adapter<ReviewAdapter.V
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(list[position])
+        //holder.bindView(list[position])
     }
 
     fun updateData(data: List<ReviewModel>) {

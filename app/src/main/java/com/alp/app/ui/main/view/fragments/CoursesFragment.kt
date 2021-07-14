@@ -141,10 +141,18 @@ class CoursesFragment : Fragment() {
     }
 
     private fun renderList(data: List<CoursesModel>) {
-        coursesAdapter.apply {
-            updateData(data)
-            notifyDataSetChanged()
+        if (data.isNotEmpty()){
+            coursesAdapter.apply {
+                updateData(data)
+                notifyDataSetChanged()
+            }
+        } else {
+            binding.textNoFound.apply {
+                visibility = View.VISIBLE
+                text = resources.getString(R.string.text_no_found)
+            }
         }
+     
     }
 
     override fun onDestroyView() {

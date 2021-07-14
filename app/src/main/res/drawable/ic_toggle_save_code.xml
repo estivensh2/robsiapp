@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 11/07/21 09:20 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 11/07/21 09:20 PM
+  ~  */
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false"
+        android:drawable="@drawable/ic_sharp_bookmark_border_24" />
+
+    <item android:state_checked="true"
+        android:drawable="@drawable/ic_sharp_bookmark_24" />
+
+</selector>

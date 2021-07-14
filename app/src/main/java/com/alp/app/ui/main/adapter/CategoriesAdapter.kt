@@ -27,7 +27,6 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     val list = ArrayList<CategoryModel>()
 
-
     class ViewHolder(val binding: TemplateCategoriesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: CategoryModel) {
             with(binding){
@@ -50,9 +49,9 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
                 val idCategory = data.id_category
                 val name = data.title
                 val image = data.image
-                //val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
-                //it.findNavController().navigate(action)
-                it.findNavController().navigate(R.id.action_homeFragment_to_detailTopicFragment)
+                val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
+                it.findNavController().navigate(action)
+                //it.findNavController().navigate(R.id.action_homeFragment_to_detailTopicFragment)
             }
         }
     }

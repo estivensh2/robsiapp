@@ -13,9 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alp.app.R
 import com.alp.app.databinding.FragmentQuestionBinding
-import com.alp.app.databinding.FragmentTopicBinding
 
 class QuestionFragment : Fragment() {
 

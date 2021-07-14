@@ -29,7 +29,7 @@ class CoursesHomeAdapter : RecyclerView.Adapter<CoursesHomeAdapter.ViewHolder>()
                 val idCourse = data.id_course
                 val name = data.title
                 val image = data.image
-                val action = HomeFragmentDirections.actionHomeFragmentToCoursesTemaryFragment(idCourse, name, image)
+                val action = HomeFragmentDirections.actionHomeFragmentToTopicsFragment(idCourse, name, image)
                 it.findNavController().navigate(action)
             }
             Picasso.get()

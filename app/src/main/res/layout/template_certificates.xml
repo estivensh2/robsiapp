@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:fontFamily="@font/nunito_black"
+            android:fontFamily="@font/changa_bold"
             android:gravity="center_vertical"
             android:text="@string/text_test"
             android:textSize="22sp"

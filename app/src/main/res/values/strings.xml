@@ -35,7 +35,7 @@
     <string name="text_progress_course">Progreso: En curso</string>
     <string name="text_completed_course">Ya has completado este tema anteriormente</string>
     <string name="text_update_image">actualizar imagen</string>
-    <string name="text_logout">cerrar sesion</string>
+    <string name="text_logout">cerrar sesión</string>
     <string name="text_general">general</string>
     <string name="text_notifications">Notificaciones</string>
     <string name="text_sounds">Sonidos</string>
@@ -118,4 +118,10 @@
     <string name="icon_setting">Configuraciones</string>
     <string name="text_icon_save">GUARDAR</string>
     <string name="text_full_name">%1$s %2$s</string>
+    <string name="text_share">Compartir en</string>
+    <string name="text_report">Reportar</string>
+    <string name="incorrect_information">La informacion es inexacta</string>
+    <string name="content_wrong">El contenido esta erroneo</string>
+    <string name="link_down">Los links no estan funcionando</string>
+    <string name="other">Otro</string>
 </resources>

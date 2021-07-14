@@ -36,23 +36,25 @@ class Functions(val context: Context) {
     fun converterDate(date: String): Boolean {
         val locale = Locale("es", "CO")
         val calendar = Calendar.getInstance()
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", locale)
-        val outputFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", locale)
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
         val parsedDate: Date = inputFormat.parse(date)!!
-        val one_date = outputFormat.format(parsedDate)
-        val simpleDF = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", locale)
+        val oneDate = outputFormat.format(parsedDate)
+        val simpleDF = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
         calendar.add(Calendar.MONTH, 1)
-        val two_date = simpleDF.format(calendar.time)
-        return one_date < two_date
+        val twoDate = simpleDF.format(calendar.time)
+        return oneDate < twoDate
     }
 
     fun enabledButton(enabled: Boolean, button: Button){
         if(enabled){
             button.isEnabled = true
-            button.setTextColor(ContextCompat.getColor(context, R.color.yellow_500))
+            button.setTextColor(ContextCompat.getColor(context, R.color.blue_700))
+            button.setBackgroundColor(ContextCompat.getColor(context, R.color.green_500))
         } else {
             button.isEnabled = false
             button.setTextColor(ContextCompat.getColor(context, R.color.gray))
+            button.setBackgroundColor(ContextCompat.getColor(context, R.color.gray_100))
         }
     }
 

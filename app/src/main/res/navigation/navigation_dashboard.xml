@@ -28,8 +28,8 @@
             android:id="@+id/action_homeFragment_to_profile2"
             app:destination="@id/profile" />
         <action
-            android:id="@+id/action_homeFragment_to_detailTopicFragment"
-            app:destination="@id/detailTopicFragment" />
+            android:id="@+id/action_homeFragment_to_topicsFragment"
+            app:destination="@id/topicsFragment" />
     </fragment>
     <fragment
         android:id="@+id/coursesTemaryDetailsFragment"
@@ -118,5 +118,48 @@
         android:id="@+id/detailTopicFragment"
         android:name="com.alp.app.ui.main.view.fragments.DetailTopicFragment"
         android:label="fragment_detail_topic"
-        tools:layout="@layout/fragment_detail_topic" />
+        tools:layout="@layout/fragment_detail_topic" >
+        <action
+            android:id="@+id/action_detailTopicFragment_to_commentsCourseFragment"
+            app:destination="@id/commentsCourseFragment" />
+        <argument
+            android:name="id_topic"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/topicsFragment"
+        android:name="com.alp.app.ui.main.view.fragments.TopicsFragment"
+        android:label="Temas"
+        tools:layout="@layout/fragment_topics">
+        <argument
+            android:name="idCourse"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="nameCourse"
+            android:defaultValue="empty"
+            app:argType="string" />
+        <argument
+            android:name="imageCourse"
+            android:defaultValue="empty"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_topicsFragment_to_detailTopicFragment"
+            app:destination="@id/detailTopicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentsCourseFragment"
+        android:name="com.alp.app.ui.main.view.fragments.CommentsCourseFragment"
+        android:label="fragment_comments_course"
+        tools:layout="@layout/fragment_comments_course" >
+        <argument
+            android:name="id_user"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="id_detail_topic"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

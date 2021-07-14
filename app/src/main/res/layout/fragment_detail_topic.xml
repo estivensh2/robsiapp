@@ -12,6 +12,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     tools:context=".ui.main.view.fragments.DetailTopicFragment" >
 
     <com.google.android.material.tabs.TabLayout
@@ -42,8 +43,23 @@
         android:id="@+id/viewPager2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:overScrollMode="always"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorOnPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
 </androidx.constraintlayout.widget.ConstraintLayout>

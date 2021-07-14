@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
-import com.alp.app.data.model.CoursesTemaryModel
+import com.alp.app.data.model.TopicsModel
 import com.alp.app.databinding.TemplateCoursesTemaryBinding
 import com.alp.app.ui.main.view.fragments.CoursesTemaryFragmentDirections
 import com.bumptech.glide.Glide
@@ -21,12 +21,12 @@ import com.bumptech.glide.Glide
 class CoursesTemaryAdapter : RecyclerView.Adapter<CoursesTemaryAdapter.ViewHolder>() {
 
     companion object {
-        val list = mutableListOf<CoursesTemaryModel>()
+        val list = mutableListOf<TopicsModel>()
     }
 
     class ViewHolder(val binding: TemplateCoursesTemaryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindView(data: CoursesTemaryModel) {
-            with(binding){
+        fun bindView(data: TopicsModel) {
+            /*with(binding){
                 titleCourseTemary.text = data.nombre
                 if (adapterPosition==0){
                     data.habilitado = "1"
@@ -45,7 +45,7 @@ class CoursesTemaryAdapter : RecyclerView.Adapter<CoursesTemaryAdapter.ViewHolde
                 val total = list.size
                 val action = CoursesTemaryFragmentDirections.actionCoursesTemaryFragmentToCoursesTemaryDetailsFragment(idTemary, idCourse, total)
                 it.findNavController().navigate(action)
-            }
+            }*/
         }
     }
 
@@ -59,7 +59,7 @@ class CoursesTemaryAdapter : RecyclerView.Adapter<CoursesTemaryAdapter.ViewHolde
         holder.bindView(list[position])
     }
 
-    fun updateData(data: List<CoursesTemaryModel>) {
+    fun updateData(data: List<TopicsModel>) {
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()

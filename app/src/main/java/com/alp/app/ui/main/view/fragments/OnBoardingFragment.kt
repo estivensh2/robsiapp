@@ -53,7 +53,7 @@ class OnBoardingFragment : Fragment() {
                 }
             })
             finalizar.visibility = View.INVISIBLE
-            saltar.setOnClickListener { saltarInduccion() }
+            saltar.setOnClickListener { skipOnBoarding() }
             finalizar.setOnClickListener {
                 PreferencesSingleton.write("user_new", true)
                 PreferencesSingleton.write("enabled_sound", true)
@@ -64,7 +64,7 @@ class OnBoardingFragment : Fragment() {
         return binding.root
     }
 
-    private fun saltarInduccion() {
+    private fun skipOnBoarding() {
         PreferencesSingleton.write("user_new", true)
         PreferencesSingleton.write("enabled_sound", true)
         findNavController().navigate(R.id.accion_induccion_a_iniciar_o_crear)

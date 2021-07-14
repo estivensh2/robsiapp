@@ -6,84 +6,80 @@
   ~  * Last modified 30/06/21 01:41 AM
   ~  */
   -->
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="?attr/colorOnPrimary"
+    app:cardCornerRadius="@dimen/dimen_card_view_rounded"
+    app:cardElevation="@dimen/elevation_card_view"
+    app:cardUseCompatPadding="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="?attr/colorOnPrimary"
-        app:cardCornerRadius="@dimen/dimen_card_view_rounded"
-        app:cardElevation="@dimen/elevation_card_view"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="209dp">
+        android:padding="@dimen/padding_card_view">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/image_category"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/description_image_category"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/text_new"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_card_view">
+            android:background="#B50808"
+            android:fontFamily="@font/changa_extralight"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="1dp"
+            android:text="@string/text_test"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/title_category"
+            app:layout_constraintTop_toTopOf="@+id/image_category"
+            tools:ignore="SmallSp" />
 
-            <ImageView
-                android:id="@+id/image_category"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:contentDescription="@string/description_image_category"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/title_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/changa_extrabold"
+            android:text="@string/text_test"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/description_category"
+            app:layout_constraintTop_toBottomOf="@+id/text_new" />
 
-            <TextView
-                android:id="@+id/text_new"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="#B50808"
-                android:fontFamily="@font/nunito_black"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="1dp"
-                android:text="@string/text_test"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="@+id/title_category"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SmallSp" />
-
-            <TextView
-                android:id="@+id/title_category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/nunito_black"
-                android:text="@string/text_test"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/description_category"
-                app:layout_constraintTop_toBottomOf="@+id/text_new" />
-
-            <TextView
-                android:id="@+id/description_category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/nunito"
-                android:text="@string/text_test"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/image_category"
-                app:layout_constraintTop_toBottomOf="@+id/title_category" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/description_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/changa"
+            android:text="@string/text_test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/image_category"
+            app:layout_constraintTop_toBottomOf="@+id/title_category" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

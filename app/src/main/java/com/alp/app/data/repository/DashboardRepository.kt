@@ -23,6 +23,14 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getSlider()
     }
 
+    suspend fun getDetailTopic(id_topic: Int) : List<DetailTopicModel> {
+        return apiService.getDetailTopic(id_topic)
+    }
+
+    suspend fun getComments(id_user: Int, id_detail_topic: Int) : List<CommentsCourseModel> {
+        return apiService.getComments(id_user, id_detail_topic)
+    }
+
     suspend fun searchCourses(search: String) : List<CoursesModel> {
         return apiService.searchCourses(search)
     }
@@ -83,7 +91,7 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getCertificate(id_user)
     }
 
-    suspend fun getCoursesTemary(id_course: Int, id_user: Int) : List<CoursesTemaryModel> {
-        return apiService.getCoursesTemary(id_course, id_user)
+    suspend fun getTopics(id_course: Int, id_user: Int) : List<TopicsModel> {
+        return apiService.getTopics(id_course, id_user)
     }
 }

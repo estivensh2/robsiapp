@@ -51,7 +51,7 @@
             android:id="@+id/iEEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
+            android:fontFamily="@font/changa_semibold"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
             android:id="@+id/iEPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
+            android:fontFamily="@font/changa_semibold"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,10 +94,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/nunito_black"
+        android:fontFamily="@font/changa_bold"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:letterSpacing="@dimen/dimen_letter_spacing"
+        android:letterSpacing="@dimen/letter_spacing"
         android:stateListAnimator="@null"
         android:text="@string/text_sign_in"
         app:cornerRadius="@dimen/size_button_radius"
@@ -112,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:fontFamily="@font/nunito_black"
+        android:fontFamily="@font/changa"
         android:text="@string/text_reset_password"
         android:textAllCaps="false"
         android:textSize="20sp"

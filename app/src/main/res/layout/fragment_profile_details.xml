@@ -54,7 +54,7 @@
                     android:id="@+id/iENames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_bold"
+                    android:fontFamily="@font/changa_semibold"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +82,7 @@
                     android:id="@+id/iELastNames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_bold"
+                    android:fontFamily="@font/changa_semibold"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -110,7 +110,7 @@
                     android:id="@+id/iEEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_bold"
+                    android:fontFamily="@font/changa_semibold"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -140,7 +140,7 @@
                     android:id="@+id/iEPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_bold"
+                    android:fontFamily="@font/changa_semibold"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/nunito_black"
+                android:fontFamily="@font/changa_bold"
                 android:text="@string/text_update_image"
                 android:textAllCaps="true"
 
@@ -178,7 +178,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/nunito_black"
+                android:fontFamily="@font/changa_bold"
                 android:text="@string/text_general"
                 android:textAllCaps="true"
                 android:textSize="20sp"
@@ -193,12 +193,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/nunito_bold"
+                android:fontFamily="@font/changa"
                 android:text="@string/text_notifications"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,8 +215,9 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/nunito_bold"
+                android:fontFamily="@font/changa"
                 android:text="@string/text_sounds"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -233,8 +234,9 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/nunito_bold"
+                android:fontFamily="@font/changa"
                 android:text="@string/text_mode_dark"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -247,14 +249,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="24dp"
-                android:fontFamily="@font/nunito_black"
+                android:fontFamily="@font/changa_bold"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:letterSpacing="@dimen/letter_spacing"
                 android:stateListAnimator="@null"
                 android:text="@string/text_logout"
+                android:textSize="18sp"
+                app:backgroundTint="?attr/colorSecondaryVariant"
                 app:cornerRadius="@dimen/size_button_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

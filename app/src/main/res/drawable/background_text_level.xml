@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 10/07/21 12:13 AM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 10/07/21 12:13 AM
+  ~  */
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#00E676" />
+    <padding android:bottom="5dp"
+        android:top="5dp"
+        android:left="20dp"
+        android:right="20dp"
+        />
+
+    <corners android:radius="40dp" />
+</shape>

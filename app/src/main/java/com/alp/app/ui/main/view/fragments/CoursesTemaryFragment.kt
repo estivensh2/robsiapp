@@ -21,7 +21,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alp.app.R
 import com.alp.app.ui.main.adapter.CoursesTemaryAdapter
-import com.alp.app.data.model.CoursesTemaryModel
+import com.alp.app.data.model.TopicsModel
 import com.alp.app.databinding.FragmentCoursesTemaryBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
@@ -79,7 +79,7 @@ class CoursesTemaryFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.getCoursesTemary(idCourse, idUser!!).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getTopics(idCourse, idUser!!).observe(requireActivity(), Observer { response ->
             response?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -101,12 +101,12 @@ class CoursesTemaryFragment : Fragment() {
         })
     }
 
-    private fun renderList(data: List<CoursesTemaryModel>) {
+    private fun renderList(data: List<TopicsModel>) {
         coursesTemaryAdapter.apply {
             updateData(data)
             notifyDataSetChanged()
         }
-        val totalTemarioCompletado = data[0].total.toDouble()
+        /*val totalTemarioCompletado = data[0].total.toDouble()
         val totalCursosTemario = data.size.toDouble()
         val progreso = totalTemarioCompletado / totalCursosTemario * 100
         binding.progresoCurso.progress = progreso.toFloat()
@@ -121,7 +121,7 @@ class CoursesTemaryFragment : Fragment() {
             else -> {
                 binding.textoProgreso.text = resources.getString(R.string.text_progress_course)
             }
-        }
+        }*/
     }
 
     private fun initListeners() {

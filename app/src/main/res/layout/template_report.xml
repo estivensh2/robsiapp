@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 11/07/21 10:30 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 11/07/21 10:30 PM
+  ~  */
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/changa_bold"
+        android:text="Reportar un problema"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Porfavor seleccionar el tipo de problema"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_background_checked"
+            android:button="@null"
+            android:drawableStart="@drawable/ic_outline_info_24"
+            android:drawableLeft="@drawable/ic_outline_info_24"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/incorrect_information"
+            android:paddingStart="10dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_background_checked"
+            android:button="@null"
+            android:drawableStart="@drawable/ic_baseline_content_paste_off_24"
+            android:drawableLeft="@drawable/ic_baseline_content_paste_off_24"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/content_wrong" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_background_checked"
+            android:button="@null"
+            android:drawableStart="@drawable/ic_baseline_link_off_24"
+            android:drawableLeft="@drawable/ic_baseline_link_off_24"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/link_down" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_background_checked"
+            android:button="@null"
+            android:drawableStart="@drawable/ic_outline_flag_24"
+            android:drawableLeft="@drawable/ic_outline_flag_24"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/other" />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/iLMessageReport"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="Escribe aqui tu mensaje (opcional)"
+        app:boxCornerRadiusBottomEnd="5dp"
+        app:boxCornerRadiusBottomStart="5dp"
+        app:boxCornerRadiusTopEnd="5dp"
+        app:boxCornerRadiusTopStart="5dp"
+        app:boxStrokeWidth="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/iEMessageReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/changa"
+            android:inputType="textMultiLine"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/changa_bold"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:letterSpacing="@dimen/letter_spacing"
+        android:stateListAnimator="@null"
+        android:text="@string/text_report"
+        app:backgroundTint="?attr/colorSecondaryVariant"
+        app:cornerRadius="@dimen/size_button_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iLMessageReport"
+        app:layout_constraintVertical_bias="0.0"
+        tools:targetApi="lollipop" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/changa_bold"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:letterSpacing="@dimen/letter_spacing"
+        android:stateListAnimator="@null"
+        android:text="@string/text_cancel"
+        app:backgroundTint="?attr/colorSecondaryVariant"
+        app:cornerRadius="@dimen/size_button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/btnReport"
+        app:layout_constraintEnd_toStartOf="@+id/btnReport"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnReport"
+        tools:targetApi="lollipop" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
