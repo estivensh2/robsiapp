@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 15/07/21, 4:55 p. m.
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 15/07/21, 4:55 p. m.
+  ~  */
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Reportar" android:id="@+id/report_comment"/>
+</menu>

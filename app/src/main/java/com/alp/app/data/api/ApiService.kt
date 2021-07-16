@@ -52,9 +52,27 @@ interface ApiService {
 
     @GET("comments")
     suspend fun getComments(
-            @Query("id_user") id_topic : Int,
+            @Query("id_user") id_user : Int,
             @Query("id_detail_topic") id_detail_topic : Int
     ): List<CommentsCourseModel>
+
+    @FormUrlEncoded
+    @PUT("comments/{id_comment}")
+    suspend fun editComment(
+        @Path("id_comment") id_comment : Int,
+        @Field("comment")   comment    : String
+    ): Response<EditCommentModel>
+
+    @DELETE("comments/{id_comment}")
+    suspend fun deleteComment(
+        @Path("id_comment") id_comment :Int,
+    ): Response<DeleteCommentModel>
+
+    @GET("replies")
+    suspend fun getReplies(
+        @Query("id_user") id_topic : Int,
+        @Query("id_comment") id_comment : Int
+    ): List<RepliesModel>
 
     @GET("topics")
     suspend fun getTopics(
@@ -67,6 +85,14 @@ interface ApiService {
     suspend fun getInfoProfile (
             @Field("id_user") id_user: Int
     ) : Response<ProfileModel>
+
+    @FormUrlEncoded
+    @POST("comments")
+    suspend fun addComment (
+        @Field("id_user") id_user: Int,
+        @Field("id_detail_topic") id_detail_topic: Int,
+        @Field("comment") comment: String
+    ) : Response<AddCommentModel>
 
     @FormUrlEncoded
     @PUT("users/{id_user}")
@@ -85,6 +111,14 @@ interface ApiService {
             @Field("new_password")     new_password:String,
             @Field("id_user")          id_user:Int
     ) : Response<UpdatePasswordModel>
+
+    @FormUrlEncoded
+    @POST("change-like")
+    suspend fun changeLike (
+        @Field("active")     active :Int,
+        @Field("id_comment") id_comment:Int,
+        @Field("id_user")    id_user:Int
+    ) : Response<ChangeLikeModel>
 
     @FormUrlEncoded
     @POST("login")

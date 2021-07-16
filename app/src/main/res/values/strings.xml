@@ -57,14 +57,18 @@
     <string name="text_good_night">Buenas noches</string>
     <string name="text_good_afternoon">Buenas tardes</string>
     <string name="text_good_morning">Buenos dias</string>
-    <string name="text_active_certificate">Ya tienes un diploma de este curso. Revisa en tu perfil en la opcion mis certificados</string>
+    <string name="text_active_certificate">Ya tienes un diploma de este curso. Revisa en tu perfil en la opcion mis
+        certificados
+    </string>
     <string name="text_without_certificates">Aun no tienes certificaciones</string>
     <string name="text_new">Nuevo</string>
     <string name="text_excellent">!Excelente!</string>
     <string name="text_course_completed">haz completado este curso. Puedes ver y descargar tu diploma</string>
     <string name="text_see_certificates">ver mis diplomas</string>
     <string name="description_icon_certificates">este es el icono de ver certificados</string>
-    <string name="text_enter_your_email">Ingresa tu correo electrónico para recibir un enlace de recuperación de contraseña</string>
+    <string name="text_enter_your_email">Ingresa tu correo electrónico para recibir un enlace de recuperación de
+        contraseña
+    </string>
     <string name="text_invalid_email">Correo no valido</string>
     <string name="text_existing_email">Este correo ya existe</string>
     <string name="text_result">Resultado:</string>
@@ -98,7 +102,9 @@
     <string name="description_image_logo">Esta es la descripcion de la imagen principal</string>
     <string name="description_profile_image">Esta es la imagen principal para ir al perfil</string>
     <string name="text_no_found">No hay ningun resultado</string>
-    <string name="text_review_confirm">Haz completado el curso. ¿Deseas realizar tu examen para obtener tu certificado?</string>
+    <string name="text_review_confirm">Haz completado el curso. ¿Deseas realizar tu examen para obtener tu
+        certificado?
+    </string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_code">Compilador de código</string>
     <string name="title_languages">Selecciona un lenguaje</string>
@@ -124,4 +130,10 @@
     <string name="content_wrong">El contenido esta erroneo</string>
     <string name="link_down">Los links no estan funcionando</string>
     <string name="other">Otro</string>
+    <string name="text_one_reply">%1$d respuesta</string>
+    <string name="text_quantity_replies">%1$d respuestas</string>
+    <string name="text_no_replies">Sin respuestas</string>
+    <string name="text_comment">COMENTAR</string>
+    <string name="text_success_comment">Se ha publicado tu comentario</string>
+    <string name="text_update_comment">Se ha actualizado tu comentario</string>
 </resources>

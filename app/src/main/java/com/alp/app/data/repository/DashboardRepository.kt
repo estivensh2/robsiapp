@@ -31,6 +31,22 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getComments(id_user, id_detail_topic)
     }
 
+    suspend fun editComment(id_comment: Int, comment: String) : Response<EditCommentModel> {
+        return apiService.editComment(id_comment, comment)
+    }
+
+    suspend fun deleteComment(id_comment: Int) : Response<DeleteCommentModel> {
+        return apiService.deleteComment(id_comment)
+    }
+
+    suspend fun changeLike(active: Int, id_comment: Int, id_user: Int) : Response<ChangeLikeModel> {
+        return apiService.changeLike(active, id_comment, id_user)
+    }
+
+    suspend fun getReplies(id_user: Int, id_comment: Int) : List<RepliesModel> {
+        return apiService.getReplies(id_user, id_comment)
+    }
+
     suspend fun searchCourses(search: String) : List<CoursesModel> {
         return apiService.searchCourses(search)
     }
@@ -49,6 +65,10 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
 
     suspend fun getInfoProfile(id_user: Int) : Response<ProfileModel> {
         return apiService.getInfoProfile(id_user)
+    }
+
+    suspend fun addComment(id_user: Int, id_detail_topic: Int, comment: String) : Response<AddCommentModel> {
+        return apiService.addComment(id_user, id_detail_topic, comment)
     }
 
     suspend fun setInfoProfile(id_user: Int, names: String, image: String, last_names: String, email: String) : Response<UpdateInfoModel> {

@@ -10,6 +10,7 @@ package com.alp.app.utils
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.util.Log
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
@@ -46,6 +47,14 @@ class Functions(val context: Context) {
         return oneDate < twoDate
     }
 
+    fun compareDates(dateStart: String, dateEnd: String): Boolean {
+        val locale = Locale("es", "CO")
+        val simpleDateFormat  = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
+        val oneDate = simpleDateFormat.parse(dateStart)!!
+        val secondDate = simpleDateFormat.parse(dateEnd)!!
+        return simpleDateFormat.format(oneDate) != simpleDateFormat.format(secondDate)
+    }
+
     fun enabledButton(enabled: Boolean, button: Button){
         if(enabled){
             button.isEnabled = true
@@ -78,5 +87,10 @@ class Functions(val context: Context) {
 
     fun decodeHtml(html: String?): String? {
         return Jsoup.parse(html).text()
+    }
+
+    fun convertDateToLong(date: String): Date? {
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        return simpleDateFormat.parse(date)
     }
 }

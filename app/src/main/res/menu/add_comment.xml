@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 14/07/21, 9:55 p. m.
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 14/07/21, 9:55 p. m.
+  ~  */
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/comment"
+            android:icon="@drawable/ic_baseline_check_24"
+            android:title="@string/text_comment"
+            app:showAsAction="always" />
+</menu>
