@@ -64,6 +64,15 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
+    fun editReply(id_reply: Int, reply: String) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.editReply(id_reply, reply)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
     fun deleteComment(id_comment: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
@@ -73,10 +82,28 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
+    fun deleteReply(id_reply: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.deleteReply(id_reply)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
     fun changeLike(active: Int, id_comment: Int, id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = dashboardRepository.changeLike(active, id_comment, id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun changeLikeReply(active: Int, id_comment: Int, id_user: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.changeLikeReply(active, id_comment, id_user)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
@@ -217,6 +244,15 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = dashboardRepository.addComment(id_user, id_detail_topic, comment)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun addReply(id_user: Int, id_comment: Int, comment: String) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.addReply(id_user, id_comment, comment)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }

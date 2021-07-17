@@ -52,33 +52,27 @@
             android:id="@+id/reply"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_profile"/>
+            app:layout_constraintTop_toBottomOf="@+id/textEdited"
+            app:layout_constraintStart_toStartOf="@+id/textEdited" android:layout_marginTop="8dp"/>
     <ToggleButton
             android:id="@+id/likeComment"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/ic_toggle_like_comment"
             android:textOff="@null"
             android:textOn="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reply" app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintTop_toBottomOf="@+id/reply"
+            app:layout_constraintStart_toEndOf="@+id/separator" android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"/>
 
     <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -96,4 +90,20 @@
             app:layout_constraintTop_toTopOf="@+id/likeComment"
             app:layout_constraintBottom_toBottomOf="@+id/likeComment" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"/>
+    <ImageButton
+            android:layout_width="4dp"
+            android:layout_height="70dp"
+            android:id="@+id/separator"
+            android:background="@drawable/vertical_line_replies"
+            app:layout_constraintTop_toBottomOf="@+id/image_profile" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/image_profile"
+            app:layout_constraintEnd_toEndOf="@+id/image_profile"/>
+
+    <TextView
+            android:text="(editado)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textEdited"
+            android:textSize="10sp" android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/full_name_profile"
+            app:layout_constraintTop_toBottomOf="@+id/full_name_profile" android:layout_marginTop="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

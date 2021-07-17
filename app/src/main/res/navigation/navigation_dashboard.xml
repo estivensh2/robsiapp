@@ -19,17 +19,16 @@
         android:label="Inicio"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_coursesFragment"
-            app:destination="@id/coursesFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_coursesTemaryFragment"
             app:destination="@id/coursesTemaryFragment" />
         <action
             android:id="@+id/action_homeFragment_to_profile2"
             app:destination="@id/profile" />
         <action
-            android:id="@+id/action_homeFragment_to_topicsFragment"
-            app:destination="@id/topicsFragment" />
+                android:id="@+id/action_homeFragment_to_topicsFragment"
+                app:destination="@id/topicsFragment"
+        />
+        <action android:id="@+id/action_homeFragment_to_coursesFragment" app:destination="@id/coursesFragment"/>
     </fragment>
     <fragment
         android:id="@+id/coursesTemaryDetailsFragment"
@@ -126,6 +125,7 @@
             android:name="id_topic"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument android:name="name_topic" app:argType="string" android:defaultValue="empty"/>
     </fragment>
     <fragment
         android:id="@+id/topicsFragment"
@@ -169,12 +169,14 @@
                 app:destination="@id/editCommentFragment"/>
     </fragment>
     <fragment android:id="@+id/repliesFragment" android:name="com.alp.app.ui.main.view.fragments.RepliesFragment"
-              android:label="fragment_replies" tools:layout="@layout/fragment_replies">
+              android:label="Respuestas" tools:layout="@layout/fragment_replies">
         <argument android:name="id_comment" app:argType="integer" android:defaultValue="0"/>
         <argument android:name="full_name_comment" app:argType="string" android:defaultValue="empty"/>
         <argument android:name="image_comment" app:argType="string" app:nullable="true"/>
         <argument android:name="comment" app:argType="string" android:defaultValue="empty"/>
         <argument android:name="date_comment" app:argType="string" android:defaultValue="empty"/>
+        <action android:id="@+id/action_repliesFragment_to_addReplyFragment" app:destination="@id/addReplyFragment"/>
+        <action android:id="@+id/action_repliesFragment_to_editReplyFragment" app:destination="@id/editReplyFragment"/>
     </fragment>
     <fragment android:id="@+id/addCommentFragment" android:name="com.alp.app.ui.main.view.fragments.AddCommentFragment"
               android:label="Nuevo comentario" tools:layout="@layout/fragment_add_comment">
@@ -188,5 +190,27 @@
         <argument android:name="id_comment" app:argType="integer" android:defaultValue="0"/>
         <action android:id="@+id/action_editCommentFragment_to_commentsCourseFragment"
                 app:destination="@id/commentsCourseFragment"/>
+    </fragment>
+    <fragment android:id="@+id/addReplyFragment" android:name="com.alp.app.ui.main.view.fragments.AddReplyFragment"
+              android:label="Responder" tools:layout="@layout/fragment_add_reply">
+        <argument android:name="id_comment" app:argType="integer" android:defaultValue="0"/>
+        <argument android:name="date_comment" app:argType="string" android:defaultValue="empty"/>
+        <argument android:name="comment" app:argType="string" android:defaultValue="empty"/>
+        <argument android:name="fullname_comment" app:argType="string" android:defaultValue="empty"/>
+        <argument android:name="image_comment" app:argType="string" app:nullable="true"/>
+        <action android:id="@+id/action_addReplyFragment_to_repliesFragment" app:destination="@id/repliesFragment"
+                app:popUpToInclusive="false" app:popUpTo="@id/commentsCourseFragment"/>
+    </fragment>
+    <fragment android:id="@+id/editReplyFragment" android:name="com.alp.app.ui.main.view.fragments.EditReplyFragment"
+              android:label="Editar respuesta" tools:layout="@layout/fragment_edit_reply">
+        <argument android:name="id_reply" app:argType="integer" android:defaultValue="0"/>
+        <argument android:name="reply" app:argType="string" android:defaultValue="empty"/>
+        <action android:id="@+id/action_editReplyFragment_to_repliesFragment" app:destination="@id/repliesFragment"
+                app:popUpTo="@id/commentsCourseFragment" app:popUpToInclusive="false"/>
+        <argument android:name="id_comment" app:argType="integer" android:defaultValue="0"/>
+        <argument android:name="full_name_comment" app:argType="string" android:defaultValue="empty"/>
+        <argument android:name="image_comment" app:argType="string" app:nullable="true"/>
+        <argument android:name="comment" app:argType="string" android:defaultValue="empty"/>
+        <argument android:name="date_comment" app:argType="string" android:defaultValue="empty"/>
     </fragment>
 </navigation>

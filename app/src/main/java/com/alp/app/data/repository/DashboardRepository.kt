@@ -35,13 +35,27 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.editComment(id_comment, comment)
     }
 
+    suspend fun editReply(id_reply: Int, reply: String) : Response<EditReplyModel> {
+        return apiService.editReply(id_reply, reply)
+    }
+
     suspend fun deleteComment(id_comment: Int) : Response<DeleteCommentModel> {
         return apiService.deleteComment(id_comment)
     }
 
+    suspend fun deleteReply(id_reply: Int) : Response<DeleteReplyModel> {
+        return apiService.deleteReply(id_reply)
+    }
+
+
     suspend fun changeLike(active: Int, id_comment: Int, id_user: Int) : Response<ChangeLikeModel> {
         return apiService.changeLike(active, id_comment, id_user)
     }
+
+    suspend fun changeLikeReply(active: Int, id_comment: Int, id_user: Int) : Response<ChangeLikeModel> {
+        return apiService.changeLikeReply(active, id_comment, id_user)
+    }
+
 
     suspend fun getReplies(id_user: Int, id_comment: Int) : List<RepliesModel> {
         return apiService.getReplies(id_user, id_comment)
@@ -69,6 +83,10 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
 
     suspend fun addComment(id_user: Int, id_detail_topic: Int, comment: String) : Response<AddCommentModel> {
         return apiService.addComment(id_user, id_detail_topic, comment)
+    }
+
+    suspend fun addReply(id_user: Int, id_comment: Int, comment: String) : Response<AddReplyModel> {
+        return apiService.addReply(id_user, id_comment, comment)
     }
 
     suspend fun setInfoProfile(id_user: Int, names: String, image: String, last_names: String, email: String) : Response<UpdateInfoModel> {

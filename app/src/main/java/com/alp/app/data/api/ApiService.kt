@@ -56,6 +56,7 @@ interface ApiService {
             @Query("id_detail_topic") id_detail_topic : Int
     ): List<CommentsCourseModel>
 
+
     @FormUrlEncoded
     @PUT("comments/{id_comment}")
     suspend fun editComment(
@@ -63,14 +64,26 @@ interface ApiService {
         @Field("comment")   comment    : String
     ): Response<EditCommentModel>
 
+    @FormUrlEncoded
+    @PUT("replies/{id_reply}")
+    suspend fun editReply(
+        @Path("id_reply") id_reply : Int,
+        @Field("reply")   reply    : String
+    ): Response<EditReplyModel>
+
     @DELETE("comments/{id_comment}")
     suspend fun deleteComment(
         @Path("id_comment") id_comment :Int,
     ): Response<DeleteCommentModel>
 
+    @DELETE("replies/{id_reply}")
+    suspend fun deleteReply(
+        @Path("id_reply") id_reply :Int,
+    ): Response<DeleteReplyModel>
+
     @GET("replies")
     suspend fun getReplies(
-        @Query("id_user") id_topic : Int,
+        @Query("id_user") id_user : Int,
         @Query("id_comment") id_comment : Int
     ): List<RepliesModel>
 
@@ -93,6 +106,14 @@ interface ApiService {
         @Field("id_detail_topic") id_detail_topic: Int,
         @Field("comment") comment: String
     ) : Response<AddCommentModel>
+
+    @FormUrlEncoded
+    @POST("replies")
+    suspend fun addReply (
+        @Field("id_user") id_user: Int,
+        @Field("id_comment") id_comment: Int,
+        @Field("comment") comment: String
+    ) : Response<AddReplyModel>
 
     @FormUrlEncoded
     @PUT("users/{id_user}")
@@ -118,6 +139,14 @@ interface ApiService {
         @Field("active")     active :Int,
         @Field("id_comment") id_comment:Int,
         @Field("id_user")    id_user:Int
+    ) : Response<ChangeLikeModel>
+
+    @FormUrlEncoded
+    @POST("change-like-reply")
+    suspend fun changeLikeReply (
+        @Field("active")    active   : Int,
+        @Field("id_reply")  id_reply : Int,
+        @Field("id_user")   id_user  : Int
     ) : Response<ChangeLikeModel>
 
     @FormUrlEncoded

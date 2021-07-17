@@ -84,11 +84,12 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="Button"
+            android:backgroundTint="?attr/colorSecondaryVariant"
             app:icon="@drawable/ic_baseline_reply_24"
             app:layout_constraintTop_toTopOf="@+id/likes"
             app:layout_constraintBottom_toBottomOf="@+id/likes"
             app:layout_constraintStart_toEndOf="@+id/likes" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp" tools:targetApi="lollipop"/>
 
     <TextView
             android:id="@+id/setting"

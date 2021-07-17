@@ -31,7 +31,7 @@ class TopicsAdapter : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
                 titleTopic.text = data.title
             }
             itemView.setOnClickListener {
-                val action = TopicsFragmentDirections.actionTopicsFragmentToDetailTopicFragment(data.id_topic)
+                val action = TopicsFragmentDirections.actionTopicsFragmentToDetailTopicFragment(data.id_topic, data.title)
                 it.findNavController().navigate(action)
             }
         }

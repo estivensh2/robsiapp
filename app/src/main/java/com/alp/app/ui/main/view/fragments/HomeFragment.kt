@@ -9,17 +9,15 @@
 package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
-import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alp.app.R
@@ -38,7 +36,6 @@ import com.google.android.gms.ads.AdRequest
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -84,15 +81,15 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun setupShowData() {
-        dashboardViewModel.getCategories().observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getCategories().observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerViewCategories.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recyclerViewCategories.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -103,16 +100,16 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                     }
                 }
             }
-        })
-        dashboardViewModel.getSlider().observe(requireActivity(), Observer { response ->
+        }
+        dashboardViewModel.getSlider().observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerViewSlider.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> retrieveSlider(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recyclerViewSlider.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -123,16 +120,16 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                     }
                 }
             }
-        })
-        dashboardViewModel.getCoursesHome().observe(requireActivity(), Observer { response ->
+        }
+        dashboardViewModel.getCoursesHome().observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerViewCourses.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> retrieveCourses(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recyclerViewCourses.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -143,7 +140,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun retrieveSlider(list: List<SliderModel>) {
@@ -152,6 +149,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
     private fun retrieveCourses(list: List<CoursesModel>) {
+        Log.i("courses1", "$list")
         adapterCourses.updateData(list)
     }
 
@@ -182,9 +180,9 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchByName(search: String) {
-        dashboardViewModel.searchCourses(search).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.searchCourses(search).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerViewSearchCourses.visibility = View.VISIBLE
                         binding.nestedScrollView.visibility = View.GONE
@@ -192,7 +190,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderSearchCourses(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.nestedScrollView.visibility = View.GONE
                         binding.recyclerViewSearchCourses.visibility = View.GONE
                         binding.textNoFound.visibility = View.VISIBLE
@@ -204,7 +202,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderSearchCourses(list: List<CoursesModel>) {

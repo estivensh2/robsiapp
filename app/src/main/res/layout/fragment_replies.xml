@@ -65,42 +65,63 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_profile"/>
-    <androidx.recyclerview.widget.RecyclerView
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/comment" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" app:layout_constraintVertical_bias="0.0" android:id="@+id/recyclerView"
-            android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"/>
+
+            android:layout_height="0dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comment"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/comment" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" app:layout_constraintVertical_bias="0.0" android:id="@+id/recyclerView"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <TextView
             android:id="@+id/textNoFound"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:fontFamily="@font/changa_bold"
             android:gravity="center"
             android:text="@string/text_no_found"
             android:textColor="?attr/colorSecondaryVariant"
             android:textSize="18sp"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0" android:layout_marginTop="16dp"/>
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progress"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/colorOnPrimary"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json"
-            app:layout_constraintTop_toTopOf="@+id/recyclerView"/>
+            app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true" android:id="@+id/addReply" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="1.0" android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp" android:src="@drawable/ic_round_add_24"
+            android:background="@drawable/ic_baseline_add_24" android:focusable="true"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 import com.alp.app.data.model.DetailTopicModel
+import com.alp.app.ui.main.view.fragments.BlankFragment
 import com.alp.app.ui.main.view.fragments.ItemFragment
 
 class DetailTopicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
@@ -21,16 +22,21 @@ class DetailTopicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
     val list = ArrayList<DetailTopicModel>()
 
     override fun createFragment(position: Int): Fragment {
-        //return ItemFragment.newInstance(list[position])
-        return ItemFragment()
+        return if (position% 2 == 0) {
+            ItemFragment.newInstance(list[position])
+        } else {
+            BlankFragment.newInstance(list[position])
+        }
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return list.size
     }
 
     fun updateData(data: List<DetailTopicModel>){
+        list.clear()
         list.addAll(data)
+        notifyDataSetChanged()
     }
 }
 

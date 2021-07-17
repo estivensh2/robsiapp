@@ -136,4 +136,16 @@
     <string name="text_comment">COMENTAR</string>
     <string name="text_success_comment">Se ha publicado tu comentario</string>
     <string name="text_update_comment">Se ha actualizado tu comentario</string>
+    <string name="text_inserted">Se ha insertado</string>
+    <string name="text_updated">Se ha actualizado</string>
+    <string-array name="string_question_correct">
+        <item>¡Eres lo máximo!</item>
+        <item>¡Correcto!</item>
+        <item>¡Buen trabajo!</item>
+    </string-array>
+    <string-array name="string_question_incorrect">
+        <item>¡Ups, inténtalo de nuevo!</item>
+        <item>La respuesta es incorrecta</item>
+        <item>Hmm, piénsalo de nuevo</item>
+    </string-array>
 </resources>

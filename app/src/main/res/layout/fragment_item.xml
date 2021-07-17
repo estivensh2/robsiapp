@@ -90,7 +90,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/textView5"
+                            android:id="@+id/numberComments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -134,7 +134,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -147,7 +147,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/visits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -160,11 +160,11 @@
                     android:text="38.6K"
                     android:textColor="?attr/colorSecondary"
                     app:drawableTint="?attr/colorSecondary"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    app:layout_constraintBottom_toBottomOf="@+id/level"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView7"
-                    app:layout_constraintTop_toTopOf="@+id/textView7" />
+                    app:layout_constraintStart_toEndOf="@+id/level"
+                    app:layout_constraintTop_toTopOf="@+id/level" />
 
                 <WebView
                     android:id="@+id/webView"
@@ -177,7 +177,7 @@
                     android:layout_marginRight="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/level" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

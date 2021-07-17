@@ -8,17 +8,13 @@
 
 package com.alp.app.ui.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.CommentsCourseModel
-import com.alp.app.data.model.ReviewModel
 import com.alp.app.databinding.TemplateCommentsBinding
 import com.alp.app.ui.main.view.fragments.CommentsCourseFragmentDirections
 import com.alp.app.utils.Functions
@@ -45,7 +41,6 @@ class CommentsCourseAdapter(var itemClickListener: ItemClickListener, var likeCl
             binding.date.text = TimeAgo.timeAgo(functions.convertDateToLong(data.date_created)!!)
             binding.likes.text = data.likes.toString()
             if (data.replies > 0){
-                binding.replies.isEnabled = true
                 if (data.replies == 1){
                     binding.replies.text = itemView.context.resources.getString(R.string.text_one_reply, data.replies)
                 } else {
@@ -57,12 +52,21 @@ class CommentsCourseAdapter(var itemClickListener: ItemClickListener, var likeCl
                         data.full_name,
                         data.image,
                         data.comment,
-                        data.date_created
+                        TimeAgo.timeAgo(functions.convertDateToLong(data.date_created)!!)
                     )
                     it.findNavController().navigate(action)
                 }
             } else {
-                binding.replies.isEnabled = false
+                binding.replies.setOnClickListener {
+                    val action = CommentsCourseFragmentDirections.actionCommentsCourseFragmentToRepliesFragment(
+                        data.id_comment,
+                        data.full_name,
+                        data.image,
+                        data.comment,
+                        TimeAgo.timeAgo(functions.convertDateToLong(data.date_created)!!)
+                    )
+                    it.findNavController().navigate(action)
+                }
                 binding.replies.text = itemView.context.resources.getString(R.string.text_no_replies)
             }
             if (data.image.isNullOrEmpty()){
@@ -121,4 +125,6 @@ class CommentsCourseAdapter(var itemClickListener: ItemClickListener, var likeCl
         list.addAll(data)
         notifyItemChanged(1)
     }
+
+
 }

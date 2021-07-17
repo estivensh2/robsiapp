@@ -14,19 +14,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.ChangeLikeModel
 import com.alp.app.data.model.CommentsCourseModel
 import com.alp.app.data.model.DeleteCommentModel
 import com.alp.app.databinding.FragmentCommentsCourseBinding
+import com.alp.app.databinding.TemplateReportBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.CommentsCourseAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
@@ -41,7 +44,7 @@ class CommentsCourseFragment : Fragment() {
 
     private var _binding: FragmentCommentsCourseBinding? = null
     private val binding get() = _binding!!
-    //private val args: CommentsCourseFragmentArgs by navArgs()
+    private val args: CommentsCourseFragmentArgs by navArgs()
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var commentsCourseAdapter: CommentsCourseAdapter
@@ -82,7 +85,6 @@ class CommentsCourseFragment : Fragment() {
                                 }
                                 R.id.delete_comment -> {
                                     deleteComment(data.id_comment, position)
-                                    Toast.makeText(contexto, "${it.title} $position", Toast.LENGTH_SHORT).show()
                                 }
                             }
                             true
@@ -97,7 +99,7 @@ class CommentsCourseFragment : Fragment() {
                         popupMenu.setOnMenuItemClickListener {
                             when(it.itemId){
                                 R.id.report_comment -> {
-                                    Toast.makeText(contexto, "${it.title} $position", Toast.LENGTH_SHORT).show()
+                                    showDialog(data)
                                 }
                             }
                             true
@@ -116,15 +118,48 @@ class CommentsCourseFragment : Fragment() {
                         }
                     }
                 })
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0 || dy < 0 && binding.addComment.isShown){
+                        binding.addComment.hide()
+                    }
+                }
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                        binding.addComment.show()
+                    }
+                    super.onScrollStateChanged(recyclerView, newState)
+                }
+            })
             recyclerView.layoutManager = LinearLayoutManager(contexto)
             recyclerView.addItemDecoration(dividerItemDecoration)
             recyclerView.adapter = commentsCourseAdapter
         }
     }
 
+    private fun showDialog(data: CommentsCourseModel) {
+        val dialog = AlertDialog.Builder(contexto)
+        val binding = TemplateReportBinding.inflate(layoutInflater, null, false)
+        dialog.setView(binding.root)
+        val alertDialog = dialog.create()
+        binding.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        binding.btnReport.isEnabled = false
+        binding.radioGroup.setOnCheckedChangeListener { group, _ ->
+            binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
+        }
+        binding.btnReport.setOnClickListener {
+
+        }
+        alertDialog.show()
+    }
+
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)!!
-        dashboardViewModel.getComments(idUser,1).observe(requireActivity()) { response ->
+        dashboardViewModel.getComments(idUser,args.idDetailTopic).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -152,18 +187,13 @@ class CommentsCourseFragment : Fragment() {
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        binding.recyclerView.visibility = View.VISIBLE
-                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> deleteItem(data, position) }
                     }
                     Status.ERROR -> {
-                        binding.recyclerView.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
-                        functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
-                        binding.recyclerView.visibility = View.GONE
-                        functions.showHideProgressBar(true, binding.progress)
+                        //
                     }
                 }
             }
@@ -189,11 +219,12 @@ class CommentsCourseFragment : Fragment() {
         }
     }
 
+
     private fun successLike(data: Response<ChangeLikeModel>) {
         if (data.body()!!.response == 1){
-            Log.i("response", "Se ha insertado")
+            Log.i("response", getString(R.string.text_inserted))
         } else {
-            Log.i("response", "Se ha actualizado")
+            Log.i("response", getString(R.string.text_updated))
         }
     }
 
@@ -222,6 +253,7 @@ class CommentsCourseFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

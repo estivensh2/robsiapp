@@ -18,10 +18,6 @@ data class DetailTopicModel(
         @SerializedName("comments")        var comments: Int,
         @SerializedName("id_question")     var id_question: Int,
         @SerializedName("question")        var question: String,
-        //@SerializedName("answers")         var options : List<Options>,
-)
-
-data class Options(
-        @SerializedName("id_option") var id_option : Int,
-        @SerializedName("option")    var option : String,
+        @SerializedName("reply")           var reply: Int,
+        @SerializedName("options")         var options : List<OptionsModel>,
 )
