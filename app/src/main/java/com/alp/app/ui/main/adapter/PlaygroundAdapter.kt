@@ -8,26 +8,27 @@
 
 package com.alp.app.ui.main.adapter
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.alp.app.R
-import com.alp.app.data.model.PlaygroundModel
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.alp.app.ui.main.view.fragments.languages.web.HtmlFragment
+import com.alp.app.ui.main.view.fragments.languages.web.OutputFragment
 import java.util.*
 
-class PlaygroundAdapter(private val context: Context, private val words: ArrayList<PlaygroundModel>): RecyclerView.Adapter<PlaygroundAdapter.PageHolder>(){
+class PlaygroundAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageHolder  =
-        PageHolder(LayoutInflater.from(context).inflate(R.layout.template_playground, parent, false))
+    val list = ArrayList<Fragment>()
 
-    override fun onBindViewHolder(holder: PageHolder, position: Int) {
-
+    override fun createFragment(position: Int): Fragment {
+        when(position){
+            0 -> return HtmlFragment()
+            1 -> return OutputFragment()
+        }
+        return OutputFragment()
     }
 
-
-    override fun getItemCount(): Int = words.size
-
-    inner class PageHolder(view: View): RecyclerView.ViewHolder(view)
+    override fun getItemCount(): Int {
+        return 2
+    }
 }

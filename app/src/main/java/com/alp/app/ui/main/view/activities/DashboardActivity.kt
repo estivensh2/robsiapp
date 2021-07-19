@@ -65,12 +65,12 @@ class DashboardActivity : AppCompatActivity() {
             containerId = R.id.nav_host_container,
             intent = intent
         )
-        bottomNavigationView.itemIconTintList = null
+        //bottomNavigationView.itemIconTintList = null
 
         //Siempre que cambie el controlador seleccionado, configure la barra de acción.
-        controller.observe(this, Observer { navController ->
+        controller.observe(this) { navController ->
             setupActionBarWithNavController(navController)
-        })
+        }
         currentNavController = controller
     }
 

@@ -38,14 +38,14 @@ class CodeFragment : Fragment(){
     private val binding get() = _binding!!
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, avedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, avedInstanceState: Bundle?): View {
         _binding = FragmentCodeBinding.inflate(inflater, container, false)
         binding.floatingActionButton.setOnClickListener { showSimpleAdapterAlertDialog() }
         return binding.root
     }
 
     private fun showSimpleAdapterAlertDialog() {
-        val items = arrayOf("Web", "PHP")
+        val items = arrayOf("Web (Beta)")
         val dialog = MaterialAlertDialogBuilder(contexto)
         dialog.setTitle(resources.getString(R.string.title_languages))
         dialog.setItems(items) { _, which ->

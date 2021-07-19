@@ -12,11 +12,13 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alp.app.R
@@ -36,7 +38,6 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.IllegalArgumentException
 
 @AndroidEntryPoint
 class TopicsFragment : Fragment() {
@@ -50,9 +51,9 @@ class TopicsFragment : Fragment() {
     private var count = 0
     private val args: TopicsFragmentArgs by navArgs()
     private val dashboardViewModel: DashboardViewModel by viewModels()
-    lateinit var topicsAdapter: TopicsAdapter
+    private lateinit var topicsAdapter: TopicsAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTopicsBinding.inflate(inflater, container, false)
         functions = Functions(contexto)
         idCourse = args.idCourse
@@ -69,7 +70,18 @@ class TopicsFragment : Fragment() {
 
     private fun setupUI() {
         with(binding){
-            topicsAdapter  = TopicsAdapter()
+            topicsAdapter  = TopicsAdapter(object : TopicsAdapter.ItemClickListener{
+                override fun itemClick(data: TopicsModel) {
+                    val action = TopicsFragmentDirections.actionTopicsFragmentToDetailTopicFragment(
+                        data.id_topic,
+                        data.title,
+                        args.idCourse,
+                        args.nameCourse,
+                        args.imageCourse
+                    )
+                    findNavController().navigate(action)
+                }
+            })
             val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return if (position == 0) {
@@ -81,26 +93,22 @@ class TopicsFragment : Fragment() {
             val gridLayoutManager = GridLayoutManager(context, 2)
             gridLayoutManager.spanSizeLookup = spanSizeLookup
             recycler.layoutManager = gridLayoutManager
-
-
-
             recycler.adapter = topicsAdapter
         }
-
 
     }
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.getTopics(idCourse, idUser!!).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getTopics(idCourse, idUser!!).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recycler.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recycler.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -111,7 +119,7 @@ class TopicsFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: List<TopicsModel>) {
@@ -121,9 +129,12 @@ class TopicsFragment : Fragment() {
                 notifyDataSetChanged()
             }
         } else {
-            binding.textNoFound.apply {
-                visibility = View.VISIBLE
-                text = resources.getString(R.string.text_no_found)
+            with(binding){
+                recycler.visibility = View.GONE
+                textNoFound.apply {
+                    visibility = View.VISIBLE
+                    text = resources.getString(R.string.text_no_found)
+                }
             }
         }
     }
@@ -161,7 +172,6 @@ class TopicsFragment : Fragment() {
     private fun showAds(){
         interstitial?.show(requireActivity())
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -9,6 +9,7 @@
 package com.alp.app.ui.main.view.fragments
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
@@ -18,10 +19,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
+import com.alp.app.R
 import com.alp.app.data.model.DetailTopicModel
 import com.alp.app.databinding.FragmentItemBinding
 import com.alp.app.singleton.PreferencesSingleton
@@ -35,6 +38,7 @@ private const val ARG_PARAM2 = "param2"
 private const val ARG_PARAM3 = "param3"
 private const val ARG_PARAM4 = "param4"
 private const val ARG_PARAM5 = "param5"
+private const val ARG_PARAM6 = "param5"
 
 class ItemFragment : Fragment(){
 
@@ -45,9 +49,10 @@ class ItemFragment : Fragment(){
     private var param3: String? = null
     private var param4: Int? = null
     private var param5: Int? = null
+    private var param6: Int? = null
     private lateinit var contexto: Context
     private lateinit var functions: Functions
-    private var mOnButtonClickListener: OnButtonClickListener? = null
+    private var onButtonClickListener: OnButtonClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +63,11 @@ class ItemFragment : Fragment(){
             param3 = it.getString(ARG_PARAM3)
             param4 = it.getInt(ARG_PARAM4)
             param5 = it.getInt(ARG_PARAM5)
+            param6 = it.getInt(ARG_PARAM6)
         }
     }
 
-    internal interface OnButtonClickListener {
-        fun onButtonClicked(view: View?)
-    }
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentItemBinding.inflate(inflater, container, false)
         functions = Functions(requireContext())
@@ -73,7 +77,7 @@ class ItemFragment : Fragment(){
             it.findNavController().navigate(action)
         }
         binding.btnNext.setOnClickListener {
-            mOnButtonClickListener?.onButtonClicked(it)
+            onButtonClickListener?.onButtonClicked(param6)
         }
         val head = "<html><head>"
         val style = "<style type='text/css'>" +
@@ -86,8 +90,8 @@ class ItemFragment : Fragment(){
         binding.webView.loadDataWithBaseURL(null, myHtmlString, "text/html", "UTF-8", null)
         binding.webView.settings.javaScriptEnabled = true
         binding.level.text = param3
-        binding.visits.text = "" + param4
-        binding.numberComments.text = "" + param5
+        binding.visits.text = resources.getString(R.string.text_visits, param4)
+        binding.numberComments.text = resources.getString(R.string.text_comments, param5)
         binding.webView.setBackgroundColor(Color.TRANSPARENT)
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
             val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -110,6 +114,10 @@ class ItemFragment : Fragment(){
         snackBar.show()
     }
 
+    interface OnButtonClickListener {
+        fun onButtonClicked(index: Int?)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -117,17 +125,19 @@ class ItemFragment : Fragment(){
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        onButtonClickListener = parentFragment as OnButtonClickListener?
         this.contexto = context
     }
 
     companion object {
-        @JvmStatic fun newInstance(data: DetailTopicModel) = ItemFragment().apply {
+        @JvmStatic fun newInstance(data: DetailTopicModel, position: Int) = ItemFragment().apply {
             arguments = Bundle().apply {
                 putInt(ARG_PARAM1, data.id_detail_topic)
                 putString(ARG_PARAM2, data.description)
                 putString(ARG_PARAM3, data.level)
                 putInt(ARG_PARAM4, data.visits)
                 putInt(ARG_PARAM5, data.comments)
+                putInt(ARG_PARAM6, position)
             }
         }
     }

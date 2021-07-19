@@ -36,7 +36,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/changa_bold"
-        android:text="TextView"
+        android:text="@string/text_test"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,15 +44,16 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@null"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:srcCompat="@drawable/ic_baseline_thumb_up_24"
-        tools:ignore="VectorDrawableCompat" />
+            android:id="@+id/imageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar"
+            app:layout_constraintStart_toStartOf="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="@+id/progressBar"
+            app:srcCompat="@drawable/ic_baseline_bolt_24"
+            tools:ignore="VectorDrawableCompat" android:tint="?attr/colorSecondaryVariant"
+            android:contentDescription="@string/description_image_topics"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

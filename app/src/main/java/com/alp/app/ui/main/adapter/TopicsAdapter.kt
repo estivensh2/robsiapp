@@ -9,32 +9,33 @@
 package com.alp.app.ui.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.alp.app.R
 import com.alp.app.data.model.TopicsModel
 import com.alp.app.databinding.TemplateTopicsBinding
-import com.alp.app.ui.main.view.fragments.CoursesFragmentDirections
-import com.alp.app.ui.main.view.fragments.HomeFragmentDirections
 import com.alp.app.ui.main.view.fragments.TopicsFragmentDirections
 
-class TopicsAdapter : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
+class TopicsAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
     companion object {
         val list = mutableListOf<TopicsModel>()
     }
 
-    class ViewHolder(val binding: TemplateTopicsBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: TemplateTopicsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: TopicsModel) {
             with(binding){
                 titleTopic.text = data.title
             }
             itemView.setOnClickListener {
-                val action = TopicsFragmentDirections.actionTopicsFragmentToDetailTopicFragment(data.id_topic, data.title)
-                it.findNavController().navigate(action)
+                itemClickListener.itemClick(data)
             }
         }
+    }
+
+    interface ItemClickListener {
+        fun itemClick(data: TopicsModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

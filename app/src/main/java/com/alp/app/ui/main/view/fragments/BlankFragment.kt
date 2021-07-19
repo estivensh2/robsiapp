@@ -27,6 +27,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private const val ARG_PARAM3 = "param3"
 private const val ARG_PARAM4 = "param4"
+private const val ARG_PARAM5 = "param5"
 
 class BlankFragment : Fragment() {
 
@@ -36,9 +37,11 @@ class BlankFragment : Fragment() {
     private var param2: String? = null
     private var param3: ArrayList<OptionsModel>? = null
     private var param4: Int? = null
+    private var param5: Int? = null
     private lateinit var functions : Functions
     private var count = 0
     private lateinit var contexto: Context
+    private var onButtonClickListener: OnButtonClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +50,7 @@ class BlankFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
             param3 = it.getParcelableArrayList(ARG_PARAM3)
             param4 = it.getInt(ARG_PARAM4)
+            param5 = it.getInt(ARG_PARAM5)
         }
     }
 
@@ -85,8 +89,7 @@ class BlankFragment : Fragment() {
             bindingBottomSheet.buttonResult.text = resources.getString(R.string.text_continue)
             bindingBottomSheet.buttonResult.setOnClickListener {
                 dialog.dismiss()
-                //val position = binding.viewPager2.currentItem
-                //binding.viewPager2.currentItem = position+1
+                onButtonClickListener?.onButtonClicked(param5)
             }
         } else {
             count += 1
@@ -102,6 +105,10 @@ class BlankFragment : Fragment() {
         dialog.show()
     }
 
+    interface OnButtonClickListener {
+        fun onButtonClicked(index: Int?)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -109,16 +116,18 @@ class BlankFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        onButtonClickListener = parentFragment as OnButtonClickListener?
         this.contexto = context
     }
 
     companion object {
-        @JvmStatic fun newInstance(data: DetailTopicModel) = BlankFragment().apply {
+        @JvmStatic fun newInstance(data: DetailTopicModel, position: Int) = BlankFragment().apply {
             arguments = Bundle().apply {
                 putInt(ARG_PARAM1, data.id_question)
                 putString(ARG_PARAM2, data.question)
                 putParcelableArrayList(ARG_PARAM3, data.options as ArrayList)
                 putInt(ARG_PARAM4, data.reply)
+                putInt(ARG_PARAM5, position)
             }
         }
     }

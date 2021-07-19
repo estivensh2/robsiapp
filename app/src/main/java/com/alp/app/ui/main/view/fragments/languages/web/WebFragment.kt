@@ -6,49 +6,51 @@
  *
  */
 
-/*
- * EHOALAELEALAE
- */
-
 package com.alp.app.ui.main.view.fragments.languages.web
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alp.app.data.model.PlaygroundModel
+import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
 import com.alp.app.databinding.FragmentWebBinding
 import com.alp.app.ui.main.adapter.PlaygroundAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import javax.inject.Inject
 
-class WebFragment : Fragment() {
+class WebFragment : Fragment(), HtmlFragment.OnButtonClickListener {
 
     private lateinit var contexto: Context
     private var _binding: FragmentWebBinding? = null
     private val binding get() = _binding!!
-    @Inject
-    lateinit var playgroundAdapter: PlaygroundAdapter
+    private lateinit var playgroundAdapter: PlaygroundAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentWebBinding.inflate(inflater, container, false)
-        setupUI()
+        binding.webView.apply {
+            loadUrl("http://192.168.0.18/compiler-web/")
+            settings.javaScriptEnabled = true
+            webViewClient = WebViewClient()
+            webChromeClient = WebChromeClient()
+        }
+
         return binding.root
     }
 
     private fun setupUI() {
-        val language = ArrayList<PlaygroundModel>()
-        language.add(PlaygroundModel("HTML", "html", "php2"))
-        language.add(PlaygroundModel("CSS", "csss","html2"))
-        language.add(PlaygroundModel("JAVASCRIPT", "","html2"))
-        val adapter = PlaygroundAdapter(contexto, language)
-        binding.viewPager2.adapter = adapter
-        TabLayoutMediator(binding.tabLayout2, binding.viewPager2) {tab, position ->
-            val texto = language[position]
-            tab.text = texto.name
+        playgroundAdapter = PlaygroundAdapter(fragmentManager = childFragmentManager, lifecycle = viewLifecycleOwner.lifecycle)
+        binding.viewPager3.adapter = playgroundAdapter
+        TabLayoutMediator(binding.tabLayout2, binding.viewPager3) {tab, position ->
+            when(position){
+                0 -> tab.text = "HTML"
+                1 -> tab.text = "RESULTADO"
+            }
         }.attach()
+        binding.viewPager3.isUserInputEnabled = false
     }
 
     override fun onDestroyView() {
@@ -59,5 +61,9 @@ class WebFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.contexto = context
+    }
+
+    override fun onChildFragClick(index: Int, data: String) {
+        binding.viewPager3.currentItem = index
     }
 }

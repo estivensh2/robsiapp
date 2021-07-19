@@ -29,6 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:itemIconSize="40dp"
+        android:background="?attr/colorSecondaryVariant"
         app:itemTextColor="@color/bottom_nav_color"
         app:itemIconTint="@color/bottom_nav_color"
         app:labelVisibilityMode="unlabeled"

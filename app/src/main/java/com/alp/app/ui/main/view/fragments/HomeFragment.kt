@@ -149,7 +149,6 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
     private fun retrieveCourses(list: List<CoursesModel>) {
-        Log.i("courses1", "$list")
         adapterCourses.updateData(list)
     }
 
@@ -187,18 +186,15 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                         binding.recyclerViewSearchCourses.visibility = View.VISIBLE
                         binding.nestedScrollView.visibility = View.GONE
                         binding.textNoFound.visibility = View.GONE
-                        functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderSearchCourses(data) }
                     }
                     Status.ERROR -> {
                         binding.nestedScrollView.visibility = View.GONE
                         binding.recyclerViewSearchCourses.visibility = View.GONE
                         binding.textNoFound.visibility = View.VISIBLE
-                        functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
                         binding.recyclerViewSearchCourses.visibility = View.GONE
-                        functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
@@ -206,7 +202,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun renderSearchCourses(list: List<CoursesModel>) {
-        adapterSearchCourses.updateData(list)
+        if (list.isNotEmpty()){
+            adapterSearchCourses.updateData(list)
+        } else {
+            binding.recyclerViewSearchCourses.visibility = View.GONE
+            binding.textNoFound.visibility = View.VISIBLE
+        }
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {

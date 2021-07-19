@@ -15,5 +15,6 @@
     <dimen name="size_button_radius">25dp</dimen>
     <dimen name="size_input_radius">30dp</dimen>
     <dimen name="elevation_card_view">5dp</dimen>
+    <dimen name="dimen150dp">150dp</dimen>
     <item name="letter_spacing" type="dimen" format="float">0.2</item>
 </resources>

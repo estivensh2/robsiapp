@@ -23,9 +23,9 @@ class DetailTopicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
 
     override fun createFragment(position: Int): Fragment {
         return if (position% 2 == 0) {
-            ItemFragment.newInstance(list[position])
+            ItemFragment.newInstance(list[position], position)
         } else {
-            BlankFragment.newInstance(list[position])
+            BlankFragment.newInstance(list[position], position)
         }
     }
 
