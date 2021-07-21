@@ -30,82 +30,82 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/iLEmail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/text_email"
-        app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
-        app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
-        app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
-        app:boxCornerRadiusTopStart="@dimen/size_input_radius"
-        app:layout_constraintBottom_toTopOf="@+id/iLPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/iEEmail"
+            android:id="@+id/iLEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/changa_semibold"
-            android:inputType="textEmailAddress" />
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/text_email"
+            app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+            app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+            app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+            app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+            app:layout_constraintBottom_toTopOf="@+id/iLPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:boxStrokeColor="?attr/colorSecondaryVariant">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/iEEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/changa_semibold"
+                android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/iLPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="24dp"
-        android:hint="@string/text_password"
-        app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
-        app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
-        app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
-        app:boxCornerRadiusTopStart="@dimen/size_input_radius"
-        app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/iEPassword"
+            android:id="@+id/iLPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/changa_semibold"
-            android:inputType="textPassword" />
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="24dp"
+            android:hint="@string/text_password"
+            app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+            app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+            app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+            app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+            app:endIconMode="password_toggle"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:boxStrokeColor="?attr/colorSecondaryVariant">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/iEPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/changa_semibold"
+                android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSignIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/changa_bold"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:letterSpacing="@dimen/letter_spacing"
-        android:stateListAnimator="@null"
-        android:text="@string/text_sign_in"
-        app:cornerRadius="@dimen/size_button_radius"
-        app:layout_constraintBottom_toTopOf="@+id/btnResetPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="lollipop" />
+            android:id="@+id/btnSignIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/changa_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:stateListAnimator="@null"
+            android:text="@string/text_sign_in"
+            app:cornerRadius="@dimen/size_button_radius"
+            app:layout_constraintBottom_toTopOf="@+id/btnResetPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:targetApi="lollipop" android:textSize="@dimen/button_font_size"/>
 
     <TextView
         android:id="@+id/btnResetPassword"

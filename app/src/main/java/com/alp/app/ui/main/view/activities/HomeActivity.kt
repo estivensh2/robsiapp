@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.navigation_home)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.iniciarOCrearCuentaFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.loginFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         instantiateID()
     }

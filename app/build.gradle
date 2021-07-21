@@ -47,6 +47,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
     kapt {
         correctErrorTypes true
     }
@@ -59,30 +60,35 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.3'
-    implementation 'androidx.navigation:navigation-ui:2.3.3'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    // circle imageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // picasso
     implementation "com.squareup.picasso:picasso:2.71828"
+    // shape of view
     implementation 'io.github.florent37:shapeofview:1.4.7'
+    // glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-
     // refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation 'org.jsoup:jsoup:1.13.1'
-    implementation 'com.github.kbiakov:CodeView-Android:1.3.2'
     // indicator de viewpager2
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation 'androidx.webkit:webkit:1.3.0'
+    // jsoup
+    implementation 'org.jsoup:jsoup:1.13.1'
+    // webkit webview
+    implementation 'androidx.webkit:webkit:1.4.0'
     //LifeCycle
     implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
@@ -94,26 +100,21 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.2.5"
     // When using Kotlin.
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
+    // toast
     implementation 'com.pranavpandey.android:dynamic-toasts:3.3.1'
+    // progress bar round
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+    // lottie
+    implementation 'com.airbnb.android:lottie:3.6.0'
+    // zoom image
+    implementation 'com.jsibbold:zoomage:1.3.1'
+    // firebase
     implementation 'com.google.android.gms:play-services-ads:20.2.0'
-
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
-    implementation 'com.airbnb.android:lottie:3.6.0'
-    implementation 'com.jsibbold:zoomage:1.3.1'
-
-
-    implementation 'com.github.AmrDeveloper:CodeView:1.0.0'
-    implementation 'com.github.ahmadaghazadeh:CodeEditor:1.0.15'
-
-
-    implementation 'org.sufficientlysecure:html-textview:4.0'
-
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-ads:20.2.0'
+    //
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

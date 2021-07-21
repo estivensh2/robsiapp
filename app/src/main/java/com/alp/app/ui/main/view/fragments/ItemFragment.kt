@@ -8,38 +8,47 @@
 
 package com.alp.app.ui.main.view.fragments
 
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.alp.app.R
 import com.alp.app.data.model.DetailTopicModel
+import com.alp.app.data.model.InsertVisitModel
 import com.alp.app.databinding.FragmentItemBinding
+import com.alp.app.databinding.TemplateReportBinding
 import com.alp.app.singleton.PreferencesSingleton
+import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
+import com.alp.app.utils.Status
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Response
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private const val ARG_PARAM3 = "param3"
 private const val ARG_PARAM4 = "param4"
 private const val ARG_PARAM5 = "param5"
-private const val ARG_PARAM6 = "param5"
+private const val ARG_PARAM6 = "param6"
 
+@AndroidEntryPoint
 class ItemFragment : Fragment(){
 
     private var _binding: FragmentItemBinding? = null
@@ -50,6 +59,7 @@ class ItemFragment : Fragment(){
     private var param4: Int? = null
     private var param5: Int? = null
     private var param6: Int? = null
+    private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var contexto: Context
     private lateinit var functions: Functions
     private var onButtonClickListener: OnButtonClickListener? = null
@@ -77,7 +87,17 @@ class ItemFragment : Fragment(){
             it.findNavController().navigate(action)
         }
         binding.btnNext.setOnClickListener {
-            onButtonClickListener?.onButtonClicked(param6)
+            onButtonClickListener?.onButtonClicked(param6, param1)
+        }
+        binding.bookMark.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                showSnackBar(getString(R.string.text_add_favorite))
+            } else {
+                showSnackBar(getString(R.string.text_delete_favorite))
+            }
+        }
+        binding.report.setOnClickListener {
+            showDialog()
         }
         val head = "<html><head>"
         val style = "<style type='text/css'>" +
@@ -87,12 +107,14 @@ class ItemFragment : Fragment(){
         val endHead = "</head>"
         val body = "<body>$param2</body></html>"
         val myHtmlString = head + style + endHead + body
-        binding.webView.loadDataWithBaseURL(null, myHtmlString, "text/html", "UTF-8", null)
-        binding.webView.settings.javaScriptEnabled = true
-        binding.level.text = param3
-        binding.visits.text = resources.getString(R.string.text_visits, param4)
-        binding.numberComments.text = resources.getString(R.string.text_comments, param5)
-        binding.webView.setBackgroundColor(Color.TRANSPARENT)
+        with(binding){
+            webView.loadDataWithBaseURL(null, myHtmlString, "text/html", "UTF-8", null)
+            webView.settings.javaScriptEnabled = true
+            level.text = param3
+            visits.text = resources.getString(R.string.text_visits, param4)
+            numberComments.text = resources.getString(R.string.text_comments, param5)
+            webView.setBackgroundColor(Color.TRANSPARENT)
+        }
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
             val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
             if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
@@ -101,7 +123,54 @@ class ItemFragment : Fragment(){
                 WebSettingsCompat.setForceDark(binding.webView.settings, WebSettingsCompat.FORCE_DARK_OFF)
             }
         }
+        setupShowData()
         return binding.root
+    }
+
+    private fun setupShowData() {
+        dashboardViewModel.insertVisit(param1!!).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        //functions.showHideProgressBar(false, binding.progress)
+                        resource.data?.let { data -> insertVisit(data) }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        //functions.showHideProgressBar(false, binding.progress)
+                    }
+                    Status.LOADING -> {
+                        //functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun insertVisit(data: Response<InsertVisitModel>) {
+        if (data.body()!!.response == 1){
+            Log.i("responseVisit", "inserted")
+        } else {
+            Log.i("responseVisit", "notInserted")
+        }
+    }
+
+    private fun showDialog() {
+        val dialog = AlertDialog.Builder(contexto)
+        val binding = TemplateReportBinding.inflate(layoutInflater, null, false)
+        dialog.setView(binding.root)
+        val alertDialog = dialog.create()
+        binding.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        binding.btnReport.isEnabled = false
+        binding.radioGroup.setOnCheckedChangeListener { group, _ ->
+            binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
+        }
+        binding.btnReport.setOnClickListener {
+
+        }
+        alertDialog.show()
     }
 
     private fun showSnackBar(text: String){
@@ -115,7 +184,7 @@ class ItemFragment : Fragment(){
     }
 
     interface OnButtonClickListener {
-        fun onButtonClicked(index: Int?)
+        fun onButtonClicked(index: Int?, id_detail_topic: Int?)
     }
 
     override fun onDestroyView() {

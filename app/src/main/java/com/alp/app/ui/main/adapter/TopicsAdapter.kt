@@ -9,13 +9,12 @@
 package com.alp.app.ui.main.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.alp.app.R
 import com.alp.app.data.model.TopicsModel
 import com.alp.app.databinding.TemplateTopicsBinding
-import com.alp.app.ui.main.view.fragments.TopicsFragmentDirections
 
 class TopicsAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
@@ -27,6 +26,10 @@ class TopicsAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Ada
         fun bindView(data: TopicsModel) {
             with(binding){
                 titleTopic.text = data.title
+                progressBar.progress = data.percentage
+                if (data.percentage == 100){
+                    imageButton.background = ContextCompat.getDrawable(itemView.context, R.drawable.ic_baseline_check_24)
+                }
             }
             itemView.setOnClickListener {
                 itemClickListener.itemClick(data)

@@ -32,116 +32,117 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/iLNames"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/text_names"
-                app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
-                app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusTopStart="@dimen/size_input_radius"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnUploadImage">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/iENames"
+                    android:id="@+id/iLNames"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/changa_semibold"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/text_names"
+                    app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnUploadImage"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/iENames"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/changa_semibold"
+                        android:inputType="textEmailAddress"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/iLLastNames"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/text_last_names"
-                app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
-                app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusTopStart="@dimen/size_input_radius"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iLNames">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/iELastNames"
+                    android:id="@+id/iLLastNames"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/changa_semibold"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/text_last_names"
+                    app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iLNames">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/iELastNames"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/changa_semibold"
+                        android:inputType="textEmailAddress"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/iLEmail"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/text_email"
-                app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
-                app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusTopStart="@dimen/size_input_radius"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iLLastNames">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/iEEmail"
+                    android:id="@+id/iLEmail"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/changa_semibold"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/text_email"
+                    app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iLLastNames">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/iEEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/changa_semibold"
+                        android:inputType="textEmailAddress"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/iLPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:hint="@string/text_password"
-                app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
-                app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
-                app:boxCornerRadiusTopStart="@dimen/size_input_radius"
-                app:endIconDrawable="@drawable/ic_baseline_change_circle_24"
-                app:endIconMode="custom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iLEmail">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/iEPassword"
+                    android:id="@+id/iLPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/changa_semibold"
-                    android:inputType="textPassword" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/text_password"
+                    app:boxCornerRadiusBottomEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/size_input_radius"
+                    app:boxCornerRadiusTopStart="@dimen/size_input_radius"
+                    app:endIconDrawable="@drawable/ic_baseline_change_circle_24"
+                    app:endIconMode="custom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iLEmail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/iEPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/changa_semibold"
+                        android:inputType="textPassword"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -9,19 +9,17 @@
 package com.alp.app.ui.main.view.activities
 
 /**
- * Extraido de https://github.com/android/architecture-components-samples/tree/master/NavigationAdvancedSample
+ * extracted from de https://github.com/android/architecture-components-samples/tree/master/NavigationAdvancedSample
  */
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.alp.app.R
 import com.alp.app.singleton.PreferencesSingleton
-import com.google.android.gms.common.util.CollectionUtils.listOf
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,16 +56,15 @@ class DashboardActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navGraphIds = mutableListOf(R.navigation.navigation_code, R.navigation.navigation_dashboard, R.navigation.navigation_profile)
 
-        //Configurar la vista de navegación inferior con una lista de gráficos de navegación
+        //Configuring the bottom navigation view with a list of navigation charts
         val controller = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
             intent = intent
         )
-        //bottomNavigationView.itemIconTintList = null
-
-        //Siempre que cambie el controlador seleccionado, configure la barra de acción.
+        bottomNavigationView.selectedItemId = R.id.home
+        //Whenever you change the selected controller, configure the action bar.
         controller.observe(this) { navController ->
             setupActionBarWithNavController(navController)
         }

@@ -54,6 +54,9 @@ class ProfileFragment : Fragment() {
         binding.btnMyCertificates.setOnClickListener {
             findNavController().navigate(R.id.accion_perfil_a_diplomas)
         }
+        binding.favorites.setOnClickListener {
+            findNavController().navigate(R.id.action_perfilFragment_to_favoritesFragment)
+        }
         setupShowData()
         setHasOptionsMenu(true)
         return binding.root

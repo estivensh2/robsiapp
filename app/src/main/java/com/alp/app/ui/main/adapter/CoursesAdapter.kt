@@ -48,7 +48,7 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
                     val idCourse = data.id_course
                     val name = data.title
                     val image = data.image
-                    val action = CoursesFragmentDirections.actionCoursesFragmentToCoursesTemaryFragment(idCourse, name, image)
+                    val action = CoursesFragmentDirections.actionCoursesFragmentToTopicsFragment(idCourse, name, image)
                     it.findNavController().navigate(action)
                 }
             }

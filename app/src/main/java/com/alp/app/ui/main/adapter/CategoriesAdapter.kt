@@ -51,7 +51,6 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
                 val image = data.image
                 val action = HomeFragmentDirections.actionHomeFragmentToCoursesFragment(idCategory, name, image)
                 it.findNavController().navigate(action)
-                //it.findNavController().navigate(R.id.action_homeFragment_to_detailTopicFragment)
             }
         }
     }

@@ -11,44 +11,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navegacion_bienvenida">
+    app:startDestination="@+id/welcomeFragment">
 
     <fragment
-        android:id="@+id/navegacion_bienvenida"
+        android:id="@+id/welcomeFragment"
         android:name="com.alp.app.ui.main.view.fragments.WelcomeFragment"
         android:label="bienvenida_fragment"
         tools:layout="@layout/fragment_welcome" >
-        <action
-            android:id="@+id/accion_bienvenida_a_induccion"
-            app:destination="@id/induccionFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:popUpTo="@id/navegacion_bienvenida"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/accion_bienvenida_a_iniciar_o_crear_cuenta"
-            app:destination="@id/iniciarOCrearCuentaFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:popUpTo="@id/navegacion_bienvenida"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_navegacion_bienvenida_to_principalActivity2"
-            app:destination="@id/principalActivity2" />
+        <action android:id="@+id/action_welcomeFragment_to_onBoardingFragment2"
+                app:destination="@id/onBoardingFragment" app:popUpTo="@id/welcomeFragment" app:popUpToInclusive="true"/>
+        <action android:id="@+id/action_welcomeFragment_to_principalActivity2"
+                app:destination="@id/principalActivity2" app:popUpTo="@id/welcomeFragment" app:popUpToInclusive="true"/>
+        <action android:id="@+id/action_welcomeFragment_to_loginFragment" app:destination="@id/loginFragment"
+                app:popUpTo="@id/welcomeFragment" app:popUpToInclusive="true"/>
     </fragment>
     <fragment
-        android:id="@+id/induccionFragment"
+        android:id="@+id/onBoardingFragment"
         android:name="com.alp.app.ui.main.view.fragments.OnBoardingFragment"
         android:label="induccion_fragment"
         tools:layout="@layout/fragment_onboarding" >
         <action
             android:id="@+id/accion_induccion_a_iniciar_o_crear"
-            app:destination="@id/iniciarOCrearCuentaFragment"
+            app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/induccionFragment"
+            app:popUpTo="@id/onBoardingFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/iniciarOCrearCuentaFragment"
+        android:id="@+id/loginFragment"
         android:name="com.alp.app.ui.main.view.fragments.LoginFragment"
         android:label="Iniciar o crear cuenta"
         tools:layout="@layout/fragment_login" >
@@ -62,7 +53,7 @@
             app:destination="@id/iniciarSesionFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
@@ -75,7 +66,7 @@
             app:destination="@id/iniciarSesionFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
@@ -87,7 +78,7 @@
             android:id="@+id/accion_iniciar_a_navegacion_principal"
             app:destination="@id/principalActivity2"
             app:enterAnim="@anim/slide_in_left"
-            app:popUpTo="@id/iniciarOCrearCuentaFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/accion_iniciar_sesion_a_recuperar_clave"

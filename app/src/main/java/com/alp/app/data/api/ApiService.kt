@@ -17,12 +17,6 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): List<CategoryModel>
 
-    @FormUrlEncoded
-    @POST("get_review.php")
-    suspend fun getReview(
-            @Field("id_course") id_course : Int
-    ): List<ReviewModel>
-
     @GET("slider")
     suspend fun getSlider(): List<SliderModel>
 
@@ -52,10 +46,23 @@ interface ApiService {
 
     @GET("comments")
     suspend fun getComments(
-            @Query("id_user") id_user : Int,
+            @Query("id_user")         id_user : Int,
             @Query("id_detail_topic") id_detail_topic : Int
     ): List<CommentsCourseModel>
 
+    @FormUrlEncoded
+    @POST("insert-visit")
+    suspend fun insertVisit(
+        @Field("id_detail_topic") id_detail_topic : Int,
+    ): Response<InsertVisitModel>
+
+    @FormUrlEncoded
+    @POST("progress")
+    suspend fun insertProgress(
+        @Field("id_user")         id_user         : Int,
+        @Field("id_detail_topic") id_detail_topic : Int,
+        @Field("id_topic")        id_topic        : Int
+    ): Response<InsertProgressModel>
 
     @FormUrlEncoded
     @PUT("comments/{id_comment}")
@@ -98,6 +105,12 @@ interface ApiService {
     suspend fun getInfoProfile (
             @Field("id_user") id_user: Int
     ) : Response<ProfileModel>
+
+
+    @GET("favorites")
+    suspend fun getFavorites (
+        @Query("id_user") id_user: Int
+    ) : List<FavoritesModel>
 
     @FormUrlEncoded
     @POST("comments")
@@ -185,21 +198,4 @@ interface ApiService {
             @Field("id_course") id_course:Int,
             @Field("id_completed") id_completed:String
     ) : Response<InsertCertificateModel>
-
-    @FormUrlEncoded
-    @POST("set_progress.php")
-    suspend fun setProgress (
-            @Field("id_enabled") id_enabled:Int,
-            @Field("id_details_course") id_details_course:Int,
-            @Field("id_course") id_course:Int,
-            @Field("id_user") id_user:Int
-    ) : Response<InsertProgressModel>
-
-    @FormUrlEncoded
-    @POST("get_courses_temary_details.php")
-    suspend fun getDetailsTemary (
-        @Field("id_course_temary") id_course_temary :Int,
-        @Field("id_course") id_course : Int,
-        @Field("id_user") id_user : Int
-    ) : Response<CoursesTemaryDetailsModel>
 }

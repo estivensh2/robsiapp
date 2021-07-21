@@ -28,7 +28,7 @@ class WelcomeFragment : Fragment() {
 
     private var _binding : FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
-    private val time: Long = 2000
+    private val time: Long = 500
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
@@ -40,8 +40,8 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun createAnimation() {
-        val url = ContextCompat.getDrawable(requireContext(), R.drawable.logobienvenida)
-        Glide.with(this).load(url).into(binding.logoanimacion)
+        val url = ContextCompat.getDrawable(requireContext(), R.drawable.ic_splash_screen)
+        Glide.with(this).load(url).into(binding.logo)
         Handler(Looper.getMainLooper()).postDelayed({
             validateStatusSessionAndWelcome()
         }, time)
@@ -51,14 +51,14 @@ class WelcomeFragment : Fragment() {
         if (PreferencesSingleton.read("user_new", false) == true) {
             if (PreferencesSingleton.read("active_session", false) == true){
                 lifecycleScope.launchWhenResumed {
-                    findNavController().navigate(R.id.action_navegacion_bienvenida_to_principalActivity2)
+                    findNavController().navigate(R.id.action_welcomeFragment_to_principalActivity2)
                 }
                 activity?.finish()
             } else {
-                findNavController().navigate(R.id.accion_bienvenida_a_iniciar_o_crear_cuenta)
+                findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
             }
         } else {
-            findNavController().navigate(R.id.accion_bienvenida_a_induccion)
+            findNavController().navigate(R.id.action_welcomeFragment_to_onBoardingFragment2)
         }
     }
 

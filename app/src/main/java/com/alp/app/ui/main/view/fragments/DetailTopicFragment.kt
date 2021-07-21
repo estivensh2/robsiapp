@@ -10,6 +10,7 @@ package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -24,7 +25,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alp.app.R
 import com.alp.app.data.model.DetailTopicModel
+import com.alp.app.data.model.InsertProgressModel
 import com.alp.app.databinding.FragmentDetailTopicBinding
+import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.DetailTopicAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
@@ -33,6 +36,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Response
 
 @AndroidEntryPoint
 class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, BlankFragment.OnButtonClickListener {
@@ -58,6 +62,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDetailTopicBinding.inflate(inflater, container, false)
+        PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
         setupUI()
         setupShowData()
@@ -82,7 +87,12 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
                 dialog.dismiss()
             }
             .setPositiveButton(resources.getString(R.string.text_yes)){ _, _ ->
-                findNavController().navigate(R.id.action_coursesReviewFragment_to_homeFragment)
+                val action = DetailTopicFragmentDirections.actionDetailTopicFragmentToTopicsFragment(
+                    args.idCourse,
+                    args.nameCourse,
+                    args.imageCourse
+                )
+                findNavController().navigate(action)
             }
             .setCancelable(false)
             .show()
@@ -96,6 +106,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
                 isUserInputEnabled = false
             }
             TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                tab.view.isClickable = false
                 when(position % 2){
                     0 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_baseline_article_24)
                     1 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_baseline_help_24)
@@ -124,6 +135,35 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
                     }
                 }
             }
+        }
+    }
+
+    private fun insertProgress(id_detail_topic: Int?) {
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.insertProgress(idUser!!, id_detail_topic!!, args.idTopic).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        //functions.showHideProgressBar(false, binding.progress)
+                        resource.data?.let { data -> renderProgress(data) }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        //functions.showHideProgressBar(false, binding.progress)
+                    }
+                    Status.LOADING -> {
+                        //functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun renderProgress(data: Response<InsertProgressModel>) {
+        if (data.body()!!.response == 1){
+            Log.i("response", "1")
+        } else {
+            Log.i("response", "2")
         }
     }
 
@@ -169,6 +209,13 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
         return super.onOptionsItemSelected(item)
     }
 
+
+    override fun onButtonClicked(index: Int?, id_detail_topic: Int?) {
+        if (index != null) {
+            insertProgress(id_detail_topic)
+            binding.viewPager2.currentItem = index + 1
+        }
+    }
 
     override fun onButtonClicked(index: Int?) {
         if (index != null) {

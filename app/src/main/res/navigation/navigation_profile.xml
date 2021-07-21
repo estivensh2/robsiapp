@@ -24,6 +24,7 @@
         <action
             android:id="@+id/accion_perfil_a_diplomas"
             app:destination="@id/listadoDiplomadosFragment" />
+        <action android:id="@+id/action_perfilFragment_to_favoritesFragment" app:destination="@id/favoritesFragment"/>
     </fragment>
     <fragment
         android:id="@+id/profileDetailsFragment"
@@ -74,4 +75,6 @@
             android:id="@+id/action_changePasswordFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
     </fragment>
+    <fragment android:id="@+id/favoritesFragment" android:name="com.alp.app.ui.main.view.fragments.FavoritesFragment"
+              android:label="fragment_favorites" tools:layout="@layout/fragment_favorites"/>
 </navigation>

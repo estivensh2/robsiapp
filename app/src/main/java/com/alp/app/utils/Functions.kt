@@ -10,7 +10,6 @@ package com.alp.app.utils
 
 import android.content.Context
 import android.media.MediaPlayer
-import android.util.Log
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
@@ -19,7 +18,6 @@ import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
-
 
 class Functions(val context: Context) {
 
@@ -62,7 +60,7 @@ class Functions(val context: Context) {
             button.setBackgroundColor(ContextCompat.getColor(context, R.color.green_500))
         } else {
             button.isEnabled = false
-            button.setTextColor(ContextCompat.getColor(context, R.color.gray))
+            button.setTextColor(ContextCompat.getColor(context, R.color.gray_200))
             button.setBackgroundColor(ContextCompat.getColor(context, R.color.gray_100))
         }
     }
@@ -90,7 +88,8 @@ class Functions(val context: Context) {
     }
 
     fun convertDateToLong(date: String): Date? {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        val locale = Locale("es", "CO")
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
         return simpleDateFormat.parse(date)
     }
 }

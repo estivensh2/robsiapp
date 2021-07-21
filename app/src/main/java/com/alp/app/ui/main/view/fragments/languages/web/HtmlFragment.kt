@@ -31,18 +31,8 @@ class HtmlFragment : Fragment() {
         _binding = FragmentHtmlBinding.inflate(inflater, container, false)
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         binding.btnRun.setOnClickListener {
-            PreferencesSingleton.write("code", binding.codeEditor.text)
-            onButtonClickListener?.onChildFragClick(1, binding.codeEditor.text)
+
         }
-        binding.codeEditor.setText("<!DOCTYPE html>\n" +
-                "<html lang=\"es\">\n" +
-                "    <head>\n" +
-                "        <meta charset=\"utf-8\">\n" +
-                "    </head>\n" +
-                "    <body>\n" +
-                "        <h1> Hola Mundo </h1> \n" +
-                "    </body>\n" +
-                "</html>", 1)
         return binding.root
     }
 

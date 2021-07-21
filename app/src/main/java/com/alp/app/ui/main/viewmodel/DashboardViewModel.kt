@@ -46,6 +46,24 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
+    fun insertVisit(id_detail_topic: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.insertVisit(id_detail_topic)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun insertProgress(id_user: Int, id_detail_topic: Int, id_topic: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.insertProgress(id_user, id_detail_topic, id_topic)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
     fun getComments(id_user: Int, id_detail_topic: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
@@ -191,35 +209,6 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
-    fun getReview(id_course: Int) = liveData(Dispatchers.IO){
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = dashboardRepository.getReview(id_course)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
-        }
-    }
-
-
-
-    fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: Int) = liveData(Dispatchers.IO){
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = dashboardRepository.setProgress(id_enabled, id_course_temary, id_course, id_user)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
-        }
-    }
-
-    fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: Int) = liveData(Dispatchers.IO){
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = dashboardRepository.getDetailsTemary(id_course_temary, id_course, id_user)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
-        }
-    }
-
     fun setSignUp(names: String, last_names: String, email: String, password: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
@@ -229,7 +218,14 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
-
+    fun getFavorites(id_user: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.getFavorites(id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
 
     fun getInfoProfile(id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))

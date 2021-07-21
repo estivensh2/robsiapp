@@ -7,7 +7,7 @@
   -->
 
 <resources>
-    <string name="app_name">app</string>
+    <string name="app_name">Robsi</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -98,7 +98,7 @@
     <string name="text_choose_for_courses">Elige por cursos</string>
     <string name="text_choose_for_categories">Elige por categorias</string>
     <string name="name_app">ALP</string>
-    <string name="text_app_secondary">Aprende lenguajes de programacion</string>
+    <string name="text_app_secondary">Aprende lenguajes de programación</string>
     <string name="description_image_logo">Esta es la descripcion de la imagen principal</string>
     <string name="description_profile_image">Esta es la imagen principal para ir al perfil</string>
     <string name="text_no_found">No hay ningun resultado</string>
@@ -131,8 +131,8 @@
     <string name="link_down">Los links no estan funcionando</string>
     <string name="other">Otro</string>
     <string name="text_one_reply">%1$d respuesta</string>
-    <string name="text_visits"> %1$d</string>
-    <string name="text_comments"> %1$d</string>
+    <string name="text_visits">%1$d</string>
+    <string name="text_comments">%1$d</string>
     <string name="text_quantity_replies">%1$d respuestas</string>
     <string name="text_no_replies">Sin respuestas</string>
     <string name="text_comment">COMENTAR</string>
@@ -142,6 +142,21 @@
     <string name="text_updated">Se ha actualizado</string>
     <string name="text_run">RUN</string>
     <string name="description_image_topics">Icono de tema</string>
+    <string name="text_delete_favorite">Eliminado de favoritos</string>
+    <string name="text_add_favorite">Guardado en favoritos</string>
+    <string name="text_description_on_boarding_one">En esta aplicacion podrás aprender las bases básicas para iniciar en
+        la programación totalmente gratis.
+    </string>
+    <string name="text_description_on_boarding_two">Encontrarás un apartado para que pruebes tu código como también en
+        los ejercicios de cada curso.
+    </string>
+    <string name="text_description_on_boarding_three">Podrás obtener y descargar tu certificado aprobando cada temario y
+        examen.
+    </string>
+    <string name="text_title_on_boarding_one">Bienvenido</string>
+    <string name="text_title_on_boarding_two">Practica, compila tu código</string>
+    <string name="text_title_on_boarding_three">y obtén tu certificado</string>
+    <string name="text_favorites">Favoritos</string>
     <string-array name="string_question_correct">
         <item>¡Eres lo máximo!</item>
         <item>¡Correcto!</item>

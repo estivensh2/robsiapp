@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 20/07/21, 4:02 p. m.
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 20/07/21, 4:02 p. m.
+  ~  */
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/blue_700"/>
+    <item
+            android:gravity="center"
+            android:drawable="@drawable/ic_splash_screen"/>
+</layer-list>

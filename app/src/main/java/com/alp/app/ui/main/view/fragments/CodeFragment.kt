@@ -18,17 +18,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.databinding.FragmentCodeBinding
-import com.alp.app.ui.main.adapter.PlaygroundAdapter
-import com.alp.app.ui.main.adapter.ReviewAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.tabs.TabLayoutMediator
-import javax.inject.Inject
 
 @SuppressLint("SetJavaScriptEnabled")
 class CodeFragment : Fragment(){

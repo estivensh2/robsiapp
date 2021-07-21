@@ -21,7 +21,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -30,7 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.ChangeLikeModel
-import com.alp.app.data.model.DeleteCommentModel
 import com.alp.app.data.model.DeleteReplyModel
 import com.alp.app.data.model.RepliesModel
 import com.alp.app.databinding.FragmentRepliesBinding
@@ -252,16 +250,16 @@ class RepliesFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)!!
-        dashboardViewModel.getReplies(idUser,args.idComment).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getReplies(idUser,args.idComment).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.swipeRefreshLayout.isRefreshing = false
                         binding.recyclerView.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recyclerView.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -272,7 +270,7 @@ class RepliesFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: List<RepliesModel>) {

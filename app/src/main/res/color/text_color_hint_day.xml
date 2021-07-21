@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 20/07/21, 6:55 p. m.
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 20/07/21, 6:55 p. m.
+  ~  */
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/blue_700" android:state_focused="true"/>
+    <item android:color="@color/gray_200"/>
+</selector>

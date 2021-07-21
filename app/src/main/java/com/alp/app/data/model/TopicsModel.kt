@@ -11,6 +11,7 @@ package com.alp.app.data.model
 import com.google.gson.annotations.SerializedName
 
 data class TopicsModel (
-    @SerializedName("id_topic") var id_topic : Int,
-    @SerializedName("title")    var title    : String
+    @SerializedName("id_topic")   var id_topic   : Int,
+    @SerializedName("title")      var title      : String,
+    @SerializedName("percentage") var percentage : Int
     )

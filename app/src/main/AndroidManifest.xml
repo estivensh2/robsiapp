@@ -32,8 +32,9 @@
             android:name="com.alp.app.ui.main.view.activities.DashboardActivity"
             android:label="@string/title_activity_home" />
         <activity
-            android:name="com.alp.app.ui.main.view.activities.HomeActivity"
-            android:label="@string/app_name">
+                android:theme="@style/SplashTheme"
+                android:name="com.alp.app.ui.main.view.activities.HomeActivity"
+                android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

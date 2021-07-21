@@ -32,29 +32,30 @@ class OnBoardingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentOnboardingBinding.inflate(layoutInflater, container, false)
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
-        arrayList.add(InduccionData(R.drawable.paso1, "Bienvenido", "En esta aplicacion podrás aprender las bases básicas para iniciar en la programación totalmente gratis."))
-        arrayList.add(InduccionData(R.drawable.paso2, "Obten tu certificado", "Podrás obtener y descargar tu certificado de cada curso."))
+        arrayList.add(InduccionData(R.drawable.paso1, getString(R.string.text_title_on_boarding_one), getString(R.string.text_description_on_boarding_one)))
+        arrayList.add(InduccionData(R.drawable.paso2, getString(R.string.text_title_on_boarding_two), getString(R.string.text_description_on_boarding_two)))
+        arrayList.add(InduccionData(R.drawable.paso2, getString(R.string.text_title_on_boarding_three), getString(R.string.text_description_on_boarding_three)))
         displayList.addAll(arrayList)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val adapter = OnBoardingAdapter(requireContext(), displayList)
-        binding.recicladorInduccion.adapter = adapter
+        binding.recyclerView.adapter = adapter
         binding.indicator.count = displayList.size
         with(binding){
-            recicladorInduccion.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+            recyclerView.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
                     indicator.selection = position
-                    if(position==1){
-                        binding.saltar.visibility = View.INVISIBLE
-                        binding.finalizar.visibility = View.VISIBLE
+                    if(position==2){
+                        binding.skip.visibility = View.INVISIBLE
+                        binding.finish.visibility = View.VISIBLE
                     } else {
-                        binding.saltar.visibility = View.VISIBLE
-                        binding.finalizar.visibility = View.INVISIBLE
+                        binding.skip.visibility = View.VISIBLE
+                        binding.finish.visibility = View.INVISIBLE
                     }
                 }
             })
-            finalizar.visibility = View.INVISIBLE
-            saltar.setOnClickListener { skipOnBoarding() }
-            finalizar.setOnClickListener {
+            finish.visibility = View.INVISIBLE
+            skip.setOnClickListener { skipOnBoarding() }
+            finish.setOnClickListener {
                 PreferencesSingleton.write("user_new", true)
                 PreferencesSingleton.write("enabled_sound", true)
                 findNavController().navigate(R.id.accion_induccion_a_iniciar_o_crear)

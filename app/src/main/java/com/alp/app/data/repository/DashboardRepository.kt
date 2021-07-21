@@ -27,8 +27,16 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getDetailTopic(id_topic)
     }
 
+    suspend fun insertVisit(id_detail_topic: Int) : Response<InsertVisitModel> {
+        return apiService.insertVisit(id_detail_topic)
+    }
+
     suspend fun getComments(id_user: Int, id_detail_topic: Int) : List<CommentsCourseModel> {
         return apiService.getComments(id_user, id_detail_topic)
+    }
+
+    suspend fun insertProgress(id_user: Int, id_detail_topic: Int, id_topic: Int) : Response<InsertProgressModel> {
+        return apiService.insertProgress(id_user, id_detail_topic, id_topic)
     }
 
     suspend fun editComment(id_comment: Int, comment: String) : Response<EditCommentModel> {
@@ -81,6 +89,10 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getInfoProfile(id_user)
     }
 
+    suspend fun getFavorites(id_user: Int) : List<FavoritesModel> {
+        return apiService.getFavorites(id_user)
+    }
+
     suspend fun addComment(id_user: Int, id_detail_topic: Int, comment: String) : Response<AddCommentModel> {
         return apiService.addComment(id_user, id_detail_topic, comment)
     }
@@ -103,18 +115,6 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
 
     suspend fun setCertificate(id_user : Int ,id_course: Int, id_completed: String) : Response<InsertCertificateModel> {
         return apiService.setCertificate(id_user, id_course, id_completed)
-    }
-
-    suspend fun getReview(id_course: Int) : List<ReviewModel> {
-        return apiService.getReview(id_course)
-    }
-
-    suspend fun setProgress(id_enabled : Int ,id_course_temary: Int, id_course: Int, id_user: Int) : Response<InsertProgressModel> {
-        return apiService.setProgress(id_enabled, id_course_temary,id_course,id_user)
-    }
-
-    suspend fun getDetailsTemary(id_course_temary : Int, id_course: Int, id_user: Int) : Response<CoursesTemaryDetailsModel> {
-        return apiService.getDetailsTemary(id_course_temary, id_course, id_user)
     }
 
     suspend fun setSignUp(names: String, last_names: String, email: String, password: String) : Response<SignUpModel> {

@@ -19,7 +19,7 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/blue_900</item>
-        <item name="toolbarStyle" tools:targetApi="l">@style/ToolbarDay</item>
+        <item name="toolbarStyle" tools:targetApi="l">@style/ToolbarNight</item>
         <item name="android:fontFamily">@font/changa</item>
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewNight</item>
@@ -33,10 +33,19 @@
         <item name="colorPrimary">@color/blue_900</item>
     </style>
 
-    <style name="ToolbarDay" parent="Widget.MaterialComponents.Toolbar">
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <style name="ToolbarNight" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextColor">@color/green_500</item>
         <item name="android:background">@color/blue_900</item>
         <item name="fontFamily">@font/changa_bold</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_color_night</item>
+        <item name="hintTextColor">@color/text_color_hint_night</item>
     </style>
 
 </resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 21/07/21, 12:49 a. m.
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 21/07/21, 12:49 a. m.
+  ~  */
+  -->
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   app:cardBackgroundColor="?attr/colorOnPrimary"
+                                                   app:cardCornerRadius="@dimen/dimen_card_view_rounded"
+                                                   app:cardElevation="@dimen/elevation_card_view"
+                                                   app:cardUseCompatPadding="true"
+                                                   app:layout_constraintBottom_toBottomOf="parent"
+                                                   app:layout_constraintEnd_toEndOf="parent"
+                                                   app:layout_constraintStart_toStartOf="parent"
+                                                   app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_card_view">
+
+        <TextView
+                android:id="@+id/titleCourse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/changa_extrabold"
+                android:text="@string/text_test"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/titleDetailTopic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/changa"
+                android:text="@string/text_test"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleCourse"
+                app:layout_constraintStart_toStartOf="@+id/titleCourse"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

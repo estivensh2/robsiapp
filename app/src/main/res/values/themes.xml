@@ -17,12 +17,14 @@
         <item name="colorSecondaryVariant">@color/blue_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
-        <item name="android:toolbarStyle" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/blue_900</item>
+        <item name="toolbarStyle" tools:targetApi="l">@style/ToolbarDay</item>
+        <item name="android:fontFamily">@font/changa</item>
         <!-- Customize your theme here. -->
-        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewDay</item>
     </style>
-    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+
+    <style name="Widget.App.BottomNavigationViewDay" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationViewDay</item>
     </style>
 
@@ -30,6 +32,34 @@
         <item name="colorPrimary">@color/green_500</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_700</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green_500</item>
+        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/blue_900</item>
+        <item name="toolbarStyle" tools:targetApi="l">@style/ToolbarDay</item>
+        <item name="android:fontFamily">@font/changa</item>
+        <!-- Customize your theme here. -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewDay</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <style name="ToolbarDay" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">@color/green_500</item>
+        <item name="android:background">@color/blue_900</item>
+        <item name="fontFamily">@font/changa_bold</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_color_day</item>
+        <item name="hintTextColor">@color/text_color_hint_day</item>
+    </style>
 
     <string name="ad_attribution">Ad</string>
 </resources>
