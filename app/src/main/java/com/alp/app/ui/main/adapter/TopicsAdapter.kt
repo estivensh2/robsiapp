@@ -30,6 +30,7 @@ class TopicsAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Ada
                 if (data.percentage == 100){
                     imageButton.background = ContextCompat.getDrawable(itemView.context, R.drawable.ic_baseline_check_24)
                 }
+                itemsCompleted.text = data.items
             }
             itemView.setOnClickListener {
                 itemClickListener.itemClick(data)

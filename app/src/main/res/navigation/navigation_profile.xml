@@ -76,5 +76,13 @@
             app:destination="@id/perfilFragment" />
     </fragment>
     <fragment android:id="@+id/favoritesFragment" android:name="com.alp.app.ui.main.view.fragments.FavoritesFragment"
-              android:label="fragment_favorites" tools:layout="@layout/fragment_favorites"/>
+              android:label="Favoritos" tools:layout="@layout/fragment_favorites">
+        <action android:id="@+id/action_favoritesFragment_to_favoritesDetailsFragment"
+                app:destination="@id/favoritesDetailsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/favoritesDetailsFragment"
+              android:name="com.alp.app.ui.main.view.fragments.FavoritesDetailsFragment"
+              android:label="Favorito" tools:layout="@layout/fragment_favorites_details">
+        <argument android:name="id_detail_topic" app:argType="integer" android:defaultValue="0"/>
+    </fragment>
 </navigation>

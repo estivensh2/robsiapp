@@ -23,8 +23,12 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.getSlider()
     }
 
-    suspend fun getDetailTopic(id_topic: Int) : List<DetailTopicModel> {
-        return apiService.getDetailTopic(id_topic)
+    suspend fun getDetailTopic(id_topic: Int, id_user: Int) : List<DetailTopicModel> {
+        return apiService.getDetailTopic(id_topic, id_user)
+    }
+
+    suspend fun getDetailTopicFavorite(id_detail_topic: Int) : Response<DetailTopicFavoriteModel> {
+        return apiService.getDetailTopicFavorite(id_detail_topic)
     }
 
     suspend fun insertVisit(id_detail_topic: Int) : Response<InsertVisitModel> {
@@ -37,6 +41,10 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
 
     suspend fun insertProgress(id_user: Int, id_detail_topic: Int, id_topic: Int) : Response<InsertProgressModel> {
         return apiService.insertProgress(id_user, id_detail_topic, id_topic)
+    }
+
+    suspend fun sendReport(report: String, comment: String, id_detail_topic: Int, id_user: Int) : Response<ReportDetailTopicModel> {
+        return apiService.sendReport(report, comment, id_detail_topic, id_user)
     }
 
     suspend fun editComment(id_comment: Int, comment: String) : Response<EditCommentModel> {
@@ -55,9 +63,12 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.deleteReply(id_reply)
     }
 
-
     suspend fun changeLike(active: Int, id_comment: Int, id_user: Int) : Response<ChangeLikeModel> {
         return apiService.changeLike(active, id_comment, id_user)
+    }
+
+    suspend fun changeFavorite(active: Int, id_detail_topic: Int, id_user: Int, id_course: Int) : Response<ChangeFavoriteModel> {
+        return apiService.changeFavorite(active, id_detail_topic, id_user, id_course)
     }
 
     suspend fun changeLikeReply(active: Int, id_comment: Int, id_user: Int) : Response<ChangeLikeModel> {

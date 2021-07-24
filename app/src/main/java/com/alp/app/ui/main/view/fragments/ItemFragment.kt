@@ -10,15 +10,23 @@ package com.alp.app.ui.main.view.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.ValueCallback
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -27,8 +35,7 @@ import androidx.navigation.findNavController
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.alp.app.R
-import com.alp.app.data.model.DetailTopicModel
-import com.alp.app.data.model.InsertVisitModel
+import com.alp.app.data.model.*
 import com.alp.app.databinding.FragmentItemBinding
 import com.alp.app.databinding.TemplateReportBinding
 import com.alp.app.singleton.PreferencesSingleton
@@ -40,6 +47,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
+import java.util.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -47,6 +55,8 @@ private const val ARG_PARAM3 = "param3"
 private const val ARG_PARAM4 = "param4"
 private const val ARG_PARAM5 = "param5"
 private const val ARG_PARAM6 = "param6"
+private const val ARG_PARAM7 = "param7"
+private const val ARG_PARAM8 = "param8"
 
 @AndroidEntryPoint
 class ItemFragment : Fragment(){
@@ -59,6 +69,8 @@ class ItemFragment : Fragment(){
     private var param4: Int? = null
     private var param5: Int? = null
     private var param6: Int? = null
+    private var param7: Int? = null
+    private var param8: Int? = null
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var contexto: Context
     private lateinit var functions: Functions
@@ -74,6 +86,8 @@ class ItemFragment : Fragment(){
             param4 = it.getInt(ARG_PARAM4)
             param5 = it.getInt(ARG_PARAM5)
             param6 = it.getInt(ARG_PARAM6)
+            param7 = it.getInt(ARG_PARAM7)
+            param8 = it.getInt(ARG_PARAM8)
         }
     }
 
@@ -89,10 +103,13 @@ class ItemFragment : Fragment(){
         binding.btnNext.setOnClickListener {
             onButtonClickListener?.onButtonClicked(param6, param1)
         }
+        binding.bookMark.isChecked = param8 == 1
         binding.bookMark.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
+                changeFavorite(1)
                 showSnackBar(getString(R.string.text_add_favorite))
             } else {
+                changeFavorite(0)
                 showSnackBar(getString(R.string.text_delete_favorite))
             }
         }
@@ -103,9 +120,13 @@ class ItemFragment : Fragment(){
         val style = "<style type='text/css'>" +
                 "@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200;300;400;500;600;700;800&display=swap');" +
                 "body { font-family: 'Changa', sans-serif; }" +
-                "</style>"
+                "</style>" +
+                "<link href=\"http://192.168.0.18/backendalp/public/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css\" rel=\"stylesheet\">"
         val endHead = "</head>"
-        val body = "<body>$param2</body></html>"
+        val script = "" +
+                "<script src=\"http://192.168.0.18/backendalp/public/vendor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js\"></script>\n" +
+                "<script>hljs.initHighlightingOnLoad();</script>"
+        val body = "<body>$param2\n\n$script</body></html>"
         val myHtmlString = head + style + endHead + body
         with(binding){
             webView.loadDataWithBaseURL(null, myHtmlString, "text/html", "UTF-8", null)
@@ -115,6 +136,7 @@ class ItemFragment : Fragment(){
             numberComments.text = resources.getString(R.string.text_comments, param5)
             webView.setBackgroundColor(Color.TRANSPARENT)
         }
+
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
             val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
             if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
@@ -123,8 +145,58 @@ class ItemFragment : Fragment(){
                 WebSettingsCompat.setForceDark(binding.webView.settings, WebSettingsCompat.FORCE_DARK_OFF)
             }
         }
+        binding.share.setOnClickListener {
+            share(screenShot(requireActivity().window.decorView.rootView))
+        }
         setupShowData()
         return binding.root
+    }
+
+    private fun screenShot(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    private fun share(bitmap: Bitmap) {
+        val text = resources.getString(R.string.app_name)
+        val calendar = Calendar.getInstance().time
+        val pathOfBmp = MediaStore.Images.Media.insertImage(contexto.contentResolver, bitmap, "$text - Capture $calendar", null)
+        val uri: Uri = Uri.parse(pathOfBmp)
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "image/*"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "$text - Capture $calendar")
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "$text - Capture $calendar")
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        contexto.startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.text_share)))
+    }
+
+    private fun changeFavorite(active: Int) {
+        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        dashboardViewModel.changeFavorite(active, param1!!, idUser, param7!!).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { data -> successFavorite(data) }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        //
+                    }
+                }
+            }
+        }
+    }
+
+    private fun successFavorite(data: Response<ChangeFavoriteModel>) {
+        if (data.body()!!.response == 1){
+            Log.i("response", getString(R.string.text_inserted))
+        } else {
+            Log.i("response", getString(R.string.text_updated))
+        }
     }
 
     private fun setupShowData() {
@@ -132,18 +204,46 @@ class ItemFragment : Fragment(){
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        //functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> insertVisit(data) }
                     }
                     Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
-                        //functions.showHideProgressBar(false, binding.progress)
                     }
                     Status.LOADING -> {
                         //functions.showHideProgressBar(true, binding.progress)
                     }
                 }
             }
+        }
+    }
+
+    private fun sendReport(report: String, comment: String, alertDialog: AlertDialog, binding: TemplateReportBinding) {
+        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        dashboardViewModel.sendReport(report, comment, param1!!, idUser).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        functions.showHideProgressBar(false, binding.progress)
+                        resource.data?.let { data -> insertReport(data,alertDialog) }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
+                    }
+                    Status.LOADING -> {
+                        functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun insertReport(data: Response<ReportDetailTopicModel>, alertDialog: AlertDialog) {
+        if (data.body()!!.response == 1){
+            alertDialog.dismiss()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_send_report), Toast.LENGTH_LONG).show()
+        } else {
+            DynamicToast.makeError(contexto, getString(R.string.text_error_send), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -164,11 +264,13 @@ class ItemFragment : Fragment(){
             alertDialog.dismiss()
         }
         binding.btnReport.isEnabled = false
-        binding.radioGroup.setOnCheckedChangeListener { group, _ ->
+        var radioButton: RadioButton? = null
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
+            radioButton = group.findViewById(checkedId)
         }
         binding.btnReport.setOnClickListener {
-
+            sendReport(radioButton?.text.toString(), binding.iEMessageReport.text.toString(), alertDialog, binding)
         }
         alertDialog.show()
     }
@@ -199,14 +301,16 @@ class ItemFragment : Fragment(){
     }
 
     companion object {
-        @JvmStatic fun newInstance(data: DetailTopicModel, position: Int) = ItemFragment().apply {
+        @JvmStatic fun newInstance(data: DetailTopicModel, position: Int, idCourse: Int) = ItemFragment().apply {
             arguments = Bundle().apply {
-                putInt(ARG_PARAM1, data.id_detail_topic)
+                putInt(ARG_PARAM1,    data.id_detail_topic)
                 putString(ARG_PARAM2, data.description)
                 putString(ARG_PARAM3, data.level)
-                putInt(ARG_PARAM4, data.visits)
-                putInt(ARG_PARAM5, data.comments)
-                putInt(ARG_PARAM6, position)
+                putInt(ARG_PARAM4,    data.visits)
+                putInt(ARG_PARAM5,    data.comments)
+                putInt(ARG_PARAM6,    position)
+                putInt(ARG_PARAM7,    idCourse)
+                putInt(ARG_PARAM8,    data.favorite)
             }
         }
     }

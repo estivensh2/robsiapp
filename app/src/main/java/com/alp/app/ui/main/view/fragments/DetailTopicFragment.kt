@@ -100,7 +100,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
 
     private fun setupUI() {
         with(binding){
-            detailTopicAdapter  = DetailTopicAdapter(fragmentManager = childFragmentManager, lifecycle = viewLifecycleOwner.lifecycle)
+            detailTopicAdapter  = DetailTopicAdapter(fragmentManager = childFragmentManager, lifecycle = viewLifecycleOwner.lifecycle, args.idCourse)
             viewPager2.apply {
                 adapter = detailTopicAdapter
                 isUserInputEnabled = false
@@ -109,14 +109,15 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
                 tab.view.isClickable = false
                 when(position % 2){
                     0 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_baseline_article_24)
-                    1 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_baseline_help_24)
+                    1 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_sharp_help_24)
                 }
             }.attach()
         }
     }
 
     private fun setupShowData() {
-        dashboardViewModel.getDetailTopic(args.idTopic).observe(requireActivity()) { response ->
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.getDetailTopic(args.idTopic, idUser!!).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

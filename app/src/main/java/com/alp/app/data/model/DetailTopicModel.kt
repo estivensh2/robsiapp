@@ -16,6 +16,7 @@ data class DetailTopicModel(
         @SerializedName("level")           var level: String,
         @SerializedName("visits")          var visits: Int,
         @SerializedName("comments")        var comments: Int,
+        @SerializedName("favorite")        var favorite: Int,
         @SerializedName("id_question")     var id_question: Int,
         @SerializedName("question")        var question: String,
         @SerializedName("reply")           var reply: Int,

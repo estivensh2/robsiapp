@@ -17,13 +17,13 @@ import com.alp.app.data.model.DetailTopicModel
 import com.alp.app.ui.main.view.fragments.BlankFragment
 import com.alp.app.ui.main.view.fragments.ItemFragment
 
-class DetailTopicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+class DetailTopicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, val idCourse: Int) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     val list = ArrayList<DetailTopicModel>()
 
     override fun createFragment(position: Int): Fragment {
         return if (position% 2 == 0) {
-            ItemFragment.newInstance(list[position], position)
+            ItemFragment.newInstance(list[position], position, idCourse)
         } else {
             BlankFragment.newInstance(list[position], position)
         }

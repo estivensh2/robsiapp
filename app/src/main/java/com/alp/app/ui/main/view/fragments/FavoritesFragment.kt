@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alp.app.R
 import com.alp.app.data.model.FavoritesModel
 import com.alp.app.databinding.FragmentFavoritesBinding
 import com.alp.app.singleton.PreferencesSingleton
@@ -39,6 +40,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        functions = Functions(contexto)
         setupUI()
         setupShowData()
         return binding.root
@@ -76,6 +78,11 @@ class FavoritesFragment : Fragment() {
     private fun renderList(data: List<FavoritesModel>) {
         if (data.isNotEmpty()) {
             favoritesAdapter.updateData(data)
+        } else {
+            binding.textNoFound.apply {
+                visibility = View.VISIBLE
+                text = resources.getString(R.string.text_no_found)
+            }
         }
     }
 

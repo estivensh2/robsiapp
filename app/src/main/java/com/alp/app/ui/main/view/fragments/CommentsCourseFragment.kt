@@ -219,7 +219,6 @@ class CommentsCourseFragment : Fragment() {
         }
     }
 
-
     private fun successLike(data: Response<ChangeLikeModel>) {
         if (data.body()!!.response == 1){
             Log.i("response", getString(R.string.text_inserted))

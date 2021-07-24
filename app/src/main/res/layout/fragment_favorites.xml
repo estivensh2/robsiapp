@@ -13,27 +13,38 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    tools:context=".ui.main.view.fragments.FavoritesFragment"
+                                                   android:background="?attr/colorOnPrimary"
 >
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/recycler"/>
+            android:id="@+id/recycler" android:layout_marginTop="16dp" android:overScrollMode="never"/>
 
+    <TextView
+            android:id="@+id/textNoFound"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/changa_bold"
+            android:gravity="center"
+            android:text="@string/text_no_found"
+            android:textColor="?attr/colorSecondaryVariant"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler"/>
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progress"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/colorOnPrimary"
             android:elevation="6dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json"
-            tools:targetApi="lollipop"/>
+            tools:targetApi="lollipop" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

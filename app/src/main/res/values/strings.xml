@@ -124,11 +124,11 @@
     <string name="icon_setting">Configuraciones</string>
     <string name="text_icon_save">GUARDAR</string>
     <string name="text_full_name">%1$s %2$s</string>
-    <string name="text_share">Compartir en</string>
+    <string name="text_share">Compartir en:</string>
     <string name="text_report">Reportar</string>
-    <string name="incorrect_information">La informacion es inexacta</string>
-    <string name="content_wrong">El contenido esta erroneo</string>
-    <string name="link_down">Los links no estan funcionando</string>
+    <string name="incorrect_information">La información es inexacta</string>
+    <string name="content_wrong">El contenido está erróneo</string>
+    <string name="link_down">Los links no están funcionando</string>
     <string name="other">Otro</string>
     <string name="text_one_reply">%1$d respuesta</string>
     <string name="text_visits">%1$d</string>
@@ -157,6 +157,8 @@
     <string name="text_title_on_boarding_two">Practica, compila tu código</string>
     <string name="text_title_on_boarding_three">y obtén tu certificado</string>
     <string name="text_favorites">Favoritos</string>
+    <string name="text_send_report">Tu reporte se ha enviado correctamente</string>
+    <string name="text_error_send">Error al enviar</string>
     <string-array name="string_question_correct">
         <item>¡Eres lo máximo!</item>
         <item>¡Correcto!</item>

@@ -37,10 +37,19 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         }
     }
 
-    fun getDetailTopic(id_topic: Int) = liveData(Dispatchers.IO){
+    fun getDetailTopic(id_topic: Int, id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.getDetailTopic(id_topic)))
+            emit(Resource.success(data = dashboardRepository.getDetailTopic(id_topic, id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun getDetailTopicFavorite(id_detail_topic: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.getDetailTopicFavorite(id_detail_topic)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
@@ -50,6 +59,15 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = dashboardRepository.insertVisit(id_detail_topic)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun sendReport(report: String, comment: String, id_detail_topic: Int, id_user: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.sendReport(report, comment, id_detail_topic, id_user)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }
@@ -113,6 +131,15 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = dashboardRepository.changeLike(active, id_comment, id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+        }
+    }
+
+    fun changeFavorite(active: Int, id_detail_topic: Int, id_user: Int, id_course: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.changeFavorite(active, id_detail_topic, id_user, id_course)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
         }

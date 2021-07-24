@@ -41,8 +41,14 @@ interface ApiService {
 
     @GET("detail-topics")
     suspend fun getDetailTopic(
-            @Query("id_topic") id_topic : Int
+            @Query("id_topic") id_topic : Int,
+            @Query("id_user")  id_user: Int
     ): List<DetailTopicModel>
+
+    @GET("detail-topic-favorite")
+    suspend fun getDetailTopicFavorite(
+        @Query("id_detail_topic") id_detail_topic : Int
+    ): Response<DetailTopicFavoriteModel>
 
     @GET("comments")
     suspend fun getComments(
@@ -63,6 +69,15 @@ interface ApiService {
         @Field("id_detail_topic") id_detail_topic : Int,
         @Field("id_topic")        id_topic        : Int
     ): Response<InsertProgressModel>
+
+    @FormUrlEncoded
+    @POST("report-detail-topic")
+    suspend fun sendReport(
+        @Field("report")           report           : String,
+        @Field("comment")          comment          : String,
+        @Field("id_detail_topic")  id_detail_topic  : Int,
+        @Field("id_user")          id_user          : Int
+    ): Response<ReportDetailTopicModel>
 
     @FormUrlEncoded
     @PUT("comments/{id_comment}")
@@ -153,6 +168,15 @@ interface ApiService {
         @Field("id_comment") id_comment:Int,
         @Field("id_user")    id_user:Int
     ) : Response<ChangeLikeModel>
+
+    @FormUrlEncoded
+    @POST("favorites")
+    suspend fun changeFavorite (
+        @Field("active")          active :Int,
+        @Field("id_detail_topic") id_detail_topic:Int,
+        @Field("id_user")         id_user:Int,
+        @Field("id_course")       id_course:Int
+    ) : Response<ChangeFavoriteModel>
 
     @FormUrlEncoded
     @POST("change-like-reply")

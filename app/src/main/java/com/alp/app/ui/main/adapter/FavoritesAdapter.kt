@@ -10,9 +10,11 @@ package com.alp.app.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.data.model.FavoritesModel
 import com.alp.app.databinding.TemplateFavoritesBinding
+import com.alp.app.ui.main.view.fragments.FavoritesFragmentDirections
 
 class FavoritesAdapter : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
@@ -24,6 +26,10 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
             with(binding){
                 titleCourse.text = data.title_course
                 titleDetailTopic.text = data.title_detail_topic
+            }
+            itemView.setOnClickListener {
+                val action = FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesDetailsFragment(data.id_detail_topic)
+                it.findNavController().navigate(action)
             }
         }
     }

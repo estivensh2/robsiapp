@@ -96,17 +96,17 @@
             android:text="@string/link_down" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ic_background_checked"
-            android:button="@null"
-            android:drawableStart="@drawable/ic_outline_flag_24"
-            android:drawableLeft="@drawable/ic_outline_flag_24"
-            android:drawablePadding="10dp"
-            android:paddingLeft="10dp"
-            android:text="@string/other" />
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_background_checked"
+                android:button="@null"
+                android:drawableStart="@drawable/ic_outline_flag_24"
+                android:drawableLeft="@drawable/ic_outline_flag_24"
+                android:drawablePadding="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/other" android:paddingStart="10dp"/>
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -179,5 +179,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnReport"
         tools:targetApi="lollipop" />
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/colorOnPrimary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
