@@ -121,7 +121,22 @@ class ItemFragment : Fragment(){
                 "@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200;300;400;500;600;700;800&display=swap');" +
                 "body { font-family: 'Changa', sans-serif; }" +
                 "</style>" +
-                "<link href=\"http://192.168.0.18/backendalp/public/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css\" rel=\"stylesheet\">"
+                "<link href=\"http://192.168.0.18/backendalp/public/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css\" rel=\"stylesheet\">" +
+                "<link href=\"https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css\" rel=\"stylesheet\">\n" +
+                "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">\n" +
+                "<style type='text/css'>" +
+                ".hljs {\n" +
+                "    white-space: pre-wrap;\n" +
+                "}" +
+                ":root {\n" +
+                "  --mdc-theme-primary: #00E676;\n" +
+                "  --mdc-theme-secondary: #feeae6;\n" +
+                "  --mdc-theme-on-primary: #fff;\n" +
+                "  --mdc-theme-on-secondary: #fff;\n" +
+                "  --mdc-theme-surface: #F3C63F;\n" +
+                "}" +
+                "</style>" +
+                "<script src=\"https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js\"></script>"
         val endHead = "</head>"
         val script = "" +
                 "<script src=\"http://192.168.0.18/backendalp/public/vendor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js\"></script>\n" +

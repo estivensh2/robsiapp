@@ -106,7 +106,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
                 isUserInputEnabled = false
             }
             TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-                tab.view.isClickable = false
+                //tab.view.isClickable = false
                 when(position % 2){
                     0 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_baseline_article_24)
                     1 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_sharp_help_24)
