@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 13/07/21 07:14 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 13/07/21 07:14 PM
+ *  * Last modified 17/07/21, 1:00 a. m.
  *
  */
 
@@ -85,16 +85,16 @@ class CommentsCourseAdapter(var itemClickListener: ItemClickListener, var likeCl
             binding.likeComment.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
                     if (likes == 0){
-                        binding.likes.text = "" + 1
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, 1)
                     } else {
-                        binding.likes.text = "" + ++likes
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, ++likes)
                     }
                     likeClickListener.itemClick(data, true)
                 } else {
                     if (likes == 0){
-                        binding.likes.text = "" + 0
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, 0)
                     } else {
-                        binding.likes.text = "" + --likes
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, --likes)
                     }
                     likeClickListener.itemClick(data, false)
                 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 7/07/21 04:56 PM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 7/07/21 04:56 PM
+  ~  * Last modified 2/08/21, 5:21 p. m.
   ~  */
   -->
 
@@ -78,7 +78,7 @@
                         app:rcRadius="10dp"
                         app:rcTextProgressColor="@color/white"/>
                 <TextView
-                        android:text="VER DIPLOMA"
+                        android:text="@string/text_view_certificate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/showCertificate"
                         app:layout_constraintStart_toEndOf="@+id/titleCourse"

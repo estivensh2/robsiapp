@@ -1,17 +1,14 @@
 /*
  * *
- *  * Created by estiv on 14/07/21, 3:57 p. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 14/07/21, 3:57 p. m.
+ *  * Last modified 14/07/21, 8:07 p. m.
  *
  */
 
 package com.alp.app.utils
 
-import android.util.Log
-import java.sql.Timestamp
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 private const val SECOND_MILLIS = 1000
 private const val MINUTE_MILLIS = 60 * SECOND_MILLIS
@@ -27,7 +24,7 @@ object TimeAgo {
         }
         val now = currentDate().time
         if (time > now || time <= 0) {
-            return "En el futuro"
+            return "Justo ahora" // En el futuro
         }
         val diff = now - time
         return when {

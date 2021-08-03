@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 15/07/21, 5:26 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 15/07/21, 5:26 p. m.
+  ~  * Last modified 16/07/21, 12:29 p. m.
   ~  */
   -->
 
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="ACTUALIZAR" android:id="@+id/edit_reply" app:showAsAction="always"/>
+    <item android:title="@string/text_update" android:id="@+id/edit_reply" app:showAsAction="always"/>
 </menu>

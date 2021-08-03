@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 9/07/21 10:08 PM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 9/07/21 10:08 PM
+  ~  * Last modified 23/07/21, 8:06 p. m.
   ~  */
   -->
 
@@ -56,7 +56,7 @@
             tools:ignore="VectorDrawableCompat" android:tint="?attr/colorSecondaryVariant"
             android:contentDescription="@string/description_image_topics"/>
     <TextView
-            android:text="TextView"
+            android:text="@string/text_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/itemsCompleted"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"

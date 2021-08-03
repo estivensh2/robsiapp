@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 21/07/21, 12:45 a. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 21/07/21, 12:45 a. m.
+ *  * Last modified 21/07/21, 5:37 p. m.
  *
  */
 
@@ -56,7 +56,7 @@ class FavoritesFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.getFavorites(idUser!!).observe(requireActivity()) { response ->
+        dashboardViewModel.getFavorites(idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

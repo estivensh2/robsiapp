@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 14/07/21, 11:18 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 14/07/21, 11:18 p. m.
+  ~  * Last modified 15/07/21, 12:08 a. m.
   ~  */
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Editar" android:id="@+id/edit_comment" android:icon="@drawable/ic_baseline_edit_24"/>
-    <item android:title="Eliminar" android:id="@+id/delete_comment" android:icon="@drawable/ic_baseline_delete_24"/>
+    <item android:title="@string/text_edit" android:id="@+id/edit_comment" android:icon="@drawable/ic_baseline_edit_24"/>
+    <item android:title="@string/text_delete" android:id="@+id/delete_comment" android:icon="@drawable/ic_baseline_delete_24"/>
 </menu>

@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 14/07/21, 2:06 a. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 14/07/21, 2:06 a. m.
+ *  * Last modified 2/08/21, 10:05 p. m.
  *
  */
 
@@ -22,7 +22,7 @@ import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
-class RepliesAdapter(var itemClickListener: RepliesAdapter.ItemClickListener, var likeClickListener: RepliesAdapter.LikeClickListener): RecyclerView.Adapter<RepliesAdapter.ViewHolder>() {
+class RepliesAdapter(var itemClickListener: ItemClickListener, var likeClickListener: LikeClickListener): RecyclerView.Adapter<RepliesAdapter.ViewHolder>() {
 
     val list = mutableListOf<RepliesModel>()
 
@@ -60,16 +60,16 @@ class RepliesAdapter(var itemClickListener: RepliesAdapter.ItemClickListener, va
             binding.likeComment.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
                     if (likes == 0){
-                        binding.likes.text = "" + 1
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, 1)
                     } else {
-                        binding.likes.text = "" + ++likes
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, ++likes)
                     }
                     likeClickListener.itemClick(data, true)
                 } else {
                     if (likes == 0){
-                        binding.likes.text = "" + 0
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, 0)
                     } else {
-                        binding.likes.text = "" + --likes
+                        binding.likes.text = itemView.resources.getString(R.string.text_plush_likes, --likes)
                     }
                     likeClickListener.itemClick(data, false)
                 }

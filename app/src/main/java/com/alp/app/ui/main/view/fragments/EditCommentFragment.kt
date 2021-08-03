@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 15/07/21, 5:18 p. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 15/07/21, 5:18 p. m.
+ *  * Last modified 2/08/21, 9:40 p. m.
  *
  */
 
@@ -42,7 +42,7 @@ class EditCommentFragment : Fragment() {
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var functions: Functions
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentEditCommentBinding.inflate(inflater, container, false)
         functions = Functions(contexto)
         setHasOptionsMenu(true)
@@ -51,14 +51,14 @@ class EditCommentFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        dashboardViewModel.editComment(args.idComment, binding.iEComment.text.toString()).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.editComment(args.idComment, binding.iEComment.text.toString()).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -67,14 +67,14 @@ class EditCommentFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<EditCommentModel>) {
         val response = data.body()!!
         if (response.response == 1) {
             DynamicToast.makeSuccess(contexto, resources.getString(R.string.text_update_comment), Toast.LENGTH_LONG).show()
-            val idUser = PreferencesSingleton.read("id_user", 0)!!
+            val idUser = PreferencesSingleton.read("id_user", 0)
             val action = EditCommentFragmentDirections.actionEditCommentFragmentToCommentsCourseFragment(
                 idUser,
                 args.idDetailTopic

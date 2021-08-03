@@ -1,8 +1,8 @@
 <!--
   ~ /**
-  ~  * Created by estiv on 3/07/21 09:56 PM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 2/07/21 04:08 PM
+  ~  * Last modified 2/08/21, 11:06 p. m.
   ~  */
   -->
 
@@ -131,6 +131,8 @@
     <string name="text_visits">%1$d</string>
     <string name="text_comments">%1$d</string>
     <string name="text_quantity_replies">%1$d respuestas</string>
+    <string name="text_minus_likes"> %1$d</string>
+    <string name="text_plush_likes"> %1$d</string>
     <string name="text_no_replies">Sin respuestas</string>
     <string name="text_comment">COMENTAR</string>
     <string name="text_success_comment">Se ha publicado tu comentario</string>
@@ -171,4 +173,35 @@
     <string name="text_wait_download">Porfavor espera descargando el archivo…</string>
     <string name="text_completed_download">Se ha descargado el archivo</string>
     <string name="text_congratulations">¡Felicidades!</string>
+    <string name="text_view_certificate">VER DIPLOMA</string>
+    <string name="text_copy">COPIAR</string>
+    <string name="text_share_2">COMPARTIR</string>
+    <string name="description_create_comment">Crear comentario</string>
+    <string name="text_review">EXAMEN</string>
+    <string name="text_write_comment">Escribe aqui tu comentario</string>
+    <string name="icons_edit">⋮</string>
+    <string name="text_edited">(editado)</string>
+    <string name="description_create_reply">Agregar respuesta</string>
+    <string name="description_separator">Imagen separador de respuestas</string>
+    <string name="description_edit_or_delete">Eliminar o editar una comentario o respuesta</string>
+    <string name="text_report_problem">Reportar un problema</string>
+    <string name="text_select_type_problem">Porfavor seleccionar el tipo de problema</string>
+    <string name="text_content_output">Contenido fuera de tema o no relacionado</string>
+    <string name="text_spam">Spam o autopromoción</string>
+    <string name="text_words_no_correct">Palabras groseras o hirientes</string>
+    <string name="text_something_else">Algo más</string>
+    <string name="text_write_message_optional">Escribe aqui tu mensaje (opcional)</string>
+    <string name="description_finish_image">Finalizar temario</string>
+    <string name="text_one">1</string>
+    <string name="text_two">2</string>
+    <string name="text_three">3</string>
+    <string name="text_four">4</string>
+    <string name="text_six">5</string>
+    <string name="description_comment">Imagen de los comentarios</string>
+    <string name="description_report_detail_topic">Reportar problema imagen</string>
+    <string name="description_share_detail_topic">Compartir temario</string>
+    <string name="text_update">ACTUALIZAR</string>
+    <string name="text_answer">Responder</string>
+    <string name="text_edit">Editar</string>
+    <string name="text_delete">Eliminar</string>
 </resources>

@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 3/07/21 09:55 PM
+ *  * Last modified 2/08/21, 8:15 p. m.
  *
  */
 
@@ -87,7 +87,7 @@ class Functions(val context: Context) {
 
     fun playSound(sound: Int) {
         val soundSharedPreferences = PreferencesSingleton.read("enabled_sound", false)
-        if(soundSharedPreferences!!){
+        if(soundSharedPreferences){
             val mediaPlayer = MediaPlayer.create(context, sound)
             mediaPlayer.start()
         }

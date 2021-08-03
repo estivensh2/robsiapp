@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 29/06/21 05:05 PM
+ *  * Last modified 2/08/21, 11:03 p. m.
  *
  */
 
@@ -43,11 +43,10 @@ class FirebaseMessageService : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.ic_logo_notifications)
             .setContentTitle(title)
             .setContentText(message)
-            .setColor(ContextCompat.getColor(applicationContext,R.color.blue_700))
+            .setColor(ContextCompat.getColor(applicationContext,R.color.green_500))
             .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.ic_logo_notifications))
             .setAutoCancel(true)
             .setSound(sound)
-            .setNumber(1)
             .setContentIntent(pendingIntent)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

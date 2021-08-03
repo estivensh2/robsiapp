@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 14/07/21, 9:32 p. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 14/07/21, 9:32 p. m.
+ *  * Last modified 2/08/21, 9:18 p. m.
  *
  */
 
@@ -57,7 +57,7 @@ class AddCommentFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.addComment(idUser!!, args.idDetailTopic, binding.iEComment.text.toString()).observe(requireActivity()) { response ->
+        dashboardViewModel.addComment(idUser, args.idDetailTopic, binding.iEComment.text.toString()).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -80,7 +80,7 @@ class AddCommentFragment : Fragment() {
         val response = data.body()!!
         if (response.response == 1) {
             DynamicToast.makeSuccess(contexto, resources.getString(R.string.text_success_comment), Toast.LENGTH_LONG).show()
-            val idUser = PreferencesSingleton.read("id_user", 0)!!
+            val idUser = PreferencesSingleton.read("id_user", 0)
             val action = AddCommentFragmentDirections.actionAddCommentFragmentToCommentsCourseFragment(
                 idUser,
                 args.idDetailTopic

@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 15/07/21, 11:03 p. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 15/07/21, 11:03 p. m.
+ *  * Last modified 2/08/21, 7:57 p. m.
  *
  */
 
@@ -76,7 +76,7 @@ class AddReplyFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.addReply(idUser!!, args.idComment, binding.iEReply.text.toString()).observe(requireActivity()) { response ->
+        dashboardViewModel.addReply(idUser, args.idComment, binding.iEReply.text.toString()).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

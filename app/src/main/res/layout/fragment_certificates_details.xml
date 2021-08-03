@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 30/07/21, 7:37 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 30/07/21, 7:37 p. m.
+  ~  * Last modified 1/08/21, 7:41 p. m.
   ~  */
   -->
 
@@ -63,7 +63,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
     <Button
-            android:text="COPIAR"
+            android:text="@string/text_copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/btnCopy"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
             app:cornerRadius="@dimen/size_button_radius" app:backgroundTint="?attr/colorSecondaryVariant"
             android:insetBottom="0dp" android:insetTop="0dp"/>
     <Button
-            android:text="COMPARTIR"
+            android:text="@string/text_share_2"
             android:layout_width="180dp"
             android:layout_height="wrap_content" android:id="@+id/btnShare"
             app:layout_constraintTop_toBottomOf="@+id/iLUrl" app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
             android:layout_marginTop="24dp" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
             android:insetBottom="0dp" android:insetTop="0dp" app:backgroundTint="?attr/colorSecondaryVariant"/>
     <Button
-            android:text="GUARDAR"
+            android:text="@string/text_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content" android:id="@+id/btnSave"
             app:layout_constraintTop_toTopOf="@+id/btnShare"

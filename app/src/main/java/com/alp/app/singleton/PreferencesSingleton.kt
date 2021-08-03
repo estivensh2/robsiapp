@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 29/06/21 01:34 AM
+ *  * Last modified 14/07/21, 12:21 a. m.
  *
  */
 
@@ -23,15 +23,15 @@ object PreferencesSingleton {
         return prefs.getString(key, value)
     }
 
-    fun read(key: String, value: Long): Long? {
+    fun read(key: String, value: Long): Long {
         return prefs.getLong(key, value)
     }
 
-    fun read(key: String, value: Int): Int? {
+    fun read(key: String, value: Int): Int {
         return prefs.getInt(key, value)
     }
 
-    fun read(key: String, value: Boolean): Boolean? {
+    fun read(key: String, value: Boolean): Boolean {
         return prefs.getBoolean(key, value)
     }
 

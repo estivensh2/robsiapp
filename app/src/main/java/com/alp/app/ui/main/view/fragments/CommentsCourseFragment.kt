@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 12/07/21 02:07 AM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 12/07/21 02:07 AM
+ *  * Last modified 2/08/21, 9:40 p. m.
  *
  */
 
@@ -168,7 +168,7 @@ class CommentsCourseFragment : Fragment() {
     }
 
     private fun sendReport(report: String, comment: String, id_comment: Int, alertDialog: AlertDialog, binding: TemplateReportCommentBinding) {
-        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        val idUser = PreferencesSingleton.read("id_user", 0)
         dashboardViewModel.sendReportComment(report, comment, id_comment, idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
@@ -198,7 +198,7 @@ class CommentsCourseFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        val idUser = PreferencesSingleton.read("id_user", 0)
         dashboardViewModel.getComments(idUser,args.idDetailTopic).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
@@ -241,7 +241,7 @@ class CommentsCourseFragment : Fragment() {
     }
 
     private fun changeLike(active: Int, data: CommentsCourseModel) {
-        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        val idUser = PreferencesSingleton.read("id_user", 0)
         dashboardViewModel.changeLike(active, data.id_comment, idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {

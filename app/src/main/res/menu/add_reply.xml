@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 15/07/21, 11:42 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
   ~  * Last modified 15/07/21, 11:42 p. m.
   ~  */
@@ -9,5 +9,5 @@
 
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Responder" android:id="@+id/add_repply" app:showAsAction="always"/>
+    <item android:title="@string/text_answer" android:id="@+id/add_repply" app:showAsAction="always"/>
 </menu>

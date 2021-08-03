@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 8/07/21 12:34 AM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 8/07/21 12:34 AM
+  ~  * Last modified 30/07/21, 1:05 a. m.
   ~  */
   -->
 
@@ -44,7 +44,7 @@
                     android:layout_marginTop="16dp"
                     android:background="@drawable/background_text_level"
                     android:fontFamily="@font/changa_bold"
-                    android:text="EXAMEN"
+                    android:text="@string/text_review"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0" android:layout_marginLeft="16dp"
@@ -62,7 +62,7 @@
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="hola" app:layout_constraintTop_toBottomOf="@+id/test" android:layout_marginTop="8dp"/>
+                    android:text="@string/text_test" app:layout_constraintTop_toBottomOf="@+id/test" android:layout_marginTop="8dp"/>
 
             <RadioGroup
                     android:id="@+id/radioGroup"

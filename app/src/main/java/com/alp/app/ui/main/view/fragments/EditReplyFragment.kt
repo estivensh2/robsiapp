@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 16/07/21, 1:53 a. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 16/07/21, 1:53 a. m.
+ *  * Last modified 16/07/21, 1:10 p. m.
  *
  */
 
@@ -43,7 +43,7 @@ class EditReplyFragment : Fragment() {
     private lateinit var repliesAdapter: RepliesAdapter
     private lateinit var functions: Functions
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentEditReplyBinding.inflate(inflater, container, false)
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
         functions = Functions(contexto)
@@ -53,14 +53,14 @@ class EditReplyFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        dashboardViewModel.editReply(args.idReply, binding.iEReply.text.toString()).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.editReply(args.idReply, binding.iEReply.text.toString()).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -69,7 +69,7 @@ class EditReplyFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<EditReplyModel>) {

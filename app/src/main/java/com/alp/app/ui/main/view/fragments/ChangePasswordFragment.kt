@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 3/07/21 09:18 PM
+ *  * Last modified 14/07/21, 12:21 a. m.
  *
  */
 
@@ -51,14 +51,14 @@ class ChangePasswordFragment : Fragment() {
         val currentPassword = binding.iECurrentPassword.text.toString()
         val newPassword = binding.iEConfirmedNewPassword.text.toString()
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.setPassword(currentPassword, newPassword , idUser!!).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.setPassword(currentPassword, newPassword , idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         functions.showHideProgressBar(false, binding.progress)
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                     }
@@ -67,7 +67,7 @@ class ChangePasswordFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<UpdatePasswordModel>) {

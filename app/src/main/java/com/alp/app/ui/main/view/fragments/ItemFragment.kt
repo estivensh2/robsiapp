@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 7/07/21 04:54 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 7/07/21 04:54 PM
+ *  * Last modified 2/08/21, 4:16 p. m.
  *
  */
 
@@ -95,7 +95,7 @@ class ItemFragment : Fragment(){
         functions = Functions(requireContext())
         binding.comments.setOnClickListener {
             val idUser = PreferencesSingleton.read("id_user", 0)
-            val action = DetailTopicFragmentDirections.actionDetailTopicFragmentToCommentsCourseFragment(idUser!!,param1!!)
+            val action = DetailTopicFragmentDirections.actionDetailTopicFragmentToCommentsCourseFragment(idUser,param1!!)
             it.findNavController().navigate(action)
         }
         binding.btnNext.setOnClickListener {
@@ -193,7 +193,7 @@ class ItemFragment : Fragment(){
     }
 
     private fun changeFavorite(active: Int) {
-        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        val idUser = PreferencesSingleton.read("id_user", 0)
         dashboardViewModel.changeFavorite(active, param1!!, idUser, param7!!).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
@@ -238,7 +238,7 @@ class ItemFragment : Fragment(){
     }
 
     private fun sendReport(report: String, comment: String, alertDialog: AlertDialog, binding: TemplateReportDetailTopicBinding) {
-        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        val idUser = PreferencesSingleton.read("id_user", 0)
         dashboardViewModel.sendReportDetailTopic(report, comment, param1!!, idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {

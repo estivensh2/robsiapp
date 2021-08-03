@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 29/06/21 05:40 PM
+ *  * Last modified 14/07/21, 12:21 a. m.
  *
  */
 
@@ -16,7 +16,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alp.app.R
@@ -118,15 +117,15 @@ class CoursesFragment : Fragment() {
     }
 
     private fun setupShowData() {
-        dashboardViewModel.getCourses(idCategory).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getCourses(idCategory).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recycler.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recycler.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -137,7 +136,7 @@ class CoursesFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: List<CoursesModel>) {

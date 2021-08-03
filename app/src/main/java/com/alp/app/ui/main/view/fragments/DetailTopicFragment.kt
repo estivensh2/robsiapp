@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 7/07/21 04:57 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 7/07/21 04:57 PM
+ *  * Last modified 2/08/21, 3:22 p. m.
  *
  */
 
@@ -120,7 +120,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.getDetailTopic(args.idTopic, idUser!!).observe(requireActivity()) { response ->
+        dashboardViewModel.getDetailTopic(args.idTopic, idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -144,7 +144,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
 
     private fun insertProgress(id_detail_topic: Int?) {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.insertProgress(idUser!!, id_detail_topic!!, args.idTopic).observe(requireActivity()) { response ->
+        dashboardViewModel.insertProgress(idUser, id_detail_topic!!, args.idTopic).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 12/07/21 02:07 AM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 12/07/21 02:07 AM
+  ~  * Last modified 16/07/21, 6:35 p. m.
   ~  */
   -->
 
@@ -69,5 +69,6 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintVertical_bias="1.0" android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp" android:src="@drawable/ic_round_add_24"
-            android:background="@drawable/ic_baseline_add_24"/>
+            android:background="@drawable/ic_baseline_add_24" android:contentDescription="@string/description_create_comment"
+            android:focusable="true"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

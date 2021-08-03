@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 7/07/21 04:54 PM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 7/07/21 04:54 PM
+  ~  * Last modified 23/07/21, 7:44 p. m.
   ~  */
   -->
 
@@ -17,9 +17,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.main.view.fragments.ItemFragment">
-
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
@@ -87,7 +86,8 @@
                                 android:src="@drawable/ic_baseline_mode_comment_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" android:tint="?attr/colorOnPrimary"/>
+                                app:layout_constraintTop_toTopOf="parent" android:tint="?attr/colorOnPrimary"
+                                android:contentDescription="@string/description_comment"/>
 
                         <TextView
                                 android:id="@+id/numberComments"
@@ -97,7 +97,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginRight="16dp"
-                                android:text="86"
+                                android:text="@string/text_test"
                                 app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.0"
@@ -118,7 +118,7 @@
                         android:src="@drawable/ic_baseline_error_24"
                         app:layout_constraintBottom_toBottomOf="@+id/bookMark"
                         app:layout_constraintEnd_toStartOf="@+id/share"
-                        app:layout_constraintTop_toTopOf="@+id/bookMark"/>
+                        app:layout_constraintTop_toTopOf="@+id/bookMark" android:contentDescription="@string/description_report_detail_topic"/>
 
                 <ImageButton
                         android:id="@+id/share"
@@ -131,7 +131,7 @@
                         android:src="@drawable/ic_baseline_share_24"
                         app:layout_constraintBottom_toBottomOf="@+id/report"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/report"/>
+                        app:layout_constraintTop_toTopOf="@+id/report" android:contentDescription="@string/description_share_detail_topic"/>
 
 
                 <TextView
@@ -143,7 +143,7 @@
                         android:layout_marginTop="16dp"
                         android:background="@drawable/background_text_level"
                         android:fontFamily="@font/changa_bold"
-                        android:text="INTERMEDIO"
+                        android:text="@string/text_test"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -158,7 +158,7 @@
                         android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24"
                         android:drawablePadding="5dp"
                         android:fontFamily="@font/changa_bold"
-                        android:text="38.6K"
+                        android:text="@string/text_test"
                         android:textColor="?attr/colorSecondary"
                         app:drawableTint="?attr/colorSecondary"
                         app:layout_constraintBottom_toBottomOf="@+id/level"

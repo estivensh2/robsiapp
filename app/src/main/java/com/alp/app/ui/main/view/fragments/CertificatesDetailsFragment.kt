@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 30/07/21, 7:37 p. m.
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 30/07/21, 7:37 p. m.
+ *  * Last modified 1/08/21, 4:55 p. m.
  *
  */
 
@@ -103,7 +103,7 @@ class CertificatesDetailsFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.certificateDetail(idUser!!, args.idCourse).observe(requireActivity()) { response ->
+        dashboardViewModel.certificateDetail(idUser, args.idCourse).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

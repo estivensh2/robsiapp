@@ -1,16 +1,16 @@
 <!--
   ~ /**
-  ~  * Created by estiv on 2/08/21, 10:58 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
   ~  * Last modified 2/08/21, 10:58 p. m.
   ~  */
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="197.3dp"
-    android:height="242dp"
-    android:viewportWidth="197.3"
-    android:viewportHeight="242">
+        xmlns:tools="http://schemas.android.com/tools" android:width="197.3dp"
+        android:height="242dp"
+        android:viewportWidth="197.3"
+        android:viewportHeight="242" tools:ignore="VectorRaster">
   <path
       android:pathData="M10.6,127.8c-2.4,-3.9 -3.9,-8.1 -4.7,-12.4c-1.7,-9.9 0.8,-20.2 7.3,-28C19.9,79.4 29.8,75 40.1,75c2.9,0 5.8,0.4 8.7,1.1C46.2,115.7 10.6,127.8 10.6,127.8z"
       android:fillColor="#BBE1F4"/>

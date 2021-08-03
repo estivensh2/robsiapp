@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 29/06/21 05:40 PM
+ *  * Last modified 14/07/21, 12:21 a. m.
  *
  */
 
@@ -19,7 +19,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.model.SignUpModel
@@ -59,14 +58,14 @@ class SignUpFragment : Fragment() {
         val lastNames = binding.iELastNames.text.toString()
         val email = binding.iEEmail.text.toString()
         val password = binding.iEPassword.text.toString()
-        dashboardViewModel.setSignUp(names, lastNames, email, password).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.setSignUp(names, lastNames, email, password).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -75,7 +74,7 @@ class SignUpFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<SignUpModel>) {

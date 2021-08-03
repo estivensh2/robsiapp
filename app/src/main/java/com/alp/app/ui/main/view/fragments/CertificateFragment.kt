@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 29/06/21 05:30 PM
+ *  * Last modified 14/07/21, 12:21 a. m.
  *
  */
 
@@ -16,7 +16,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alp.app.R
 import com.alp.app.ui.main.adapter.CertificateAdapter
@@ -37,7 +36,7 @@ class CertificateFragment : Fragment() {
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var functions: Functions
-    lateinit var certificateAdapter: CertificateAdapter
+    private lateinit var certificateAdapter: CertificateAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentListCertificatesBinding.inflate(inflater, container, false)
@@ -59,15 +58,15 @@ class CertificateFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.getCertificate(idUser!!).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.getCertificate(idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         binding.recyclerview.visibility = View.VISIBLE
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         binding.recyclerview.visibility = View.VISIBLE
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
@@ -78,7 +77,7 @@ class CertificateFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: List<CertificateModel>) {

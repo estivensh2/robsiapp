@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 7/07/21 04:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 7/07/21 04:56 PM
+ *  * Last modified 1/08/21, 7:05 p. m.
  *
  */
 
@@ -104,7 +104,7 @@ class TopicsFragment : Fragment() {
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.getTopics(idCourse, idUser!!).observe(requireActivity()) { response ->
+        dashboardViewModel.getTopics(idCourse, idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -154,7 +154,7 @@ class TopicsFragment : Fragment() {
 
     private fun generateCertificate() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.generateCertificate(idUser!!, idCourse).observe(requireActivity()) { response ->
+        dashboardViewModel.generateCertificate(idUser, idCourse).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

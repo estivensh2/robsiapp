@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 13/07/21 07:01 PM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 13/07/21 07:01 PM
+  ~  * Last modified 16/07/21, 12:39 a. m.
   ~  */
   -->
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:text="TextView"
+            android:text="@string/text_test"
             app:layout_constraintBottom_toBottomOf="@+id/image_profile"
             app:layout_constraintStart_toEndOf="@+id/image_profile"
             app:layout_constraintTop_toTopOf="@+id/image_profile"/>
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="TextView"
+            android:text="@string/text_test"
             app:layout_constraintBottom_toBottomOf="@+id/full_name_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -56,7 +56,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="TextView"
+            android:text="@string/text_test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
             android:layout_height="30dp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Button"
+            android:text="@string/text_test"
             android:backgroundTint="?attr/colorSecondaryVariant"
             app:icon="@drawable/ic_baseline_reply_24"
             app:layout_constraintTop_toTopOf="@+id/likes"
@@ -99,7 +99,7 @@
             android:layout_alignParentTop="true"
             android:textStyle="bold"
             android:layout_margin="20dp"
-            android:text="⋮"
+            android:text="@string/icons_edit"
             android:textAppearance="?android:textAppearanceLarge"
             app:layout_constraintBottom_toBottomOf="@+id/replies"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
             app:layout_constraintTop_toTopOf="@+id/replies"/>
 
     <TextView
-            android:text="TextView"
+            android:text="@string/text_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/likes"
             app:layout_constraintStart_toEndOf="@+id/likeComment"
@@ -116,10 +116,10 @@
             app:layout_constraintBottom_toBottomOf="@+id/likeComment" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"/>
     <TextView
-            android:text="(editado)"
+            android:text="@string/text_edited"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textEdited"
             app:layout_constraintTop_toBottomOf="@+id/image_profile"
             app:layout_constraintStart_toStartOf="@+id/image_profile" android:layout_marginTop="16dp"
-            android:textSize="10sp" android:visibility="gone"/>
+            android:textSize="10sp" android:visibility="gone" tools:ignore="SmallSp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

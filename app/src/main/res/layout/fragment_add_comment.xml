@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 14/07/21, 9:32 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 14/07/21, 9:32 p. m.
+  ~  * Last modified 14/07/21, 10:19 p. m.
   ~  */
   -->
 
@@ -18,7 +18,7 @@
             android:id="@+id/iLComment"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:hint="Escribe aqui tu comentario"
+            android:hint="@string/text_write_comment"
             app:boxCornerRadiusBottomEnd="5dp"
             app:boxCornerRadiusBottomStart="5dp"
             app:boxCornerRadiusTopEnd="5dp"

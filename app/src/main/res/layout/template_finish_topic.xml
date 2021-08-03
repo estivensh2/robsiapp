@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 29/07/21, 7:56 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 29/07/21, 7:56 p. m.
+  ~  * Last modified 2/08/21, 1:14 p. m.
   ~  */
   -->
 
@@ -17,7 +17,8 @@
             android:layout_height="wrap_content" android:id="@+id/imageView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ic_robsi_celebration" android:layout_marginTop="24dp"/>
+            android:background="@drawable/ic_robsi_celebration" android:layout_marginTop="24dp"
+            android:contentDescription="@string/description_finish_image"/>
     <TextView
             android:text="@string/text_well_done"
             android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
                 android:button="@null"
                 android:text="@string/text_very_easy"
                 android:drawableTop="@drawable/ic_easy"
-                android:gravity="center_horizontal" android:padding="5dp" android:hint="1"/>
+                android:gravity="center_horizontal" android:padding="5dp" android:hint="@string/text_one"/>
 
         <RadioButton
                 android:id="@+id/radioButton2"
@@ -62,7 +63,7 @@
                 android:background="@drawable/ic_background_checked_topic_finish"
                 android:button="@null"
                 android:text="@string/text_easy" android:drawableTop="@drawable/ic_very_easy"
-                android:gravity="center_horizontal" android:padding="5dp" android:hint="2"/>
+                android:gravity="center_horizontal" android:padding="5dp" android:hint="@string/text_two"/>
 
         <RadioButton
                 android:id="@+id/radioButton3"
@@ -72,7 +73,7 @@
                 android:button="@null"
                 android:text="@string/text_right" android:drawableTop="@drawable/ic_just"
                 android:gravity="center_horizontal"
-                android:padding="5dp" android:hint="3"/>
+                android:padding="5dp" android:hint="@string/text_three"/>
 
         <RadioButton
                 android:id="@+id/radioButton4"
@@ -81,7 +82,7 @@
                 android:background="@drawable/ic_background_checked_topic_finish"
                 android:button="@null"
                 android:text="@string/text_diffcult" android:drawableTop="@drawable/ic_difficult"
-                android:gravity="center_horizontal" android:padding="5dp" android:hint="4"/>
+                android:gravity="center_horizontal" android:padding="5dp" android:hint="@string/text_four"/>
         <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
@@ -90,7 +91,7 @@
                 android:button="@null"
                 android:text="@string/text_very_difficult"
                 android:drawableTop="@drawable/ic_very_difficult" android:gravity="center_horizontal"
-                android:padding="5dp" android:hint="5"/>
+                android:padding="5dp" android:hint="@string/text_six"/>
     </RadioGroup>
     <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSkip"

@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 29/06/21 05:44 PM
+ *  * Last modified 2/08/21, 2:34 p. m.
  *
  */
 
@@ -46,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun insertToken(token: String) {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.tokenUser(idUser!!, token).observe(this) { response ->
+        dashboardViewModel.tokenUser(idUser, token).observe(this) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

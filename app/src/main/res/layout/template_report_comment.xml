@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 11/07/21 10:30 PM
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 11/07/21 10:30 PM
+  ~  * Last modified 2/08/21, 3:47 p. m.
   ~  */
   -->
 
@@ -21,7 +21,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/changa_bold"
-            android:text="Reportar un problema"
+            android:text="@string/text_report_problem"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:text="Porfavor seleccionar el tipo de problema"
+            android:text="@string/text_select_type_problem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +64,8 @@
                 android:drawableLeft="@drawable/ic_baseline_warning_24"
                 android:drawablePadding="10dp"
                 android:paddingLeft="10dp"
-                android:text="Contenido fuera de tema o no relacionado"
-                android:paddingStart="10dp"/>
+                android:text="@string/text_content_output"
+                android:paddingStart="10dp" tools:ignore="RtlSymmetry"/>
 
         <RadioButton
                 android:id="@+id/radioButton2"
@@ -79,7 +79,7 @@
                 android:drawableLeft="@drawable/ic_baseline_smart_toy_24"
                 android:drawablePadding="10dp"
                 android:paddingLeft="10dp"
-                android:text="Spam o autopromoción"/>
+                android:text="@string/text_spam" android:paddingStart="10dp" tools:ignore="RtlSymmetry"/>
 
         <RadioButton
                 android:id="@+id/radioButton3"
@@ -93,7 +93,7 @@
                 android:drawableLeft="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
                 android:drawablePadding="10dp"
                 android:paddingLeft="10dp"
-                android:text="Palabras groseras o hirientes"/>
+                android:text="@string/text_words_no_correct" android:paddingStart="10dp" tools:ignore="RtlSymmetry"/>
 
         <RadioButton
                 android:id="@+id/radioButton4"
@@ -106,7 +106,7 @@
                 android:drawableLeft="@drawable/ic_outline_flag_24"
                 android:drawablePadding="10dp"
                 android:paddingLeft="10dp"
-                android:text="Algo más" android:paddingStart="10dp"/>
+                android:text="@string/text_something_else" android:paddingStart="10dp" tools:ignore="RtlSymmetry"/>
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -118,7 +118,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:hint="Escribe aqui tu mensaje (opcional)"
+            android:hint="@string/text_write_message_optional"
             app:boxCornerRadiusBottomEnd="5dp"
             app:boxCornerRadiusBottomStart="5dp"
             app:boxCornerRadiusTopEnd="5dp"

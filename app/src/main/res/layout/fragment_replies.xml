@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 14/07/21, 1:27 a. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 14/07/21, 1:27 a. m.
+  ~  * Last modified 20/07/21, 11:39 p. m.
   ~  */
   -->
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:text="TextView"
+            android:text="@string/text_test"
             app:layout_constraintBottom_toBottomOf="@+id/image_profile"
             app:layout_constraintStart_toEndOf="@+id/image_profile"
             app:layout_constraintTop_toTopOf="@+id/image_profile"/>
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="TextView"
+            android:text="@string/text_test"
             app:layout_constraintBottom_toBottomOf="@+id/full_name_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -60,7 +60,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="TextView"
+            android:text="@string/text_test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,6 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="0dp"
-
             android:layout_height="0dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comment"
@@ -124,6 +123,7 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintVertical_bias="1.0" android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp" android:src="@drawable/ic_round_add_24"
-            android:background="@drawable/ic_baseline_add_24" android:focusable="true"/>
+            android:background="@drawable/ic_baseline_add_24" android:focusable="true"
+            android:contentDescription="@string/description_create_reply"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

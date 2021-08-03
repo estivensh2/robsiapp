@@ -1,8 +1,8 @@
 /*
  * *
- *  * Created by estiv on 3/07/21 09:56 PM
+ *  * Created by estiven on 3/08/21, 3:05 p. m.
  *  * Copyright (c) 2021 . All rights reserved.
- *  * Last modified 3/07/21 09:18 PM
+ *  * Last modified 14/07/21, 12:21 a. m.
  *
  */
 
@@ -19,7 +19,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +27,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.alp.app.R
@@ -83,8 +81,8 @@ class ProfileDetailsFragment : Fragment() {
             iELastNames.setText(args.apellidos)
             iEPassword.setText(args.claveAcceso)
             iEEmail.setText(args.correoElectronico)
-            sounds.isChecked = PreferencesSingleton.read("enabled_sound" , false) as Boolean
-            changeTheme.isChecked = PreferencesSingleton.read("mode_dark" , false) as Boolean
+            sounds.isChecked = PreferencesSingleton.read("enabled_sound" , false)
+            changeTheme.isChecked = PreferencesSingleton.read("mode_dark" , false)
             btnUploadImage.setOnClickListener  { alertaSubirImagen() }
             btnLogout.setOnClickListener {
                 PreferencesSingleton.delete("active_session")
@@ -122,14 +120,14 @@ class ProfileDetailsFragment : Fragment() {
         val lastNames = binding.iELastNames.text.toString()
         val email = binding.iEEmail.text.toString()
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.setInfoProfile(idUser!! , names, image, lastNames, email).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.setInfoProfile(idUser , names, image, lastNames, email).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -138,7 +136,7 @@ class ProfileDetailsFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<UpdateInfoModel>) {

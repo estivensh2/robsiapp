@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 21/07/21, 5:49 p. m.
+  ~  * Created by estiven on 3/08/21, 3:05 p. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 21/07/21, 5:49 p. m.
+  ~  * Last modified 2/08/21, 4:56 p. m.
   ~  */
   -->
 
@@ -52,7 +52,7 @@
                         android:layout_marginTop="16dp"
                         android:background="@drawable/background_text_level"
                         android:fontFamily="@font/changa_bold"
-                        android:text="INTERMEDIO"
+                        android:text="@string/text_test"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -67,7 +67,7 @@
                         android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24"
                         android:drawablePadding="5dp"
                         android:fontFamily="@font/changa_bold"
-                        android:text="38.6K"
+                        android:text="@string/text_test"
                         android:textColor="?attr/colorSecondary"
                         app:drawableTint="?attr/colorSecondary"
                         app:layout_constraintBottom_toBottomOf="@+id/level"
