@@ -65,7 +65,10 @@
         android:id="@+id/listadoDiplomadosFragment"
         android:name="com.alp.app.ui.main.view.fragments.CertificateFragment"
         android:label="Certificados"
-        tools:layout="@layout/fragment_list_certificates" />
+        tools:layout="@layout/fragment_list_certificates" >
+        <action android:id="@+id/action_listadoDiplomadosFragment_to_certificatesDetailsFragment2"
+                app:destination="@id/certificatesDetailsFragment2"/>
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.alp.app.ui.main.view.fragments.ChangePasswordFragment"
@@ -84,5 +87,10 @@
               android:name="com.alp.app.ui.main.view.fragments.FavoritesDetailsFragment"
               android:label="Favorito" tools:layout="@layout/fragment_favorites_details">
         <argument android:name="id_detail_topic" app:argType="integer" android:defaultValue="0"/>
+    </fragment>
+    <fragment android:id="@+id/certificatesDetailsFragment2"
+              android:name="com.alp.app.ui.main.view.fragments.CertificatesDetailsFragment"
+              android:label="Certificado" tools:layout="@layout/fragment_certificates_details">
+        <argument android:name="idCourse" app:argType="integer" android:defaultValue="0"/>
     </fragment>
 </navigation>

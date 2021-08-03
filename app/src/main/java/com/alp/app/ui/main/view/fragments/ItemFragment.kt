@@ -16,7 +16,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -24,7 +23,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.ValueCallback
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
@@ -37,7 +35,7 @@ import androidx.webkit.WebViewFeature
 import com.alp.app.R
 import com.alp.app.data.model.*
 import com.alp.app.databinding.FragmentItemBinding
-import com.alp.app.databinding.TemplateReportBinding
+import com.alp.app.databinding.TemplateReportDetailTopicBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
@@ -121,6 +119,7 @@ class ItemFragment : Fragment(){
                 "@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200;300;400;500;600;700;800&display=swap');" +
                 "body { font-family: 'Changa', sans-serif; }" +
                 "</style>" +
+                "<meta name=\\\"viewport\\\" content=\\\"width=device-width, user-scalable=yes\\\">" +
                 "<link href=\"http://192.168.0.18/backendalp/public/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css\" rel=\"stylesheet\">" +
                 "<link href=\"https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css\" rel=\"stylesheet\">\n" +
                 "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">\n" +
@@ -135,6 +134,10 @@ class ItemFragment : Fragment(){
                 "  --mdc-theme-on-secondary: #fff;\n" +
                 "  --mdc-theme-surface: #F3C63F;\n" +
                 "}" +
+                "img {" +
+                "   max-width: 100%" +
+                "   height: auto" +
+                "}" +
                 "</style>" +
                 "<script src=\"https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js\"></script>"
         val endHead = "</head>"
@@ -145,7 +148,9 @@ class ItemFragment : Fragment(){
         val myHtmlString = head + style + endHead + body
         with(binding){
             webView.loadDataWithBaseURL(null, myHtmlString, "text/html", "UTF-8", null)
-            webView.settings.javaScriptEnabled = true
+            webView.settings.apply {
+                javaScriptEnabled = true
+            }
             level.text = param3
             visits.text = resources.getString(R.string.text_visits, param4)
             numberComments.text = resources.getString(R.string.text_comments, param5)
@@ -232,9 +237,9 @@ class ItemFragment : Fragment(){
         }
     }
 
-    private fun sendReport(report: String, comment: String, alertDialog: AlertDialog, binding: TemplateReportBinding) {
+    private fun sendReport(report: String, comment: String, alertDialog: AlertDialog, binding: TemplateReportDetailTopicBinding) {
         val idUser = PreferencesSingleton.read("id_user", 0)!!
-        dashboardViewModel.sendReport(report, comment, param1!!, idUser).observe(requireActivity()) { response ->
+        dashboardViewModel.sendReportDetailTopic(report, comment, param1!!, idUser).observe(requireActivity()) { response ->
             response?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -272,7 +277,7 @@ class ItemFragment : Fragment(){
 
     private fun showDialog() {
         val dialog = AlertDialog.Builder(contexto)
-        val binding = TemplateReportBinding.inflate(layoutInflater, null, false)
+        val binding = TemplateReportDetailTopicBinding.inflate(layoutInflater, null, false)
         dialog.setView(binding.root)
         val alertDialog = dialog.create()
         binding.btnCancel.setOnClickListener {

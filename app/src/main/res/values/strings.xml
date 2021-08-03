@@ -33,7 +33,7 @@
     <string name="text_progress_course_completed">Progreso: Curso completado</string>
     <string name="text_uninitiated_course">Progreso: Sin iniciar</string>
     <string name="text_progress_course">Progreso: En curso</string>
-    <string name="text_completed_course">Ya has completado este tema anteriormente</string>
+    <string name="text_completed_course">!Has completado con éxito el curso!</string>
     <string name="text_update_image">actualizar imagen</string>
     <string name="text_logout">cerrar sesión</string>
     <string name="text_general">general</string>
@@ -110,12 +110,9 @@
     <string name="title_languages">Selecciona un lenguaje</string>
     <string name="banner_home_ad_unit_id">ca-app-pub-2689265379329623/1379381616</string>
     <string name="banner_courses_ad_unit_id">ca-app-pub-2689265379329623/6839059026</string>
-    <string name="banner_review_ad_unit_id">ca-app-pub-2689265379329623/3829752302</string>
-    <string name="banner_temary_ad_unit_id">ca-app-pub-2689265379329623/7577425621</string>
-    <string name="banner_temary_details_ad_unit_id">ca-app-pub-2689265379329623/3638180617</string>
-    <string name="banner_certificate_ad_unit_id">ca-app-pub-2689265379329623/1012017271</string>
+    <string name="banner_topics_ad_unit_id">ca-app-pub-2689265379329623/2944243131</string>
+    <string name="banner_certificate_ad_unit_id">ca-app-pub-2689265379329623/5152631746</string>
     <string name="intersitial_courses_ad_unit_id">ca-app-pub-2689265379329623/2142277871</string>
-    <string name="intersitial_review_ad_unit_id">ca-app-pub-2689265379329623/1563994698</string>
     <string name="intersitial_temary_ad_unit_id">ca-app-pub-2689265379329623/6624749682</string>
     <string name="description_image_result">Esta es la imagen del resultado del codigo</string>
     <string name="text_again">REINTENTAR</string>
@@ -159,14 +156,19 @@
     <string name="text_favorites">Favoritos</string>
     <string name="text_send_report">Tu reporte se ha enviado correctamente</string>
     <string name="text_error_send">Error al enviar</string>
-    <string-array name="string_question_correct">
-        <item>¡Eres lo máximo!</item>
-        <item>¡Correcto!</item>
-        <item>¡Buen trabajo!</item>
-    </string-array>
-    <string-array name="string_question_incorrect">
-        <item>¡Ups, inténtalo de nuevo!</item>
-        <item>La respuesta es incorrecta</item>
-        <item>Hmm, piénsalo de nuevo</item>
-    </string-array>
+    <string name="text_topic_finish">¿Qué le ha parecido este entrenamiento?</string>
+    <string name="text_well_done">Bien hecho</string>
+    <string name="text_very_easy">Muy fácil</string>
+    <string name="text_easy">Fácil</string>
+    <string name="text_right">Lo justo</string>
+    <string name="text_diffcult">Difícil</string>
+    <string name="text_very_difficult">Muy difícil</string>
+    <string name="text_skip">SALTAR</string>
+    <string name="text_submit">ENVIAR</string>
+    <string name="text_url">URL</string>
+    <string name="text_copied">COPIADO</string>
+    <string name="text_certificate">Certificado</string>
+    <string name="text_wait_download">Porfavor espera descargando el archivo…</string>
+    <string name="text_completed_download">Se ha descargado el archivo</string>
+    <string name="text_congratulations">¡Felicidades!</string>
 </resources>

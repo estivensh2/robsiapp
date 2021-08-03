@@ -85,7 +85,6 @@ class RepliesAdapter(var itemClickListener: RepliesAdapter.ItemClickListener, va
         fun itemClick(data: RepliesModel, boolean: Boolean)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(TemplateRepliesBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }

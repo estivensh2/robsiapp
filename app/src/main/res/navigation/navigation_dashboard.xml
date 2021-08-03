@@ -87,6 +87,8 @@
         <action
             android:id="@+id/action_topicsFragment_to_detailTopicFragment"
             app:destination="@id/detailTopicFragment" />
+        <action android:id="@+id/action_topicsFragment_to_certficiatesDetailsFragment"
+                app:destination="@id/certificatesDetailsFragment"/>
     </fragment>
     <fragment
             android:id="@+id/commentsCourseFragment"
@@ -121,6 +123,10 @@
     <fragment android:id="@+id/addCommentFragment" android:name="com.alp.app.ui.main.view.fragments.AddCommentFragment"
               android:label="Nuevo comentario" tools:layout="@layout/fragment_add_comment">
         <action android:id="@+id/action_addCommentFragment_to_commentsCourseFragment"
+                app:destination="@id/commentsCourseFragment" app:popUpTo="@id/detailTopicFragment"
+                app:popUpToInclusive="false"/>
+        <argument android:name="id_detail_topic" app:argType="integer" android:defaultValue="0"/>
+        <action android:id="@+id/action_addCommentFragment_to_commentsCourseFragment2"
                 app:destination="@id/commentsCourseFragment"/>
     </fragment>
     <fragment android:id="@+id/editCommentFragment"
@@ -129,7 +135,9 @@
         <argument android:name="comment" app:argType="string" android:defaultValue="empty"/>
         <argument android:name="id_comment" app:argType="integer" android:defaultValue="0"/>
         <action android:id="@+id/action_editCommentFragment_to_commentsCourseFragment"
-                app:destination="@id/commentsCourseFragment"/>
+                app:destination="@id/commentsCourseFragment" app:popUpTo="@id/commentsCourseFragment"
+                app:popUpToInclusive="true"/>
+        <argument android:name="id_detail_topic" app:argType="integer" android:defaultValue="0"/>
     </fragment>
     <fragment android:id="@+id/addReplyFragment" android:name="com.alp.app.ui.main.view.fragments.AddReplyFragment"
               android:label="Responder" tools:layout="@layout/fragment_add_reply">
@@ -152,5 +160,10 @@
         <argument android:name="image_comment" app:argType="string" app:nullable="true"/>
         <argument android:name="comment" app:argType="string" android:defaultValue="empty"/>
         <argument android:name="date_comment" app:argType="string" android:defaultValue="empty"/>
+    </fragment>
+    <fragment android:id="@+id/certificatesDetailsFragment"
+              android:name="com.alp.app.ui.main.view.fragments.CertificatesDetailsFragment"
+              android:label="Certificado" tools:layout="@layout/fragment_certificates_details">
+        <argument android:name="idCourse" app:argType="integer" android:defaultValue="0"/>
     </fragment>
 </navigation>

@@ -10,10 +10,13 @@ package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alp.app.R
 import com.alp.app.data.model.DetailTopicModel
@@ -59,14 +62,21 @@ class BlankFragment : Fragment() {
         functions = Functions(contexto)
         with(binding){
             question.text = param2
+            val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT)
             for (i in param3!!.indices) {
                 val radioButton = RadioButton(contexto)
                 radioButton.text = param3!![i].option
                 radioButton.id = param3!![i].id_option!!
-                option.addView(radioButton)
+                radioButton.buttonDrawable = null
+                radioButton.setTextColor(ContextCompat.getColor(contexto, R.color.gray_300))
+                radioButton.background = ContextCompat.getDrawable(contexto, R.drawable.ic_background_checked_option)
+                radioButton.setPadding(40,20,20,20)
+                radioButton.layoutParams = layoutParams
+                layoutParams.setMargins(0,8,0,8)
+                radioGroup.addView(radioButton)
             }
             check.setOnClickListener {
-                val optionSelected = option.checkedRadioButtonId
+                val optionSelected = radioGroup.checkedRadioButtonId
                 if(optionSelected == param4){
                     val list = listOf("¡Eres lo máximo!", "¡Correcto!", "¡Buen trabajo!")
                     loadBottomSheet(functions.stringRandom(list), R.drawable.ic_baseline_check_circle_24, true)

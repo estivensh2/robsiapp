@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by estiv on 29/07/21, 7:56 p. m.
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 29/07/21, 7:56 p. m.
+  ~  */
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/ic_robsi_celebration" android:layout_marginTop="24dp"/>
+    <TextView
+            android:text="@string/text_well_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp" android:textSize="36sp"
+            android:fontFamily="@font/changa_bold"/>
+    <TextView
+            android:text="@string/text_topic_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" android:orientation="horizontal"
+            android:gravity="center" android:layout_marginTop="16dp">
+
+        <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_background_checked_topic_finish"
+                android:button="@null"
+                android:text="@string/text_very_easy"
+                android:drawableTop="@drawable/ic_easy"
+                android:gravity="center_horizontal" android:padding="5dp" android:hint="1"/>
+
+        <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_background_checked_topic_finish"
+                android:button="@null"
+                android:text="@string/text_easy" android:drawableTop="@drawable/ic_very_easy"
+                android:gravity="center_horizontal" android:padding="5dp" android:hint="2"/>
+
+        <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_background_checked_topic_finish"
+                android:button="@null"
+                android:text="@string/text_right" android:drawableTop="@drawable/ic_just"
+                android:gravity="center_horizontal"
+                android:padding="5dp" android:hint="3"/>
+
+        <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_background_checked_topic_finish"
+                android:button="@null"
+                android:text="@string/text_diffcult" android:drawableTop="@drawable/ic_difficult"
+                android:gravity="center_horizontal" android:padding="5dp" android:hint="4"/>
+        <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_background_checked_topic_finish"
+                android:button="@null"
+                android:text="@string/text_very_difficult"
+                android:drawableTop="@drawable/ic_very_difficult" android:gravity="center_horizontal"
+                android:padding="5dp" android:hint="5"/>
+    </RadioGroup>
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/changa_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:stateListAnimator="@null"
+            android:text="@string/text_skip"
+            app:backgroundTint="?attr/colorSecondaryVariant"
+            app:cornerRadius="@dimen/size_button_radius"
+            tools:targetApi="lollipop"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="@+id/btnSubmit"
+            app:layout_constraintTop_toTopOf="@+id/btnSubmit" android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+            app:layout_constraintHorizontal_bias="1.0" android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"/>
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/changa_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:stateListAnimator="@null"
+            android:text="@string/text_submit"
+            app:backgroundTint="?attr/colorSecondaryVariant"
+            app:cornerRadius="@dimen/size_button_radius"
+            tools:targetApi="lollipop" app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0" android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

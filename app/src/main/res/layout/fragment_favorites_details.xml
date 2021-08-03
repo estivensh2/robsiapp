@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.main.view.fragments.FavoritesDetailsFragment">
+            tools:context=".ui.main.view.fragments.FavoritesDetailsFragment" android:background="?attr/colorOnPrimary">
 
 
         <androidx.cardview.widget.CardView

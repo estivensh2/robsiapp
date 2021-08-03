@@ -8,9 +8,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="false"
-        android:drawable="@drawable/ic_no_checked_option"/>
     <item android:state_checked="true"
-        android:drawable="@drawable/ic_checked_option"/>
-    <item android:drawable="@drawable/ic_no_checked_option"/>
+          android:drawable="@drawable/ic_checked_submit"/>
 </selector>

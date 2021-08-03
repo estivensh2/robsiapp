@@ -61,14 +61,14 @@ class SignInFragment : Fragment() {
     private fun setupShowData() {
         val email    = binding.iEEmail.text.toString()
         val password = binding.iEPassword.text.toString()
-        dashboardViewModel.setSignIn(email, password).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.setSignIn(email, password).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         functions.showHideProgressBar(false, binding.progress)
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                     }
@@ -77,7 +77,7 @@ class SignInFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<SignInModel>) {
@@ -110,7 +110,6 @@ class SignInFragment : Fragment() {
             }
         }
     }
-
 
     private fun TextInputEditText.onChange(cb: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {

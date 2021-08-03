@@ -31,11 +31,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_text_level"
+                    android:fontFamily="@font/changa_bold"
+                    android:text="EXAMEN"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0" android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"/>
 
             <TextView
                     android:id="@+id/question"
@@ -43,28 +56,33 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:fontFamily="@font/changa_bold"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" android:text="hola"/>
+                    android:text="hola" app:layout_constraintTop_toBottomOf="@+id/test" android:layout_marginTop="8dp"/>
 
             <RadioGroup
-                    android:id="@+id/option"
+                    android:id="@+id/radioGroup"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/question">
+                    android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/question"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginRight="16dp" android:layout_marginEnd="16dp">
+                <RadioGroup
+                        android:id="@+id/option"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                >
 
+                </RadioGroup>
             </RadioGroup>
 
             <Button
@@ -73,21 +91,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/changa_bold"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="@string/text_check"
                     app:backgroundTint="?attr/colorSecondaryVariant"
                     app:cornerRadius="@dimen/size_button_radius"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/option"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -95,7 +95,7 @@
         android:id="@+id/recuperarClaveFragment"
         android:name="com.alp.app.ui.main.view.fragments.ResetPasswordFragment"
         android:label="Recuperar clave"
-        tools:layout="@layout/fragment_recuperar_clave" >
+        tools:layout="@layout/fragment_reset_password" >
         <action
             android:id="@+id/accion_recuperar_a_iniciar_o_crear"
             app:destination="@id/iniciarSesionFragment"

@@ -16,7 +16,6 @@ import com.alp.app.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
-
 class DashboardViewModel @ViewModelInject constructor(private val dashboardRepository: DashboardRepository) : ViewModel() {
 
     fun getCategories() = liveData(Dispatchers.IO){
@@ -24,7 +23,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getCategories()))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -33,7 +32,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getSlider()))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -42,7 +41,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getDetailTopic(id_topic, id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -51,7 +50,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getDetailTopicFavorite(id_detail_topic)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -60,16 +59,34 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.insertVisit(id_detail_topic)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
-    fun sendReport(report: String, comment: String, id_detail_topic: Int, id_user: Int) = liveData(Dispatchers.IO){
+    fun sendReportDetailTopic(report: String, comment: String, id_detail_topic: Int, id_user: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.sendReport(report, comment, id_detail_topic, id_user)))
+            emit(Resource.success(data = dashboardRepository.sendReportDetailTopic(report, comment, id_detail_topic, id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
+        }
+    }
+
+    fun sendReportComment(report: String, comment: String, id_comment: Int, id_user: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.sendReportComment(report, comment, id_comment, id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
+        }
+    }
+
+    fun sendReportReply(report: String, comment: String, id_detail_topic: Int, id_user: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.sendReportReply(report, comment, id_detail_topic, id_user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -78,7 +95,16 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.insertProgress(id_user, id_detail_topic, id_topic)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
+        }
+    }
+
+    fun surveyTopic(satisfaction: Int, id_topic: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.surveyTopic(satisfaction,id_topic)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -87,7 +113,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getComments(id_user, id_detail_topic)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -96,7 +122,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.editComment(id_comment, comment)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -105,7 +131,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.editReply(id_reply, reply)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -114,7 +140,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.deleteComment(id_comment)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -123,7 +149,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.deleteReply(id_reply)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -132,7 +158,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.changeLike(active, id_comment, id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -141,7 +167,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.changeFavorite(active, id_detail_topic, id_user, id_course)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -150,7 +176,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.changeLikeReply(active, id_comment, id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -159,7 +185,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getReplies(id_user, id_comment)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -169,7 +195,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.searchCourses(search)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -178,7 +204,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getCourses(id_category)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -187,7 +213,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getCoursesHome()))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -196,7 +222,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.setResetPassword(password)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -205,7 +231,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.setPassword(current_password, new_password, id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -214,25 +240,25 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.setSignIn(email, password)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
-    fun setToken(id_user: Int, id_token: String) = liveData(Dispatchers.IO){
+    fun tokenUser(id_user: Int, token: String) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setToken(id_user, id_token)))
+            emit(Resource.success(data = dashboardRepository.tokenUser(id_user, token)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
-    fun setCertificate(id_user : Int ,id_course: Int, id_completed: String) = liveData(Dispatchers.IO){
+    fun generateCertificate(id_user : Int ,id_course: Int) = liveData(Dispatchers.IO){
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = dashboardRepository.setCertificate(id_user, id_course, id_completed)))
+            emit(Resource.success(data = dashboardRepository.generateCertificate(id_user, id_course)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -241,7 +267,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.setSignUp(names,last_names,email,password)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -250,7 +276,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getFavorites(id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -259,7 +285,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getInfoProfile(id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -268,7 +294,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.addComment(id_user, id_detail_topic, comment)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -277,7 +303,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.addReply(id_user, id_comment, comment)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -286,7 +312,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.setInfoProfile(id_user, name, image, last_names, email)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -296,7 +322,7 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getCertificate(id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
@@ -306,8 +332,16 @@ class DashboardViewModel @ViewModelInject constructor(private val dashboardRepos
         try {
             emit(Resource.success(data = dashboardRepository.getTopics(id_course, id_user)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Ha ocurrido un error"))
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
         }
     }
 
+    fun certificateDetail(id_user : Int ,id_course: Int) = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = dashboardRepository.certificateDetail(id_user, id_course)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "An error has occurred"))
+        }
+    }
 }

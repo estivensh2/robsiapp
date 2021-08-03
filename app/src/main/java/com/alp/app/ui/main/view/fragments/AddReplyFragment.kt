@@ -10,11 +10,12 @@ package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alp.app.R
@@ -25,6 +26,7 @@ import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputEditText
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
@@ -41,6 +43,7 @@ class AddReplyFragment : Fragment() {
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var functions: Functions
+    private lateinit var item : MenuItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAddReplyBinding.inflate(inflater, container, false)
@@ -60,20 +63,27 @@ class AddReplyFragment : Fragment() {
             fullNameProfile.text = args.fullnameComment
             date.text = args.dateComment
             comment.text = args.comment
+            iEReply.onChange { enabledButton() }
         }
         return binding.root
     }
 
+    private fun enabledButton() {
+        with(binding){
+            item.isVisible = iEReply.length()>0
+        }
+    }
+
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.addReply(idUser!!, args.idComment, binding.iEReply.text.toString()).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.addReply(idUser!!, args.idComment, binding.iEReply.text.toString()).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -82,7 +92,7 @@ class AddReplyFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<AddReplyModel>) {
@@ -98,12 +108,15 @@ class AddReplyFragment : Fragment() {
             DynamicToast.makeSuccess(contexto, resources.getString(R.string.text_success_comment), Toast.LENGTH_LONG).show()
             findNavController().navigate(action)
         } else {
-            DynamicToast.makeError(contexto, "HA OCURRIDO UN ERROR", Toast.LENGTH_LONG).show()
+            DynamicToast.makeError(contexto, "ERROR", Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_reply, menu)
+        item = menu.findItem(R.id.add_repply)
+        item.isVisible = false
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -113,6 +126,14 @@ class AddReplyFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun TextInputEditText.onChange(cb: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     override fun onDestroyView() {

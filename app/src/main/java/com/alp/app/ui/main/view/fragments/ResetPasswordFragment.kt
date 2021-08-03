@@ -18,11 +18,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.alp.app.R
 import com.alp.app.data.model.ResetPasswordModel
-import com.alp.app.databinding.FragmentRecuperarClaveBinding
+import com.alp.app.databinding.FragmentResetPasswordBinding
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
@@ -33,14 +32,14 @@ import retrofit2.Response
 
 @AndroidEntryPoint
 class ResetPasswordFragment : Fragment() {
-    private var _binding: FragmentRecuperarClaveBinding? = null
+    private var _binding: FragmentResetPasswordBinding? = null
     private lateinit var functions : Functions
     private val binding get() = _binding!!
     private lateinit var contexto: Context
     private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentRecuperarClaveBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentResetPasswordBinding.inflate(layoutInflater, container, false)
         functions = Functions(contexto)
         with(binding){
             functions.enabledButton(false, btnResetPassword)
@@ -52,14 +51,14 @@ class ResetPasswordFragment : Fragment() {
 
     private fun setupShowData() {
         val email = binding.iEEmail.text.toString()
-        dashboardViewModel.setResetPassword(email).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.setResetPassword(email).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -68,7 +67,7 @@ class ResetPasswordFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<ResetPasswordModel>) {

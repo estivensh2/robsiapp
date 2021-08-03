@@ -8,13 +8,13 @@
 
 package com.alp.app.ui.main.adapter
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.data.model.CertificateModel
 import com.alp.app.databinding.TemplateCertificatesBinding
+import com.alp.app.ui.main.view.fragments.CertificateFragmentDirections
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
@@ -26,14 +26,15 @@ class CertificateAdapter : RecyclerView.Adapter<CertificateAdapter.ViewHolder>()
     class ViewHolder(val binding: TemplateCertificatesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(data: CertificateModel) {
             binding.title.text = data.name_course
-            binding.btnDownload.setOnClickListener {
-                itemView.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.url_download)))
-            }
             Picasso.get()
                     .load(data.image_course)
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_STORE)
                     .into(binding.image)
+            itemView.setOnClickListener {
+                val action = CertificateFragmentDirections.actionListadoDiplomadosFragmentToCertificatesDetailsFragment2(data.id_course)
+                itemView.findNavController().navigate(action)
+            }
         }
     }
 

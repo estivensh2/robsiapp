@@ -43,7 +43,6 @@ object NetworkingModule {
 
     @Provides
     fun providesBaseUrl(): String {
-        //return "http://estiven.tubarberia.co/webservices/modulos/webservices/"
         return "http://192.168.0.18/backendalp/public/api/"
     }
 

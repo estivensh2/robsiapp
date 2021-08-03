@@ -24,4 +24,5 @@
     <color name="gray">#202020</color>
     <color name="gray_100">#EAE9E9</color>
     <color name="gray_200">#CACACA</color>
+    <color name="gray_300">#AFAFAF</color>
 </resources>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by estiv on 11/07/21 11:56 PM
+  ~  * Created by estiv on 30/07/21, 12:30 a. m.
   ~  * Copyright (c) 2021 . All rights reserved.
-  ~  * Last modified 11/07/21 11:56 PM
+  ~  * Last modified 30/07/21, 12:30 a. m.
   ~  */
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="false"
-        android:drawable="@drawable/ic_no_checked_option"/>
+          android:drawable="@drawable/ic_no_checked_option"/>
     <item android:state_checked="true"
-        android:drawable="@drawable/ic_checked_option"/>
+          android:drawable="@drawable/ic_checked_option_question"/>
     <item android:drawable="@drawable/ic_no_checked_option"/>
 </selector>

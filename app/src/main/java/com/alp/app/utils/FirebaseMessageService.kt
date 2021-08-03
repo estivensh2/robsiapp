@@ -40,11 +40,11 @@ class FirebaseMessageService : FirebaseMessagingService() {
         val canalID = getString(R.string.default_notification_channel_id)
         val sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, canalID)
-            .setSmallIcon(R.drawable.notificaciones)
+            .setSmallIcon(R.drawable.ic_logo_notifications)
             .setContentTitle(title)
             .setContentText(message)
             .setColor(ContextCompat.getColor(applicationContext,R.color.blue_700))
-            .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.notificaciones))
+            .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.ic_logo_notifications))
             .setAutoCancel(true)
             .setSound(sound)
             .setNumber(1)
@@ -61,5 +61,4 @@ class FirebaseMessageService : FirebaseMessagingService() {
         Log.d("token_refresh", p0)
         super.onNewToken(p0)
     }
-
 }

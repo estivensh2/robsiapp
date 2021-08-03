@@ -43,8 +43,20 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.insertProgress(id_user, id_detail_topic, id_topic)
     }
 
-    suspend fun sendReport(report: String, comment: String, id_detail_topic: Int, id_user: Int) : Response<ReportDetailTopicModel> {
-        return apiService.sendReport(report, comment, id_detail_topic, id_user)
+    suspend fun surveyTopic(satisfaction: Int, id_topic: Int) : Response<SurveyModel> {
+        return apiService.surveyTopic(satisfaction, id_topic)
+    }
+
+    suspend fun sendReportDetailTopic(report: String, comment: String, id_detail_topic: Int, id_user: Int) : Response<ReportDetailTopicModel> {
+        return apiService.sendReportDetailTopic(report, comment, id_detail_topic, id_user)
+    }
+
+    suspend fun sendReportComment(report: String, comment: String, id_comment: Int, id_user: Int) : Response<ReportDetailTopicModel> {
+        return apiService.sendReportComment(report, comment, id_comment, id_user)
+    }
+
+    suspend fun sendReportReply(report: String, comment: String, id_reply: Int, id_user: Int) : Response<ReportDetailTopicModel> {
+        return apiService.sendReportReply(report, comment, id_reply, id_user)
     }
 
     suspend fun editComment(id_comment: Int, comment: String) : Response<EditCommentModel> {
@@ -120,12 +132,16 @@ class DashboardRepository @Inject constructor(private val apiService: ApiService
         return apiService.setSignIn(email, password)
     }
 
-    suspend fun setToken(id_user: Int, id_token: String) : Response<InsertTokenModel> {
-        return apiService.setToken(id_user, id_token)
+    suspend fun tokenUser(id_user: Int, token: String) : Response<InsertTokenModel> {
+        return apiService.tokenUser(id_user, token)
     }
 
-    suspend fun setCertificate(id_user : Int ,id_course: Int, id_completed: String) : Response<InsertCertificateModel> {
-        return apiService.setCertificate(id_user, id_course, id_completed)
+    suspend fun generateCertificate(id_user : Int ,id_course: Int) : Response<InsertCertificateModel> {
+        return apiService.generateCertificate(id_user, id_course)
+    }
+
+    suspend fun certificateDetail(id_user : Int ,id_course: Int) : Response<CertificateDetailModel> {
+        return apiService.certificateDetail(id_user, id_course)
     }
 
     suspend fun setSignUp(names: String, last_names: String, email: String, password: String) : Response<SignUpModel> {

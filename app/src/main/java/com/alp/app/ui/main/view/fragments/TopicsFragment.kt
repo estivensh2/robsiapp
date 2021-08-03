@@ -10,9 +10,9 @@ package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -65,6 +65,10 @@ class TopicsFragment : Fragment() {
         initListeners()
         count += 1
         checkCounter()
+        binding.showCertificate.setOnClickListener {
+            val action = TopicsFragmentDirections.actionTopicsFragmentToCertficiatesDetailsFragment(idCourse)
+            it.findNavController().navigate(action)
+        }
         return binding.root
     }
 
@@ -128,6 +132,15 @@ class TopicsFragment : Fragment() {
                 updateData(data)
                 notifyDataSetChanged()
             }
+            with(binding){
+                progressCourse.progress = data[0].percentageTopics
+                if (data[0].percentageTopics.toInt() == 100){
+                    generateCertificate()
+                    showCertificate.visibility = View.VISIBLE
+                } else {
+                    showCertificate.visibility = View.GONE
+                }
+            }
         } else {
             with(binding){
                 recycler.visibility = View.GONE
@@ -138,6 +151,32 @@ class TopicsFragment : Fragment() {
             }
         }
     }
+
+    private fun generateCertificate() {
+        val idUser = PreferencesSingleton.read("id_user", 0)
+        dashboardViewModel.generateCertificate(idUser!!, idCourse).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { data ->
+                            if (data.body()!!.response == 1){
+                                Log.d("generateCertificate", "yes")
+                            } else {
+                                Log.d("generateCertificate", "no")
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        //
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun initListeners() {
         interstitial?.fullScreenContentCallback = object: FullScreenContentCallback() {

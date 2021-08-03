@@ -50,35 +50,43 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/titleCourse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/changa_extrabold"
-                    android:text="@string/text_test"
-                    android:textColor="?attr/colorOnPrimary"
-                    android:textSize="22sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageCourse"
-                    app:layout_constraintTop_toTopOf="@+id/imageCourse" />
+                        android:id="@+id/titleCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:fontFamily="@font/changa_extrabold"
+                        android:text="@string/text_test"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:textSize="22sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageCourse"
+                        app:layout_constraintTop_toTopOf="@+id/imageCourse"/>
 
                 <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
-                    android:id="@+id/progressCourse"
-                    android:layout_width="0dp"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/titleCourse"
-                    app:layout_constraintTop_toBottomOf="@+id/titleCourse"
-                    app:rcBackgroundColor="#0A000000"
-                    app:rcBackgroundPadding="2dp"
-                    app:rcMax="100"
-                    app:rcProgressColor="@color/green_500"
-                    app:rcRadius="10dp"
-                    app:rcTextProgressColor="@color/white" />
+                        android:id="@+id/progressCourse"
+                        android:layout_width="0dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/titleCourse"
+                        app:layout_constraintTop_toBottomOf="@+id/titleCourse"
+                        app:rcBackgroundColor="#0A000000"
+                        app:rcBackgroundPadding="2dp"
+                        app:rcMax="100"
+                        app:rcProgressColor="@color/green_500"
+                        app:rcRadius="10dp"
+                        app:rcTextProgressColor="@color/white"/>
+                <TextView
+                        android:text="VER DIPLOMA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/showCertificate"
+                        app:layout_constraintStart_toEndOf="@+id/titleCourse"
+                        app:layout_constraintTop_toTopOf="@+id/titleCourse"
+                        app:layout_constraintBottom_toBottomOf="@+id/titleCourse"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="1.0"
+                        android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
+                        android:textColor="?attr/colorOnPrimary" android:visibility="gone"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -130,28 +138,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     ads:adSize="BANNER"
-                    app:adUnitId="@string/banner_courses_ad_unit_id"
+                    app:adUnitId="@string/banner_topics_ad_unit_id"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recycler"/>
 
+            <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/colorOnPrimary"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-    <com.airbnb.lottie.LottieAnimationView
-    android:id="@+id/progress"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorOnPrimary"
-    android:visibility="gone"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:lottie_autoPlay="true"
-    app:lottie_loop="true"
-    app:lottie_url="https://assets2.lottiefiles.com/datafiles/V6a7qEnbQRmA83z/data.json" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

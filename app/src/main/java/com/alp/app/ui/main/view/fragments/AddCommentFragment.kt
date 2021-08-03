@@ -10,12 +10,14 @@ package com.alp.app.ui.main.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.alp.app.R
 import com.alp.app.data.model.AddCommentModel
 import com.alp.app.databinding.FragmentAddCommentBinding
@@ -23,6 +25,7 @@ import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
+import com.google.android.material.textfield.TextInputEditText
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
@@ -33,26 +36,35 @@ class AddCommentFragment : Fragment() {
     private var _binding: FragmentAddCommentBinding? = null
     private val binding get() = _binding!!
     private lateinit var contexto: Context
+    private val args: AddCommentFragmentArgs by navArgs()
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var functions: Functions
+    private lateinit var item : MenuItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAddCommentBinding.inflate(inflater, container, false)
         functions = Functions(contexto)
         setHasOptionsMenu(true)
+        binding.iEComment.onChange { enabledButton() }
         return binding.root
+    }
+
+    private fun enabledButton() {
+        with(binding){
+            item.isVisible = iEComment.length()>0
+        }
     }
 
     private fun setupShowData() {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.addComment(idUser!!, 1, binding.iEComment.text.toString()).observe(requireActivity(), Observer { response ->
+        dashboardViewModel.addComment(idUser!!, args.idDetailTopic, binding.iEComment.text.toString()).observe(requireActivity()) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         functions.showHideProgressBar(false, binding.progress)
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         DynamicToast.makeError(contexto, response.message, Toast.LENGTH_LONG).show()
                         functions.showHideProgressBar(false, binding.progress)
                     }
@@ -61,16 +73,21 @@ class AddCommentFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<AddCommentModel>) {
         val response = data.body()!!
         if (response.response == 1) {
             DynamicToast.makeSuccess(contexto, resources.getString(R.string.text_success_comment), Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_addCommentFragment_to_commentsCourseFragment)
+            val idUser = PreferencesSingleton.read("id_user", 0)!!
+            val action = AddCommentFragmentDirections.actionAddCommentFragmentToCommentsCourseFragment(
+                idUser,
+                args.idDetailTopic
+            )
+            findNavController().navigate(action)
         } else {
-            DynamicToast.makeError(contexto, "HA OCURRIDO UN ERROR", Toast.LENGTH_LONG).show()
+            DynamicToast.makeError(contexto, "ERROR", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -86,6 +103,8 @@ class AddCommentFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_comment, menu)
+        item = menu.findItem(R.id.comment)
+        item.isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -96,5 +115,13 @@ class AddCommentFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun TextInputEditText.onChange(cb: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 }

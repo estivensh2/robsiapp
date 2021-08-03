@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -28,8 +29,9 @@ import com.alp.app.R
 import com.alp.app.data.model.ChangeLikeModel
 import com.alp.app.data.model.CommentsCourseModel
 import com.alp.app.data.model.DeleteCommentModel
+import com.alp.app.data.model.ReportDetailTopicModel
 import com.alp.app.databinding.FragmentCommentsCourseBinding
-import com.alp.app.databinding.TemplateReportBinding
+import com.alp.app.databinding.TemplateReportCommentBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.CommentsCourseAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
@@ -60,7 +62,10 @@ class CommentsCourseFragment : Fragment() {
             setOnRefreshListener { setupShowData() }
         }
         binding.addComment.setOnClickListener {
-            it.findNavController().navigate(R.id.action_commentsCourseFragment_to_addCommentFragment)
+            val action = CommentsCourseFragmentDirections.actionCommentsCourseFragmentToAddCommentFragment(
+                args.idDetailTopic,
+            )
+            it.findNavController().navigate(action)
         }
         return binding.root
     }
@@ -80,7 +85,7 @@ class CommentsCourseFragment : Fragment() {
                         popupMenu.setOnMenuItemClickListener {
                             when(it.itemId){
                                 R.id.edit_comment -> {
-                                    val action = CommentsCourseFragmentDirections.actionCommentsCourseFragmentToEditCommentFragment(data.comment, data.id_comment)
+                                    val action = CommentsCourseFragmentDirections.actionCommentsCourseFragmentToEditCommentFragment(data.comment, data.id_comment,args.idDetailTopic)
                                     findNavController().navigate(action)
                                 }
                                 R.id.delete_comment -> {
@@ -141,7 +146,7 @@ class CommentsCourseFragment : Fragment() {
 
     private fun showDialog(data: CommentsCourseModel) {
         val dialog = AlertDialog.Builder(contexto)
-        val binding = TemplateReportBinding.inflate(layoutInflater, null, false)
+        val binding = TemplateReportCommentBinding.inflate(layoutInflater, null, false)
         dialog.setView(binding.root)
         val alertDialog = dialog.create()
         binding.btnCancel.setOnClickListener {
@@ -151,10 +156,45 @@ class CommentsCourseFragment : Fragment() {
         binding.radioGroup.setOnCheckedChangeListener { group, _ ->
             binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
         }
+        var radioButton: RadioButton? = null
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
+            radioButton = group.findViewById(checkedId)
+        }
         binding.btnReport.setOnClickListener {
-
+            sendReport(radioButton?.text.toString(), binding.iEMessageReport.text.toString(), data.id_comment, alertDialog, binding)
         }
         alertDialog.show()
+    }
+
+    private fun sendReport(report: String, comment: String, id_comment: Int, alertDialog: AlertDialog, binding: TemplateReportCommentBinding) {
+        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        dashboardViewModel.sendReportComment(report, comment, id_comment, idUser).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        functions.showHideProgressBar(false, binding.progress)
+                        resource.data?.let { data -> insertReport(data,alertDialog) }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
+                    }
+                    Status.LOADING -> {
+                        functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun insertReport(data: Response<ReportDetailTopicModel>, alertDialog: AlertDialog) {
+        if (data.body()!!.response == 1){
+            alertDialog.dismiss()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_send_report), Toast.LENGTH_LONG).show()
+        } else {
+            DynamicToast.makeError(contexto, getString(R.string.text_error_send), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun setupShowData() {

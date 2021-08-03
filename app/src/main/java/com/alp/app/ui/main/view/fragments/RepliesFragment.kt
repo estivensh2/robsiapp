@@ -17,6 +17,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -31,8 +32,9 @@ import com.alp.app.R
 import com.alp.app.data.model.ChangeLikeModel
 import com.alp.app.data.model.DeleteReplyModel
 import com.alp.app.data.model.RepliesModel
+import com.alp.app.data.model.ReportDetailTopicModel
 import com.alp.app.databinding.FragmentRepliesBinding
-import com.alp.app.databinding.TemplateReportBinding
+import com.alp.app.databinding.TemplateReportCommentBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.RepliesAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
@@ -179,7 +181,7 @@ class RepliesFragment : Fragment() {
 
     private fun showDialog(data: RepliesModel) {
         val dialog = AlertDialog.Builder(contexto)
-        val binding = TemplateReportBinding.inflate(layoutInflater, null, false)
+        val binding = TemplateReportCommentBinding.inflate(layoutInflater, null, false)
         dialog.setView(binding.root)
         val alertDialog = dialog.create()
         binding.btnCancel.setOnClickListener {
@@ -189,10 +191,45 @@ class RepliesFragment : Fragment() {
         binding.radioGroup.setOnCheckedChangeListener { group, _ ->
             binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
         }
+        var radioButton: RadioButton? = null
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.btnReport.isEnabled = group.checkedRadioButtonId != -1
+            radioButton = group.findViewById(checkedId)
+        }
         binding.btnReport.setOnClickListener {
-
+            sendReport(radioButton?.text.toString(), binding.iEMessageReport.text.toString(), data.id_reply, alertDialog, binding)
         }
         alertDialog.show()
+    }
+
+    private fun sendReport(report: String, comment: String, id_reply: Int, alertDialog: AlertDialog, binding: TemplateReportCommentBinding) {
+        val idUser = PreferencesSingleton.read("id_user", 0)!!
+        dashboardViewModel.sendReportReply(report, comment, id_reply, idUser).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        functions.showHideProgressBar(false, binding.progress)
+                        resource.data?.let { data -> insertReport(data,alertDialog) }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        functions.showHideProgressBar(false, binding.progress)
+                    }
+                    Status.LOADING -> {
+                        functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun insertReport(data: Response<ReportDetailTopicModel>, alertDialog: AlertDialog) {
+        if (data.body()!!.response == 1){
+            alertDialog.dismiss()
+            DynamicToast.makeSuccess(contexto, getString(R.string.text_send_report), Toast.LENGTH_LONG).show()
+        } else {
+            DynamicToast.makeError(contexto, getString(R.string.text_error_send), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun deleteComment(id_comment: Int, position: Int) {

@@ -8,12 +8,18 @@
 
 package com.alp.app.utils
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.media.MediaPlayer
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.alp.app.R
+import com.alp.app.singleton.PreferencesSingleton
+import com.google.android.material.textfield.TextInputEditText
 import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,6 +36,20 @@ class Functions(val context: Context) {
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                         + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches()
+    }
+
+    fun TextInputEditText.onChange(cb: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    fun copyToClipboard(text: CharSequence){
+        val clipboard = ContextCompat.getSystemService(context, ClipboardManager::class.java)
+        val clip = ClipData.newPlainText("label",text)
+        clipboard?.setPrimaryClip(clip)
     }
 
     fun converterDate(date: String): Boolean {
@@ -66,8 +86,11 @@ class Functions(val context: Context) {
     }
 
     fun playSound(sound: Int) {
-        val mediaPlayer = MediaPlayer.create(context, sound)
-        mediaPlayer.start()
+        val soundSharedPreferences = PreferencesSingleton.read("enabled_sound", false)
+        if(soundSharedPreferences!!){
+            val mediaPlayer = MediaPlayer.create(context, sound)
+            mediaPlayer.start()
+        }
     }
 
     fun stringRandom(list: List<String>) : String {

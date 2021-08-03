@@ -10,11 +10,13 @@ package com.alp.app.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alp.app.R
 import com.alp.app.data.model.TopicsModel
 import com.alp.app.databinding.TemplateTopicsBinding
+import retrofit2.Response
 
 class TopicsAdapter(var itemClickListener: ItemClickListener) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 

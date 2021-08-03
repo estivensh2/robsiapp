@@ -33,10 +33,9 @@ interface ApiService {
             @Query("search") search : String
     ): List<CoursesModel>
 
-    @FormUrlEncoded
-    @POST("certificates")
+    @GET("certificates")
     suspend fun getCertificate(
-            @Field("id_user") id_user : Int
+            @Query("id_user") id_user : Int
     ): List<CertificateModel>
 
     @GET("detail-topics")
@@ -71,11 +70,36 @@ interface ApiService {
     ): Response<InsertProgressModel>
 
     @FormUrlEncoded
+    @POST("survey")
+    suspend fun surveyTopic(
+        @Field("satisfaction")    satisfaction : Int,
+        @Field("id_topic")        id_topic     : Int
+    ): Response<SurveyModel>
+
+    @FormUrlEncoded
     @POST("report-detail-topic")
-    suspend fun sendReport(
+    suspend fun sendReportDetailTopic(
         @Field("report")           report           : String,
         @Field("comment")          comment          : String,
         @Field("id_detail_topic")  id_detail_topic  : Int,
+        @Field("id_user")          id_user          : Int
+    ): Response<ReportDetailTopicModel>
+
+    @FormUrlEncoded
+    @POST("report-comment")
+    suspend fun sendReportComment(
+        @Field("report")           report           : String,
+        @Field("comment")          comment          : String,
+        @Field("id_comment")  id_comment  : Int,
+        @Field("id_user")          id_user          : Int
+    ): Response<ReportDetailTopicModel>
+
+    @FormUrlEncoded
+    @POST("report-reply")
+    suspend fun sendReportReply(
+        @Field("report")           report           : String,
+        @Field("comment")          comment          : String,
+        @Field("id_reply")  id_reply  : Int,
         @Field("id_user")          id_user          : Int
     ): Response<ReportDetailTopicModel>
 
@@ -194,10 +218,10 @@ interface ApiService {
     ) : Response<SignInModel>
 
     @FormUrlEncoded
-    @POST("set_token.php")
-    suspend fun setToken (
-            @Field("id_user") id_user:Int,
-            @Field("token") token:String
+    @PUT("token-user/{id_user}")
+    suspend fun tokenUser (
+        @Path("id_user") id_user : Int,
+        @Field("token")  token   : String
     ) : Response<InsertTokenModel>
 
     @FormUrlEncoded
@@ -216,10 +240,16 @@ interface ApiService {
     ) : Response<ResetPasswordModel>
 
     @FormUrlEncoded
-    @POST("insert_certificate.php")
-    suspend fun setCertificate (
-            @Field("id_user") id_user:Int,
-            @Field("id_course") id_course:Int,
-            @Field("id_completed") id_completed:String
+    @POST("certificates")
+    suspend fun generateCertificate (
+            @Field("id_user")   id_user   : Int,
+            @Field("id_course") id_course : Int,
     ) : Response<InsertCertificateModel>
+
+    @FormUrlEncoded
+    @POST("certificate-detail")
+    suspend fun certificateDetail (
+        @Field("id_user")   id_user   : Int,
+        @Field("id_course") id_course : Int,
+    ) : Response<CertificateDetailModel>
 }

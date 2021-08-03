@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,7 +25,6 @@ import com.alp.app.utils.Status
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
-
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -48,13 +46,13 @@ class HomeActivity : AppCompatActivity() {
 
     private fun insertToken(token: String) {
         val idUser = PreferencesSingleton.read("id_user", 0)
-        dashboardViewModel.setToken(idUser!!, token).observe(this, Observer { response ->
+        dashboardViewModel.tokenUser(idUser!!, token).observe(this) { response ->
             response?.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { data -> renderList(data) }
                     }
-                    Status.ERROR   -> {
+                    Status.ERROR -> {
                         Log.d("token", response.message!!)
                     }
                     Status.LOADING -> {
@@ -62,15 +60,15 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun renderList(data: Response<InsertTokenModel>) {
         val response = data.body()!!
-        if (response.data == "1") {
-            Log.d("token", "insertado")
+        if (response.response == 1) {
+            Log.d("token", "Inserted")
         } else {
-            Log.d("token", "actualizado")
+            Log.d("token", "Updated")
         }
     }
 

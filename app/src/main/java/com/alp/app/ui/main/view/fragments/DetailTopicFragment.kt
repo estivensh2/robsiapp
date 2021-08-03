@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -27,11 +28,13 @@ import com.alp.app.R
 import com.alp.app.data.model.DetailTopicModel
 import com.alp.app.data.model.InsertProgressModel
 import com.alp.app.databinding.FragmentDetailTopicBinding
+import com.alp.app.databinding.TemplateFinishTopicBinding
 import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.DetailTopicAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
 import com.alp.app.utils.Status
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -106,7 +109,7 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
                 isUserInputEnabled = false
             }
             TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-                //tab.view.isClickable = false
+                tab.view.isClickable = false
                 when(position % 2){
                     0 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_baseline_article_24)
                     1 -> tab.icon = ContextCompat.getDrawable(contexto, R.drawable.ic_sharp_help_24)
@@ -210,7 +213,6 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
         return super.onOptionsItemSelected(item)
     }
 
-
     override fun onButtonClicked(index: Int?, id_detail_topic: Int?) {
         if (index != null) {
             insertProgress(id_detail_topic)
@@ -218,15 +220,67 @@ class DetailTopicFragment : Fragment(), ItemFragment.OnButtonClickListener, Blan
         }
     }
 
+    private fun showTopicFinish(){
+        val dialog = BottomSheetDialog(contexto)
+        val binding = TemplateFinishTopicBinding.inflate(layoutInflater, null, false)
+        dialog.setContentView(binding.root)
+        binding.btnSkip.setOnClickListener {
+            dialog.dismiss()
+            val action = DetailTopicFragmentDirections.actionDetailTopicFragmentToTopicsFragment(
+                args.idCourse,
+                args.nameCourse,
+                args.imageCourse
+            )
+            findNavController().navigate(action)
+        }
+        var radioButton: RadioButton? = null
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.btnSubmit.isEnabled = group.checkedRadioButtonId != -1
+            radioButton = group.findViewById(checkedId)
+        }
+        binding.btnSubmit.setOnClickListener {
+            surveyTopic(radioButton?.hint.toString().toInt())
+            dialog.dismiss()
+            val action = DetailTopicFragmentDirections.actionDetailTopicFragmentToTopicsFragment(
+                args.idCourse,
+                args.nameCourse,
+                args.imageCourse
+            )
+            findNavController().navigate(action)
+        }
+        dialog.setCancelable(false)
+        dialog.show()
+    }
+
+    private fun surveyTopic(satisfaction: Int?) {
+        dashboardViewModel.surveyTopic(satisfaction!!, args.idTopic).observe(requireActivity()) { response ->
+            response?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { data ->
+                            if (data.body()!!.response == 1){
+                                Log.d("Survey", "Inserted")
+                            } else {
+                                Log.d("Survey", "Failed")
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        DynamicToast.makeError(contexto, response.message!!, Toast.LENGTH_LONG).show()
+                        //functions.showHideProgressBar(false, binding.progress)
+                    }
+                    Status.LOADING -> {
+                        //functions.showHideProgressBar(true, binding.progress)
+                    }
+                }
+            }
+        }
+    }
+
     override fun onButtonClicked(index: Int?) {
         if (index != null) {
             if(index == detailTopicAdapter.list.size-1){
-                val action = DetailTopicFragmentDirections.actionDetailTopicFragmentToTopicsFragment(
-                    args.idCourse,
-                    args.nameCourse,
-                    args.imageCourse
-                )
-                findNavController().navigate(action)
+                showTopicFinish()
             } else {
                 binding.viewPager2.currentItem = index + 1
             }

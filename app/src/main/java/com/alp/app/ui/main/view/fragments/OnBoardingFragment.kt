@@ -32,9 +32,9 @@ class OnBoardingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentOnboardingBinding.inflate(layoutInflater, container, false)
         PreferencesSingleton.init(requireContext(), resources.getString(R.string.name_preferences))
-        arrayList.add(InduccionData(R.drawable.paso1, getString(R.string.text_title_on_boarding_one), getString(R.string.text_description_on_boarding_one)))
-        arrayList.add(InduccionData(R.drawable.paso2, getString(R.string.text_title_on_boarding_two), getString(R.string.text_description_on_boarding_two)))
-        arrayList.add(InduccionData(R.drawable.paso2, getString(R.string.text_title_on_boarding_three), getString(R.string.text_description_on_boarding_three)))
+        arrayList.add(InduccionData(R.drawable.ic_onboarding_1, getString(R.string.text_title_on_boarding_one), getString(R.string.text_description_on_boarding_one)))
+        arrayList.add(InduccionData(R.drawable.ic_onboarding_2, getString(R.string.text_title_on_boarding_two), getString(R.string.text_description_on_boarding_two)))
+        arrayList.add(InduccionData(R.drawable.ic_onboarding_3, getString(R.string.text_title_on_boarding_three), getString(R.string.text_description_on_boarding_three)))
         displayList.addAll(arrayList)
         val supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
         val adapter = OnBoardingAdapter(requireContext(), displayList)

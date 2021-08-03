@@ -22,6 +22,7 @@ import com.alp.app.data.model.CommentsCourseModel
 import com.alp.app.data.model.EditCommentModel
 import com.alp.app.databinding.FragmentCommentsCourseBinding
 import com.alp.app.databinding.FragmentEditCommentBinding
+import com.alp.app.singleton.PreferencesSingleton
 import com.alp.app.ui.main.adapter.CommentsCourseAdapter
 import com.alp.app.ui.main.viewmodel.DashboardViewModel
 import com.alp.app.utils.Functions
@@ -73,7 +74,12 @@ class EditCommentFragment : Fragment() {
         val response = data.body()!!
         if (response.response == 1) {
             DynamicToast.makeSuccess(contexto, resources.getString(R.string.text_update_comment), Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_editCommentFragment_to_commentsCourseFragment)
+            val idUser = PreferencesSingleton.read("id_user", 0)!!
+            val action = EditCommentFragmentDirections.actionEditCommentFragmentToCommentsCourseFragment(
+                idUser,
+                args.idDetailTopic
+            )
+            findNavController().navigate(action)
         } else {
             DynamicToast.makeError(contexto, "HA OCURRIDO UN ERROR", Toast.LENGTH_LONG).show()
         }
